@@ -8,20 +8,24 @@ import {BarChartModule} from "@swimlane/ngx-charts";
 import { ChartComponent } from './chart/chart.component';
 import { ChartNgxLibComponent } from './chart-ngx-lib/chart-ngx-lib.component';
 import { HorizontalChartComponent } from './horizontal-chart/horizontal-chart.component';
+import {ClrVerticalNavModule} from "@clr/angular";
+import { VolumeListComponent } from './volume-list/volume-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChartComponent,
     ChartNgxLibComponent,
-    HorizontalChartComponent
+    HorizontalChartComponent,
+    VolumeListComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BarChartModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BarChartModule,
+        ClrVerticalNavModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -7,58 +7,24 @@
   <title>Europium</title>
 </head>
 <body>
-<table class="table">
-  <thead class="bg-primary text-white">
-  <tr>
-    <th>Nom</th>
-    <th>Taille</th>
-    <th>Utilisé</th>
-    <th>Utilisation</th>
-    <th>Libre</th>
-  </tr>
 
-  </thead>
+<div class="main-container">
+  <header class="header">
 
-  <tbody>
-  <tr *ngFor="let fileSystem of fileSystems">
+  </header>
+  <div class="content-container">
 
-    <td>
-      {{ fileSystem.volume }}
-    </td>
+    <clr-vertical-nav>
+      <a clrVerticalNavLink routerLink="./volume-list" routerLinkActive="active">Volume list</a>
+      <div class="nav-divider"></div>
+      <a clrVerticalNavLink routerLink="./credit" routerLinkActive="active">Credit</a>
+    </clr-vertical-nav>
 
-    <td>
-      {{ fileSystem.size }}
-    </td>
-
-    <td>
-      {{ fileSystem.used }}
-    </td>
-
-    <td>
-      {{ fileSystem.percentageUsed }}
-    </td>
-
-    <td>
-      {{ fileSystem.available }}
-    </td>
-
-  </tr>
-  </tbody>
-</table>
-
-
-
-<app-horizontal-chart
-  [chartData]='chartData'
-  [chartMetaInfo]='metaInfo'
-></app-horizontal-chart>
-
-<br>
-
-<app-chart
-  [chartData]='chartData'
-  [chartMetaInfo]='metaInfo'
-></app-chart>
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

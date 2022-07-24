@@ -22,7 +22,7 @@ export class ChartComponent implements AfterViewInit {
     this.context.fillStyle = '#262a33';
     this.context.fillRect(0, 0, this.chartMetaInfo.chartWidth, this.chartMetaInfo.chartHeight);
 
-    this.refreshChart();
+    // this.refreshChart();
   }
 
   public refreshChart() {
