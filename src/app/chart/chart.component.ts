@@ -12,8 +12,8 @@ export class ChartComponent implements AfterViewInit {
   @Input() chartMetaInfo?: any;
 
   @ViewChild('chart', {static: false})
-  private canvas: ElementRef<HTMLCanvasElement> = {} as ElementRef<HTMLCanvasElement>;
-  private context: CanvasRenderingContext2D = {} as CanvasRenderingContext2D;
+  protected canvas: ElementRef<HTMLCanvasElement> = {} as ElementRef<HTMLCanvasElement>;
+  protected context: CanvasRenderingContext2D = {} as CanvasRenderingContext2D;
 
   ngAfterViewInit() {
 
@@ -27,30 +27,30 @@ export class ChartComponent implements AfterViewInit {
 
   public refreshChart() {
     this.drawBarChart();
-    this.addTitleToChart();
-    this.addFooterToChart();
-    this.addHorizontalLines();
+    // this.addTitleToChart();
+    // this.addFooterToChart();
+    // this.addHorizontalLines();
   }
 
-  private addTitleToChart() {
+  protected addTitleToChart() {
     this.context.font = this.chartMetaInfo.titleFont;
     this.context.fillStyle = this.chartMetaInfo.titleColor;
     this.context.fillText(this.chartMetaInfo.title, 100, 30);
   }
 
-  private addFooterToChart() {
+  protected addFooterToChart() {
     this.context.font = this.chartMetaInfo.footerFont;
     this.context.fillStyle = this.chartMetaInfo.footerColor;
     this.context.fillText(this.chartMetaInfo.footerTitle, this.chartMetaInfo.chartWidth / 2, this.chartMetaInfo.chartHeight - 10);
   }
 
-  private addColumnName(name: any, xpos: any, ypos: any) {
+  protected addColumnName(name: any, xpos: any, ypos: any) {
     this.context.font = this.chartMetaInfo.columnFont;
     this.context.fillStyle = this.chartMetaInfo.columnTitleColor;
     this.context.fillText(name, xpos, ypos);
   }
 
-  private addHorizontalLines() {
+  protected addHorizontalLines() {
     this.context.font = this.chartMetaInfo.leftaxisFont;
     this.context.fillStyle = this.chartMetaInfo.leftaxisColor;
 
@@ -65,23 +65,23 @@ export class ChartComponent implements AfterViewInit {
     }
   }
 
-  private addColumnHead(name: any, xpos: any, ypos: any) {
+  protected addColumnHead(name: any, xpos: any, ypos: any) {
     this.context.font = this.chartMetaInfo.columnFont;
     this.context.fillStyle = this.chartMetaInfo.columnTitleColor;
     this.context.fillText(name, xpos, ypos);
   }
 
 
-  private drawBarChart() {
+  protected drawBarChart() {
 
     const heightRatio = this.getHeightRatio();
 
     for (let index = 0; index < this.chartData.length; index++) {
-      this.context.fillStyle = "#36b5d8";
+      this.context.fillStyle = "#1266F1";
 
       this.roundRect(
         25 + index * 70,
-        this.chartMetaInfo.chartHeight - this.chartData[index].value * heightRatio - 60,
+        this.chartMetaInfo.chartHeight - this.chartData[index].value * heightRatio - 50,
         50,
         this.chartData[index].value * heightRatio, 7
       );
@@ -93,14 +93,14 @@ export class ChartComponent implements AfterViewInit {
       );
 
       this.addColumnHead(
-        this.chartData[index].value,
+        this.chartData[index].valueToDisplay,
         45 + index * 70,
         this.chartMetaInfo.chartHeight - this.chartData[index].value - 65
       );
     }
   }
 
-  private getHeightRatio(): number {
+  protected getHeightRatio(): number {
 
     const maxValue = Math.max(...this.chartData.map(chartItem => chartItem.value));
     this.chartData.sort((a, b) => a.value - b.value).reverse();
@@ -115,7 +115,22 @@ export class ChartComponent implements AfterViewInit {
     return heightRatio;
   }
 
-  private roundRect(
+  protected getWidthRatio(): number {
+
+    this.chartData.sort((a, b) => a.value - b.value).reverse();
+    const maxValue = this.chartData[0].value;
+
+    let widthRatio;
+    if (maxValue > this.chartMetaInfo.chartWidth) {
+      widthRatio = maxValue / this.chartMetaInfo.chartWidth;
+    } else {
+      widthRatio = (this.chartMetaInfo.chartWidth - 90) / maxValue;
+    }
+
+    return widthRatio;
+  }
+
+  protected roundRect(
     x: number,
     y: number,
     width: number,
@@ -129,13 +144,23 @@ export class ChartComponent implements AfterViewInit {
 
     this.context.moveTo(x + radius, y);
 
+    this.makeBorderRadius(x, y, width, height, radius);
+
+    this.context.closePath();
+    this.context.fill();
+  }
+
+  protected makeBorderRadius(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number = 0
+  ) {
     this.context.arcTo(x + width, y, x + width, y + height, radius);
     this.context.arcTo(x + width, y + height, x, y + height, 0);
     this.context.arcTo(x, y + height, x, y, 0);
     this.context.arcTo(x, y, x + width, y, radius);
-
-    this.context.closePath();
-    this.context.fill();
   }
 
 }
