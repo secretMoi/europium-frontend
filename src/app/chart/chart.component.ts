@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {ChartData} from "./chartData";
 
 @Component({
   selector: 'app-chart',
@@ -7,9 +8,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@a
 })
 export class ChartComponent implements AfterViewInit {
 
-  //getting the cricketers Information
-  @Input() chartData?: any;
-//getting the chart Meta data
+  @Input() chartData!: ChartData[];
   @Input() chartMetaInfo?: any;
 
   @ViewChild('chart', {static: false})
@@ -17,88 +16,115 @@ export class ChartComponent implements AfterViewInit {
   private context: CanvasRenderingContext2D = {} as CanvasRenderingContext2D;
 
   ngAfterViewInit() {
-    //setting up the inital Context, Get the canvas element
-    // const canvas = <HTMLCanvasElement>document.getElementById('chart');
-    // getContext will return the rendering context using it we can call the different methods and properties for creating shapes
-    //we will be sending this context throught the methods to implement any drawing
+
     this.context = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D;
-    // this.context.canvas.getContext('2d');
-    //To set up the inital background color for the drawing area
-    // @ts-ignore
-    this.context.fillStyle='#262a33';
-    //fillRect will use the fillstyle color and starts from 0,0 position and draws a rectangle with the width and height provided in
-    //metadata , This will set up the context will #262a33 backgound , on top of this we will start drawing.
-    this.context.fillRect(0,0,this.chartMetaInfo.chartWidth,this.chartMetaInfo.chartHeight);
-    //The below 4 functions , contain the logic of drawing the chart I will be explaining them in Steps sections
+
+    this.context.fillStyle = '#262a33';
+    this.context.fillRect(0, 0, this.chartMetaInfo.chartWidth, this.chartMetaInfo.chartHeight);
+
+    this.refreshChart();
+  }
+
+  public refreshChart() {
     this.drawBarChart();
     this.addTitleToChart();
     this.addFooterToChart();
     this.addHorizontalLines();
   }
 
-  addTitleToChart(){
+  private addTitleToChart() {
     this.context.font = this.chartMetaInfo.titleFont;
     this.context.fillStyle = this.chartMetaInfo.titleColor;
-    this.context.fillText(this.chartMetaInfo.title,100,30);
+    this.context.fillText(this.chartMetaInfo.title, 100, 30);
   }
 
-  addFooterToChart() {
+  private addFooterToChart() {
     this.context.font = this.chartMetaInfo.footerFont;
     this.context.fillStyle = this.chartMetaInfo.footerColor;
-    this.context.fillText(this.chartMetaInfo.footerTitle,this.chartMetaInfo.chartWidth/2,this.chartMetaInfo.chartHeight-10);
+    this.context.fillText(this.chartMetaInfo.footerTitle, this.chartMetaInfo.chartWidth / 2, this.chartMetaInfo.chartHeight - 10);
   }
 
-  addColumnName(name: any, xpos: any, ypos: any){
+  private addColumnName(name: any, xpos: any, ypos: any) {
     this.context.font = this.chartMetaInfo.columnFont;
     this.context.fillStyle = this.chartMetaInfo.columnTitleColor;
-    this.context.fillText(name,xpos,ypos);
+    this.context.fillText(name, xpos, ypos);
   }
 
-  addHorizontalLines() {
+  private addHorizontalLines() {
     this.context.font = this.chartMetaInfo.leftaxisFont;
     this.context.fillStyle = this.chartMetaInfo.leftaxisColor;
 
-    for(var i=0; i<11; i++) {
+    for (let i = 0; i < 11; i++) {
 
       this.context.lineWidth = 0.5;
       this.context.beginPath();
-      this.context.moveTo(25,(20*i)+40);
-      this.context.lineTo(475,(20*i)+40);
-      this.context.strokeStyle  = this.chartMetaInfo.leftaxisColor;
+      this.context.moveTo(25, (20 * i) + 40);
+      this.context.lineTo(475, (20 * i) + 40);
+      this.context.strokeStyle = this.chartMetaInfo.leftaxisColor;
       this.context.stroke();
     }
   }
 
-  addColumnHead(name: any, xpos: any, ypos: any){
+  private addColumnHead(name: any, xpos: any, ypos: any) {
     this.context.font = this.chartMetaInfo.columnFont;
     this.context.fillStyle = this.chartMetaInfo.columnTitleColor;
-    this.context.fillText(name,xpos,ypos);
+    this.context.fillText(name, xpos, ypos);
   }
 
 
+  private drawBarChart() {
 
-  drawBarChart(){
+    const heightRatio = this.getHeightRatio();
 
-    for(let cricketer=0; cricketer<this.chartData.length; cricketer++) {
+    for (let index = 0; index < this.chartData.length; index++) {
       this.context.fillStyle = "#36b5d8";
-      let cricketerInfo = this.chartData[cricketer];
-      // this.context.fillRect(25 + cricketer*100, this.chartMetaInfo.chartHeight-cricketerInfo['centuries']*2-60, 50, cricketerInfo['centuries']*2);
-      this.roundRect(25 + cricketer*100, this.chartMetaInfo.chartHeight-cricketerInfo['centuries']*2-60, 50, cricketerInfo['centuries']*2, 10)
-      this.addColumnName(cricketerInfo.name, 25 + cricketer*100, this.chartMetaInfo.chartHeight-40);
-      this.addColumnHead(cricketerInfo['centuries'],45 + cricketer*100, this.chartMetaInfo.chartHeight-cricketerInfo['centuries']*2-65)
+
+      this.roundRect(
+        25 + index * 70,
+        this.chartMetaInfo.chartHeight - this.chartData[index].value * heightRatio - 60,
+        50,
+        this.chartData[index].value * heightRatio, 7
+      );
+
+      this.addColumnName(
+        this.chartData[index].label,
+        25 + index * 70,
+        this.chartMetaInfo.chartHeight - 40
+      );
+
+      this.addColumnHead(
+        this.chartData[index].value,
+        45 + index * 70,
+        this.chartMetaInfo.chartHeight - this.chartData[index].value - 65
+      );
+    }
+  }
+
+  private getHeightRatio(): number {
+
+    const maxValue = Math.max(...this.chartData.map(chartItem => chartItem.value));
+    this.chartData.sort((a, b) => a.value - b.value).reverse();
+
+    let heightRatio;
+    if (maxValue > this.chartMetaInfo.height) {
+      heightRatio = maxValue / this.chartMetaInfo.chartHeight;
+    } else {
+      heightRatio = (this.chartMetaInfo.chartHeight - 90) / maxValue;
     }
 
+    return heightRatio;
   }
 
-  roundRect(
+  private roundRect(
     x: number,
     y: number,
     width: number,
     height: number,
-    radius: number = 5
+    radius: number = 0
   ) {
     if (width < 2 * radius) radius = width / 2;
     if (height < 2 * radius) radius = height / 2;
+
     this.context.beginPath();
 
     this.context.moveTo(x + radius, y);

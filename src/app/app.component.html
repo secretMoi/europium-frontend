@@ -8,7 +8,7 @@
 </head>
 <body>
 <table class="table">
-  <thead>
+  <thead class="bg-primary text-white">
   <tr>
     <th>Nom</th>
     <th>Taille</th>
@@ -47,10 +47,10 @@
 </table>
 
 
-<app-chart-ngx-lib></app-chart-ngx-lib>
-<app-chart [chartData]='cricketersInfo' [chartMetaInfo] = 'metaInfo'></app-chart>
+<app-chart
+  [chartData]='chartData'
+  [chartMetaInfo]='metaInfo'
+></app-chart>
 
 </body>
 </html>
-
-
