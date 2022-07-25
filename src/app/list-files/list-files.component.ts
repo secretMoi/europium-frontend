@@ -5,6 +5,7 @@ import {HorizontalChartComponent} from "../horizontal-chart/horizontal-chart.com
 import {StorageService} from "../service/storage.service";
 import {File} from "../models/file";
 import {ListFilesArguments} from "../models/listFilesArguments";
+import {ChartConfig} from "../chart/chartConfig";
 
 @Component({
   selector: 'app-list-files',
@@ -13,10 +14,10 @@ import {ListFilesArguments} from "../models/listFilesArguments";
 })
 export class ListFilesComponent {
 
-  files?: File[];
+  files: File[] = [];
 
   chartData: ChartData[] = [];
-  metaInfo?;
+  chartConfig!: ChartConfig;
 
   @ViewChild(ChartComponent) chartComponent?:ChartComponent;
   @ViewChild(HorizontalChartComponent) horizontalChartComponent?:HorizontalChartComponent;
@@ -25,13 +26,19 @@ export class ListFilesComponent {
 
     storageService.getFiles(this.getListFilesArguments()).subscribe(
       (files: File[]) => {
-        this.files = files;
-
         for (let file of files) {
+          this.files.push(new File(
+            this.cleanFileName(file.path),
+            file.size,
+            this.getSizeToDisplay(file.size)
+          ));
+        }
+
+        for (let file of this.files) {
           this.chartData?.push(new ChartData(
             file.size,
             file.path,
-            this.getSizeToDisplay(file.size)
+            file.sizeToDisplay
           ));
         }
 
@@ -40,21 +47,17 @@ export class ListFilesComponent {
       }
     );
 
-    //Metadata for the chart like width and height of the chart, Title for the chart, Title color etc..
-    this.metaInfo = {
-      'chartWidth':'800',
-      'chartHeight': '600',
-      'title':'Indian cricketers with Most Centuries',
-      'titleColor':'#262626',
-      'titleFont': '20px sans-serif',
-      'columnTitleColor': '#262626',
-      'columnFont': '16px sans-serif',
-      'footerTitle':'Cricketer',
-      'footerColor':'#c1d0cd',
-      'footerFont': '12px sans-serif',
-      'leftaxisColor': '#c1d0cd',
-      'leftaxisFont': '12px sans-serif',
-    }
+    this.chartConfig = new ChartConfig(
+      800, 600, '16px sans-serif', '#262626'
+    );
+  }
+
+  cleanFileName(name: string): string {
+    name = name.substring(name.lastIndexOf("/") + 1);
+    name = name.substring(0, name.lastIndexOf("."));
+    name = name.split('.').join(' ');
+
+    return name;
   }
 
   getSizeToDisplay(size: number): string {

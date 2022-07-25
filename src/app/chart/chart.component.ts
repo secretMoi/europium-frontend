@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {ChartData} from "./chartData";
+import {ChartConfig} from "./chartConfig";
 
 @Component({
   selector: 'app-chart',
@@ -9,7 +10,7 @@ import {ChartData} from "./chartData";
 export class ChartComponent implements AfterViewInit {
 
   @Input() chartData!: ChartData[];
-  @Input() chartMetaInfo?: any;
+  @Input() chartConfig!: ChartConfig;
 
   @ViewChild('chart', {static: false})
   protected canvas: ElementRef<HTMLCanvasElement> = {} as ElementRef<HTMLCanvasElement>;
@@ -20,7 +21,7 @@ export class ChartComponent implements AfterViewInit {
     this.context = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D;
 
     this.context.fillStyle = '#262a33';
-    this.context.fillRect(0, 0, this.chartMetaInfo.chartWidth, this.chartMetaInfo.chartHeight);
+    this.context.fillRect(0, 0, this.chartConfig.width, this.chartConfig.height);
 
     // this.refreshChart();
   }
@@ -33,41 +34,41 @@ export class ChartComponent implements AfterViewInit {
   }
 
   protected addTitleToChart() {
-    this.context.font = this.chartMetaInfo.titleFont;
-    this.context.fillStyle = this.chartMetaInfo.titleColor;
-    this.context.fillText(this.chartMetaInfo.title, 100, 30);
+    // this.context.font = this.chartMetaInfo.titleFont;
+    // this.context.fillStyle = this.chartMetaInfo.titleColor;
+    // this.context.fillText(this.chartMetaInfo.title, 100, 30);
   }
 
   protected addFooterToChart() {
-    this.context.font = this.chartMetaInfo.footerFont;
-    this.context.fillStyle = this.chartMetaInfo.footerColor;
-    this.context.fillText(this.chartMetaInfo.footerTitle, this.chartMetaInfo.chartWidth / 2, this.chartMetaInfo.chartHeight - 10);
+    // this.context.font = this.chartMetaInfo.footerFont;
+    // this.context.fillStyle = this.chartMetaInfo.footerColor;
+    // this.context.fillText(this.chartMetaInfo.footerTitle, this.chartMetaInfo.chartWidth / 2, this.chartMetaInfo.chartHeight - 10);
   }
 
   protected addColumnName(name: any, xpos: any, ypos: any) {
-    this.context.font = this.chartMetaInfo.columnFont;
-    this.context.fillStyle = this.chartMetaInfo.columnTitleColor;
+    this.context.font = <string> this.chartConfig.columnFont;
+    this.context.fillStyle = <string> this.chartConfig.columnTitleColor;
     this.context.fillText(name, xpos, ypos);
   }
 
   protected addHorizontalLines() {
-    this.context.font = this.chartMetaInfo.leftaxisFont;
-    this.context.fillStyle = this.chartMetaInfo.leftaxisColor;
-
-    for (let i = 0; i < 11; i++) {
-
-      this.context.lineWidth = 0.5;
-      this.context.beginPath();
-      this.context.moveTo(25, (20 * i) + 40);
-      this.context.lineTo(475, (20 * i) + 40);
-      this.context.strokeStyle = this.chartMetaInfo.leftaxisColor;
-      this.context.stroke();
-    }
+    // this.context.font = this.chartMetaInfo.leftaxisFont;
+    // this.context.fillStyle = this.chartMetaInfo.leftaxisColor;
+    //
+    // for (let i = 0; i < 11; i++) {
+    //
+    //   this.context.lineWidth = 0.5;
+    //   this.context.beginPath();
+    //   this.context.moveTo(25, (20 * i) + 40);
+    //   this.context.lineTo(475, (20 * i) + 40);
+    //   this.context.strokeStyle = this.chartMetaInfo.leftaxisColor;
+    //   this.context.stroke();
+    // }
   }
 
   protected addColumnHead(name: any, xpos: any, ypos: any) {
-    this.context.font = this.chartMetaInfo.columnFont;
-    this.context.fillStyle = this.chartMetaInfo.columnTitleColor;
+    this.context.font = <string>this.chartConfig.columnFont;
+    this.context.fillStyle = <string>this.chartConfig.columnTitleColor;
     this.context.fillText(name, xpos, ypos);
   }
 
@@ -81,7 +82,7 @@ export class ChartComponent implements AfterViewInit {
 
       this.roundRect(
         25 + index * 70,
-        this.chartMetaInfo.chartHeight - this.chartData[index].value * heightRatio - 50,
+        this.chartConfig.height - this.chartData[index].value * heightRatio - 50,
         50,
         this.chartData[index].value * heightRatio, 7
       );
@@ -89,13 +90,13 @@ export class ChartComponent implements AfterViewInit {
       this.addColumnName(
         this.chartData[index].label,
         25 + index * 70,
-        this.chartMetaInfo.chartHeight - 40
+        this.chartConfig.height - 40
       );
 
       this.addColumnHead(
         this.chartData[index].valueToDisplay,
         45 + index * 70,
-        this.chartMetaInfo.chartHeight - this.chartData[index].value - 65
+        this.chartConfig.height - this.chartData[index].value - 65
       );
     }
   }
@@ -106,10 +107,10 @@ export class ChartComponent implements AfterViewInit {
     this.chartData.sort((a, b) => a.value - b.value).reverse();
 
     let heightRatio;
-    if (maxValue > this.chartMetaInfo.height) {
-      heightRatio = maxValue / this.chartMetaInfo.chartHeight;
+    if (maxValue > this.chartConfig.height) {
+      heightRatio = maxValue / this.chartConfig.height;
     } else {
-      heightRatio = (this.chartMetaInfo.chartHeight - 90) / maxValue;
+      heightRatio = (this.chartConfig.height - 90) / maxValue;
     }
 
     return heightRatio;
@@ -120,9 +121,7 @@ export class ChartComponent implements AfterViewInit {
     this.chartData.sort((a, b) => a.value - b.value).reverse();
     const maxValue = this.chartData[0].value;
 
-    const widthRatio = (this.chartMetaInfo.chartWidth - 90) / maxValue;
-
-    return widthRatio;
+    return (this.chartConfig.width - 100) / maxValue;
   }
 
   protected roundRect(

@@ -4,6 +4,7 @@ import {ChartData} from "../chart/chartData";
 import {ChartComponent} from "../chart/chart.component";
 import {HorizontalChartComponent} from "../horizontal-chart/horizontal-chart.component";
 import {StorageService} from "../service/storage.service";
+import {ChartConfig} from "../chart/chartConfig";
 
 @Component({
   selector: 'app-volume-list',
@@ -15,7 +16,7 @@ export class VolumeListComponent {
   fileSystems?: FileSystem[];
 
   chartData: ChartData[] = [];
-  metaInfo?;
+  chartConfig!: ChartConfig;
 
   @ViewChild(ChartComponent) chartComponent?:ChartComponent;
   @ViewChild(HorizontalChartComponent) horizontalChartComponent?:HorizontalChartComponent;
@@ -39,21 +40,9 @@ export class VolumeListComponent {
       }
     );
 
-    //Metadata for the chart like width and height of the chart, Title for the chart, Title color etc..
-    this.metaInfo = {
-      'chartWidth':'800',
-      'chartHeight': '600',
-      'title':'Indian cricketers with Most Centuries',
-      'titleColor':'#262626',
-      'titleFont': '20px sans-serif',
-      'columnTitleColor': '#262626',
-      'columnFont': '16px sans-serif',
-      'footerTitle':'Cricketer',
-      'footerColor':'#c1d0cd',
-      'footerFont': '12px sans-serif',
-      'leftaxisColor': '#c1d0cd',
-      'leftaxisFont': '12px sans-serif',
-    }
+    this.chartConfig = new ChartConfig(
+      800, 600, '16px sans-serif', '#262626'
+    );
   }
 
 }

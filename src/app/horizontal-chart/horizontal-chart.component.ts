@@ -11,7 +11,7 @@ export class HorizontalChartComponent extends ChartComponent {
   public override refreshChart() {
     this.canvas.nativeElement.height = this.chartData.length * 80;
     this.context.fillStyle = '#fff';
-    this.context.fillRect(0, 0, this.chartMetaInfo.chartWidth, this.chartData.length * 80);
+    this.context.fillRect(0, 0, this.chartConfig.width, this.chartData.length * 80);
 
     super.refreshChart();
   }
@@ -20,7 +20,7 @@ export class HorizontalChartComponent extends ChartComponent {
 
     const widthRatio = this.getWidthRatio();
 
-    const barPadding = 20;
+    const barPadding = 10;
     const barHeight = 30;
 
     for (let index = 0; index < this.chartData.length; index++) {

@@ -1,24 +1,22 @@
-<table class="table">
-  <thead class="bg-primary text-white">
-  <tr>
-    <th>Nom</th>
-    <th>Taille</th>
-  </tr>
+<clr-datagrid>
+  <clr-dg-column [clrDgField]="'path'">Nom</clr-dg-column>
+  <clr-dg-column [clrDgField]="'sizeToDisplay'">Taille</clr-dg-column>
 
-  </thead>
+  <clr-dg-row *clrDgItems="let file of files">
+    <clr-dg-cell>{{ file.path }}</clr-dg-cell>
+    <clr-dg-cell>{{ file.sizeToDisplay }}</clr-dg-cell>
+  </clr-dg-row>
 
-  <tbody>
-  <tr *ngFor="let file of files">
-
-    <td>{{ file.path }}</td>
-    <td>{{ getSizeToDisplay(file.size) }}</td>
-
-  </tr>
-  </tbody>
-</table>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="20">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">Films par page</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} sur {{pagination.totalItems}} films
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
 
 
 <app-horizontal-chart
   [chartData]='chartData'
-  [chartMetaInfo]='metaInfo'
+  [chartConfig]='chartConfig'
 ></app-horizontal-chart>

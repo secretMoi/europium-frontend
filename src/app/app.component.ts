@@ -1,10 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {FileSystem} from "./models/fileSystem";
-import data from '../config.json';
-import {ChartData} from "./chart/chartData";
-import {ChartComponent} from "./chart/chart.component";
-import {HorizontalChartComponent} from "./horizontal-chart/horizontal-chart.component";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
