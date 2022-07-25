@@ -120,12 +120,7 @@ export class ChartComponent implements AfterViewInit {
     this.chartData.sort((a, b) => a.value - b.value).reverse();
     const maxValue = this.chartData[0].value;
 
-    let widthRatio;
-    if (maxValue > this.chartMetaInfo.chartWidth) {
-      widthRatio = maxValue / this.chartMetaInfo.chartWidth;
-    } else {
-      widthRatio = (this.chartMetaInfo.chartWidth - 90) / maxValue;
-    }
+    const widthRatio = (this.chartMetaInfo.chartWidth - 90) / maxValue;
 
     return widthRatio;
   }

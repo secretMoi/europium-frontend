@@ -11,7 +11,7 @@
   <tr *ngFor="let file of files">
 
     <td>{{ file.path }}</td>
-    <td>{{ file.size }}</td>
+    <td>{{ getSizeToDisplay(file.size) }}</td>
 
   </tr>
   </tbody>
@@ -22,10 +22,3 @@
   [chartData]='chartData'
   [chartMetaInfo]='metaInfo'
 ></app-horizontal-chart>
-
-<br>
-
-<app-chart
-  [chartData]='chartData'
-  [chartMetaInfo]='metaInfo'
-></app-chart>

@@ -1,5 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FileSystem} from "../models/fileSystem";
+import {Component, ViewChild} from '@angular/core';
 import {ChartData} from "../chart/chartData";
 import {ChartComponent} from "../chart/chart.component";
 import {HorizontalChartComponent} from "../horizontal-chart/horizontal-chart.component";
@@ -28,10 +27,11 @@ export class ListFilesComponent {
       (files: File[]) => {
         this.files = files;
 
-        for(let file of files) {
+        for (let file of files) {
           this.chartData?.push(new ChartData(
             file.size,
-            file.path
+            file.path,
+            this.getSizeToDisplay(file.size)
           ));
         }
 
@@ -55,6 +55,18 @@ export class ListFilesComponent {
       'leftaxisColor': '#c1d0cd',
       'leftaxisFont': '12px sans-serif',
     }
+  }
+
+  getSizeToDisplay(size: number): string {
+    if(size > 1000000) {
+      return Math.round(size / 10000) / 100 + 'Go';
+    }
+
+    if(size > 1000) {
+      return Math.round(size / 10) / 100 + 'Mo';
+    }
+
+    return size.toString();
   }
 
   getListFilesArguments() {
