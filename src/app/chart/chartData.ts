@@ -3,9 +3,17 @@ export class ChartData {
   label: string;
   valueToDisplay: string;
 
-  constructor(value: number, label: string, valueToDisplay: string) {
+  constructor(value: number, label: string, valueToDisplay?: string) {
     this.value = value;
     this.label = label;
-    this.valueToDisplay = valueToDisplay;
+
+    if(valueToDisplay)
+    {
+      this.valueToDisplay = valueToDisplay;
+    }
+    else
+    {
+      this.valueToDisplay = value.toString();
+    }
   }
 }

@@ -1,18 +1,20 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FileSystem} from "../models/fileSystem";
 import {ChartData} from "../chart/chartData";
 import {ChartComponent} from "../chart/chart.component";
 import {HorizontalChartComponent} from "../horizontal-chart/horizontal-chart.component";
 import {StorageService} from "../service/storage.service";
+import {File} from "../models/file";
+import {ListFilesArguments} from "../models/listFilesArguments";
 
 @Component({
-  selector: 'app-volume-list',
-  templateUrl: './volume-list.component.html',
-  styleUrls: ['./volume-list.component.scss']
+  selector: 'app-list-files',
+  templateUrl: './list-files.component.html',
+  styleUrls: ['./list-files.component.scss']
 })
-export class VolumeListComponent {
+export class ListFilesComponent {
 
-  fileSystems?: FileSystem[];
+  files?: File[];
 
   chartData: ChartData[] = [];
   metaInfo?;
@@ -22,15 +24,14 @@ export class VolumeListComponent {
 
   constructor(private storageService: StorageService) {
 
-    storageService.getFileSystems().subscribe(
-      (fileSystems: FileSystem[]) => {
-        this.fileSystems = fileSystems;
+    storageService.getFiles(this.getListFilesArguments()).subscribe(
+      (files: File[]) => {
+        this.files = files;
 
-        for(let fileSystem of fileSystems) {
+        for(let file of files) {
           this.chartData?.push(new ChartData(
-            +fileSystem.size.replace(/[^\d.-]/g,''),
-            fileSystem.volume,
-            fileSystem.size
+            file.size,
+            file.path
           ));
         }
 
@@ -54,6 +55,10 @@ export class VolumeListComponent {
       'leftaxisColor': '#c1d0cd',
       'leftaxisFont': '12px sans-serif',
     }
+  }
+
+  getListFilesArguments() {
+    return new ListFilesArguments('/volumeUSB1/usbshare/', 50, 1);
   }
 
 }

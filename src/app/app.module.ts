@@ -10,6 +10,7 @@ import { ChartNgxLibComponent } from './chart-ngx-lib/chart-ngx-lib.component';
 import { HorizontalChartComponent } from './horizontal-chart/horizontal-chart.component';
 import {ClrVerticalNavModule} from "@clr/angular";
 import { VolumeListComponent } from './volume-list/volume-list.component';
+import { ListFilesComponent } from './list-files/list-files.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { VolumeListComponent } from './volume-list/volume-list.component';
     ChartComponent,
     ChartNgxLibComponent,
     HorizontalChartComponent,
-    VolumeListComponent
+    VolumeListComponent,
+    ListFilesComponent
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,31 @@
+<table class="table">
+  <thead class="bg-primary text-white">
+  <tr>
+    <th>Nom</th>
+    <th>Taille</th>
+  </tr>
+
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let file of files">
+
+    <td>{{ file.path }}</td>
+    <td>{{ file.size }}</td>
+
+  </tr>
+  </tbody>
+</table>
+
+
+<app-horizontal-chart
+  [chartData]='chartData'
+  [chartMetaInfo]='metaInfo'
+></app-horizontal-chart>
+
+<br>
+
+<app-chart
+  [chartData]='chartData'
+  [chartMetaInfo]='metaInfo'
+></app-chart>
