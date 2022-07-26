@@ -29,7 +29,7 @@ export class VolumeListComponent {
 
         for(let fileSystem of fileSystems) {
           this.chartData?.push(new ChartData(
-            +fileSystem.size.replace(/[^\d.-]/g,''),
+            this.multiplySizeBySuffix(fileSystem.size),
             fileSystem.volume,
             fileSystem.size
           ));
@@ -45,4 +45,20 @@ export class VolumeListComponent {
     );
   }
 
+  multiplySizeBySuffix(size: string): number {
+    const sizeAsNumber: number = this.convertStringToNumber(size);
+
+    if (size.includes('T')) {
+      return sizeAsNumber * 1000000000;
+    }
+    if (size.includes('G')) {
+      return sizeAsNumber * 1000000;
+    }
+
+    return 0;
+  }
+
+  convertStringToNumber(text: string): number {
+    return +text.replace(/[^\d.-]/g,'');
+  }
 }

@@ -8,9 +8,10 @@ import {BarChartModule} from "@swimlane/ngx-charts";
 import { ChartComponent } from './chart/chart.component';
 import { ChartNgxLibComponent } from './chart-ngx-lib/chart-ngx-lib.component';
 import { HorizontalChartComponent } from './horizontal-chart/horizontal-chart.component';
-import {ClrDatagridModule, ClrVerticalNavModule} from "@clr/angular";
+import {ClrDatagridModule, ClrInputModule, ClrVerticalNavModule} from "@clr/angular";
 import { VolumeListComponent } from './volume-list/volume-list.component';
 import { ListFilesComponent } from './list-files/list-files.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -21,14 +22,16 @@ import { ListFilesComponent } from './list-files/list-files.component';
     VolumeListComponent,
     ListFilesComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BarChartModule,
-        ClrVerticalNavModule,
-        ClrDatagridModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BarChartModule,
+    ClrVerticalNavModule,
+    ClrDatagridModule,
+    FormsModule,
+    ClrInputModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

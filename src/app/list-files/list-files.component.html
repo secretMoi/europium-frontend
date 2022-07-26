@@ -1,3 +1,31 @@
+<div class="card">
+  <div class="card-body">
+
+    <form class="row g-3">
+
+      <div class="form-check form-switch col-md-2">
+        <input class="form-check-input switch" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="isFile" (click)="toggleIsFileValue()">
+        <label class="form-check-label" for="flexSwitchCheckChecked">{{ fileOrFolderText }}</label>
+      </div>
+
+      <div class="col-10">
+        <div class="row">
+          <label class="col-3 col-form-label">Nombre de résultats</label>
+          <div class="col-4">
+            <input placeholder="Nombre de résultats" clrInput [(ngModel)]="resultNumber" name="resultNumber" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button type="button" class="btn btn-primary" (click)="sendFilter()">Envoyer</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
 <clr-datagrid>
   <clr-dg-column [clrDgField]="'path'">Nom</clr-dg-column>
   <clr-dg-column [clrDgField]="'sizeToDisplay'">Taille</clr-dg-column>

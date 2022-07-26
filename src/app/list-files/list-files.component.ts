@@ -6,6 +6,7 @@ import {StorageService} from "../service/storage.service";
 import {File} from "../models/file";
 import {ListFilesArguments} from "../models/listFilesArguments";
 import {ChartConfig} from "../chart/chartConfig";
+import {FileType} from "../models/fileType";
 
 @Component({
   selector: 'app-list-files',
@@ -19,13 +20,30 @@ export class ListFilesComponent {
   chartData: ChartData[] = [];
   chartConfig!: ChartConfig;
 
+  fileOrFolderText!: string;
+
+  isFile: boolean = true;
+  resultNumber?: number;
+
   @ViewChild(ChartComponent) chartComponent?:ChartComponent;
   @ViewChild(HorizontalChartComponent) horizontalChartComponent?:HorizontalChartComponent;
 
   constructor(private storageService: StorageService) {
+    this.displayFileOrFolderText();
 
-    storageService.getFiles(this.getListFilesArguments()).subscribe(
+    this.loadData(this.getListFilesArguments());
+
+    this.chartConfig = new ChartConfig(
+      800, 600, '16px sans-serif', '#262626'
+    );
+  }
+
+  loadData(listFilesArguments: ListFilesArguments) {
+    this.storageService.getFiles(listFilesArguments).subscribe(
       (files: File[]) => {
+        this.files.splice(0, this.files.length);
+        this.chartData.splice(0, this.chartData.length);
+
         for (let file of files) {
           this.files.push(new File(
             this.cleanFileName(file.path),
@@ -46,16 +64,14 @@ export class ListFilesComponent {
         this.horizontalChartComponent?.refreshChart();
       }
     );
-
-    this.chartConfig = new ChartConfig(
-      800, 600, '16px sans-serif', '#262626'
-    );
   }
 
   cleanFileName(name: string): string {
-    name = name.substring(name.lastIndexOf("/") + 1);
-    name = name.substring(0, name.lastIndexOf("."));
-    name = name.split('.').join(' ');
+    if (this.isFile) {
+      name = name.substring(name.lastIndexOf("/") + 1);
+      name = name.substring(0, name.lastIndexOf("."));
+      name = name.split('.').join(' ');
+    }
 
     return name;
   }
@@ -76,4 +92,24 @@ export class ListFilesComponent {
     return new ListFilesArguments('/volumeUSB1/usbshare/', 50, 1);
   }
 
+  toggleIsFileValue() {
+    this.isFile = !this.isFile;
+
+    this.displayFileOrFolderText();
+  }
+
+  displayFileOrFolderText() {
+    if(this.isFile) {
+      this.fileOrFolderText = 'Fichier';
+    } else {
+      this.fileOrFolderText = 'Dossier';
+    }
+  }
+
+  sendFilter() {
+    const fileType = this.isFile ? FileType.File : FileType.Folder;
+    const resultNumber = this.resultNumber ? this.resultNumber : 50;
+
+    this.loadData(new ListFilesArguments('/volumeUSB1/usbshare/', resultNumber, fileType));
+  }
 }
