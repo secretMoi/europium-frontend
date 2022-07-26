@@ -20,4 +20,14 @@ export class StorageService {
   getFiles(listFilesArguments: ListFilesArguments): Observable<File[]> {
     return this.http.post<File[]>(data.server.host + 'Storage/files', listFilesArguments);
   }
+
+  getCleanVolumeName(name: string) {
+    name = name.substring(1, name.length);
+
+    if(name.endsWith('/usbshare')) {
+      name = name.replace('/usbshare', '');
+    }
+
+    return name;
+  }
 }

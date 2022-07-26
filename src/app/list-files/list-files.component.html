@@ -3,22 +3,37 @@
 
     <form class="row g-3">
 
-      <div class="form-check form-switch col-md-2">
+      <div class="form-switch col-2 my-auto d-flex justify-content-center">
         <input class="form-check-input switch" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="isFile" (click)="toggleIsFileValue()">
         <label class="form-check-label" for="flexSwitchCheckChecked">{{ fileOrFolderText }}</label>
       </div>
 
-      <div class="col-10">
-        <div class="row">
-          <label class="col-3 col-form-label">Nombre de résultats</label>
-          <div class="col-4">
-            <input placeholder="Nombre de résultats" clrInput [(ngModel)]="resultNumber" name="resultNumber" />
+      <div class="col-6">
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label mt-3">Nombre de résultats</label>
+          <div class="col-sm-10">
+            <input clrInput placeholder="Nombre de résultats" [(ngModel)]="resultNumber" name="resultNumber" />
           </div>
         </div>
       </div>
 
+      <div class="col-4 my-auto mx-auto">
+        <select
+          class="form-select"
+          aria-label="Sélectionner un volume"
+          name="selectVolume"
+          [(ngModel)]="selectedVolume"
+        >
+          <option
+            *ngFor="let fileSystem of fileSystems" [ngValue]="fileSystem.volume">{{ storageService.getCleanVolumeName(fileSystem.volume) }}
+          </option>
+        </select>
+      </div>
+
       <div class="col-12">
-        <button type="button" class="btn btn-primary" (click)="sendFilter()">Envoyer</button>
+        <div class="d-flex flex-row-reverse bd-highlight">
+          <button type="button" class="btn btn-primary" (click)="sendFilter()">Envoyer</button>
+        </div>
       </div>
 
     </form>

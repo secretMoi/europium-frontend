@@ -1,12 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
 import {ChartData} from "../chart/chartData";
-import {ChartComponent} from "../chart/chart.component";
 import {HorizontalChartComponent} from "../horizontal-chart/horizontal-chart.component";
 import {StorageService} from "../service/storage.service";
 import {File} from "../models/file";
 import {ListFilesArguments} from "../models/listFilesArguments";
 import {ChartConfig} from "../chart/chartConfig";
 import {FileType} from "../models/fileType";
+import {FileSystem} from "../models/fileSystem";
 
 @Component({
   selector: 'app-list-files',
@@ -14,27 +14,38 @@ import {FileType} from "../models/fileType";
   styleUrls: ['./list-files.component.scss']
 })
 export class ListFilesComponent {
+  defaultResultNumber: number = 50;
+  defaultVolume: string = '/volumeUSB1/usbshare';
 
   files: File[] = [];
 
   chartData: ChartData[] = [];
   chartConfig!: ChartConfig;
 
+  fileSystems!: FileSystem[];
+
   fileOrFolderText!: string;
 
   isFile: boolean = true;
-  resultNumber?: number;
+  resultNumber?: number = this.defaultResultNumber;
+  selectedVolume?: string = this.defaultVolume;
 
-  @ViewChild(ChartComponent) chartComponent?:ChartComponent;
   @ViewChild(HorizontalChartComponent) horizontalChartComponent?:HorizontalChartComponent;
 
-  constructor(private storageService: StorageService) {
+  constructor(public storageService: StorageService) {
     this.displayFileOrFolderText();
 
+    this.getVolumes();
     this.loadData(this.getListFilesArguments());
 
     this.chartConfig = new ChartConfig(
       800, 600, '16px sans-serif', '#262626'
+    );
+  }
+
+  getVolumes() {
+    this.storageService.getFileSystems().subscribe(
+      (volumes: FileSystem[]) => this.fileSystems = volumes
     );
   }
 
@@ -60,9 +71,9 @@ export class ListFilesComponent {
           ));
         }
 
-        this.chartComponent?.refreshChart();
         this.horizontalChartComponent?.refreshChart();
-      }
+      },
+      _ => console.error('error')
     );
   }
 
@@ -89,7 +100,7 @@ export class ListFilesComponent {
   }
 
   getListFilesArguments() {
-    return new ListFilesArguments('/volumeUSB1/usbshare/', 50, 1);
+    return new ListFilesArguments(this.defaultVolume, this.defaultResultNumber, 1);
   }
 
   toggleIsFileValue() {
@@ -108,8 +119,20 @@ export class ListFilesComponent {
 
   sendFilter() {
     const fileType = this.isFile ? FileType.File : FileType.Folder;
-    const resultNumber = this.resultNumber ? this.resultNumber : 50;
+    const resultNumber = this.resultNumber ? this.resultNumber : this.defaultResultNumber;
+    const volume = this.selectedVolume ? this.selectedVolume : this.defaultVolume;
 
-    this.loadData(new ListFilesArguments('/volumeUSB1/usbshare/', resultNumber, fileType));
+    this.loadData(new ListFilesArguments(volume, resultNumber, fileType));
+  }
+
+  onVolumeSelected(value: any) {
+   console.log(value)
+  }
+
+  selectOption(value: any) {
+    //getted from event
+    console.log(value);
+    //getted from binding
+    console.log(this.selectedVolume)
   }
 }

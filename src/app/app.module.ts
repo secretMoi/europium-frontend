@@ -30,7 +30,7 @@ import {FormsModule} from "@angular/forms";
     ClrVerticalNavModule,
     ClrDatagridModule,
     FormsModule,
-    ClrInputModule,
+    ClrInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
