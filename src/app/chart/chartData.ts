@@ -7,13 +7,6 @@ export class ChartData {
     this.value = value;
     this.label = label;
 
-    if(valueToDisplay)
-    {
-      this.valueToDisplay = valueToDisplay;
-    }
-    else
-    {
-      this.valueToDisplay = value.toString();
-    }
+    this.valueToDisplay = valueToDisplay ? valueToDisplay : value.toString();
   }
 }

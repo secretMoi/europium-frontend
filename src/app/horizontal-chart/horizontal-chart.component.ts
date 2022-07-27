@@ -19,46 +19,6 @@ export class HorizontalChartComponent extends ChartComponent {
     super.refreshChart();
   }
 
-  private onCanvasMouseMove() {
-    return (mouseEvent: MouseEvent) => {
-      const mousePosition = this.getMousePosition(mouseEvent);
-
-      this.highlightBarChartOnThisPosition(mousePosition);
-    };
-  }
-
-  highlightBarChartOnThisPosition(mousePosition: {x: number, y: number}) {
-    let index = 0;
-
-    for(const item of this.chartData) {
-      const barVerticalPosition = 25 + index * 80;
-
-      if (mousePosition.y >= barVerticalPosition &&
-        mousePosition.y <= barVerticalPosition + this.barHeight &&
-        this.drawnBars[index].color == this.barColor
-      ) {
-        if(this.barHighlighted) {
-          this.redrawBar(this.barHighlighted, this.barColor);
-        }
-
-        this.redrawBar(this.drawnBars[index], this.highlightedBarColor);
-
-        this.barHighlighted = this.drawnBars[index];
-      }
-
-      index++;
-    }
-  }
-
-  getMousePosition(mouseEvent: MouseEvent) {
-    const rect = this.context.canvas.getBoundingClientRect();
-
-    return {
-      x: mouseEvent.clientX - rect.left,
-      y: mouseEvent.clientY - rect.top
-    };
-  }
-
   protected override drawBarChart() {
 
     const widthRatio = this.getWidthRatio();

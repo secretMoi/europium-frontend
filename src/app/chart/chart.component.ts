@@ -38,8 +38,8 @@ export class ChartComponent implements AfterViewInit {
   }
 
   protected addColumnName(name: any, xpos: any, ypos: any) {
-    this.context.font = <string> this.chartConfig.columnFont;
-    this.context.fillStyle = <string> this.chartConfig.columnTitleColor;
+    this.context.font = <string>this.chartConfig.columnFont;
+    this.context.fillStyle = <string>this.chartConfig.columnTitleColor;
     this.context.fillText(name, xpos, ypos);
   }
 
@@ -116,7 +116,7 @@ export class ChartComponent implements AfterViewInit {
     this.context.beginPath();
     this.context.moveTo(drawnBar.x + drawnBar.radius, drawnBar.y);
 
-    this.context.arcTo(drawnBar.x + drawnBar.width, drawnBar.y, drawnBar.x +drawnBar.width, drawnBar.y + drawnBar.height, drawnBar.radius);
+    this.context.arcTo(drawnBar.x + drawnBar.width, drawnBar.y, drawnBar.x + drawnBar.width, drawnBar.y + drawnBar.height, drawnBar.radius);
     this.context.arcTo(drawnBar.x + drawnBar.width, drawnBar.y + drawnBar.height, drawnBar.x, drawnBar.y + drawnBar.height, 0);
     this.context.arcTo(drawnBar.x, drawnBar.y + drawnBar.height, drawnBar.x, drawnBar.y, 0);
     this.context.arcTo(drawnBar.x, drawnBar.y, drawnBar.x + drawnBar.width, drawnBar.y, drawnBar.radius);
@@ -131,4 +131,61 @@ export class ChartComponent implements AfterViewInit {
     this.drawBar(drawnBar);
   }
 
+  highlightBarChartOnThisPosition(mousePosition: { x: number, y: number }) {
+    let index = 0;
+
+    if (this.barHighlighted) {
+      if(mousePosition.y > this.barHighlighted.y && mousePosition.y - this.barHighlighted.y < 80) {
+        return;
+      }
+
+      if(mousePosition.y < this.barHighlighted.y && this.barHighlighted.y - mousePosition.y < 80 - 25) {
+        return;
+      }
+
+      if(mousePosition.y == this.barHighlighted.y) {
+        return;
+      }
+    }
+
+    console.error('merde');
+    //todo retrouver en direct sans boucle l'élement survolé pour optimiser
+    for (const item of this.chartData) {
+      const barVerticalPosition = 25 + index * 80;
+
+      if (mousePosition.y >= barVerticalPosition &&
+        mousePosition.y <= barVerticalPosition + this.barHeight &&
+        this.drawnBars[index].color == this.barColor
+      ) {
+        if (this.barHighlighted) {
+          this.redrawBar(this.barHighlighted, this.barColor);
+        }
+
+        this.redrawBar(this.drawnBars[index], this.highlightedBarColor);
+
+        this.barHighlighted = this.drawnBars[index];
+
+        break;
+      }
+
+      index++;
+    }
+  }
+
+  getMousePosition(mouseEvent: MouseEvent) {
+    const rect = this.context.canvas.getBoundingClientRect();
+
+    return {
+      x: mouseEvent.clientX - rect.left,
+      y: mouseEvent.clientY - rect.top
+    };
+  }
+
+  protected onCanvasMouseMove() {
+    return (mouseEvent: MouseEvent) => {
+      const mousePosition = this.getMousePosition(mouseEvent);
+
+      this.highlightBarChartOnThisPosition(mousePosition);
+    };
+  }
 }
