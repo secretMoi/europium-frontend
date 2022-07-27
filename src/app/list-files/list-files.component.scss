@@ -6,3 +6,11 @@
 .switch:hover {
   cursor: pointer;
 }
+
+.accordion-button:not(.collapsed) {
+  background-color: transparent;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}

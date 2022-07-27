@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {ChartComponent} from "../chart/chart.component";
+import {DrawnBar} from "../chart/drawnBar";
 
 @Component({
   selector: 'app-horizontal-chart',
@@ -13,26 +14,71 @@ export class HorizontalChartComponent extends ChartComponent {
     this.context.fillStyle = '#fff';
     this.context.fillRect(0, 0, this.chartConfig.width, this.chartData.length * 80);
 
+    this.canvas.nativeElement.onmousemove = this.onCanvasMouseMove();
+
     super.refreshChart();
+  }
+
+  private onCanvasMouseMove() {
+    return (mouseEvent: MouseEvent) => {
+      const mousePosition = this.getMousePosition(mouseEvent);
+
+      this.highlightBarChartOnThisPosition(mousePosition);
+    };
+  }
+
+  highlightBarChartOnThisPosition(mousePosition: {x: number, y: number}) {
+    let index = 0;
+
+    for(const item of this.chartData) {
+      const barVerticalPosition = 25 + index * 80;
+
+      if (mousePosition.y >= barVerticalPosition &&
+        mousePosition.y <= barVerticalPosition + this.barHeight &&
+        this.drawnBars[index].color == this.barColor
+      ) {
+        if(this.barHighlighted) {
+          this.redrawBar(this.barHighlighted, this.barColor);
+        }
+
+        this.redrawBar(this.drawnBars[index], this.highlightedBarColor);
+
+        this.barHighlighted = this.drawnBars[index];
+      }
+
+      index++;
+    }
+  }
+
+  getMousePosition(mouseEvent: MouseEvent) {
+    const rect = this.context.canvas.getBoundingClientRect();
+
+    return {
+      x: mouseEvent.clientX - rect.left,
+      y: mouseEvent.clientY - rect.top
+    };
   }
 
   protected override drawBarChart() {
 
     const widthRatio = this.getWidthRatio();
 
-    const barPadding = 10;
-    const barHeight = 30;
-
     for (let index = 0; index < this.chartData.length; index++) {
-      this.context.fillStyle = "#1266F1";
 
-      this.roundRect(
-        barPadding,
-      25 + index * 80,
-      this.chartData[index].value * widthRatio,
-        barHeight,
-      7
+      const drawBar = new DrawnBar(
+        this.barPadding,
+        25 + index * 80,
+        this.chartData[index].value * widthRatio,
+        this.barHeight,
+        7,
+        this.barColor
       );
+
+      this.drawnBars.push(drawBar);
+
+      this.context.fillStyle = this.barColor;
+
+      this.roundRect(drawBar);
 
       this.addColumnName(
         this.chartData[index].label,
@@ -42,23 +88,24 @@ export class HorizontalChartComponent extends ChartComponent {
 
       this.addColumnHead(
         this.chartData[index].valueToDisplay,
-        barPadding + this.chartData[index].value * widthRatio + 10,
+        this.barPadding + this.chartData[index].value * widthRatio + 10,
         45 + index * 80
       );
     }
   }
 
-  protected override makeBorderRadius(
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    radius: number = 0
-  ) {
-    this.context.arcTo(x + width, y, x + width, y + height, radius);
-    this.context.arcTo(x + width, y + height, x, y + height, radius);
-    this.context.arcTo(x, y + height, x, y, 0);
-    this.context.arcTo(x, y, x + width, y, 0);
+  protected override drawBar(drawnBar: DrawnBar) {
+    this.context.beginPath();
+    this.context.moveTo(drawnBar.x + drawnBar.radius, drawnBar.y);
+
+    this.context.fillStyle = drawnBar.color;
+    this.context.arcTo(drawnBar.x + drawnBar.width, drawnBar.y, drawnBar.x + drawnBar.width, drawnBar.y + drawnBar.height, drawnBar.radius);
+    this.context.arcTo(drawnBar.x + drawnBar.width, drawnBar.y +drawnBar.height, drawnBar.x, drawnBar.y + drawnBar.height, drawnBar.radius);
+    this.context.arcTo(drawnBar.x, drawnBar.y + drawnBar.height, drawnBar.x, drawnBar.y, 0);
+    this.context.arcTo(drawnBar.x, drawnBar.y, drawnBar.x + drawnBar.width, drawnBar.y, 0);
+
+    this.context.closePath();
+    this.context.fill();
   }
 
 }

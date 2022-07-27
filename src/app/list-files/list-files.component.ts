@@ -124,15 +124,4 @@ export class ListFilesComponent {
 
     this.loadData(new ListFilesArguments(volume, resultNumber, fileType));
   }
-
-  onVolumeSelected(value: any) {
-   console.log(value)
-  }
-
-  selectOption(value: any) {
-    //getted from event
-    console.log(value);
-    //getted from binding
-    console.log(this.selectedVolume)
-  }
 }

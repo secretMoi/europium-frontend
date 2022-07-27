@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {ChartData} from "./chartData";
 import {ChartConfig} from "./chartConfig";
+import {DrawnBar} from "./drawnBar";
 
 @Component({
   selector: 'app-chart',
@@ -16,54 +17,30 @@ export class ChartComponent implements AfterViewInit {
   protected canvas: ElementRef<HTMLCanvasElement> = {} as ElementRef<HTMLCanvasElement>;
   protected context: CanvasRenderingContext2D = {} as CanvasRenderingContext2D;
 
+  protected drawnBars: DrawnBar[] = [];
+  protected barHighlighted?: DrawnBar;
+
+  protected barPadding: number = 10;
+  protected barHeight: number = 30;
+  protected barColor: string = 'rgba(18, 102, 241, 0.5)';
+  protected highlightedBarColor: string = 'rgba(18, 102, 241, 1)';
+
   ngAfterViewInit() {
 
     this.context = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D;
 
     this.context.fillStyle = '#262a33';
     this.context.fillRect(0, 0, this.chartConfig.width, this.chartConfig.height);
-
-    // this.refreshChart();
   }
 
   public refreshChart() {
     this.drawBarChart();
-    // this.addTitleToChart();
-    // this.addFooterToChart();
-    // this.addHorizontalLines();
-  }
-
-  protected addTitleToChart() {
-    // this.context.font = this.chartMetaInfo.titleFont;
-    // this.context.fillStyle = this.chartMetaInfo.titleColor;
-    // this.context.fillText(this.chartMetaInfo.title, 100, 30);
-  }
-
-  protected addFooterToChart() {
-    // this.context.font = this.chartMetaInfo.footerFont;
-    // this.context.fillStyle = this.chartMetaInfo.footerColor;
-    // this.context.fillText(this.chartMetaInfo.footerTitle, this.chartMetaInfo.chartWidth / 2, this.chartMetaInfo.chartHeight - 10);
   }
 
   protected addColumnName(name: any, xpos: any, ypos: any) {
     this.context.font = <string> this.chartConfig.columnFont;
     this.context.fillStyle = <string> this.chartConfig.columnTitleColor;
     this.context.fillText(name, xpos, ypos);
-  }
-
-  protected addHorizontalLines() {
-    // this.context.font = this.chartMetaInfo.leftaxisFont;
-    // this.context.fillStyle = this.chartMetaInfo.leftaxisColor;
-    //
-    // for (let i = 0; i < 11; i++) {
-    //
-    //   this.context.lineWidth = 0.5;
-    //   this.context.beginPath();
-    //   this.context.moveTo(25, (20 * i) + 40);
-    //   this.context.lineTo(475, (20 * i) + 40);
-    //   this.context.strokeStyle = this.chartMetaInfo.leftaxisColor;
-    //   this.context.stroke();
-    // }
   }
 
   protected addColumnHead(name: any, xpos: any, ypos: any) {
@@ -78,14 +55,18 @@ export class ChartComponent implements AfterViewInit {
     const heightRatio = this.getHeightRatio();
 
     for (let index = 0; index < this.chartData.length; index++) {
-      this.context.fillStyle = "#1266F1";
+      this.context.fillStyle = this.barColor;
 
-      this.roundRect(
+      const drawBar = new DrawnBar(
         25 + index * 70,
         this.chartConfig.height - this.chartData[index].value * heightRatio - 50,
         50,
-        this.chartData[index].value * heightRatio, 7
+        this.chartData[index].value * heightRatio,
+        7,
+        this.barColor
       );
+
+      this.roundRect(drawBar);
 
       this.addColumnName(
         this.chartData[index].label,
@@ -124,37 +105,30 @@ export class ChartComponent implements AfterViewInit {
     return (this.chartConfig.width - 100) / maxValue;
   }
 
-  protected roundRect(
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    radius: number = 0
-  ) {
-    if (width < 2 * radius) radius = width / 2;
-    if (height < 2 * radius) radius = height / 2;
+  protected roundRect(drawnBar: DrawnBar) {
+    if (drawnBar.width < 2 * drawnBar.radius) drawnBar.radius = drawnBar.width / 2;
+    if (drawnBar.height < 2 * drawnBar.radius) drawnBar.radius = drawnBar.height / 2;
 
+    this.drawBar(drawnBar);
+  }
+
+  protected drawBar(drawnBar: DrawnBar) {
     this.context.beginPath();
+    this.context.moveTo(drawnBar.x + drawnBar.radius, drawnBar.y);
 
-    this.context.moveTo(x + radius, y);
-
-    this.makeBorderRadius(x, y, width, height, radius);
+    this.context.arcTo(drawnBar.x + drawnBar.width, drawnBar.y, drawnBar.x +drawnBar.width, drawnBar.y + drawnBar.height, drawnBar.radius);
+    this.context.arcTo(drawnBar.x + drawnBar.width, drawnBar.y + drawnBar.height, drawnBar.x, drawnBar.y + drawnBar.height, 0);
+    this.context.arcTo(drawnBar.x, drawnBar.y + drawnBar.height, drawnBar.x, drawnBar.y, 0);
+    this.context.arcTo(drawnBar.x, drawnBar.y, drawnBar.x + drawnBar.width, drawnBar.y, drawnBar.radius);
 
     this.context.closePath();
     this.context.fill();
   }
 
-  protected makeBorderRadius(
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    radius: number = 0
-  ) {
-    this.context.arcTo(x + width, y, x + width, y + height, radius);
-    this.context.arcTo(x + width, y + height, x, y + height, 0);
-    this.context.arcTo(x, y + height, x, y, 0);
-    this.context.arcTo(x, y, x + width, y, radius);
+  protected redrawBar(drawnBar: DrawnBar, barColor: string) {
+    drawnBar.color = barColor;
+    this.context.clearRect(drawnBar.x, drawnBar.y, drawnBar.width, drawnBar.height);
+    this.drawBar(drawnBar);
   }
 
 }
