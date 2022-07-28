@@ -20,8 +20,6 @@ export class HorizontalChartComponent extends ChartComponent {
     super.refreshChart();
   }
 
-
-
   protected override drawBarChart() {
 
     const widthRatio = this.getWidthRatio();
@@ -43,13 +41,13 @@ export class HorizontalChartComponent extends ChartComponent {
 
       this.roundRect(drawBar);
 
-      this.addColumnName(
+      this.addText(
         this.chartData[index].label,
         10,
         20 + index * 80
       );
 
-      this.addColumnHead(
+      this.addText(
         this.chartData[index].valueToDisplay,
         this.barPadding + this.chartData[index].value * widthRatio + 10,
         45 + index * 80

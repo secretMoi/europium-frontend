@@ -34,19 +34,16 @@ export class ChartComponent implements AfterViewInit {
   }
 
   public refreshChart() {
+    this.drawnBars = [];
+    this.barHighlighted = undefined;
+
     this.drawBarChart();
   }
 
-  protected addColumnName(name: any, xpos: any, ypos: any) {
+  protected addText(name: any, x: any, y: any) {
     this.context.font = <string>this.chartConfig.columnFont;
     this.context.fillStyle = <string>this.chartConfig.columnTitleColor;
-    this.context.fillText(name, xpos, ypos);
-  }
-
-  protected addColumnHead(name: any, xpos: any, ypos: any) {
-    this.context.font = <string>this.chartConfig.columnFont;
-    this.context.fillStyle = <string>this.chartConfig.columnTitleColor;
-    this.context.fillText(name, xpos, ypos);
+    this.context.fillText(name, x, y);
   }
 
   protected drawBarChart() {
@@ -67,13 +64,13 @@ export class ChartComponent implements AfterViewInit {
 
       this.roundRect(drawBar);
 
-      this.addColumnName(
+      this.addText(
         this.chartData[index].label,
         25 + index * 70,
         this.chartConfig.height - 40
       );
 
-      this.addColumnHead(
+      this.addText(
         this.chartData[index].valueToDisplay,
         45 + index * 70,
         this.chartConfig.height - this.chartData[index].value - 65
@@ -167,6 +164,7 @@ export class ChartComponent implements AfterViewInit {
       mousePosition.y <= drawnBar.y + this.barHeight &&
       drawnBar.color == this.barColor
     ) {
+
       if (this.barHighlighted) {
         this.redrawBar(this.barHighlighted, this.barColor);
       }

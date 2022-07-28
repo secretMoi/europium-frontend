@@ -12,6 +12,7 @@ import {ClrDatagridModule, ClrInputModule, ClrVerticalNavModule} from "@clr/angu
 import { VolumeListComponent } from './volume-list/volume-list.component';
 import { ListFilesComponent } from './list-files/list-files.component';
 import {FormsModule} from "@angular/forms";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {FormsModule} from "@angular/forms";
     ChartNgxLibComponent,
     HorizontalChartComponent,
     VolumeListComponent,
-    ListFilesComponent
+    ListFilesComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
