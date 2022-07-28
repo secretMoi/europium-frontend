@@ -49,7 +49,6 @@ export class ChartComponent implements AfterViewInit {
     this.context.fillText(name, xpos, ypos);
   }
 
-
   protected drawBarChart() {
 
     const heightRatio = this.getHeightRatio();
@@ -131,44 +130,50 @@ export class ChartComponent implements AfterViewInit {
     this.drawBar(drawnBar);
   }
 
-  highlightBarChartOnThisPosition(mousePosition: { x: number, y: number }) {
-    let index = 0;
+  findDrawnBar(verticalPosition: number): DrawnBar {
+    verticalPosition -= 25;
 
+    return this.drawnBars[Math.floor(verticalPosition / 80)];
+  }
+
+  isBarAlreadyHighlighted(mousePosition: { x: number, y: number }): boolean {
     if (this.barHighlighted) {
-      if(mousePosition.y > this.barHighlighted.y && mousePosition.y - this.barHighlighted.y < 80) {
-        return;
+      if (mousePosition.y > this.barHighlighted.y && mousePosition.y - this.barHighlighted.y < 80) {
+        return true;
       }
 
-      if(mousePosition.y < this.barHighlighted.y && this.barHighlighted.y - mousePosition.y < 80 - 25) {
-        return;
+      if (mousePosition.y < this.barHighlighted.y && this.barHighlighted.y - mousePosition.y < 80 - 25) {
+        return true;
       }
 
-      if(mousePosition.y == this.barHighlighted.y) {
-        return;
+      if (mousePosition.y == this.barHighlighted.y) {
+        return true;
       }
     }
 
-    console.error('merde');
-    //todo retrouver en direct sans boucle l'élement survolé pour optimiser
-    for (const item of this.chartData) {
-      const barVerticalPosition = 25 + index * 80;
+    return false;
+  }
 
-      if (mousePosition.y >= barVerticalPosition &&
-        mousePosition.y <= barVerticalPosition + this.barHeight &&
-        this.drawnBars[index].color == this.barColor
-      ) {
-        if (this.barHighlighted) {
-          this.redrawBar(this.barHighlighted, this.barColor);
-        }
+  highlightBarChartOnThisPosition(mousePosition: { x: number, y: number }) {
+    const drawnBar = this.findDrawnBar(mousePosition.y);
 
-        this.redrawBar(this.drawnBars[index], this.highlightedBarColor);
+    if (this.isBarAlreadyHighlighted(mousePosition)) {
+      return;
+    }
 
-        this.barHighlighted = this.drawnBars[index];
-
-        break;
+    if (
+      drawnBar &&
+      mousePosition.y >= drawnBar.y &&
+      mousePosition.y <= drawnBar.y + this.barHeight &&
+      drawnBar.color == this.barColor
+    ) {
+      if (this.barHighlighted) {
+        this.redrawBar(this.barHighlighted, this.barColor);
       }
 
-      index++;
+      this.redrawBar(drawnBar, this.highlightedBarColor);
+
+      this.barHighlighted = drawnBar;
     }
   }
 
@@ -183,9 +188,20 @@ export class ChartComponent implements AfterViewInit {
 
   protected onCanvasMouseMove() {
     return (mouseEvent: MouseEvent) => {
+
       const mousePosition = this.getMousePosition(mouseEvent);
 
       this.highlightBarChartOnThisPosition(mousePosition);
+    };
+  }
+
+  protected onCanvasMouseLeave() {
+    return (_: any) => {
+      if (this.barHighlighted) {
+        this.redrawBar(this.barHighlighted, this.barColor);
+
+        this.barHighlighted = undefined;
+      }
     };
   }
 }

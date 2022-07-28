@@ -4,7 +4,7 @@ export class ChartData {
   valueToDisplay: string;
 
   constructor(value: number, label: string, valueToDisplay?: string) {
-    this.value = value;
+    this.value = Math.floor(value);
     this.label = label;
 
     this.valueToDisplay = valueToDisplay ? valueToDisplay : value.toString();

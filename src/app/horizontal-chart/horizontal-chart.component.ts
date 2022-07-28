@@ -15,9 +15,12 @@ export class HorizontalChartComponent extends ChartComponent {
     this.context.fillRect(0, 0, this.chartConfig.width, this.chartData.length * 80);
 
     this.canvas.nativeElement.onmousemove = this.onCanvasMouseMove();
+    this.canvas.nativeElement.onmouseleave = this.onCanvasMouseLeave();
 
     super.refreshChart();
   }
+
+
 
   protected override drawBarChart() {
 
@@ -67,5 +70,4 @@ export class HorizontalChartComponent extends ChartComponent {
     this.context.closePath();
     this.context.fill();
   }
-
 }
