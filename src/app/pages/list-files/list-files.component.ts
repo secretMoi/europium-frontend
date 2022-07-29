@@ -1,12 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
-import {ChartData} from "../chart/chartData";
-import {HorizontalChartComponent} from "../horizontal-chart/horizontal-chart.component";
-import {StorageService} from "../service/storage.service";
-import {File} from "../models/file";
-import {ListFilesArguments} from "../models/list-files-arguments";
-import {ChartConfig} from "../chart/chartConfig";
-import {FileType} from "../models/file-type";
-import {FileSystem} from "../models/file-system";
+import {ChartData} from "../../helpers/chart/chartData";
+import {HorizontalChartComponent} from "../../helpers/horizontal-chart/horizontal-chart.component";
+import {StorageService} from "../../service/storage.service";
+import {File} from "../../models/file";
+import {ListFilesArguments} from "../../models/list-files-arguments";
+import {ChartConfig} from "../../helpers/chart/chartConfig";
+import {FileType} from "../../models/file-type";
+import {FileSystem} from "../../models/file-system";
 
 @Component({
   selector: 'app-list-files',

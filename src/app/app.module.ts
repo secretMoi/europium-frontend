@@ -5,15 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {BarChartModule} from "@swimlane/ngx-charts";
-import { ChartComponent } from './chart/chart.component';
-import { ChartNgxLibComponent } from './chart-ngx-lib/chart-ngx-lib.component';
-import { HorizontalChartComponent } from './horizontal-chart/horizontal-chart.component';
+import { ChartComponent } from './helpers/chart/chart.component';
+import { ChartNgxLibComponent } from './helpers/chart-ngx-lib/chart-ngx-lib.component';
+import { HorizontalChartComponent } from './helpers/horizontal-chart/horizontal-chart.component';
 import {ClrDatagridModule, ClrInputModule, ClrVerticalNavModule} from "@clr/angular";
-import { VolumeListComponent } from './volume-list/volume-list.component';
-import { ListFilesComponent } from './list-files/list-files.component';
+import { VolumeListComponent } from './pages/volume-list/volume-list.component';
+import { ListFilesComponent } from './pages/list-files/list-files.component';
 import {FormsModule} from "@angular/forms";
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { ApiMonitoredCardComponent } from './helpers/api-monitored-card/api-monitored-card.component';
+import { HandleApiComponent } from './pages/handle-api/handle-api.component';
+import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { ApiMonitoredCardComponent } from './helpers/api-monitored-card/api-moni
     VolumeListComponent,
     ListFilesComponent,
     HomeComponent,
-    ApiMonitoredCardComponent
+    ApiMonitoredCardComponent,
+    HandleApiComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,9 @@ import { ApiMonitoredCardComponent } from './helpers/api-monitored-card/api-moni
     ClrVerticalNavModule,
     ClrDatagridModule,
     FormsModule,
-    ClrInputModule
+    ClrInputModule,
+    NgbCollapseModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

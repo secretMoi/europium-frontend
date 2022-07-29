@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MonitoredApiService} from "../service/monitored-api.service";
-import {MonitoredApi} from "../models/monitored-api";
+import {MonitoredApiService} from "../../service/monitored-api.service";
+import {MonitoredApi} from "../../models/monitored-api";
 
 @Component({
   selector: 'app-home',

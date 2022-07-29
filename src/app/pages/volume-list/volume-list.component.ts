@@ -1,10 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
-import {FileSystem} from "../models/file-system";
-import {ChartData} from "../chart/chartData";
-import {ChartComponent} from "../chart/chart.component";
-import {HorizontalChartComponent} from "../horizontal-chart/horizontal-chart.component";
-import {StorageService} from "../service/storage.service";
-import {ChartConfig} from "../chart/chartConfig";
+import {FileSystem} from "../../models/file-system";
+import {ChartData} from "../../helpers/chart/chartData";
+import {ChartComponent} from "../../helpers/chart/chart.component";
+import {HorizontalChartComponent} from "../../helpers/horizontal-chart/horizontal-chart.component";
+import {StorageService} from "../../service/storage.service";
+import {ChartConfig} from "../../helpers/chart/chartConfig";
 
 @Component({
   selector: 'app-volume-list',
