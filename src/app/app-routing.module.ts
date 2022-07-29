@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {AppComponent} from "./app.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {VolumeListComponent} from "./pages/volume-list/volume-list.component";
 import {ListFilesComponent} from "./pages/list-files/list-files.component";
 import {HomeComponent} from "./pages/home/home.component";

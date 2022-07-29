@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HandleApiComponent } from './handle-api.component';
+import {HandleApiComponent} from './handle-api.component';
 
 describe('HandleApiComponent', () => {
   let component: HandleApiComponent;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ChartComponent} from "../chart/chart.component";
 import {DrawnBar} from "../chart/drawnBar";
 

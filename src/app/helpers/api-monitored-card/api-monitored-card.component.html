@@ -13,14 +13,27 @@
 
     <p class="ms-3">
       <img aria-controls="collapseExample" src="assets/down.png" height="64"
-           [@smoothCollapse]='state'
-              (click)="rotate()" [attr.aria-expanded]="!isCollapsed" />
+           [@smoothCollapse]='state' (click)="rotate()" [attr.aria-expanded]="!isCollapsed" />
     </p>
   </div>
 
   <div id="collapseExample" [(ngbCollapse)]="isCollapsed">
     <div class="card card-body" style="margin-top: 0;">
-      Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+      <div class="list-group">
+        <a href="#" class="list-group-item" *ngFor="let apiUrl of monitoredApi.apiUrls">
+          <div class="d-flex justify-content-between w-100">
+            <div class="p-2 fs-4 my-auto">
+              <a href="{{ apiUrl.url }}" target="_blank">{{ apiUrl.url }}</a>
+            </div>
+
+            <div class="p-2">
+              <img *ngIf="apiUrl.state" src="assets/check.png" height="64">
+              <img *ngIf="apiUrl.state === false" src="assets/cancel.png" height="64">
+              <img *ngIf="apiUrl.state === null" src="assets/interrogation-mark.png" height="64">
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 

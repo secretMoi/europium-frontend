@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ApiMonitoredCardComponent } from './api-monitored-card.component';
+import {ApiMonitoredCardComponent} from './api-monitored-card.component';
 
 describe('ApiMonitoredCardComponent', () => {
   let component: ApiMonitoredCardComponent;

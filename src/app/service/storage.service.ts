@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FileSystem} from "../models/file-system";
 import data from "../../config.json";
 import {HttpClient} from "@angular/common/http";
