@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {FileSystem} from "../models/fileSystem";
+import {FileSystem} from "../models/file-system";
 import {ChartData} from "../chart/chartData";
 import {ChartComponent} from "../chart/chart.component";
 import {HorizontalChartComponent} from "../horizontal-chart/horizontal-chart.component";

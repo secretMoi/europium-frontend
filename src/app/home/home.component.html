@@ -1,28 +1,9 @@
 <div class="card">
-  <ul class="list-group list-group-flush">
+  <ul class="list-group list-group-flush" *ngFor="let monitoredApi of monitoredApis">
 
-    <li class="list-group-item">
-      <div class="d-flex justify-content-between">
-        <div class="p-2"><img src="assets/plex-icon.png" height="96"></div>
-        <div class="p-2 fs-1 my-auto">Plex</div>
-        <div class="p-2"><img src="assets/check.png" height="96"></div>
-      </div>
-    </li>
-
-    <li class="list-group-item">
-      <div class="d-flex justify-content-between">
-        <div class="p-2"><img src="assets/radarr.png" height="96"></div>
-        <div class="p-2 fs-1 my-auto">Radarr</div>
-        <div class="p-2"><img src="assets/cancel.png" height="96"></div>
-      </div>
-    </li>
-
-    <li class="list-group-item">
-      <div class="d-flex justify-content-between">
-        <div class="p-2"><img src="assets/sonarr.png" height="96"></div>
-        <div class="p-2 fs-1 my-auto">Sonarr</div>
-        <div class="p-2"><img src="assets/check.png" height="96"></div>
-      </div>
-    </li>
+    <app-api-monitored-card
+    [monitoredApi]="monitoredApi"
+    [monitoredApiChanged]="monitoredApisValueChanged"
+    ></app-api-monitored-card>
   </ul>
 </div>

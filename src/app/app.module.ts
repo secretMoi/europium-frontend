@@ -13,6 +13,7 @@ import { VolumeListComponent } from './volume-list/volume-list.component';
 import { ListFilesComponent } from './list-files/list-files.component';
 import {FormsModule} from "@angular/forms";
 import { HomeComponent } from './home/home.component';
+import { ApiMonitoredCardComponent } from './helpers/api-monitored-card/api-monitored-card.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HomeComponent } from './home/home.component';
     HorizontalChartComponent,
     VolumeListComponent,
     ListFilesComponent,
-    HomeComponent
+    HomeComponent,
+    ApiMonitoredCardComponent
   ],
   imports: [
     BrowserModule,

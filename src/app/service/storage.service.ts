@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {FileSystem} from "../models/fileSystem";
+import {FileSystem} from "../models/file-system";
 import data from "../../config.json";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {ListFilesArguments} from "../models/listFilesArguments";
+import {ListFilesArguments} from "../models/list-files-arguments";
 import {File} from "../models/file";
 
 @Injectable({

@@ -1,4 +1,4 @@
-import {FileType} from "./fileType";
+import {FileType} from "./file-type";
 
 export class ListFilesArguments {
   path: string;

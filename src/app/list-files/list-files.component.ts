@@ -3,10 +3,10 @@ import {ChartData} from "../chart/chartData";
 import {HorizontalChartComponent} from "../horizontal-chart/horizontal-chart.component";
 import {StorageService} from "../service/storage.service";
 import {File} from "../models/file";
-import {ListFilesArguments} from "../models/listFilesArguments";
+import {ListFilesArguments} from "../models/list-files-arguments";
 import {ChartConfig} from "../chart/chartConfig";
-import {FileType} from "../models/fileType";
-import {FileSystem} from "../models/fileSystem";
+import {FileType} from "../models/file-type";
+import {FileSystem} from "../models/file-system";
 
 @Component({
   selector: 'app-list-files',
