@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MonitoredApiService} from "../service/monitored-api.service";
-import {MonitoredApi} from "../models/MonitoredApi";
-import {BehaviorSubject, ReplaySubject, Subject} from "rxjs";
+import {MonitoredApi} from "../models/monitored-api";
 
 @Component({
   selector: 'app-home',
@@ -11,16 +10,12 @@ import {BehaviorSubject, ReplaySubject, Subject} from "rxjs";
 export class HomeComponent implements OnInit {
 
   monitoredApis!: MonitoredApi[];
-  monitoredApisValueChanged: Subject<Object> = new ReplaySubject<Object>(1);
 
   constructor(private monitoredApiService: MonitoredApiService) {}
 
   ngOnInit(): void {
     this.monitoredApiService.getMonitoredApis().subscribe(
-      (monitoredApis) => {
-        this.monitoredApis = monitoredApis;
-        this.monitoredApisValueChanged.next(true);
-      }
+      (monitoredApis) => this.monitoredApis = monitoredApis
     );
   }
 

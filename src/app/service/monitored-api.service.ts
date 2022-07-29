@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import data from "../../config.json";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {MonitoredApi} from "../models/MonitoredApi";
+import {MonitoredApi} from "../models/monitored-api";
 
 @Injectable({
   providedIn: 'root'

@@ -3,8 +3,9 @@
     <div class="p-2"><img src="{{ monitoredApi.logo }}" height="96"></div>
     <div class="p-2 fs-1 my-auto">{{ monitoredApi.name }}</div>
     <div class="p-2">
-      <img *ngIf="state" src="assets/check.png" height="96">
-      <img *ngIf="!state" src="assets/cancel.png" height="96">
+      <img *ngIf="getApiState()" src="assets/check.png" height="96">
+      <img *ngIf="getApiState() === false" src="assets/cancel.png" height="96">
+      <img *ngIf="getApiState() === null" src="assets/interrogation-mark.png" height="96">
     </div>
   </div>
 </li>
