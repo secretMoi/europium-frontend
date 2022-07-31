@@ -9,7 +9,7 @@ import {MonitoredApi} from "../models/monitored-api";
 })
 export class MonitoredApiService {
 
-  controllerPrefix: string = data.server.host + 'monitor/apis';
+  controllerPrefix: string = data.server.host + '/monitor/apis';
 
   constructor(private http: HttpClient) {}
 
