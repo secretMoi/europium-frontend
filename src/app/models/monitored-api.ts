@@ -5,6 +5,7 @@ export class MonitoredApi {
   name!: string;
   logo!: string;
   url!: string;
+  code!: string;
 
   apiUrls!: ApiUrl[];
 }

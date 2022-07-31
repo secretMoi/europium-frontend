@@ -2,7 +2,7 @@
 
   <div class="d-flex justify-content-between">
     <div class="d-flex justify-content-between w-100" (click)="navigateToApiLink()" style="cursor: pointer">
-      <div class="p-2"><img src="{{ monitoredApi.logo }}" height="96"></div>
+      <div class="p-2"><img [src]='image' height="96"></div>
       <div class="p-2 fs-1 my-auto">{{ monitoredApi.name }}</div>
       <div class="p-2">
         <img *ngIf="getApiState()" src="assets/check.png" height="96">
