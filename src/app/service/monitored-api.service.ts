@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import data from "../../config.json";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {MonitoredApi} from "../models/monitored-api";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MonitoredApiService {
 
-  controllerPrefix: string = data.server.host + '/monitor';
+  controllerPrefix: string = environment.backendUrl + '/monitor';
 
   constructor(private http: HttpClient) {}
 

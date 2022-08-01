@@ -46,8 +46,8 @@ export class ApiMonitoredCardComponent implements OnInit {
   }
 
   getApiState(): boolean | null {
-    let hasUp: boolean = false;
-    let hasDown: boolean = false;
+    let hasUp: boolean | null = null;
+    let hasDown: boolean | null = null;
 
     this.monitoredApi.apiUrls.forEach((apiUrl) => {
       if(apiUrl.state) {
@@ -58,16 +58,16 @@ export class ApiMonitoredCardComponent implements OnInit {
       }
     });
 
-    if(hasUp && !hasDown) {
+    if(hasUp === true) {
       return true;
     }
 
-    if(!hasUp && hasDown) {
-      return false;
+    if(hasUp === false && hasDown === true) {
+      return null;
     }
 
-    if(hasUp && hasDown) {
-      return null;
+    if(hasUp === false && hasDown === false) {
+      return false;
     }
 
     return null;
