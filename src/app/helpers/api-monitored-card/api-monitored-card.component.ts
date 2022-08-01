@@ -4,6 +4,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Subject} from "rxjs";
 import {MonitoredApiService} from "../../service/monitored-api.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {ApiState} from "../../models/api-state";
 
 @Component({
   selector: 'app-api-monitored-card',
@@ -31,17 +32,33 @@ export class ApiMonitoredCardComponent implements OnInit {
 
   image!: any;
 
-  constructor(private monitoredApiService: MonitoredApiService, private sanitizer: DomSanitizer) {
-  }
+  constructor(private monitoredApiService: MonitoredApiService, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.monitoredApiChanged.subscribe(
       _ => {
-
-        this.monitoredApiService.getApiLogo(this.monitoredApi.code).subscribe(
-          (blobImage: any) => this.image = this.sanitizer.bypassSecurityTrustUrl(blobImage)
-        );
+        this.updateApiState();
+        this.updateApiLogo();
       }
+    );
+  }
+
+  updateApiState() {
+
+    for(const apiUrl of this.monitoredApi.apiUrls){
+      const apiState = new ApiState(this.monitoredApi.code, apiUrl.url);
+
+      this.monitoredApiService.getApiState(apiState).subscribe(
+        value => apiUrl.state = value
+      );
+    }
+
+
+  }
+
+  updateApiLogo() {
+    this.monitoredApiService.getApiLogo(this.monitoredApi.code).subscribe(
+      (blobImage: any) => this.image = this.sanitizer.bypassSecurityTrustUrl(blobImage)
     );
   }
 

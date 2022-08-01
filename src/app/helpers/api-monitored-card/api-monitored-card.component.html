@@ -7,7 +7,9 @@
       <div class="p-2">
         <img *ngIf="getApiState()" src="assets/check.png" height="96">
         <img *ngIf="getApiState() === false" src="assets/cancel.png" height="96">
-        <img *ngIf="getApiState() === null" src="assets/interrogation-mark.png" height="96">
+        <div *ngIf="getApiState() === null" class="spinner-border text-primary" style="width: 96px;height: 96px;" role="status">
+          <span class="visually-hidden">Loading</span>
+        </div>
       </div>
     </div>
 
@@ -29,7 +31,9 @@
             <div class="p-2">
               <img *ngIf="apiUrl.state" src="assets/check.png" height="64">
               <img *ngIf="apiUrl.state === false" src="assets/cancel.png" height="64">
-              <img *ngIf="apiUrl.state === null" src="assets/interrogation-mark.png" height="64">
+              <div *ngIf="apiUrl.state === null" class="spinner-border text-primary"  style="width: 64px;height: 64px;" role="status">
+                <span class="visually-hidden">Loading</span>
+              </div>
             </div>
           </div>
         </a>
