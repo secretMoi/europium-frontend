@@ -1,0 +1,15 @@
+<clr-datagrid>
+  <clr-dg-column [style.width.px]="130" [clrDgField]="'logo'">Logo</clr-dg-column>
+  <clr-dg-column [clrDgField]="'name'">Nom</clr-dg-column>
+  <clr-dg-column [style.width.px]="100" [clrDgField]="'name'">Editer</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let api of apis">
+    <clr-dg-cell><img [src]='api.image' height="96"></clr-dg-cell>
+    <clr-dg-cell style="text-align: center;" class="fs-1 my-auto">{{ api.name }}</clr-dg-cell>
+    <clr-dg-cell class="my-auto">
+      <button type="button" class="btn btn-primary" style="height: 56px" (click)="onApiSelected(api)">
+        <img src="assets/edit.svg" height="32px">
+      </button>
+    </clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>

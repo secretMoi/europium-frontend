@@ -5,8 +5,8 @@
       <div class="p-2"><img [src]='image' height="96"></div>
       <div class="p-2 fs-1 my-auto">{{ monitoredApi.name }}</div>
       <div class="p-2">
-        <img *ngIf="getApiState()" src="assets/check.png" height="96">
-        <img *ngIf="getApiState() === false" src="assets/cancel.png" height="96">
+        <img *ngIf="getApiState()" src="assets/check.svg" height="96">
+        <img *ngIf="getApiState() === false" src="assets/cancel.svg" height="96">
         <div *ngIf="getApiState() === null" class="spinner-border text-primary" style="width: 96px;height: 96px;" role="status">
           <span class="visually-hidden">Loading</span>
         </div>
@@ -14,7 +14,7 @@
     </div>
 
     <p class="ms-3">
-      <img aria-controls="collapseExample" src="assets/down.png" height="64"
+      <img aria-controls="collapseExample" src="assets/down.svg" height="64"
            [@smoothCollapse]='state' (click)="rotate()" [attr.aria-expanded]="!isCollapsed" />
     </p>
   </div>
@@ -29,8 +29,8 @@
             </div>
 
             <div class="p-2">
-              <img *ngIf="apiUrl.state" src="assets/check.png" height="64">
-              <img *ngIf="apiUrl.state === false" src="assets/cancel.png" height="64">
+              <img *ngIf="apiUrl.state" src="assets/check.svg" height="64">
+              <img *ngIf="apiUrl.state === false" src="assets/cancel.svg" height="64">
               <div *ngIf="apiUrl.state === null" class="spinner-border text-primary"  style="width: 64px;height: 64px;" role="status">
                 <span class="visually-hidden">Loading</span>
               </div>

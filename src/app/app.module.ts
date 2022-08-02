@@ -15,6 +15,7 @@ import {ApiMonitoredCardComponent} from './helpers/api-monitored-card/api-monito
 import {HandleApiComponent} from './pages/handle-api/handle-api.component';
 import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { CrudApisComponent } from './pages/crud-apis/crud-apis.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     ListFilesComponent,
     HomeComponent,
     ApiMonitoredCardComponent,
-    HandleApiComponent
+    HandleApiComponent,
+    CrudApisComponent
   ],
   imports: [
     BrowserModule,
