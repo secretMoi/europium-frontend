@@ -16,6 +16,7 @@ import {HandleApiComponent} from './pages/handle-api/handle-api.component';
 import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CrudApisComponent } from './pages/crud-apis/crud-apis.component';
+import { EditApiComponent } from './pages/edit-api/edit-api.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CrudApisComponent } from './pages/crud-apis/crud-apis.component';
     HomeComponent,
     ApiMonitoredCardComponent,
     HandleApiComponent,
-    CrudApisComponent
+    CrudApisComponent,
+    EditApiComponent
   ],
   imports: [
     BrowserModule,

@@ -41,6 +41,6 @@ export class CrudApisComponent implements OnInit {
   }
 
   onApiSelected(api: CrudApiTableItem) {
-    this.router.navigate(['edit-api', api.name], {relativeTo: this.activatedRoute});
+    this.router.navigate(['edit', api.name], {relativeTo: this.activatedRoute});
   }
 }
