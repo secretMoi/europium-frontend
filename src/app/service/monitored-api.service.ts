@@ -27,4 +27,8 @@ export class MonitoredApiService {
   getApiState(apiState: ApiState): Observable<boolean | null> {
     return this.http.post<boolean | null>(this.controllerPrefix + `/api/status`, apiState);
   }
+
+  getApiByCode(apiCode: string): Observable<MonitoredApi> {
+    return this.http.get<MonitoredApi>(this.controllerPrefix + `/api/${apiCode}`);
+  }
 }

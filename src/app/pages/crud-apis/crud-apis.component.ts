@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MonitoredApiService} from "../../service/monitored-api.service";
-import {MonitoredApi} from "../../models/monitored-api";
-import {ReplaySubject, Subject} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 import {CrudApiTableItem} from "./crud-api-table-item";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -41,6 +39,6 @@ export class CrudApisComponent implements OnInit {
   }
 
   onApiSelected(api: CrudApiTableItem) {
-    this.router.navigate(['edit', api.name], {relativeTo: this.activatedRoute});
+    this.router.navigate(['edit', api.code], {relativeTo: this.activatedRoute});
   }
 }

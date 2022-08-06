@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'volume-list', component: VolumeListComponent},
   {path: 'files-list', component: ListFilesComponent},
   {path: 'api', component: CrudApisComponent},
-  {path: 'api/edit/:name', component: EditApiComponent}
+  {path: 'api/edit/:code', component: EditApiComponent}
 ];
 
 @NgModule({
