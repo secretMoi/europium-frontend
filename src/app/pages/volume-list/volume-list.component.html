@@ -1,25 +1,24 @@
 <table class="table">
   <thead class="bg-primary text-white">
-  <tr>
-    <th>Nom</th>
-    <th>Taille</th>
-    <th>Utilisé</th>
-    <th>Utilisation</th>
-    <th>Libre</th>
-  </tr>
-
+    <tr>
+      <th>Nom</th>
+      <th>Taille</th>
+      <th>Utilisé</th>
+      <th>Utilisation</th>
+      <th>Libre</th>
+    </tr>
   </thead>
 
   <tbody>
-  <tr *ngFor="let fileSystem of fileSystems">
+    <tr *ngFor="let fileSystem of fileSystems">
 
-    <td>{{ fileSystem.volume }}</td>
-    <td>{{ fileSystem.size }}</td>
-    <td>{{ fileSystem.used }}</td>
-    <td>{{ fileSystem.percentageUsed }}</td>
-    <td>{{ fileSystem.available }}</td>
+      <td>{{ fileSystem.volume }}</td>
+      <td>{{ fileSystem.size }}</td>
+      <td>{{ fileSystem.used }}</td>
+      <td>{{ fileSystem.percentageUsed }}</td>
+      <td>{{ fileSystem.available }}</td>
 
-  </tr>
+    </tr>
   </tbody>
 </table>
 
@@ -29,9 +28,9 @@
   [chartConfig]='chartConfig'
 ></app-horizontal-chart>
 
-<br>
+<!--<br>-->
 
-<app-chart
-  [chartData]='chartData'
-  [chartConfig]='chartConfig'
-></app-chart>
+<!--<app-chart-->
+<!--  [chartData]='chartData'-->
+<!--  [chartConfig]='chartConfig'-->
+<!--&gt;</app-chart>-->

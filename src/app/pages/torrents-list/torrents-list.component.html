@@ -1,10 +1,12 @@
+
 <table class="table table-responsive table-hover">
   <thead>
     <tr>
-      <th>Nom</th>
+      <th (click)="dynamicSort('name')">Nom</th>
       <th>Catégorie</th>
       <th>Etat</th>
       <th>Save Path</th>
+      <th (click)="dynamicSort('size')">Taille</th>
     </tr>
   </thead>
   <tbody>
@@ -13,7 +15,7 @@
       <td>{{ torrent.category }}</td>
       <td>{{ torrent.state }}</td>
       <td>{{ torrent.save_path }}</td>
+      <td>{{ torrent.size }}</td>
     </tr>
   </tbody>
 </table>
-

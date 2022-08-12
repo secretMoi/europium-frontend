@@ -12,11 +12,11 @@ import {FormsModule} from "@angular/forms";
 import {HomeComponent} from './pages/home/home.component';
 import {ApiMonitoredCardComponent} from './helpers/api-monitored-card/api-monitored-card.component';
 import {HandleApiComponent} from './pages/handle-api/handle-api.component';
-import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbCollapseModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CrudApisComponent } from './pages/crud-apis/crud-apis.component';
 import { EditApiComponent } from './pages/edit-api/edit-api.component';
-import { TorrentsListComponent } from './pages/torrents-list/torrents-list.component';
+import { TorrentsListComponent} from './pages/torrents-list/torrents-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { TorrentsListComponent } from './pages/torrents-list/torrents-list.compo
     HandleApiComponent,
     CrudApisComponent,
     EditApiComponent,
-    TorrentsListComponent
+    TorrentsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +38,8 @@ import { TorrentsListComponent } from './pages/torrents-list/torrents-list.compo
     HttpClientModule,
     FormsModule,
     NgbCollapseModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
