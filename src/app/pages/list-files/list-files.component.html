@@ -3,16 +3,16 @@
 
     <form class="row g-3">
 
-      <div class="form-switch col-2 my-auto d-flex justify-content-center">
+      <div class="form-switch col-3 my-auto d-flex justify-content-center">
         <input class="form-check-input switch" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="isFile" (click)="toggleIsFileValue()">
         <label class="form-check-label" for="flexSwitchCheckChecked">{{ fileOrFolderText }}</label>
       </div>
 
-      <div class="col-6">
+      <div class="col-4">
         <div class="mb-3 row">
-          <label class="col-sm-2 col-form-label mt-3">Nombre de résultats</label>
-          <div class="col-sm-10">
-            <input clrInput placeholder="Nombre de résultats" [(ngModel)]="resultNumber" name="resultNumber" />
+          <div class="input-group">
+            <span class="input-group-text">Nombre de résultats</span>
+            <input class="form-control" placeholder="Nombre de résultats" [(ngModel)]="resultNumber" name="resultNumber" />
           </div>
         </div>
       </div>
@@ -40,23 +40,6 @@
 
   </div>
 </div>
-
-<clr-datagrid>
-  <clr-dg-column [clrDgField]="'path'">Nom</clr-dg-column>
-  <clr-dg-column [clrDgField]="'sizeToDisplay'">Taille</clr-dg-column>
-
-  <clr-dg-row *clrDgItems="let file of files">
-    <clr-dg-cell>{{ file.path }}</clr-dg-cell>
-    <clr-dg-cell>{{ file.sizeToDisplay }}</clr-dg-cell>
-  </clr-dg-row>
-
-  <clr-dg-footer>
-    <clr-dg-pagination #pagination [clrDgPageSize]="20">
-      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">Films par page</clr-dg-page-size>
-      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} sur {{pagination.totalItems}} films
-    </clr-dg-pagination>
-  </clr-dg-footer>
-</clr-datagrid>
 
 <div class="accordion mt-3" id="accordionFlushExample">
   <div class="accordion-item">

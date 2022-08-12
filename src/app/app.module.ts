@@ -6,7 +6,6 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ChartComponent} from './helpers/chart/chart.component';
 import {HorizontalChartComponent} from './helpers/horizontal-chart/horizontal-chart.component';
-import {ClrDatagridModule, ClrInputModule, ClrVerticalNavModule} from "@clr/angular";
 import {VolumeListComponent} from './pages/volume-list/volume-list.component';
 import {ListFilesComponent} from './pages/list-files/list-files.component';
 import {FormsModule} from "@angular/forms";
@@ -37,10 +36,7 @@ import { TorrentsListComponent } from './pages/torrents-list/torrents-list.compo
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ClrVerticalNavModule,
-    ClrDatagridModule,
     FormsModule,
-    ClrInputModule,
     NgbCollapseModule,
     BrowserAnimationsModule
   ],
