@@ -1,60 +1,100 @@
 <div class="card">
-  <div class="card-body">
+	<div class="card-body">
 
-    <form class="row g-3">
+		<form class="row g-3">
 
-      <div class="form-switch col-3 my-auto d-flex justify-content-center">
-        <input class="form-check-input switch" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="isFile" (click)="toggleIsFileValue()">
-        <label class="form-check-label" for="flexSwitchCheckChecked">{{ fileOrFolderText }}</label>
-      </div>
+			<div class="form-switch col-3 my-auto d-flex justify-content-center">
+				<input class="form-check-input switch" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+					   [checked]="isFile" (click)="toggleIsFileValue()">
+				<label class="form-check-label" for="flexSwitchCheckChecked">{{ fileOrFolderText }}</label>
+			</div>
 
-      <div class="col-4">
-        <div class="mb-3 row">
-          <div class="input-group">
-            <span class="input-group-text">Nombre de résultats</span>
-            <input class="form-control" placeholder="Nombre de résultats" [(ngModel)]="resultNumber" name="resultNumber" />
-          </div>
-        </div>
-      </div>
+			<div class="col-4">
+				<div class="mb-3 row">
+					<div class="input-group">
+						<span class="input-group-text">Nombre de résultats</span>
+						<input class="form-control" placeholder="Nombre de résultats" [(ngModel)]="resultNumber"
+							   name="resultNumber"/>
+					</div>
+				</div>
+			</div>
 
-      <div class="col-4 my-auto mx-auto">
-        <select
-          class="form-select"
-          aria-label="Sélectionner un volume"
-          name="selectVolume"
-          [(ngModel)]="selectedVolume"
-        >
-          <option
-            *ngFor="let fileSystem of fileSystems" [ngValue]="fileSystem.volume">{{ storageService.getCleanVolumeName(fileSystem.volume) }}
-          </option>
-        </select>
-      </div>
+			<div class="col-4 my-auto mx-auto">
+				<select
+					class="form-select"
+					aria-label="Sélectionner un volume"
+					name="selectVolume"
+					[(ngModel)]="selectedVolume"
+				>
+					<option
+						*ngFor="let fileSystem of fileSystems"
+						[ngValue]="fileSystem.volume">{{ storageService.getCleanVolumeName(fileSystem.volume) }}
+					</option>
+				</select>
+			</div>
 
-      <div class="col-12">
-        <div class="d-flex flex-row-reverse bd-highlight">
-          <button type="button" class="btn btn-primary" (click)="sendFilter()">Envoyer</button>
-        </div>
-      </div>
+			<div class="col-12">
+				<div class="d-flex flex-row-reverse bd-highlight">
+					<button type="button" class="btn btn-primary" (click)="sendFilter()">Envoyer</button>
+				</div>
+			</div>
 
-    </form>
+		</form>
 
-  </div>
+	</div>
 </div>
 
+<div class="theme-table mt-3">
+	<table class="table table-responsive table-hover">
+		<thead>
+		<tr>
+			<th (click)="dynamicSort('path')">Nom</th>
+			<th (click)="dynamicSort('sizeToDisplay')">Taille</th>
+		</tr>
+		</thead>
+
+		<tbody>
+		<tr *ngFor="let file of files">
+			<td>{{ file.path }}</td>
+			<td>{{ file.sizeToDisplay }}</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<ngb-pagination [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"
+				[boundaryLinks]="true" class="d-flex justify-content-center my-3"></ngb-pagination>
+
+<!--<nav aria-label="Page navigation example" class="my-3">-->
+<!--	<ul class="pagination justify-content-center">-->
+<!--		<li class="page-item disabled">-->
+<!--			<a class="page-link">Previous</a>-->
+<!--		</li>-->
+<!--		<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--		<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--		<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--		<li class="page-item">-->
+<!--			<a class="page-link" href="#">Next</a>-->
+<!--		</li>-->
+<!--	</ul>-->
+<!--</nav>-->
+
 <div class="accordion mt-3" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingOne">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        Graphique
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
-        <app-horizontal-chart
-          [chartData]='chartData'
-          [chartConfig]='chartConfig'
-        ></app-horizontal-chart>
-      </div>
-    </div>
-  </div>
+	<div class="accordion-item">
+		<h2 class="accordion-header" id="flush-headingOne">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+				Graphique
+			</button>
+		</h2>
+		<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+			 data-bs-parent="#accordionFlushExample">
+			<div class="accordion-body">
+				<app-horizontal-chart
+					[chartData]='chartData'
+					[chartConfig]='chartConfig'
+				></app-horizontal-chart>
+			</div>
+		</div>
+	</div>
 </div>

@@ -1,31 +1,32 @@
-<table class="table">
-  <thead class="bg-primary text-white">
-    <tr>
-      <th>Nom</th>
-      <th>Taille</th>
-      <th>Utilisé</th>
-      <th>Utilisation</th>
-      <th>Libre</th>
-    </tr>
-  </thead>
+<div class="theme-table">
+	<table class="table table-responsive table-hover">
+		<thead class="bg-primary text-white">
+		<tr>
+			<th>Nom</th>
+			<th>Taille</th>
+			<th>Utilisé</th>
+			<th>Utilisation</th>
+			<th>Libre</th>
+		</tr>
+		</thead>
 
-  <tbody>
-    <tr *ngFor="let fileSystem of fileSystems">
+		<tbody>
+		<tr *ngFor="let fileSystem of fileSystems">
 
-      <td>{{ fileSystem.volume }}</td>
-      <td>{{ fileSystem.size }}</td>
-      <td>{{ fileSystem.used }}</td>
-      <td>{{ fileSystem.percentageUsed }}</td>
-      <td>{{ fileSystem.available }}</td>
+			<td>{{ fileSystem.volume }}</td>
+			<td>{{ fileSystem.size }}</td>
+			<td>{{ fileSystem.used }}</td>
+			<td>{{ fileSystem.percentageUsed }}</td>
+			<td>{{ fileSystem.available }}</td>
 
-    </tr>
-  </tbody>
-</table>
-
+		</tr>
+		</tbody>
+	</table>
+</div>
 
 <app-horizontal-chart
-  [chartData]='chartData'
-  [chartConfig]='chartConfig'
+	[chartData]='chartData'
+	[chartConfig]='chartConfig'
 ></app-horizontal-chart>
 
 <!--<br>-->

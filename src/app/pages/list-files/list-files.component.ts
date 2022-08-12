@@ -30,6 +30,11 @@ export class ListFilesComponent {
   resultNumber?: number = this.defaultResultNumber;
   selectedVolume?: string = this.defaultVolume;
 
+  lastSortedProperty!: string;
+  sortOrder: number = 1;
+
+  page: number = 4;
+
   @ViewChild(HorizontalChartComponent) horizontalChartComponent?:HorizontalChartComponent;
 
   constructor(public storageService: StorageService) {
@@ -123,5 +128,22 @@ export class ListFilesComponent {
     const volume = this.selectedVolume ? this.selectedVolume : this.defaultVolume;
 
     this.loadData(new ListFilesArguments(volume, resultNumber, fileType));
+  }
+
+  dynamicSort(property: string) {
+    if (this.lastSortedProperty === property) {
+      this.sortOrder *= -1;
+    } else {
+      this.sortOrder = 1;
+    }
+
+    this.lastSortedProperty = property;
+    let sortOrder = this.sortOrder;
+
+    this.files.sort(function (a: any, b: any) {
+      // works with strings and numbers
+      let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+      return result * sortOrder;
+    });
   }
 }
