@@ -1,0 +1,18 @@
+<table class="table table-responsive table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Catégorie</th>
+      <th scope="col">Etat</th>
+      <th scope="col">Save Path</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let torrent of torrents">
+      <th>{{ torrent.name }}</th>
+      <td>{{ torrent.category }}</td>
+      <td>{{ torrent.state }}</td>
+      <td>{{ torrent.save_path }}</td>
+    </tr>
+  </tbody>
+</table>

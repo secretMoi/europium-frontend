@@ -17,6 +17,7 @@ import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CrudApisComponent } from './pages/crud-apis/crud-apis.component';
 import { EditApiComponent } from './pages/edit-api/edit-api.component';
+import { TorrentsListComponent } from './pages/torrents-list/torrents-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { EditApiComponent } from './pages/edit-api/edit-api.component';
     ApiMonitoredCardComponent,
     HandleApiComponent,
     CrudApisComponent,
-    EditApiComponent
+    EditApiComponent,
+    TorrentsListComponent
   ],
   imports: [
     BrowserModule,
