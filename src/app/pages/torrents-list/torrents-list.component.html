@@ -1,21 +1,33 @@
-
 <table class="table table-responsive table-hover">
   <thead>
     <tr>
       <th (click)="dynamicSort('name')">Nom</th>
-      <th>Catégorie</th>
-      <th>Etat</th>
-      <th>Save Path</th>
+      <th (click)="dynamicSort('category')">Catégorie</th>
+      <th (click)="dynamicSort('state')">Etat</th>
+      <th (click)="dynamicSort('save_path')">Save Path</th>
       <th (click)="dynamicSort('size')">Taille</th>
+      <th (click)="dynamicSort('progress')">Progrès</th>
+      <th (click)="dynamicSort('eta')">Eta</th>
+      <th (click)="dynamicSort('dlspeed')">Vitesse</th>
     </tr>
   </thead>
+
   <tbody>
     <tr *ngFor="let torrent of torrents">
       <td>{{ torrent.name }}</td>
-      <td>{{ torrent.category }}</td>
-      <td>{{ torrent.state }}</td>
+      <td>
+        <img *ngIf="torrent.category === 'radarr'" src="assets/radarr.svg" height="50" />
+        <img *ngIf="torrent.category === 'tv-sonarr'" src="assets/sonarr.svg" height="50" />
+      </td>
+      <td>
+        <img [src]="displayState(torrent.state)" height="50" [title]="torrent.state" />
+
+      </td>
       <td>{{ torrent.save_path }}</td>
-      <td>{{ torrent.size }}</td>
+      <td>{{ getSizeToDisplay(torrent.size) }}</td>
+      <td>{{ torrent.progress }}</td>
+      <td>{{ convertEta(torrent.eta) }}</td>
+      <td>{{ convertSpeed(torrent.dlspeed) }}</td>
     </tr>
   </tbody>
 </table>
