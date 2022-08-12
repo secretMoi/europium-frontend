@@ -62,8 +62,11 @@
 	</table>
 </div>
 
-<ngb-pagination [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"
-				[boundaryLinks]="true" class="d-flex justify-content-center my-3"></ngb-pagination>
+<app-pagination
+	class="my-3"
+	(pageChanged)="onPageChanged($event)"
+	[numberOfItems]="files.length" [numberOfItemsPerPage]="10"
+></app-pagination>
 
 <!--<nav aria-label="Page navigation example" class="my-3">-->
 <!--	<ul class="pagination justify-content-center">-->

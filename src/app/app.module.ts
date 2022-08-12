@@ -17,6 +17,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CrudApisComponent } from './pages/crud-apis/crud-apis.component';
 import { EditApiComponent } from './pages/edit-api/edit-api.component';
 import { TorrentsListComponent} from './pages/torrents-list/torrents-list.component';
+import { PaginationComponent } from './helpers/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TorrentsListComponent} from './pages/torrents-list/torrents-list.compon
     CrudApisComponent,
     EditApiComponent,
     TorrentsListComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
