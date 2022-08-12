@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MonitoredApi} from "../../models/monitored-api";
 import {ApiUrl} from "../../models/api-url";
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {MonitoredApiService} from "../../service/monitored-api.service";
 
 @Component({
@@ -13,6 +13,8 @@ import {MonitoredApiService} from "../../service/monitored-api.service";
 export class EditApiComponent implements OnInit {
 
   api!: MonitoredApi;
+  logoData!: string | SafeUrl;
+  isAlertDisplayed: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +24,7 @@ export class EditApiComponent implements OnInit {
   ) {
 
     this.api = new MonitoredApi();
-    this.api.logo = '/assets/interrogation-blue.svg'
+    this.logoData = '/assets/interrogation-blue.svg';
     this.api.apiUrls = [];
     this.api.apiUrls.push(new ApiUrl());
 
@@ -36,7 +38,7 @@ export class EditApiComponent implements OnInit {
         (api: MonitoredApi) => {
           this.api = api;
           this.apiService.getApiLogo(apiCode).subscribe(
-            (blobImage: any) => this.api.logo = this.sanitizer.bypassSecurityTrustUrl(blobImage)
+            (blobImage: any) => this.logoData = this.sanitizer.bypassSecurityTrustUrl(blobImage)
           )
         }
       );
@@ -57,9 +59,25 @@ export class EditApiComponent implements OnInit {
   updateImage(ev: any) {
     // console.log(ev.target.files[0])
     // this.api.logo = <string>this.sanitizer.sanitize(SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(ev.target.files[0]));
+    this.api.logo = ev.target.files[0].name;
 
-    this.api.logo = this.sanitizer.bypassSecurityTrustUrl(
+    this.logoData = this.sanitizer.bypassSecurityTrustUrl(
       window.URL.createObjectURL(ev.target.files[0])
     );
+  }
+
+  saveApi() {
+    this.apiService.saveApi(this.api).subscribe(
+      _ => this.router.navigate(['/api']),
+      _ => this.isAlertDisplayed = true
+    );
+  }
+
+  cancelApi() {
+    this.router.navigate(['/api']);
+  }
+
+  maskDisplayAlert() {
+    this.isAlertDisplayed = false;
   }
 }

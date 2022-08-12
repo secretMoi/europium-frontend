@@ -31,4 +31,8 @@ export class MonitoredApiService {
   getApiByCode(apiCode: string): Observable<MonitoredApi> {
     return this.http.get<MonitoredApi>(this.controllerPrefix + `/api/${apiCode}`);
   }
+
+  saveApi(api: MonitoredApi): Observable<boolean> {
+    return this.http.post<boolean>(this.controllerPrefix + `/api`, api);
+  }
 }

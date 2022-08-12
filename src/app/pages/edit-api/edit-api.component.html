@@ -1,3 +1,16 @@
+<div class="alert alert-app-level alert-danger mb-3" role="alert" *ngIf="isAlertDisplayed">
+  <div class="alert-items">
+    <div class="alert-item static">
+      <div class="alert-text h5">
+        Erreur lors de la sauvegarde de {{ api.name }}
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end" style="cursor: pointer">
+    <img src="assets/simple-cross.svg" height="48" (click)="maskDisplayAlert()">
+  </div>
+</div>
+
 <div class="card text-center">
   <div class="card-body">
 
@@ -11,15 +24,13 @@
 <!--            Logo-->
             <div class="p-2 border">
 
-              <img style="cursor: pointer" [src]="api.logo" height="96px" (click)="selectImage.click()" />
+              <img style="cursor: pointer" [src]="logoData" height="96px" (click)="selectImage.click()" />
               <input
                 type="file"
                 (change)="updateImage($event)"
                 style="display: none"
                 #selectImage
               />
-
-
             </div>
 
 <!--            Nom-->
@@ -90,6 +101,11 @@
 
         </div>
       </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-4">
+      <button class="btn btn-danger" (click)="cancelApi()">Annuler</button>
+      <button class="btn btn-primary" (click)="saveApi()">Sauver</button>
     </div>
 
   </div>
