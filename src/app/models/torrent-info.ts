@@ -3,8 +3,9 @@ export class TorrentInfo {
   category?: string;
   state!: string;
   size!: number;
-  progress?: number
+  progress!: number
   eta!: number;
+  added_on!: number;
   completion_on?: number;
   completed?: number;
   downloaded?: number;
