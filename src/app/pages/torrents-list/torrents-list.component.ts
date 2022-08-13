@@ -56,6 +56,7 @@ export class TorrentsListComponent implements OnInit {
     if (state === 'pausedUP') return 'assets/check.svg';
     if (state === 'downloading') return 'assets/play.svg';
     if (state === 'error') return 'assets/cancel.svg';
+    if (state === 'missingFiles') return 'assets/broken-link.svg';
 
     return 'assets/interrogation-mark.svg';
   }
