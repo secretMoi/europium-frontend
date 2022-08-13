@@ -153,6 +153,8 @@ export class ListFilesComponent {
 	}
 
 	filesToDisplay(): File[] {
+		if(this.itemPerPage === 0) return this.files;
+
 		return this.files.slice((this.currentPage - 1) * this.itemPerPage, this.currentPage * this.itemPerPage);
 	}
 }

@@ -3,22 +3,25 @@
 
 		<form class="row g-3">
 
+			<!--			File / Folder-->
 			<div class="form-switch col-3 my-auto d-flex justify-content-center">
 				<input class="form-check-input switch" type="checkbox" role="switch" id="flexSwitchCheckChecked"
-					   [checked]="isFile" (click)="toggleIsFileValue()">
+							 [checked]="isFile" (click)="toggleIsFileValue()">
 				<label class="form-check-label" for="flexSwitchCheckChecked">{{ fileOrFolderText }}</label>
 			</div>
 
+			<!--			Result number-->
 			<div class="col-4">
 				<div class="mb-3 row">
 					<div class="input-group">
 						<span class="input-group-text">Nombre de résultats</span>
 						<input class="form-control" placeholder="Nombre de résultats" [(ngModel)]="resultNumber"
-							   name="resultNumber"/>
+									 name="resultNumber"/>
 					</div>
 				</div>
 			</div>
 
+			<!--			Select volume-->
 			<div class="col-4 my-auto mx-auto">
 				<select
 					class="form-select"
@@ -44,7 +47,8 @@
 	</div>
 </div>
 
-<div class="theme-table mt-3">
+<!--Table-->
+<div class="theme-table my-3">
 	<table class="table table-responsive table-hover">
 		<thead>
 		<tr>
@@ -62,36 +66,47 @@
 	</table>
 </div>
 
-<app-pagination
-	class="my-3"
-	(pageChanged)="onPageChanged($event)"
-	[numberOfItems]="files.length" [numberOfItemsPerPage]="itemPerPage"
-></app-pagination>
+<!--Table footer-->
+<div class="row align-items-center">
+	<div class="col"></div>
 
-<!--<nav aria-label="Page navigation example" class="my-3">-->
-<!--	<ul class="pagination justify-content-center">-->
-<!--		<li class="page-item disabled">-->
-<!--			<a class="page-link">Previous</a>-->
-<!--		</li>-->
-<!--		<li class="page-item"><a class="page-link" href="#">1</a></li>-->
-<!--		<li class="page-item"><a class="page-link" href="#">2</a></li>-->
-<!--		<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-<!--		<li class="page-item">-->
-<!--			<a class="page-link" href="#">Next</a>-->
-<!--		</li>-->
-<!--	</ul>-->
-<!--</nav>-->
+	<!--	Pagination-->
+	<div class="col">
+		<app-pagination
+			class="d-flex justify-content-center mt-3 mx-auto"
+			(pageChanged)="onPageChanged($event)"
+			[numberOfItems]="files.length" [numberOfItemsPerPage]="itemPerPage"
+		></app-pagination>
+	</div>
 
+	<!--	Item per page-->
+	<div class="col">
+		<div class="ms-auto w-75 d-flex justify-content-end">
+			<div class="input-group">
+				<span class="input-group-text">Eléments par page</span>
+
+				<select class="form-select" [(ngModel)]="itemPerPage">
+					<option [ngValue]="0">Tous</option>
+					<option [ngValue]="10">10</option>
+					<option [ngValue]="20">20</option>
+					<option [ngValue]="50">50</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Graphique-->
 <div class="accordion mt-3" id="accordionFlushExample">
 	<div class="accordion-item">
 		<h2 class="accordion-header" id="flush-headingOne">
 			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-					data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+							data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
 				Graphique
 			</button>
 		</h2>
 		<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-			 data-bs-parent="#accordionFlushExample">
+				 data-bs-parent="#accordionFlushExample">
 			<div class="accordion-body">
 				<app-horizontal-chart
 					[chartData]='chartData'
