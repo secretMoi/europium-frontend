@@ -15,7 +15,7 @@
 }
 
 .theme-table table tr th {
-  background-color: $primary;
+  background-color: $blue-400;
   color: white;
   font-size: larger;
 }
@@ -32,4 +32,9 @@
 
 .clickable-image {
 	cursor: pointer;
+}
+
+.input-group-text {
+	background-color: $blue-500;
+	color: white;
 }

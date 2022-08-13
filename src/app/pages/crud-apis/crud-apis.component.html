@@ -1,20 +1,22 @@
-<table class="table table-responsive table-hover">
-  <thead>
-  <tr>
-    <th>Logo</th>
-    <th>Nom</th>
-    <th>Editer</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let api of apis">
-    <th><img [src]='api.image' height="96"></th>
-    <td style="text-align: center;" class="fs-1 my-auto">{{ api.name }}</td>
-    <td class="my-auto">
-      <button type="button" class="btn btn-primary" style="height: 56px" (click)="onApiSelected(api)">
-        <img src="assets/edit.svg" height="32px">
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="theme-table">
+	<table class="table table-responsive table-hover">
+		<thead>
+		<tr>
+			<th>Logo</th>
+			<th>Nom</th>
+			<th>Editer</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr *ngFor="let api of apis">
+			<td><img [src]='api.image' height="96"></td>
+			<td style="text-align: center;" class="fs-1 my-auto">{{ api.name }}</td>
+			<td class="my-auto">
+				<button type="button" class="btn btn-primary" style="height: 56px" (click)="onApiSelected(api)">
+					<img src="assets/edit.svg" height="32px">
+				</button>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
