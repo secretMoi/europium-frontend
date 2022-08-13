@@ -15,10 +15,14 @@ export class TorrentsListComponent implements OnInit {
   constructor(
     private torrentService: TorrentService
   ) {
-    torrentService.getAllTorrents().subscribe(
-      (torrents) => this.torrents = torrents
-    );
+    this.refreshTorrentList();
   }
+
+	refreshTorrentList() {
+		this.torrentService.getAllTorrents().subscribe(
+			(torrents) => this.torrents = torrents
+		);
+	}
 
   ngOnInit(): void {
   }
@@ -88,4 +92,15 @@ export class TorrentsListComponent implements OnInit {
 
     return speed.toString();
   }
+
+	deleteTorrent(torrent: TorrentInfo) {
+		this.torrentService.deleteTorrent(torrent.hash).subscribe(
+			_ => {
+				const index = this.torrents.indexOf(torrent, 0);
+				if (index > -1) {
+					this.torrents.splice(index, 1);
+				}
+			}
+		);
+	}
 }

@@ -11,4 +11,5 @@ export class TorrentInfo {
   dlspeed!: number;
   total_size?: number;
   save_path?: string;
+  hash!: string;
 }

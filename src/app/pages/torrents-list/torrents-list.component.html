@@ -10,6 +10,7 @@
 			<th (click)="dynamicSort('progress')">Progrès</th>
 			<th (click)="dynamicSort('eta')">Eta</th>
 			<th (click)="dynamicSort('dlspeed')">Vitesse</th>
+			<th>Supprimer</th>
 		</tr>
 		</thead>
 
@@ -28,6 +29,7 @@
 			<td>{{ torrent.progress }}</td>
 			<td>{{ convertEta(torrent.eta) }}</td>
 			<td>{{ convertSpeed(torrent.dlspeed) }}</td>
+			<td><img src="assets/cancel.svg" height="50" class="clickable-image" (click)="deleteTorrent(torrent)"></td>
 		</tr>
 		</tbody>
 	</table>

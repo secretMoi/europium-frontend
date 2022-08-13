@@ -13,4 +13,8 @@ export class TorrentService {
   getAllTorrents(): Observable<TorrentInfo[]> {
     return this.http.get<TorrentInfo[]>(environment.backendUrl + '/torrent/list');
   }
+
+  deleteTorrent(torrentHash: string): Observable<any> {
+    return this.http.post<any>(environment.backendUrl + '/torrent/delete/' + torrentHash, null);
+  }
 }
