@@ -54,7 +54,7 @@
 		</thead>
 
 		<tbody>
-		<tr *ngFor="let file of files">
+		<tr *ngFor="let file of filesToDisplay()">
 			<td>{{ file.path }}</td>
 			<td>{{ file.sizeToDisplay }}</td>
 		</tr>
@@ -65,7 +65,7 @@
 <app-pagination
 	class="my-3"
 	(pageChanged)="onPageChanged($event)"
-	[numberOfItems]="files.length" [numberOfItemsPerPage]="10"
+	[numberOfItems]="files.length" [numberOfItemsPerPage]="itemPerPage"
 ></app-pagination>
 
 <!--<nav aria-label="Page navigation example" class="my-3">-->

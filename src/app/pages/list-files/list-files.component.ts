@@ -33,7 +33,8 @@ export class ListFilesComponent {
 	lastSortedProperty!: string;
 	sortOrder: number = 1;
 
-	itemPerPage: number = 20;
+	itemPerPage: number = 10;
+	currentPage: number = 1;
 
 	@ViewChild(HorizontalChartComponent) horizontalChartComponent?: HorizontalChartComponent;
 
@@ -148,6 +149,10 @@ export class ListFilesComponent {
 	}
 
 	onPageChanged(newPage: number) {
-		console.log(newPage)
+		this.currentPage = newPage;
+	}
+
+	filesToDisplay(): File[] {
+		return this.files.slice((this.currentPage - 1) * this.itemPerPage, this.currentPage * this.itemPerPage);
 	}
 }
