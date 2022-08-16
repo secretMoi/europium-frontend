@@ -8,12 +8,13 @@ import {EditApiComponent} from "./pages/edit-api/edit-api.component";
 import {TorrentsListComponent} from "./pages/torrents-list/torrents-list.component";
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'volume-list', component: VolumeListComponent},
   {path: 'files-list', component: ListFilesComponent},
   {path: 'api', component: CrudApisComponent},
   {path: 'api/edit/:code', component: EditApiComponent},
   {path: 'torrent/list', component: TorrentsListComponent},
+	{path: '', redirectTo: '/home', pathMatch: 'full'},
 ];
 
 @NgModule({

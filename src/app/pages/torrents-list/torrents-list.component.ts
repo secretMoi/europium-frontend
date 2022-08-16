@@ -1,31 +1,42 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {TorrentService} from "../../service/torrent.service";
 import {TorrentInfo} from "../../models/torrent-info";
+import {map, Subscription, timer} from "rxjs";
 
 @Component({
   selector: 'app-torrents-list',
   templateUrl: './torrents-list.component.html',
   styleUrls: ['./torrents-list.component.scss']
 })
-export class TorrentsListComponent implements OnInit {
+export class TorrentsListComponent implements OnDestroy {
   torrents!: TorrentInfo[];
   lastSortedProperty!: string;
   sortOrder: number = 1;
+	timerSubscription: Subscription;
 
-  constructor(
+	constructor(
     private torrentService: TorrentService
   ) {
-    this.refreshTorrentList();
+		this.timerSubscription = timer(0, 2000).pipe(
+			map(() => {
+				this.refreshTorrentList();
+			})
+		).subscribe();
   }
+
+	ngOnDestroy(): void {
+		this.timerSubscription.unsubscribe();
+	}
 
 	refreshTorrentList() {
 		this.torrentService.getAllTorrents().subscribe(
-			(torrents) => this.torrents = torrents
+			(torrents) => {
+				this.torrents = torrents;
+				this.sortOrder *= -1;
+				this.dynamicSort(this.lastSortedProperty);
+			}
 		);
 	}
-
-  ngOnInit(): void {
-  }
 
   dynamicSort(property: string) {
     if (this.lastSortedProperty === property) {
@@ -56,8 +67,13 @@ export class TorrentsListComponent implements OnInit {
     return size.toString();
   }
 
+	getProgressToDisplay(progress: number){
+		return Math.round(progress * 100 * 10) / 10;
+	}
+
   displayState(state: string): string {
     if (state === 'pausedUP') return 'assets/check.svg';
+    if (state === 'uploading') return 'assets/check.svg';
     if (state === 'downloading') return 'assets/play.svg';
     if (state === 'error') return 'assets/cancel.svg';
     if (state === 'missingFiles') return 'assets/broken-link.svg';
@@ -83,11 +99,11 @@ export class TorrentsListComponent implements OnInit {
 
   convertSpeed(speed: number): string {
     if (speed > 1000000) {
-      return Math.round(speed / 1000000) / 100 + 'Mo/s';
+      return Math.round(speed / 1000000) + 'Mo/s';
     }
 
     if (speed > 1000) {
-      return Math.round(speed / 1000) / 100 + 'ko/s';
+      return Math.round(speed / 1000) + 'ko/s';
     }
 
     return speed.toString();
