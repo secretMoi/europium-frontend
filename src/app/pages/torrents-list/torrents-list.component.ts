@@ -109,6 +109,23 @@ export class TorrentsListComponent implements OnDestroy {
     return speed.toString();
   }
 
+	cleanTorrentName(name: string): string {
+		name = this.removeAllTextAfter(name, 'MULTI');
+		name = this.removeAllTextAfter(name, 'VOSTFR');
+		name = this.removeAllTextAfter(name, 'TRUEFRENCH');
+		name = name.split(".").join(" ");
+
+		return name;
+	}
+
+	removeAllTextAfter(text: string, textToSearch: string): string {
+		let index = text.toUpperCase().indexOf(textToSearch);
+		if(index !== -1)
+			text = text.substring(0, index);
+
+		return text;
+	}
+
 	deleteTorrent(torrent: TorrentInfo) {
 		this.torrentService.deleteTorrent(torrent.hash).subscribe(
 			_ => {

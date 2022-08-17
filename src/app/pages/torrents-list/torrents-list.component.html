@@ -16,7 +16,7 @@
 
 		<tbody>
 		<tr *ngFor="let torrent of torrents">
-			<td>{{ torrent.name }}</td>
+			<td>{{ cleanTorrentName(torrent.name) }}</td>
 			<td>
 				<img *ngIf="torrent.category === 'radarr'" src="assets/RADARR.svg" height="50"/>
 				<img *ngIf="torrent.category === 'tv-sonarr'" src="assets/SONARR.svg" height="50"/>

@@ -1,5 +1,5 @@
 export class TorrentInfo {
-  name?: string;
+  name!: string;
   category?: string;
   state!: string;
   size!: number;
