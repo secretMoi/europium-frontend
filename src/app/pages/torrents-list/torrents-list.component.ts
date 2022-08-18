@@ -37,6 +37,9 @@ export class TorrentsListComponent implements OnDestroy {
 					if(torrent.category === 'radarr') {
 						this.getMovieData(torrent);
 					}
+					else if(torrent.category === 'tv-sonarr') {
+						this.getSerieData(torrent);
+					}
 				}
 
 				this.torrents = torrents;
@@ -49,8 +52,23 @@ export class TorrentsListComponent implements OnDestroy {
 	getMovieData(torrent: TorrentInfo) {
 		this.theMovieDbService.getMovieByName(this.cleanTorrentName(torrent.name)).subscribe(
 			(movie) => {
+				if(movie === null) return;
+
 				torrent.movie = movie;
 				torrent.name = movie.title;
+			}
+		);
+	}
+
+	getSerieData(torrent: TorrentInfo) {
+		this.theMovieDbService.getSerieByName(this.cleanTorrentName(torrent.name)).subscribe(
+			(movie) => {
+				if(movie === null) return;
+
+				torrent.movie = movie;
+				torrent.name = movie.title;
+
+				console.log(torrent.movie?.poster_path);
 			}
 		);
 	}
@@ -131,8 +149,13 @@ export class TorrentsListComponent implements OnDestroy {
 		name = this.removeAllTextAfter(name, 'VOSTFR');
 		name = this.removeAllTextAfter(name, 'TRUEFRENCH');
 		name = this.removeAllTextAfter(name, new Date().getFullYear().toString());
+		name = this.removeAllTextAfter(name, 'S0');
+		name = this.removeAllTextAfter(name, '(');
+		name = this.removeAllTextAfter(name, 'SAISON');
+		name = this.removeAllTextAfter(name, 'SEASON');
+		name = this.removeAllTextBetween(name, '[', ']');
 
-		name = name.split(".").join(" ");
+		name = name.split(".").join(" ").trim();
 
 		return name;
 	}
@@ -143,6 +166,18 @@ export class TorrentsListComponent implements OnDestroy {
 			text = text.substring(0, index);
 
 		return text;
+	}
+
+	removeAllTextBetween(text: string, start: string, end: string): string {
+		let startIndex = text.toUpperCase().indexOf(start);
+		if(startIndex === -1) return text;
+		let endIndex = text.toUpperCase().indexOf(end);
+		if(endIndex === -1) return text;
+
+		let textToKeep = text.substring(0, startIndex);
+		textToKeep = textToKeep + text.substring(endIndex + 1, text.length);
+
+		return textToKeep;
 	}
 
 	deleteTorrent(torrent: TorrentInfo) {

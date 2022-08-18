@@ -13,4 +13,8 @@ export class TheMovieDbService {
 	getMovieByName(movieName: string): Observable<Movie> {
 		return this.http.get<Movie>(environment.backendUrl + '/TheMovieDb/movie/' + movieName);
 	}
+
+	getSerieByName(serieName: string): Observable<Movie> {
+		return this.http.get<Movie>(environment.backendUrl + '/TheMovieDb/serie/' + serieName);
+	}
 }
