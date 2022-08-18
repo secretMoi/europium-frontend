@@ -1,3 +1,5 @@
+import {Movie} from "./movie";
+
 export class TorrentInfo {
   name!: string;
   category?: string;
@@ -13,4 +15,6 @@ export class TorrentInfo {
   total_size?: number;
   save_path?: string;
   hash!: string;
+
+	movie?: Movie;
 }

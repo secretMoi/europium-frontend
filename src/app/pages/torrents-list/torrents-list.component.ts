@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {TorrentService} from "../../service/torrent.service";
 import {TorrentInfo} from "../../models/torrent-info";
 import {map, Subscription, timer} from "rxjs";
+import {TheMovieDbService} from "../../service/the-movie-db.service";
 
 @Component({
   selector: 'app-torrents-list',
@@ -15,9 +16,10 @@ export class TorrentsListComponent implements OnDestroy {
 	timerSubscription: Subscription;
 
 	constructor(
-    private torrentService: TorrentService
+    private torrentService: TorrentService,
+    private theMovieDbService: TheMovieDbService,
   ) {
-		this.timerSubscription = timer(0, 2000).pipe(
+		this.timerSubscription = timer(0, 20000).pipe(
 			map(() => {
 				this.refreshTorrentList();
 			})
@@ -31,9 +33,24 @@ export class TorrentsListComponent implements OnDestroy {
 	refreshTorrentList() {
 		this.torrentService.getAllTorrents().subscribe(
 			(torrents) => {
+				for(let torrent of torrents) {
+					if(torrent.category === 'radarr') {
+						this.getMovieData(torrent);
+					}
+				}
+
 				this.torrents = torrents;
 				this.sortOrder *= -1;
 				this.dynamicSort(this.lastSortedProperty);
+			}
+		);
+	}
+
+	getMovieData(torrent: TorrentInfo) {
+		this.theMovieDbService.getMovieByName(this.cleanTorrentName(torrent.name)).subscribe(
+			(movie) => {
+				torrent.movie = movie;
+				torrent.name = movie.title;
 			}
 		);
 	}
@@ -113,6 +130,8 @@ export class TorrentsListComponent implements OnDestroy {
 		name = this.removeAllTextAfter(name, 'MULTI');
 		name = this.removeAllTextAfter(name, 'VOSTFR');
 		name = this.removeAllTextAfter(name, 'TRUEFRENCH');
+		name = this.removeAllTextAfter(name, new Date().getFullYear().toString());
+
 		name = name.split(".").join(" ");
 
 		return name;

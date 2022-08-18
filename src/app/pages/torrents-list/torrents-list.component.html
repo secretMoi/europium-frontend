@@ -2,6 +2,7 @@
 	<table class="table table-responsive table-hover">
 		<thead>
 		<tr>
+			<th>Affiche</th>
 			<th (click)="dynamicSort('name')">Nom</th>
 			<th (click)="dynamicSort('category')">API</th>
 			<th (click)="dynamicSort('state')">Etat</th>
@@ -16,6 +17,7 @@
 
 		<tbody>
 		<tr *ngFor="let torrent of torrents">
+			<td><img src="{{torrent.movie?.poster_path}}" height="200"></td>
 			<td>{{ cleanTorrentName(torrent.name) }}</td>
 			<td>
 				<img *ngIf="torrent.category === 'radarr'" src="assets/RADARR.svg" height="50"/>
