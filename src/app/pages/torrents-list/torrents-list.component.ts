@@ -19,7 +19,7 @@ export class TorrentsListComponent implements OnDestroy {
     private torrentService: TorrentService,
     private theMovieDbService: TheMovieDbService,
   ) {
-		this.timerSubscription = timer(0, 20000).pipe(
+		this.timerSubscription = timer(0, 5000).pipe(
 			map(() => {
 				this.refreshTorrentList();
 			})
