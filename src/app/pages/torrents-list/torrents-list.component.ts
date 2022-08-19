@@ -30,19 +30,62 @@ export class TorrentsListComponent implements OnDestroy {
 		this.timerSubscription.unsubscribe();
 	}
 
+	addNewMedias(torrents: TorrentInfo[]) {
+		let mediasToAdd = torrents.filter(o1 => !this.torrents.some(o2 => o1.hash === o2.hash));
+
+		for(let mediaToAdd of mediasToAdd) {
+			if(mediaToAdd.category === 'radarr') {
+				this.getMovieData(mediaToAdd);
+			}
+			else if(mediaToAdd.category === 'tv-sonarr') {
+				this.getSerieData(mediaToAdd);
+			}
+		}
+
+		this.torrents = this.torrents.concat(mediasToAdd);
+	}
+
+	removeOldMedias(torrents: TorrentInfo[]) {
+		let mediaToDelete = this.torrents.filter(o1 => !torrents.some(o2 => o1.hash === o2.hash));
+
+		this.torrents = this.torrents.concat(mediaToDelete);
+	}
+
+	updateMedias(torrents: TorrentInfo[]) {
+		this.torrents.forEach(torrent => {
+			let updatedTorrent = torrents.find(t => t.hash === torrent.hash);
+
+			if(!updatedTorrent) return;
+
+			torrent.state = updatedTorrent.state;
+			torrent.progress = updatedTorrent.progress;
+			torrent.eta = updatedTorrent.eta;
+			torrent.completion_on = updatedTorrent.completion_on;
+			torrent.dlspeed = updatedTorrent.dlspeed;
+			torrent.downloaded = updatedTorrent.downloaded;
+		});
+	}
+
 	refreshTorrentList() {
 		this.torrentService.getAllTorrents().subscribe(
 			(torrents) => {
-				for(let torrent of torrents) {
-					if(torrent.category === 'radarr') {
-						this.getMovieData(torrent);
+				if(this.torrents) {
+					this.addNewMedias(torrents);
+					this.removeOldMedias(torrents);
+					this.updateMedias(torrents);
+				} else {
+					for(let torrent of torrents) {
+						if(torrent.category === 'radarr') {
+							this.getMovieData(torrent);
+						}
+						else if(torrent.category === 'tv-sonarr') {
+							this.getSerieData(torrent);
+						}
 					}
-					else if(torrent.category === 'tv-sonarr') {
-						this.getSerieData(torrent);
-					}
+
+					this.torrents = torrents;
 				}
 
-				this.torrents = torrents;
 				this.sortOrder *= -1;
 				this.dynamicSort(this.lastSortedProperty);
 			}
@@ -67,8 +110,6 @@ export class TorrentsListComponent implements OnDestroy {
 
 				torrent.movie = movie;
 				torrent.name = movie.title;
-
-				console.log(torrent.movie?.poster_path);
 			}
 		);
 	}

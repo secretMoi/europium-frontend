@@ -18,7 +18,7 @@
 		<tbody>
 		<tr *ngFor="let torrent of torrents">
 			<td>
-				<img *ngIf="!torrent.movie?.poster_path" src="assets/interrogation-blue.svg" height="200">
+				<img *ngIf="!torrent.movie?.poster_path" src="assets/missing-poster.svg" height="200">
 				<img *ngIf="torrent.movie?.poster_path" src="{{ torrent.movie?.poster_path }}" height="200">
 			</td>
 			<td>{{ cleanTorrentName(torrent.name) }}</td>
