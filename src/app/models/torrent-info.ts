@@ -17,4 +17,7 @@ export class TorrentInfo {
   hash!: string;
 
 	movie?: Movie;
+
+	season?: number;
+	episode?: number;
 }

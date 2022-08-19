@@ -18,29 +18,32 @@
 		<tbody>
 		<tr *ngFor="let torrent of torrents">
 			<td>
-				<img *ngIf="!torrent.movie?.poster_path" src="assets/missing-poster.svg" height="200">
-				<img *ngIf="torrent.movie?.poster_path" src="{{ torrent.movie?.poster_path }}" height="200">
-			</td>
-			<td>{{ cleanTorrentName(torrent.name) }}</td>
-			<td>
-				<img *ngIf="torrent.category === 'radarr'" src="assets/RADARR.svg" height="50"/>
-				<img *ngIf="torrent.category === 'tv-sonarr'" src="assets/SONARR.svg" height="50"/>
+				<img *ngIf="!torrent.movie?.poster_path" src="assets/missing-poster.svg" height="200" alt="">
+				<img *ngIf="torrent.movie?.poster_path" src="{{ torrent.movie?.poster_path }}" height="200" alt="">
 			</td>
 			<td>
-				<img [src]="displayState(torrent.state)" height="50" [title]="torrent.state"/>
+				{{ cleaningDataService.cleanTorrentName(torrent.name) }}
+				<span *ngIf="torrent.category === apiType.SONARR && (torrent.season || torrent.episode)"><br> {{ cleaningDataService.getSeasonAndEpisodeFromTorrent(torrent) }}</span>
+			</td>
+			<td>
+				<img *ngIf="torrent.category === apiType.RADARR" src="assets/RADARR.svg" height="50" alt=""/>
+				<img *ngIf="torrent.category === apiType.SONARR" src="assets/SONARR.svg" height="50" alt=""/>
+			</td>
+			<td>
+				<img [src]="displayState(torrent.state)" height="50" [title]="torrent.state" alt=""/>
 			</td>
 			<td>{{ torrent.added_on * 1000 | date: 'dd-MM-yy HH:mm' }}</td>
-			<td>{{ getSizeToDisplay(torrent.size) }}</td>
+			<td>{{ cleaningDataService.getSizeToDisplay(torrent.size) }}</td>
 			<td>
 				<div class="progress" style="height: 25px; font-size: large">
 					<div class="progress-bar" role="progressbar" [ngStyle]="{'width': torrent.progress * 100 + '%'}" aria-valuemin="0" aria-valuemax="100">
-						{{ getProgressToDisplay(torrent.progress) }}%
+						{{ cleaningDataService.getProgressToDisplay(torrent.progress) }}%
 					</div>
 				</div>
 			</td>
-			<td>{{ convertEta(torrent.eta) }}</td>
-			<td>{{ convertSpeed(torrent.dlspeed) }}</td>
-			<td><img src="assets/cancel.svg" height="50" class="clickable-image" (click)="deleteTorrent(torrent)"></td>
+			<td>{{ cleaningDataService.convertEta(torrent.eta) }}</td>
+			<td>{{ cleaningDataService.convertSpeed(torrent.dlspeed) }}</td>
+			<td><img src="assets/cancel.svg" height="50" class="clickable-image" (click)="deleteTorrent(torrent)" alt=""></td>
 		</tr>
 		</tbody>
 	</table>

@@ -3,6 +3,8 @@ import {TorrentService} from "../../service/torrent.service";
 import {TorrentInfo} from "../../models/torrent-info";
 import {map, Subscription, timer} from "rxjs";
 import {TheMovieDbService} from "../../service/the-movie-db.service";
+import {CleaningDataService} from "../../service/cleaning-data.service";
+import {ApiType} from "../../models/enums/api-type";
 
 @Component({
   selector: 'app-torrents-list',
@@ -14,10 +16,12 @@ export class TorrentsListComponent implements OnDestroy {
   lastSortedProperty!: string;
   sortOrder: number = 1;
 	timerSubscription: Subscription;
+	apiType = ApiType;
 
 	constructor(
-    private torrentService: TorrentService,
-    private theMovieDbService: TheMovieDbService,
+		private torrentService: TorrentService,
+		private theMovieDbService: TheMovieDbService,
+		public cleaningDataService: CleaningDataService,
   ) {
 		this.timerSubscription = timer(0, 5000).pipe(
 			map(() => {
@@ -30,17 +34,21 @@ export class TorrentsListComponent implements OnDestroy {
 		this.timerSubscription.unsubscribe();
 	}
 
-	addNewMedias(torrents: TorrentInfo[]) {
-		let mediasToAdd = torrents.filter(o1 => !this.torrents.some(o2 => o1.hash === o2.hash));
-
-		for(let mediaToAdd of mediasToAdd) {
-			if(mediaToAdd.category === 'radarr') {
+	setMediaData(medias: TorrentInfo[]) {
+		for(let mediaToAdd of medias) {
+			if(mediaToAdd.category === ApiType.RADARR) {
 				this.getMovieData(mediaToAdd);
 			}
-			else if(mediaToAdd.category === 'tv-sonarr') {
+			else if(mediaToAdd.category === ApiType.SONARR) {
 				this.getSerieData(mediaToAdd);
 			}
 		}
+	}
+
+	addNewMedias(torrents: TorrentInfo[]) {
+		let mediasToAdd = torrents.filter(o1 => !this.torrents.some(o2 => o1.hash === o2.hash));
+
+		this.setMediaData(mediasToAdd);
 
 		this.torrents = this.torrents.concat(mediasToAdd);
 	}
@@ -74,16 +82,13 @@ export class TorrentsListComponent implements OnDestroy {
 					this.removeOldMedias(torrents);
 					this.updateMedias(torrents);
 				} else {
-					for(let torrent of torrents) {
-						if(torrent.category === 'radarr') {
-							this.getMovieData(torrent);
-						}
-						else if(torrent.category === 'tv-sonarr') {
-							this.getSerieData(torrent);
-						}
-					}
-
+					this.setMediaData(torrents);
 					this.torrents = torrents;
+
+					torrents.forEach(f => {
+						f.season = this.cleaningDataService.getSeasonFromName(f.name);
+						f.episode = this.cleaningDataService.getEpisodeFromName(f.name);
+					});
 				}
 
 				this.sortOrder *= -1;
@@ -93,7 +98,7 @@ export class TorrentsListComponent implements OnDestroy {
 	}
 
 	getMovieData(torrent: TorrentInfo) {
-		this.theMovieDbService.getMovieByName(this.cleanTorrentName(torrent.name)).subscribe(
+		this.theMovieDbService.getMovieByName(this.cleaningDataService.cleanTorrentName(torrent.name)).subscribe(
 			(movie) => {
 				if(movie === null) return;
 
@@ -104,7 +109,7 @@ export class TorrentsListComponent implements OnDestroy {
 	}
 
 	getSerieData(torrent: TorrentInfo) {
-		this.theMovieDbService.getSerieByName(this.cleanTorrentName(torrent.name)).subscribe(
+		this.theMovieDbService.getSerieByName(this.cleaningDataService.cleanTorrentName(torrent.name)).subscribe(
 			(movie) => {
 				if(movie === null) return;
 
@@ -131,22 +136,6 @@ export class TorrentsListComponent implements OnDestroy {
     });
   }
 
-  getSizeToDisplay(size: number): string {
-    if (size > 1000000000) {
-      return Math.round(size / 10000000) / 100 + 'Go';
-    }
-
-    if (size > 1000000) {
-      return Math.round(size / 1000000) / 100 + 'Mo';
-    }
-
-    return size.toString();
-  }
-
-	getProgressToDisplay(progress: number){
-		return Math.round(progress * 100 * 10) / 10;
-	}
-
   displayState(state: string): string {
     if (state === 'pausedUP') return 'assets/check.svg';
     if (state === 'uploading') return 'assets/check.svg';
@@ -156,70 +145,6 @@ export class TorrentsListComponent implements OnDestroy {
 
     return 'assets/interrogation-mark.svg';
   }
-
-  convertEta(seconds: number): string {
-    if(seconds == 8640000) return '0';
-
-    let d = Math.floor(seconds / (3600 * 24));
-    let h = Math.floor(seconds % (3600 * 24) / 3600);
-    let m = Math.floor(seconds % 3600 / 60);
-    let s = Math.floor(seconds % 60);
-
-    let dDisplay = d > 0 ? d + 'j' : "";
-    let hDisplay = h > 0 ? h + 'h' : "";
-    let mDisplay = m > 0 ? m + 'm' : "";
-    let sDisplay = s > 0 ? s + 's' : "";
-
-    return dDisplay + hDisplay + mDisplay + sDisplay;
-  }
-
-  convertSpeed(speed: number): string {
-    if (speed > 1000000) {
-      return Math.round(speed / 1000000) + 'Mo/s';
-    }
-
-    if (speed > 1000) {
-      return Math.round(speed / 1000) + 'ko/s';
-    }
-
-    return speed.toString();
-  }
-
-	cleanTorrentName(name: string): string {
-		name = this.removeAllTextAfter(name, 'MULTI');
-		name = this.removeAllTextAfter(name, 'VOSTFR');
-		name = this.removeAllTextAfter(name, 'TRUEFRENCH');
-		name = this.removeAllTextAfter(name, new Date().getFullYear().toString());
-		name = this.removeAllTextAfter(name, 'S0');
-		name = this.removeAllTextAfter(name, '(');
-		name = this.removeAllTextAfter(name, 'SAISON');
-		name = this.removeAllTextAfter(name, 'SEASON');
-		name = this.removeAllTextBetween(name, '[', ']');
-
-		name = name.split(".").join(" ").trim();
-
-		return name;
-	}
-
-	removeAllTextAfter(text: string, textToSearch: string): string {
-		let index = text.toUpperCase().indexOf(textToSearch);
-		if(index !== -1)
-			text = text.substring(0, index);
-
-		return text;
-	}
-
-	removeAllTextBetween(text: string, start: string, end: string): string {
-		let startIndex = text.toUpperCase().indexOf(start);
-		if(startIndex === -1) return text;
-		let endIndex = text.toUpperCase().indexOf(end);
-		if(endIndex === -1) return text;
-
-		let textToKeep = text.substring(0, startIndex);
-		textToKeep = textToKeep + text.substring(endIndex + 1, text.length);
-
-		return textToKeep;
-	}
 
 	deleteTorrent(torrent: TorrentInfo) {
 		this.torrentService.deleteTorrent(torrent.hash).subscribe(
