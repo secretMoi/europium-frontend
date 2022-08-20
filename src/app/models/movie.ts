@@ -1,3 +1,5 @@
+import {Season} from "./torrent-info";
+
 export class Movie {
 	id!: number;
 	title!: string;
@@ -6,4 +8,6 @@ export class Movie {
 	original_title!: string;
 	poster_path!: string;
 	backdrop_path!: string;
+
+	seasons?: Season[];
 }

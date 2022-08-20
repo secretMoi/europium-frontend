@@ -16,7 +16,6 @@ export class TorrentsListComponent implements OnDestroy {
   lastSortedProperty!: string;
   sortOrder: number = 1;
 	timerSubscription: Subscription;
-	apiType = ApiType;
 	isFirstLoading = true;
 
 	constructor(
@@ -24,7 +23,7 @@ export class TorrentsListComponent implements OnDestroy {
 		private theMovieDbService: TheMovieDbService,
 		public cleaningDataService: CleaningDataService,
   ) {
-		this.timerSubscription = timer(0, 5000).pipe(
+		this.timerSubscription = timer(0, 1000).pipe(
 			map(() => {
 				this.refreshTorrentList();
 			})
@@ -37,6 +36,7 @@ export class TorrentsListComponent implements OnDestroy {
 
 	setMediaData(medias: TorrentInfo[]) {
 		for(let mediaToAdd of medias) {
+
 			if(mediaToAdd.category === ApiType.RADARR) {
 				this.getMovieData(mediaToAdd);
 			}
@@ -75,6 +75,14 @@ export class TorrentsListComponent implements OnDestroy {
 		});
 	}
 
+	setPosterFromSeason(torrent: TorrentInfo) {
+		if(!torrent.seasons || !torrent.season || !torrent.movie) return;
+
+		let newPoster = torrent.seasons[torrent.season - 1].poster_path;
+		if(newPoster)
+			torrent.movie.poster_path = newPoster;
+	}
+
 	refreshTorrentList() {
 		this.torrentService.getAllTorrents().subscribe(
 			(torrents) => {
@@ -86,9 +94,9 @@ export class TorrentsListComponent implements OnDestroy {
 					this.setMediaData(torrents);
 					this.torrents = torrents;
 
-					torrents.forEach(f => {
-						f.season = this.cleaningDataService.getSeasonFromName(f.name);
-						f.episode = this.cleaningDataService.getEpisodeFromName(f.name);
+					torrents.forEach(torrent => {
+						torrent.season = this.cleaningDataService.getSeasonFromName(torrent.name);
+						torrent.episode = this.cleaningDataService.getEpisodeFromName(torrent.name);
 					});
 				}
 
@@ -121,6 +129,9 @@ export class TorrentsListComponent implements OnDestroy {
 
 				torrent.movie = movie;
 				torrent.name = movie.title;
+				torrent.seasons = movie.seasons;
+
+				this.setPosterFromSeason(torrent);
 			}
 		);
 	}

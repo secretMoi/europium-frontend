@@ -12,6 +12,7 @@ import {
 import {TorrentInfo} from "../../models/torrent-info";
 import {CleaningDataService} from "../../service/cleaning-data.service";
 import {ApiType} from "../../models/enums/api-type";
+import {TorrentState} from "../../models/torrent-state";
 
 @Component({
   selector: 'app-torrent-card',
@@ -27,6 +28,7 @@ export class TorrentCardComponent implements AfterContentChecked, OnInit, AfterV
 	@ViewChild('movieCard') movieCard!: ElementRef<HTMLDivElement>;
 
 	apiType = ApiType;
+	torrentState = TorrentState;
 
   constructor(
 		public cleaningDataService: CleaningDataService,

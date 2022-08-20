@@ -26,7 +26,6 @@ html, body {
 .movie_card {
 	position: relative;
 	display: block;
-	min-height: 400px;
 	height: auto;
 	margin-top: 60px;
 	margin-left: 60px;
@@ -240,7 +239,6 @@ html, body {
 .progress, progress[value] {
 	width: auto;
 	border: none;
-	margin-top: 27px;
 	height: 14px;
 	display: block;
 	appearance: none;

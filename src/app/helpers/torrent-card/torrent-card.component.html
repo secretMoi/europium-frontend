@@ -2,7 +2,7 @@
 	<img src="assets/cancel.svg" height="50" class="ribbon clickable-image" (click)="onDeleteTorrent(torrent)" alt=""/>
 </div>
 
-<div #movieCard class="movie_card" id="bright">
+<div #movieCard class="movie_card">
 	<div class="info_section">
 		<div class="movie_header">
 			<img *ngIf="!torrent.movie?.poster_path" class="locandina" src="assets/missing-poster.svg" width="170" alt="">
@@ -41,7 +41,7 @@
 			</ul>
 		</div>
 
-		<div class="progress-container" *ngIf="torrent.progress > 0">
+		<div class="progress-container" *ngIf="torrent.state === torrentState.DOWNLOADING">
 			<progress class="progress" max="100" [value]="cleaningDataService.getProgressToDisplay(torrent.progress)">
 			</progress>
 		</div>
