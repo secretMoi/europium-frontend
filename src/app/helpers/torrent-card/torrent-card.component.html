@@ -25,7 +25,8 @@
 
 		<div class="movie_desc">
 			<p class="text">
-				{{ torrent.movie?.overview | truncate:[150] }}
+<!--				{{ torrent.movie?.overview | truncate:[150] }}-->
+				{{ torrent.movie?.overview }}
 			</p>
 		</div>
 
@@ -47,9 +48,9 @@
 
 	</div>
 
-	<div #backDropContainer class="blur_back bright_back">
+	<div class="blur_back bright_back">
 		<img *ngIf="torrent.movie?.backdrop_path"
 				 src="{{ torrent.movie?.backdrop_path }}"
-				 [height]="backDropContainer.offsetHeight" alt="">
+				 alt="">
 	</div>
 </div>

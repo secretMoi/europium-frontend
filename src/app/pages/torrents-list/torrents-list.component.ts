@@ -138,6 +138,7 @@ export class TorrentsListComponent implements OnDestroy {
 		if(isFirstLoading) {
 			this.lastSortedProperty = '';
 			this.sortOrder = -1;
+			sortOrder = -1;
 		}
 
     this.torrents.sort(function (a: any, b: any) {

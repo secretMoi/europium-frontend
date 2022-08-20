@@ -26,7 +26,8 @@ html, body {
 .movie_card {
 	position: relative;
 	display: block;
-	height: 400px;
+	min-height: 400px;
+	height: auto;
 	margin-top: 60px;
 	margin-left: 60px;
 	margin-right: 60px;
@@ -51,8 +52,9 @@ html, body {
 
 		.movie_header {
 			position: relative;
-			padding: 25px;
-			height: 40%;
+			padding-top: 25px;
+			padding-left: 25px;
+			height: auto;
 
 			h1 {
 				color: black;
@@ -87,7 +89,9 @@ html, body {
 		}
 
 		.movie_desc {
-			padding: 25px;
+			padding-top: 20px;
+			padding-bottom: 25px;
+			padding-left: 25px;
 			height: 40%;
 
 			.text {
@@ -143,7 +147,7 @@ html, body {
 	}
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1042px) {
 	.movie_header {
 		width: 65%;
 	}
@@ -158,6 +162,10 @@ html, body {
 
 	.blur_back {
 		background-position: -100% 10% !important;
+	}
+
+	.bright_back img {
+		height: 100%;
 	}
 
 	.minutes {
@@ -183,7 +191,7 @@ html, body {
 	top: -25px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1042px) {
 	.movie_card {
 		width: 95%;
 		margin: 70px auto;
@@ -196,6 +204,10 @@ html, body {
 		background-position: 50% 50% !important;
 	}
 
+	.bright_back img {
+		width: 100%;
+	}
+
 	.movie_header {
 		width: 100%;
 		margin-top: 85px;
@@ -203,6 +215,7 @@ html, body {
 
 	.movie_desc {
 		width: 100%;
+		padding-right: 25px;
 	}
 
 	.info_section {
