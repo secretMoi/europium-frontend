@@ -18,6 +18,8 @@ import { CrudApisComponent } from './pages/crud-apis/crud-apis.component';
 import { EditApiComponent } from './pages/edit-api/edit-api.component';
 import { TorrentsListComponent} from './pages/torrents-list/torrents-list.component';
 import { PaginationComponent } from './helpers/pagination/pagination.component';
+import { TorrentCardComponent } from './helpers/torrent-card/torrent-card.component';
+import {TruncatePipe} from "./pipes/truncate.pipe";
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { PaginationComponent } from './helpers/pagination/pagination.component';
     EditApiComponent,
     TorrentsListComponent,
     PaginationComponent,
+    TorrentCardComponent,
+		TruncatePipe
   ],
   imports: [
     BrowserModule,

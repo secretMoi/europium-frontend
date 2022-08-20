@@ -87,7 +87,7 @@ export class CleaningDataService {
 
 	getSeasonFromName(name: string): number {
 		let seasonFound: RegExpMatchArray | null = name.toUpperCase().match('S[0-9][0-9]');
-		let season: string = '';
+		let season: string;
 		if(seasonFound) {
 			season = seasonFound[0].substring(1);
 			while(season.charAt(0) === '0')
@@ -121,7 +121,7 @@ export class CleaningDataService {
 	}
 
 	getSeasonAndEpisodeFromTorrent(torrent: TorrentInfo): string {
-		let text: string = '(';
+		let text: string = '';
 
 		if(torrent.season && torrent.season > 0) {
 			text += 'Saison ' + torrent.season;
@@ -129,8 +129,6 @@ export class CleaningDataService {
 		if(torrent.episode && torrent.episode > 0) {
 			text += ' Episode ' + torrent.episode;
 		}
-
-		text += ')';
 
 		return text;
 	}

@@ -1,0 +1,56 @@
+<div id="delete-button">
+	<img src="assets/cancel.svg" height="50" class="ribbon clickable-image" (click)="onDeleteTorrent(torrent)" alt=""/>
+</div>
+
+<div #movieCard class="movie_card" id="bright">
+	<div class="info_section">
+		<div class="movie_header">
+			<img *ngIf="!torrent.movie?.poster_path" class="locandina" src="assets/missing-poster.svg" width="170" alt="">
+			<img *ngIf="torrent.movie?.poster_path" class="locandina" src="{{ torrent.movie?.poster_path }}" alt="">
+
+			<h1>{{ cleaningDataService.cleanTorrentName(torrent.name) }}</h1>
+
+			<h4 *ngIf="torrent.category === apiType.SONARR && (torrent.season || torrent.episode)">
+				{{ cleaningDataService.getSeasonAndEpisodeFromTorrent(torrent) }}
+			</h4>
+
+			<span class="minutes">
+				{{ cleaningDataService.getSizeToDisplay(torrent.size) }}
+			</span>
+
+			<p class="type">
+				Ajouté le {{ torrent.added_on * 1000 | date: 'dd-MM-yy à HH:mm' }}
+			</p>
+		</div>
+
+		<div class="movie_desc">
+			<p class="text">
+				{{ torrent.movie?.overview | truncate:[200] }}
+			</p>
+		</div>
+
+		<div class="movie_social">
+			<ul>
+				<li>
+					<img *ngIf="torrent.category === apiType.RADARR" src="assets/RADARR.svg" height="50" alt=""/>
+					<img *ngIf="torrent.category === apiType.SONARR" src="assets/SONARR.svg" height="50" alt=""/>
+				</li>
+
+				<li><img [src]="displayState(torrent.state)" height="50" [title]="torrent.state" alt=""/></li>
+			</ul>
+		</div>
+<!--		{{movieCard.offsetWidth}}-->
+<!--		<div class="progress-container" [ngStyle]="{'width': (movieCard.offsetWidth - backDropContainer.offsetWidth) + 'px'}">-->
+		<div class="progress-container" *ngIf="torrent.progress > 0">
+			<progress class="progress" max="100" [value]="cleaningDataService.getProgressToDisplay(torrent.progress)">
+			</progress>
+		</div>
+
+	</div>
+
+	<div #backDropContainer class="blur_back bright_back">
+		<img *ngIf="torrent.movie?.backdrop_path"
+				 src="{{ torrent.movie?.backdrop_path }}"
+				 [height]="backDropContainer.offsetHeight" alt="">
+	</div>
+</div>
