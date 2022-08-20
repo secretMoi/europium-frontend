@@ -17,6 +17,7 @@ export class TorrentsListComponent implements OnDestroy {
   sortOrder: number = 1;
 	timerSubscription: Subscription;
 	apiType = ApiType;
+	isFirstLoading = true;
 
 	constructor(
 		private torrentService: TorrentService,
@@ -91,8 +92,13 @@ export class TorrentsListComponent implements OnDestroy {
 					});
 				}
 
-				this.sortOrder *= -1;
-				this.dynamicSort(this.lastSortedProperty);
+				if(this.isFirstLoading) {
+					this.dynamicSort('added_on', true);
+				} else {
+					this.sortOrder *= -1;
+					this.dynamicSort(this.lastSortedProperty);
+					this.isFirstLoading = false;
+				}
 			}
 		);
 	}
@@ -119,7 +125,7 @@ export class TorrentsListComponent implements OnDestroy {
 		);
 	}
 
-  dynamicSort(property: string) {
+  dynamicSort(property: string, isFirstLoading?: boolean) {
     if (this.lastSortedProperty === property) {
       this.sortOrder *= -1;
     } else {
@@ -129,21 +135,16 @@ export class TorrentsListComponent implements OnDestroy {
     this.lastSortedProperty = property;
     let sortOrder = this.sortOrder;
 
+		if(isFirstLoading) {
+			this.lastSortedProperty = '';
+			this.sortOrder = -1;
+		}
+
     this.torrents.sort(function (a: any, b: any) {
       // works with strings and numbers
       let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
       return result * sortOrder;
     });
-  }
-
-  displayState(state: string): string {
-    if (state === 'pausedUP') return 'assets/check.svg';
-    if (state === 'uploading') return 'assets/check.svg';
-    if (state === 'downloading') return 'assets/play.svg';
-    if (state === 'error') return 'assets/cancel.svg';
-    if (state === 'missingFiles') return 'assets/broken-link.svg';
-
-    return 'assets/interrogation-mark.svg';
   }
 
 	deleteTorrent(torrent: TorrentInfo) {

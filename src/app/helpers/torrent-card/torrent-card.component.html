@@ -25,7 +25,7 @@
 
 		<div class="movie_desc">
 			<p class="text">
-				{{ torrent.movie?.overview | truncate:[200] }}
+				{{ torrent.movie?.overview | truncate:[150] }}
 			</p>
 		</div>
 
@@ -39,8 +39,7 @@
 				<li><img [src]="displayState(torrent.state)" height="50" [title]="torrent.state" alt=""/></li>
 			</ul>
 		</div>
-<!--		{{movieCard.offsetWidth}}-->
-<!--		<div class="progress-container" [ngStyle]="{'width': (movieCard.offsetWidth - backDropContainer.offsetWidth) + 'px'}">-->
+
 		<div class="progress-container" *ngIf="torrent.progress > 0">
 			<progress class="progress" max="100" [value]="cleaningDataService.getProgressToDisplay(torrent.progress)">
 			</progress>
