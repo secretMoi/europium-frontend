@@ -78,7 +78,11 @@ export class TorrentsListComponent implements OnDestroy {
 	setPosterFromSeason(torrent: TorrentInfo) {
 		if(!torrent.seasons || !torrent.season || !torrent.movie) return;
 
-		let newPoster = torrent.seasons[torrent.season - 1].poster_path;
+		let season = torrent.seasons.find(t => t.season_number === torrent.season);
+
+		if(!season) return;
+
+		let newPoster = season.poster_path;
 		if(newPoster)
 			torrent.movie.poster_path = newPoster;
 	}
