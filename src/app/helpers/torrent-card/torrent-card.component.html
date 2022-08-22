@@ -38,6 +38,12 @@
 				</li>
 
 				<li><img [src]="displayState(torrent.state)" height="50" [title]="torrent.state" alt=""/></li>
+
+				<li *ngIf="torrent?.movie?.link">
+					<a [href]=torrent.movie?.link target="_blank">
+						<img src="assets/tmdb.svg" width="100" alt=""/>
+					</a>
+				</li>
 			</ul>
 		</div>
 
