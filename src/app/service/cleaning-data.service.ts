@@ -71,11 +71,11 @@ export class CleaningDataService {
 
 	getSizeToDisplay(size: number): string {
 		if (size > 1000000000) {
-			return Math.round(size / 10000000) / 100 + 'Go';
+			return Math.round(size / 10000000) / 100 + ' Go';
 		}
 
 		if (size > 1000000) {
-			return Math.round(size / 1000000) / 100 + 'Mo';
+			return Math.round(size / 1000000) / 100 + ' Mo';
 		}
 
 		return size.toString();

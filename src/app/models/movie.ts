@@ -1,4 +1,5 @@
 import {Season} from "./torrent-info";
+import {RadarrInformation} from "./radarr-information";
 
 export class Movie {
 	id!: number;
@@ -11,4 +12,5 @@ export class Movie {
 	backdrop_path!: string;
 
 	seasons?: Season[];
+	radarrInformation?: RadarrInformation;
 }

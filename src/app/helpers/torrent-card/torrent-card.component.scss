@@ -244,6 +244,7 @@ html, body {
 	display: block;
 	appearance: none;
 	-webkit-appearance: none;
+	border-radius: 0;
 
 	&::-webkit-progress-bar {
 		background-color: lighten($primary, 35%);
