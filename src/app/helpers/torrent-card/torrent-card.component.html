@@ -1,3 +1,13 @@
+<!--<div class="container" *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo">-->
+<!--	<div class="interior">-->
+<!--		<a class="btn" href="{{ getCurrenUrlWithoutAnchor() }}#open-modal" target="_self">Modal</a>-->
+<!--	</div>-->
+<!--</div>-->
+
+<!--<app-torrent-metadata-modal-->
+<!--	[metaData]="torrent.movie?.radarrInformation?.movieFile?.mediaInfo"-->
+<!--&gt;</app-torrent-metadata-modal>-->
+
 <div id="delete-button">
 	<img src="assets/cancel.svg" height="50" class="ribbon clickable-image" (click)="onDeleteTorrent(torrent)" alt=""/>
 </div>
@@ -25,7 +35,7 @@
 
 		<div class="movie_desc">
 			<p class="text">
-<!--				{{ torrent.movie?.overview | truncate:[150] }}-->
+				<!--				{{ torrent.movie?.overview | truncate:[150] }}-->
 				{{ torrent.movie?.overview }}
 			</p>
 		</div>

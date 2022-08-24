@@ -10,6 +10,7 @@ import {TorrentInfo} from "../../models/torrent-info";
 import {CleaningDataService} from "../../service/cleaning-data.service";
 import {ApiType} from "../../models/enums/api-type";
 import {TorrentState} from "../../models/torrent-state";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-torrent-card',
@@ -29,7 +30,12 @@ export class TorrentCardComponent {
 
   constructor(
 		public cleaningDataService: CleaningDataService,
+		public router: Router
 	) {
+	}
+
+	getCurrenUrlWithoutAnchor(): string {
+		return this.cleaningDataService.removeAllTextAfter(this.router.url, '#');
 	}
 
 	displayState(state: string): string {
