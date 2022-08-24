@@ -10,8 +10,6 @@ import {TorrentInfo} from "../../models/torrent-info";
 import {CleaningDataService} from "../../service/cleaning-data.service";
 import {ApiType} from "../../models/enums/api-type";
 import {TorrentState} from "../../models/torrent-state";
-import {MonitoredApi} from "../../models/monitored-api";
-import {MonitoredApiService} from "../../service/monitored-api.service";
 
 @Component({
   selector: 'app-torrent-card',
@@ -28,20 +26,10 @@ export class TorrentCardComponent {
 
 	apiType = ApiType;
 	torrentState = TorrentState;
-	radarr!: MonitoredApi;
-	sonarr!: MonitoredApi;
 
   constructor(
 		public cleaningDataService: CleaningDataService,
-		public apiService: MonitoredApiService,
 	) {
-		apiService.getApiByCode('RADARR').subscribe(
-			api => this.radarr = api
-		);
-
-		apiService.getApiByCode('SONARR').subscribe(
-			api => this.sonarr = api
-		);
 	}
 
 	displayState(state: string): string {

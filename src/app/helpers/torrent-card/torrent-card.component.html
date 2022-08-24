@@ -39,7 +39,9 @@
 				</li>
 
 				<li *ngIf="torrent.category === apiType.SONARR">
-					<img src="assets/SONARR.svg" height="50" alt=""/>
+					<a [href]=torrent.movie?.sonarrInformation?.fileLink target="_blank">
+						<img src="assets/SONARR.svg" height="50" alt=""/>
+					</a>
 				</li>
 
 				<li><img [src]="displayState(torrent.state)" height="50" [title]="torrent.state" alt=""/></li>

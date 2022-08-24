@@ -1,5 +1,6 @@
 import {Season} from "./torrent-info";
 import {RadarrInformation} from "./radarr-information";
+import {SonarrInformation} from "./sonarr-information";
 
 export class Movie {
 	id!: number;
@@ -13,4 +14,5 @@ export class Movie {
 
 	seasons?: Season[];
 	radarrInformation?: RadarrInformation;
+	sonarrInformation?: SonarrInformation;
 }

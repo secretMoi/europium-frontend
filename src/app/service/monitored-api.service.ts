@@ -12,6 +12,8 @@ export class MonitoredApiService {
 
   controllerPrefix: string = environment.backendUrl + '/monitor';
 
+	radarrApi!: MonitoredApi;
+
   constructor(private http: HttpClient) {}
 
   getMonitoredApis(): Observable<MonitoredApi[]> {
