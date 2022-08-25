@@ -3,10 +3,13 @@
 	[modalName]="'modal_' + torrent.hash">
 </app-torrent-metadata-modal>
 
+
+<div class="container-main">
+
+
 <div id="delete-button">
 	<img src="assets/cancel.svg" height="50" class="ribbon clickable-image" (click)="onDeleteTorrent(torrent)" alt=""/>
 </div>
-
 <div #movieCard class="movie_card">
 	<div class="info_section">
 
@@ -77,4 +80,5 @@
 				 src="{{ torrent.movie?.backdrop_path }}"
 				 alt="">
 	</div>
+</div>
 </div>
