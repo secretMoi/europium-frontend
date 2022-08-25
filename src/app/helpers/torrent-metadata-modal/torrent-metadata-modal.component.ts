@@ -11,11 +11,12 @@ import {MediaInfo} from "../../models/radarr-information";
 export class TorrentMetadataModalComponent implements OnInit {
 
 	@Input() metaData?: MediaInfo;
+	@Input() modalName?: string;
 
   constructor(
 		public cleaningDataService: CleaningDataService,
 		public router: Router
-	) { }
+	) {}
 
   ngOnInit(): void {
   }

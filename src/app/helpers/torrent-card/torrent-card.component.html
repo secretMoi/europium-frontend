@@ -1,147 +1,15 @@
-<!--<div class="container" *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo">-->
-<!--	<div class="interior">-->
-<!--		<a class="btn" href="{{ getCurrenUrlWithoutAnchor() }}#open-modal" target="_self">Modal</a>-->
-<!--	</div>-->
-<!--</div>-->
-
-<!--<app-torrent-metadata-modal-->
-<!--	[metaData]="torrent.movie?.radarrInformation?.movieFile?.mediaInfo"-->
-<!--&gt;</app-torrent-metadata-modal>-->
-
-<!--<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">-->
-<!--	Link with href-->
-<!--</a>-->
-
-<!-- Modal -->
-<div class="modal fade" id="modal_{{torrent.hash}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Meta data</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-
-			<div class="modal-body">
-				<p *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.resolution">
-					Résolution : {{ torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.resolution }}
-				</p>
-
-				<p *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.runTime">
-					Durée : {{ torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.runTime }}
-				</p>
-
-				<p *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.audioLanguages">
-					Langue : {{ torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.audioLanguages }}
-				</p>
-
-				<p *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.subtitles">
-					Sous-titres : {{ torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.subtitles }}
-				</p>
-
-				<p *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.videoBitDepth">
-					HDR : {{ torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.videoBitDepth }}
-				</p>
-
-				<p *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.videoBitrate">
-					Débit vidéo : {{ torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.videoBitrate  }} kbps
-				</p>
-
-				<p *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.videoCodec">
-					Codec : {{ torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.videoCodec  }}
-				</p>
-
-				<p *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.audioBitrate">
-					Débit audio : {{ torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.audioBitrate  }} kbps
-				</p>
-
-				<p *ngIf="torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.audioChannels">
-					Canaux audio : {{ torrent.movie?.radarrInformation?.movieFile?.mediaInfo?.audioChannels }}
-				</p>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-			</div>
-
-		</div>
-	</div>
-</div>
+<app-torrent-metadata-modal
+	[metaData]="torrent.movie?.radarrInformation?.movieFile?.mediaInfo"
+	[modalName]="'modal_' + torrent.hash">
+</app-torrent-metadata-modal>
 
 <div id="delete-button">
 	<img src="assets/cancel.svg" height="50" class="ribbon clickable-image" (click)="onDeleteTorrent(torrent)" alt=""/>
 </div>
 
 <div #movieCard class="movie_card">
-
-
-
-<!--	<div class="wrapper">-->
-
-<!--		<div class="inside">-->
-<!--			<div class="icon"><i class="material-icons">info_outline</i></div>-->
-<!--			<div class="contents">-->
-<!--				<table>-->
-<!--					<tr>-->
-<!--						<th>Width</th>-->
-<!--						<th>Height</th>-->
-<!--					</tr>-->
-<!--					<tr>-->
-<!--						<td>3000mm</td>-->
-<!--						<td>4000mm</td>-->
-<!--					</tr>-->
-<!--					<tr>-->
-<!--						<th>Something</th>-->
-<!--						<th>Something</th>-->
-<!--					</tr>-->
-<!--					<tr>-->
-<!--						<td>200mm</td>-->
-<!--						<td>200mm</td>-->
-<!--					</tr>-->
-<!--					<tr>-->
-<!--						<th>Something</th>-->
-<!--						<th>Something</th>-->
-<!--					</tr>-->
-<!--					<tr>-->
-<!--						<td>200mm</td>-->
-<!--						<td>200mm</td>-->
-<!--					</tr>-->
-<!--					<tr>-->
-<!--						<th>Something</th>-->
-<!--						<th>Something</th>-->
-<!--					</tr>-->
-<!--					<tr>-->
-<!--						<td>200mm</td>-->
-<!--						<td>200mm</td>-->
-<!--					</tr>-->
-<!--				</table>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-
-<!--	<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">-->
-<!--		Button with data-bs-target-->
-<!--	</button>-->
-
-<!--	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">-->
-<!--		<div class="offcanvas-header">-->
-<!--			<h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>-->
-<!--			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>-->
-<!--		</div>-->
-<!--		<div class="offcanvas-body">-->
-<!--			<div>-->
-<!--				Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-
 	<div class="info_section">
-<!--		<div>-->
-<!--			<div class="metadata-container">-->
-<!--				coucoucoucoucoucoucoucou<br>-->
-<!--				cucou-->
-<!--			</div>-->
-<!--		</div>-->
+
 		<div class="movie_header">
 			<img *ngIf="!torrent.movie?.poster_path" class="locandina" src="assets/missing-poster.svg" width="170" alt="">
 			<img *ngIf="torrent.movie?.poster_path" class="locandina" src="{{ torrent.movie?.poster_path }}" alt="">
@@ -163,7 +31,6 @@
 
 		<div class="movie_desc">
 			<p class="text">
-				<!--				{{ torrent.movie?.overview | truncate:[150] }}-->
 				{{ torrent.movie?.overview }}
 			</p>
 		</div>
@@ -190,19 +57,11 @@
 					</a>
 				</li>
 
-				<li>
+				<li *ngIf="torrent.movie?.radarrInformation?.movieFile">
 					<a [href]="getModalLink()" target="_self" data-bs-toggle="modal">
 						<img src="assets/metadata.svg" width="50" alt=""/>
 					</a>
 				</li>
-
-
-
-
-<!--				<li (click)="canvas = !canvas">-->
-<!--					<input id="toggle" type="checkbox" class="visually-hidden">-->
-<!--					<label for="toggle">Info</label>-->
-<!--				</li>-->
 			</ul>
 		</div>
 

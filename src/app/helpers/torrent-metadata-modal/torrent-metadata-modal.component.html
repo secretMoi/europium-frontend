@@ -1,9 +1,56 @@
-<div id="open-modal" class="modal-window">
-	<div>
-		<a href="{{ getCurrenUrlWithoutAnchor() }}#" title="Close" class="modal-close">Close</a>
-		<h1>Voilà!</h1>
-		<div>A CSS-only modal based on the :target pseudo-class. Hope you find it helpful.</div>
-		<br>
+<!-- Modal -->
+<div class="modal fade" id="{{modalName}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+		 aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Meta data</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+
+			<div class="modal-body">
+				<p *ngIf="metaData?.resolution">
+					Résolution : {{ metaData?.resolution }}
+				</p>
+
+				<p *ngIf="metaData?.runTime">
+					Durée : {{ metaData?.runTime }}
+				</p>
+
+				<p *ngIf="metaData?.audioLanguages">
+					Langue : {{ metaData?.audioLanguages }}
+				</p>
+
+				<p *ngIf="metaData?.subtitles">
+					Sous-titres : {{ metaData?.subtitles }}
+				</p>
+
+				<p *ngIf="metaData?.videoBitDepth">
+					HDR : {{ metaData?.videoBitDepth }}
+				</p>
+
+				<p *ngIf="metaData?.videoBitrate">
+					Débit vidéo : {{ metaData?.videoBitrate  }} kbps
+				</p>
+
+				<p *ngIf="metaData?.videoCodec">
+					Codec : {{ metaData?.videoCodec  }}
+				</p>
+
+				<p *ngIf="metaData?.audioBitrate">
+					Débit audio : {{ metaData?.audioBitrate  }} kbps
+				</p>
+
+				<p *ngIf="metaData?.audioChannels">
+					Canaux audio : {{ metaData?.audioChannels }}
+				</p>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+			</div>
+
+		</div>
 	</div>
 </div>
-

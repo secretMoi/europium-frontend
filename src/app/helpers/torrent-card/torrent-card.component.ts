@@ -11,7 +11,6 @@ import {CleaningDataService} from "../../service/cleaning-data.service";
 import {ApiType} from "../../models/enums/api-type";
 import {TorrentState} from "../../models/torrent-state";
 import {Router} from "@angular/router";
-import {NgbOffcanvas, OffcanvasDismissReasons} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-torrent-card',
@@ -28,11 +27,8 @@ export class TorrentCardComponent {
 
 	apiType = ApiType;
 	torrentState = TorrentState;
-	canvas: boolean = false;
-	closeResult = '';
 
   constructor(
-		private offcanvasService: NgbOffcanvas,
 		public cleaningDataService: CleaningDataService,
 		public router: Router
 	) {
@@ -59,22 +55,4 @@ export class TorrentCardComponent {
 	onDeleteTorrent(torrent: TorrentInfo) {
 		this.deleteTorrent.emit(torrent);
 	}
-
-	// open(content: any) {
-	// 	this.offcanvasService.open(content, {ariaLabelledBy: 'offcanvas-basic-title'}).result.then((result) => {
-	// 		this.closeResult = `Closed with: ${result}`;
-	// 	}, (reason) => {
-	// 		this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-	// 	});
-	// }
-	//
-	// private getDismissReason(reason: any): string {
-	// 	if (reason === OffcanvasDismissReasons.ESC) {
-	// 		return 'by pressing ESC';
-	// 	} else if (reason === OffcanvasDismissReasons.BACKDROP_CLICK) {
-	// 		return 'by clicking on the backdrop';
-	// 	} else {
-	// 		return `with: ${reason}`;
-	// 	}
-	// }
 }
