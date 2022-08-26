@@ -6,7 +6,7 @@ import {TorrentInfo} from "../models/torrent-info";
 })
 export class CleaningDataService {
 	convertEta(seconds: number): string {
-		if(seconds == 8640000) return '0';
+		if (seconds == 8640000) return '0';
 
 		let d = Math.floor(seconds / (3600 * 24));
 		let h = Math.floor(seconds % (3600 * 24) / 3600);
@@ -51,7 +51,7 @@ export class CleaningDataService {
 
 	removeAllTextAfter(text: string, textToSearch: string): string {
 		let index = text.toUpperCase().indexOf(textToSearch);
-		if(index !== -1)
+		if (index !== -1)
 			text = text.substring(0, index);
 
 		return text;
@@ -59,9 +59,9 @@ export class CleaningDataService {
 
 	removeAllTextBetween(text: string, start: string, end: string): string {
 		let startIndex = text.toUpperCase().indexOf(start);
-		if(startIndex === -1) return text;
+		if (startIndex === -1) return text;
 		let endIndex = text.toUpperCase().indexOf(end);
-		if(endIndex === -1) return text;
+		if (endIndex === -1) return text;
 
 		let textToKeep = text.substring(0, startIndex);
 		textToKeep = textToKeep + text.substring(endIndex + 1, text.length);
@@ -81,16 +81,16 @@ export class CleaningDataService {
 		return size.toString();
 	}
 
-	getProgressToDisplay(progress: number){
+	getProgressToDisplay(progress: number) {
 		return Math.round(progress * 100 * 10) / 10;
 	}
 
 	getSeasonFromName(name: string): number {
 		let seasonFound: RegExpMatchArray | null = name.toUpperCase().match('S[0-9][0-9]');
 		let season: string;
-		if(seasonFound) {
+		if (seasonFound) {
 			season = seasonFound[0].substring(1);
-			while(season.charAt(0) === '0')
+			while (season.charAt(0) === '0')
 				season = season.substring(1);
 
 			return Number(season);
@@ -98,7 +98,7 @@ export class CleaningDataService {
 
 		seasonFound = name.toUpperCase().match('SAISON [0-9]');
 		season = '';
-		if(seasonFound) {
+		if (seasonFound) {
 			season = seasonFound[0].replace('SAISON ', '');
 
 			return Number(season);
@@ -111,9 +111,9 @@ export class CleaningDataService {
 		let episodeFound: RegExpMatchArray | null = name.toUpperCase().match('E[0-9][0-9]');
 		let episode: string = '';
 
-		if(episodeFound) {
+		if (episodeFound) {
 			episode = episodeFound[0].substring(1);
-			while(episode.charAt(0) === '0')
+			while (episode.charAt(0) === '0')
 				episode = episode.substring(1);
 		}
 
@@ -123,13 +123,26 @@ export class CleaningDataService {
 	getSeasonAndEpisodeFromTorrent(torrent: TorrentInfo): string {
 		let text: string = '';
 
-		if(torrent.season && torrent.season > 0) {
+		if (torrent.season && torrent.season > 0) {
 			text += 'Saison ' + torrent.season;
 		}
-		if(torrent.episode && torrent.episode > 0) {
+		if (torrent.episode && torrent.episode > 0) {
 			text += ' Episode ' + torrent.episode;
 		}
 
 		return text;
+	}
+
+	cleanLanguages(languages: string): string {
+		let languagesList = languages.split('/');
+		let languagesKnown: string[] = [];
+
+		for (let language of languagesList) {
+			if (!languagesKnown.indexOf(language)) {
+				languagesKnown.push(language)
+			}
+		}
+
+		return languagesKnown.join(', ');
 	}
 }

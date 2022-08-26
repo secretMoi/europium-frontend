@@ -23,13 +23,13 @@ html, body {
 	padding: 10px;
 }
 
-.container-main {
+.torrent-container {
 
 
 	height: auto;
 	margin-top: 60px;
-	margin-left: 60px;
-	margin-right: 60px;
+	margin-left: 4%;
+	margin-right: 4%;
 	border-radius: 10px;
 	transition: all 0.4s;
 	backface-visibility: hidden;
@@ -118,13 +118,14 @@ html, body {
 				ul {
 					list-style: none;
 					padding: 0;
+					margin-bottom: 0;
 
 					li {
 						display: inline-block;
 						color: rgba(0, 0, 0, 0.3);
 						transition: color 0.3s;
 						transition-delay: 0.15s;
-						margin: 0 15px;
+						margin: 0 15px 1rem;
 
 						&:hover {
 							transition: color 0.3s;
@@ -156,6 +157,16 @@ html, body {
 				//background: url("https://occ-0-2433-448.1.nflxso.net/art/cd5c9/3e192edf2027c536e25bb5d3b6ac93ced77cd5c9.jpg");
 			}
 		}
+	}
+
+	#delete-button {
+		position: relative;
+		z-index: 1000;
+	}
+
+	#delete-button img {
+		position: absolute;
+		top: -25px;
 	}
 
 	@media screen and (min-width: 1042px) {
@@ -190,16 +201,6 @@ html, body {
 		#delete-button img {
 			right: -15px;
 		}
-	}
-
-	#delete-button {
-		position: relative;
-		z-index: 1000;
-	}
-
-	#delete-button img {
-		position: absolute;
-		top: -25px;
 	}
 
 	@media screen and (max-width: 1042px) {
@@ -247,6 +248,10 @@ html, body {
 		}
 	}
 }
+
+
+
+
 
 .progress, progress[value] {
 	width: auto;

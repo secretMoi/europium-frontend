@@ -27,15 +27,12 @@ export class TorrentCardComponent {
 
 	apiType = ApiType;
 	torrentState = TorrentState;
+	isMetaDataModalOpen: boolean = false;
 
   constructor(
 		public cleaningDataService: CleaningDataService,
 		public router: Router
 	) {
-	}
-
-	getCurrenUrlWithoutAnchor(): string {
-		return this.cleaningDataService.removeAllTextAfter(this.router.url, '#');
 	}
 
 	getModalLink(): string {

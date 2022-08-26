@@ -11,39 +11,43 @@
 
 			<div class="modal-body">
 				<p *ngIf="metaData?.resolution">
-					Résolution : {{ metaData?.resolution }}
+					Résolution : {{ metaData.resolution }}
 				</p>
 
 				<p *ngIf="metaData?.runTime">
-					Durée : {{ metaData?.runTime }}
+					Durée : {{ metaData.runTime }}
 				</p>
 
 				<p *ngIf="metaData?.audioLanguages">
-					Langue : {{ metaData?.audioLanguages }}
+					Langue : {{ cleaningDataService.cleanLanguages(metaData.audioLanguages) }}
 				</p>
 
 				<p *ngIf="metaData?.subtitles">
-					Sous-titres : {{ metaData?.subtitles }}
+					Sous-titres : {{ metaData.subtitles }}
 				</p>
 
 				<p *ngIf="metaData?.videoBitDepth">
-					HDR : {{ metaData?.videoBitDepth }}
+					HDR :
+					<img *ngIf="metaData.videoBitDepth > 8" src="assets/hdr-true.svg" height="64" alt="" />
+					<img *ngIf="metaData.videoBitDepth <= 8" src="assets/hdr-false.svg" height="64" alt="" />
 				</p>
 
 				<p *ngIf="metaData?.videoBitrate">
-					Débit vidéo : {{ metaData?.videoBitrate  }} kbps
+					Débit vidéo : {{ metaData.videoBitrate  }} kbps
 				</p>
 
 				<p *ngIf="metaData?.videoCodec">
-					Codec : {{ metaData?.videoCodec  }}
+					Codec :
+					<img *ngIf="metaData.videoCodec.search('265') != -1" src="assets/hevc-true.svg" height="64" alt="" />
+					<img *ngIf="metaData.videoCodec.search('265') == -1" src="assets/hevc-true.svg" height="64" alt="" />
 				</p>
 
 				<p *ngIf="metaData?.audioBitrate">
-					Débit audio : {{ metaData?.audioBitrate  }} kbps
+					Débit audio : {{ metaData.audioBitrate / 1000  }} kbps
 				</p>
 
 				<p *ngIf="metaData?.audioChannels">
-					Canaux audio : {{ metaData?.audioChannels }}
+					Canaux audio : {{ metaData.audioChannels }}
 				</p>
 			</div>
 

@@ -10,7 +10,8 @@ import {MediaInfo} from "../../models/radarr-information";
 })
 export class TorrentMetadataModalComponent implements OnInit {
 
-	@Input() metaData?: MediaInfo;
+	@Input() isOpen!: boolean;
+	@Input() metaData!: MediaInfo;
 	@Input() modalName?: string;
 
   constructor(
@@ -20,8 +21,4 @@ export class TorrentMetadataModalComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-	getCurrenUrlWithoutAnchor(): string {
-		return this.cleaningDataService.removeAllTextAfter(this.router.url, '#');
-	}
 }
