@@ -1,10 +1,3 @@
-<app-torrent-metadata-modal
-	[isOpen]="isMetaDataModalOpen"
-	[metaData]="torrent.movie?.radarrInformation?.movieFile?.mediaInfo!"
-	[modalName]="'modal_' + torrent.hash">
-</app-torrent-metadata-modal>
-
-
 <div class="torrent-container">
 
 	<!--	Delete Button-->
@@ -68,7 +61,7 @@
 					</li>
 
 					<li *ngIf="torrent.movie?.radarrInformation?.movieFile" (click)="isMetaDataModalOpen = !isMetaDataModalOpen">
-						<a [href]="getModalLink()" target="_self" data-bs-toggle="modal" >
+						<a [href]="getModalLink()" target="_self" data-bs-toggle="modal">
 							<img src="assets/metadata.svg" width="50" alt=""/>
 						</a>
 					</li>
@@ -76,10 +69,9 @@
 			</div>
 
 			<!--		Progress bar-->
-			<div class="progress-container" *ngIf="torrent.state === torrentState.DOWNLOADING">
-				<progress class="progress" max="100" [value]="cleaningDataService.getProgressToDisplay(torrent.progress)">
-				</progress>
-			</div>
+			<app-progress-bar
+				[torrent]="torrent"
+			></app-progress-bar>
 
 		</div>
 
@@ -91,3 +83,9 @@
 		</div>
 	</div>
 </div>
+
+<app-torrent-metadata-modal
+	[isOpen]="isMetaDataModalOpen"
+	[metaData]="torrent.movie?.radarrInformation?.movieFile?.mediaInfo!"
+	[modalName]="'modal_' + torrent.hash">
+</app-torrent-metadata-modal>

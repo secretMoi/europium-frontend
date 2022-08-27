@@ -12,6 +12,7 @@ export class Season {
 
 export class TorrentInfo {
   name!: string;
+	originalName!: string;
   category?: string;
   state!: string;
   size!: number;

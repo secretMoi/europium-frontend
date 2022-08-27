@@ -17,6 +17,7 @@ export class TorrentsListComponent implements OnDestroy {
   sortOrder: number = 1;
 	timerSubscription: Subscription;
 	isFirstLoading = true;
+	searchTorrent!: string;
 
 	constructor(
 		private torrentService: TorrentService,
@@ -105,6 +106,10 @@ export class TorrentsListComponent implements OnDestroy {
 				}
 
 				if(this.isFirstLoading) {
+					for (let torrent of this.torrents) {
+						torrent.originalName = torrent.name;
+					}
+
 					this.dynamicSort('added_on', true);
 				} else {
 					this.sortOrder *= -1;
@@ -113,6 +118,10 @@ export class TorrentsListComponent implements OnDestroy {
 				}
 			}
 		);
+	}
+
+	filterTorrents() {
+		// this.torrents = this.torrents.find(torrent -> torrent.originalName)
 	}
 
 	getMovieData(torrent: TorrentInfo) {

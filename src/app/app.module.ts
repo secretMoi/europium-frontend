@@ -22,6 +22,7 @@ import { TorrentCardComponent } from './helpers/torrent-card/torrent-card.compon
 import {TruncatePipe} from "./pipes/truncate.pipe";
 import { TorrentMetadataModalComponent } from './helpers/torrent-metadata-modal/torrent-metadata-modal.component';
 import { MetadataElementComponent } from './helpers/torrent-metadata-modal/metadata-element/metadata-element.component';
+import { ProgressBarComponent } from './helpers/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MetadataElementComponent } from './helpers/torrent-metadata-modal/metad
     TorrentCardComponent,
 		TruncatePipe,
   TorrentMetadataModalComponent,
-  MetadataElementComponent
+  MetadataElementComponent,
+  ProgressBarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,19 @@
+.row {
+	margin: 0;
+	align-items: center;
+}
+
+.input-text:focus {
+	box-shadow: 0 0 0;
+	border-color: #0D6EFD;
+	outline: 0;
+}
+
+.form-control {
+	border: 1px solid #0D6EFD;
+}
+
+.search-btn {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
