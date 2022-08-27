@@ -7,16 +7,19 @@ import {CleaningDataService} from "../../service/cleaning-data.service";
 import {ApiType} from "../../models/enums/api-type";
 
 @Component({
-  selector: 'app-torrents-list',
-  templateUrl: './torrents-list.component.html',
-  styleUrls: ['./torrents-list.component.scss']
+	selector: 'app-torrents-list',
+	templateUrl: './torrents-list.component.html',
+	styleUrls: ['./torrents-list.component.scss']
 })
 export class TorrentsListComponent implements OnDestroy {
-  torrents!: TorrentInfo[];
-  lastSortedProperty!: string;
-  sortOrder: number = 1;
-	timerSubscription: Subscription;
+	torrents!: TorrentInfo[];
+	timerSubscription!: Subscription;
+	lastTimingSubscription!: number;
 	isFirstLoading = true;
+
+	// order
+	lastSortedProperty!: string;
+	sortOrder: number = 1;
 
 	// filters
 	searchTorrent!: string;
@@ -27,25 +30,30 @@ export class TorrentsListComponent implements OnDestroy {
 		private torrentService: TorrentService,
 		private theMovieDbService: TheMovieDbService,
 		public cleaningDataService: CleaningDataService,
-  ) {
-		this.timerSubscription = timer(0, 1000).pipe(
+	) {
+		this.setTimerSubscription(1000);
+	}
+
+	setTimerSubscription(timing: number) {
+		this.lastTimingSubscription = timing;
+
+		this.timerSubscription = timer(0, timing).pipe(
 			map(() => {
 				this.refreshTorrentList();
 			})
 		).subscribe();
-  }
+	}
 
 	ngOnDestroy(): void {
 		this.timerSubscription.unsubscribe();
 	}
 
 	setMediaData(medias: TorrentInfo[]) {
-		for(let mediaToAdd of medias) {
+		for (let mediaToAdd of medias) {
 
-			if(mediaToAdd.category === ApiType.RADARR) {
+			if (mediaToAdd.category === ApiType.RADARR) {
 				this.getMovieData(mediaToAdd);
-			}
-			else if(mediaToAdd.category === ApiType.SONARR) {
+			} else if (mediaToAdd.category === ApiType.SONARR) {
 				this.getSerieData(mediaToAdd);
 			}
 		}
@@ -69,7 +77,7 @@ export class TorrentsListComponent implements OnDestroy {
 		this.torrents.forEach(torrent => {
 			let updatedTorrent = torrents.find(t => t.hash === torrent.hash);
 
-			if(!updatedTorrent) return;
+			if (!updatedTorrent) return;
 
 			torrent.state = updatedTorrent.state;
 			torrent.progress = updatedTorrent.progress;
@@ -81,21 +89,21 @@ export class TorrentsListComponent implements OnDestroy {
 	}
 
 	setPosterFromSeason(torrent: TorrentInfo) {
-		if(!torrent.seasons || !torrent.season || !torrent.movie) return;
+		if (!torrent.seasons || !torrent.season || !torrent.movie) return;
 
 		let season = torrent.seasons.find(t => t.season_number === torrent.season);
 
-		if(!season) return;
+		if (!season) return;
 
 		let newPoster = season.poster_path;
-		if(newPoster)
+		if (newPoster)
 			torrent.movie.poster_path = newPoster;
 	}
 
 	refreshTorrentList() {
 		this.torrentService.getAllTorrents().subscribe(
 			(torrents) => {
-				if(this.torrents) {
+				if (this.torrents) {
 					this.addNewMedias(torrents);
 					this.removeOldMedias(torrents);
 					this.updateMedias(torrents);
@@ -109,7 +117,7 @@ export class TorrentsListComponent implements OnDestroy {
 					});
 				}
 
-				if(this.isFirstLoading) {
+				if (this.isFirstLoading) {
 					for (let torrent of this.torrents) {
 						torrent.originalName = torrent.name;
 					}
@@ -120,14 +128,25 @@ export class TorrentsListComponent implements OnDestroy {
 					this.dynamicSort(this.lastSortedProperty);
 					this.isFirstLoading = false;
 				}
+
+				let hasDownloadingTorrent = this.torrents.findIndex(f => f.state === 'downloading') != -1;
+				if (hasDownloadingTorrent && this.lastTimingSubscription != 1000) {
+					this.timerSubscription.unsubscribe();
+					this.setTimerSubscription(1000);
+				}
+				if (!hasDownloadingTorrent && this.lastTimingSubscription != 5000) {
+					this.timerSubscription.unsubscribe();
+					this.setTimerSubscription(5000);
+				}
 			}
 		);
 	}
 
+
 	getMovieData(torrent: TorrentInfo) {
 		this.theMovieDbService.getMovieByName(this.cleaningDataService.cleanTorrentName(torrent.name)).subscribe(
 			(movie) => {
-				if(movie === null) return;
+				if (movie === null) return;
 
 				torrent.movie = movie;
 				torrent.name = movie.title;
@@ -138,7 +157,7 @@ export class TorrentsListComponent implements OnDestroy {
 	getSerieData(torrent: TorrentInfo) {
 		this.theMovieDbService.getSerieByName(this.cleaningDataService.cleanTorrentName(torrent.name)).subscribe(
 			(movie) => {
-				if(movie === null) return;
+				if (movie === null) return;
 
 				torrent.movie = movie;
 				torrent.name = movie.title;
@@ -149,28 +168,28 @@ export class TorrentsListComponent implements OnDestroy {
 		);
 	}
 
-  dynamicSort(property: string, isFirstLoading?: boolean) {
-    if (this.lastSortedProperty === property) {
-      this.sortOrder *= -1;
-    } else {
-      this.sortOrder = 1;
-    }
+	dynamicSort(property: string, isFirstLoading?: boolean) {
+		if (this.lastSortedProperty === property) {
+			this.sortOrder *= -1;
+		} else {
+			this.sortOrder = 1;
+		}
 
-    this.lastSortedProperty = property;
-    let sortOrder = this.sortOrder;
+		this.lastSortedProperty = property;
+		let sortOrder = this.sortOrder;
 
-		if(isFirstLoading) {
+		if (isFirstLoading) {
 			this.lastSortedProperty = '';
 			this.sortOrder = -1;
 			sortOrder = -1;
 		}
 
-    this.torrents.sort(function (a: any, b: any) {
-      // works with strings and numbers
-      let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-      return result * sortOrder;
-    });
-  }
+		this.torrents.sort(function (a: any, b: any) {
+			// works with strings and numbers
+			let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+			return result * sortOrder;
+		});
+	}
 
 	deleteTorrent(torrent: TorrentInfo) {
 		this.torrentService.deleteTorrent(torrent.hash).subscribe(
@@ -188,12 +207,12 @@ export class TorrentsListComponent implements OnDestroy {
 	}
 
 	isTorrentMatchingFilterName(torrent: TorrentInfo): boolean {
-		if(!this.searchTorrent || this.searchTorrent.trim() === '') return true;
+		if (!this.searchTorrent || this.searchTorrent.trim() === '') return true;
 		return torrent.name.toLowerCase().includes(this.searchTorrent.toLowerCase());
 	}
 
 	isTorrentMatchingFilterApiType(torrent: TorrentInfo): boolean {
-		if(this.selectedApi === ApiType.ANY) return true;
+		if (this.selectedApi === ApiType.ANY) return true;
 
 		return torrent.category === this.selectedApi;
 	}
