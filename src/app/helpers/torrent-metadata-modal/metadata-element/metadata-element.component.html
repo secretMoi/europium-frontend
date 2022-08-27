@@ -1,0 +1,17 @@
+<div class="container">
+	<div class="row justify-content-evenly">
+
+		<div class="col-4">
+			{{ label }}
+		</div>
+
+		<div *ngIf="!imageToDisplay" class="col-4">
+			{{ value }}
+		</div>
+
+		<div *ngIf="imageToDisplay" class="col-4">
+			<img [src]="imageToDisplay" height="64px" alt="">
+		</div>
+
+	</div>
+</div>

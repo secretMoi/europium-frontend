@@ -20,5 +20,7 @@ export class TorrentMetadataModalComponent implements OnInit {
 	) {}
 
   ngOnInit(): void {
+		console.log(this.metaData)
+		console.log(this.isOpen)
   }
 }

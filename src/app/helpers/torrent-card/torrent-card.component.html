@@ -67,8 +67,8 @@
 						</a>
 					</li>
 
-					<li *ngIf="torrent.movie?.radarrInformation?.movieFile">
-						<a [href]="getModalLink()" target="_self" (click)="isMetaDataModalOpen = !isMetaDataModalOpen" data-bs-toggle="modal">
+					<li *ngIf="torrent.movie?.radarrInformation?.movieFile" (click)="isMetaDataModalOpen = !isMetaDataModalOpen">
+						<a [href]="getModalLink()" target="_self" data-bs-toggle="modal" >
 							<img src="assets/metadata.svg" width="50" alt=""/>
 						</a>
 					</li>

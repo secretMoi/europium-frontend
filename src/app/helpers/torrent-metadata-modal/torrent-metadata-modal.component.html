@@ -10,45 +10,70 @@
 			</div>
 
 			<div class="modal-body">
-				<p *ngIf="metaData?.resolution">
-					Résolution : {{ metaData.resolution }}
-				</p>
 
-				<p *ngIf="metaData?.runTime">
-					Durée : {{ metaData.runTime }}
-				</p>
+				<app-metadata-element
+					*ngIf="metaData?.resolution"
+					[label]="'Résolution'"
+					[value]="metaData.resolution"
+				>
+				</app-metadata-element>
 
-				<p *ngIf="metaData?.audioLanguages">
-					Langue : {{ cleaningDataService.cleanLanguages(metaData.audioLanguages) }}
-				</p>
+				<app-metadata-element
+					*ngIf="metaData?.runTime"
+					[label]="'Durée'"
+					[value]="metaData.runTime"
+				>
+				</app-metadata-element>
 
-				<p *ngIf="metaData?.subtitles">
-					Sous-titres : {{ metaData.subtitles }}
-				</p>
+				<app-metadata-element
+					*ngIf="metaData?.audioLanguages"
+					[label]="'Langue'"
+					[value]="cleaningDataService.cleanLanguages(metaData.audioLanguages)"
+				>
+				</app-metadata-element>
 
-				<p *ngIf="metaData?.videoBitDepth">
-					HDR :
-					<img *ngIf="metaData.videoBitDepth > 8" src="assets/hdr-true.svg" height="64" alt="" />
-					<img *ngIf="metaData.videoBitDepth <= 8" src="assets/hdr-false.svg" height="64" alt="" />
-				</p>
+				<app-metadata-element
+					*ngIf="metaData?.subtitles"
+					[label]="'Sous titres'"
+					[value]="cleaningDataService.cleanLanguages(metaData.subtitles)"
+				>
+				</app-metadata-element>
 
-				<p *ngIf="metaData?.videoBitrate">
-					Débit vidéo : {{ metaData.videoBitrate  }} kbps
-				</p>
+				<app-metadata-element
+					*ngIf="metaData?.videoBitDepth"
+					[label]="'HDR'"
+					[imageToDisplay]="metaData.videoBitDepth > 8 ? 'assets/hdr-true.svg' : 'assets/hdr-false.svg'"
+				>
+				</app-metadata-element>
 
-				<p *ngIf="metaData?.videoCodec">
-					Codec :
-					<img *ngIf="metaData.videoCodec.search('265') != -1" src="assets/hevc-true.svg" height="64" alt="" />
-					<img *ngIf="metaData.videoCodec.search('265') == -1" src="assets/hevc-true.svg" height="64" alt="" />
-				</p>
+				<app-metadata-element
+					*ngIf="metaData?.videoBitrate"
+					[label]="'Débit vidéo'"
+					[value]="metaData.videoBitrate.toString()"
+				>
+				</app-metadata-element>
 
-				<p *ngIf="metaData?.audioBitrate">
-					Débit audio : {{ metaData.audioBitrate / 1000  }} kbps
-				</p>
+				<app-metadata-element
+					*ngIf="metaData?.videoCodec"
+					[label]="'HEVC'"
+					[imageToDisplay]="metaData.videoCodec.search('265') != -1 ? 'assets/hevc-true.svg' : 'assets/hevc-false.svg'"
+				>
+				</app-metadata-element>
 
-				<p *ngIf="metaData?.audioChannels">
-					Canaux audio : {{ metaData.audioChannels }}
-				</p>
+				<app-metadata-element
+					*ngIf="metaData?.audioBitrate"
+					[label]="'Débit audio'"
+					[value]="(metaData.audioBitrate / 1000).toString()"
+				>
+				</app-metadata-element>
+
+				<app-metadata-element
+					*ngIf="metaData?.audioChannels"
+					[label]="'Canaux audio'"
+					[value]="metaData.audioChannels.toString( )"
+				>
+				</app-metadata-element>
+
 			</div>
 
 			<div class="modal-footer">

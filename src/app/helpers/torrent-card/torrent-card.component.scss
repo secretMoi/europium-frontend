@@ -24,8 +24,6 @@ html, body {
 }
 
 .torrent-container {
-
-
 	height: auto;
 	margin-top: 60px;
 	margin-left: 4%;
@@ -154,7 +152,6 @@ html, body {
 				float: right;
 				margin-left: auto;
 				display: block;
-				//background: url("https://occ-0-2433-448.1.nflxso.net/art/cd5c9/3e192edf2027c536e25bb5d3b6ac93ced77cd5c9.jpg");
 			}
 		}
 	}
@@ -205,8 +202,6 @@ html, body {
 
 	@media screen and (max-width: 1042px) {
 		.movie_card {
-			//width: 95%;
-			//margin: 70px auto;
 			min-height: 350px;
 			height: auto;
 		}

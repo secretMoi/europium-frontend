@@ -138,8 +138,18 @@ export class CleaningDataService {
 		let languagesKnown: string[] = [];
 
 		for (let language of languagesList) {
-			if (!languagesKnown.indexOf(language)) {
-				languagesKnown.push(language)
+			if (languagesKnown.indexOf(language) === -1) {
+				languagesKnown.push(language);
+			}
+		}
+
+		for(let i = 0; i < languagesKnown.length; i++) {
+			if (languagesKnown[i] == 'fre') {
+				languagesKnown[i] = 'Français'
+			}
+
+			if (languagesKnown[i] == 'eng') {
+				languagesKnown[i] = 'Anglais'
 			}
 		}
 

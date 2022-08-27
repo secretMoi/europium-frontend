@@ -21,6 +21,7 @@ import { PaginationComponent } from './helpers/pagination/pagination.component';
 import { TorrentCardComponent } from './helpers/torrent-card/torrent-card.component';
 import {TruncatePipe} from "./pipes/truncate.pipe";
 import { TorrentMetadataModalComponent } from './helpers/torrent-metadata-modal/torrent-metadata-modal.component';
+import { MetadataElementComponent } from './helpers/torrent-metadata-modal/metadata-element/metadata-element.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { TorrentMetadataModalComponent } from './helpers/torrent-metadata-modal/
     PaginationComponent,
     TorrentCardComponent,
 		TruncatePipe,
-  TorrentMetadataModalComponent
+  TorrentMetadataModalComponent,
+  MetadataElementComponent
   ],
   imports: [
     BrowserModule,
