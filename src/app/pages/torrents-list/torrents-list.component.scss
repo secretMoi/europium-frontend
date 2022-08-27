@@ -3,17 +3,21 @@
 	align-items: center;
 }
 
-.input-text:focus {
-	box-shadow: 0 0 0;
-	border-color: #0D6EFD;
-	outline: 0;
-}
-
 .form-control {
-	border: 1px solid #0D6EFD;
+	background-color: transparent;
 }
 
-.search-btn {
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+.form-control:focus {
+	box-shadow: none;
+}
+
+.form-control-underlined {
+	border-width: 0;
+	border-bottom-width: 1px;
+	border-radius: 0;
+	padding-left: 0;
+}
+
+option {
+	text-align: center;
 }

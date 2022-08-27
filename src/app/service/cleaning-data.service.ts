@@ -70,15 +70,14 @@ export class CleaningDataService {
 	}
 
 	getSizeToDisplay(size: number): string {
-		if (size > 1000000000) {
-			return Math.round(size / 10000000) / 100 + ' Go';
-		}
+		const suffixes = ['b', 'Kb', 'Mb', 'Gb', 'Tb'];
+		const suffixIndex = Math.floor(Math.log(size) / Math.log(1024));
+		const suffix = suffixes[suffixIndex];
 
-		if (size > 1000000) {
-			return Math.round(size / 1000000) / 100 + ' Mo';
-		}
+		if (suffixIndex === 0) return `${size} ${suffix})`;
 
-		return size.toString();
+		let sizeInBytes = (size / (1024 ** suffixIndex)); // ** = exponentielle
+		return `${sizeInBytes.toFixed(1)} ${suffix}`;
 	}
 
 	getProgressToDisplay(progress: number) {

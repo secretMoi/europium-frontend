@@ -1,3 +1,3 @@
 export enum ApiType {
-	RADARR = 'radarr', SONARR = 'tv-sonarr'
+	RADARR = 'radarr', SONARR = 'tv-sonarr', ANY = 'ANY'
 }

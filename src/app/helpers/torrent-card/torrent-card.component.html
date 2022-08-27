@@ -80,6 +80,10 @@
 			<img *ngIf="torrent.movie?.backdrop_path"
 					 src="{{ torrent.movie?.backdrop_path }}"
 					 alt="">
+
+			<img *ngIf="!torrent.movie?.backdrop_path"
+					 src="assets/missing-poster.svg"
+					 alt="">
 		</div>
 	</div>
 </div>

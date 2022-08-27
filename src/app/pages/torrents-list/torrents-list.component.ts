@@ -17,7 +17,11 @@ export class TorrentsListComponent implements OnDestroy {
   sortOrder: number = 1;
 	timerSubscription: Subscription;
 	isFirstLoading = true;
+
+	// filters
 	searchTorrent!: string;
+	selectedApi: string = ApiType.ANY;
+	apiType = ApiType;
 
 	constructor(
 		private torrentService: TorrentService,
@@ -179,9 +183,18 @@ export class TorrentsListComponent implements OnDestroy {
 		);
 	}
 
-	isTorrentMatchFilter(torrent: TorrentInfo): boolean {
-		if(!this.searchTorrent || this.searchTorrent.trim() === '') return true;
+	isTorrentMatchFilters(torrent: TorrentInfo): boolean {
+		return this.isTorrentMatchingFilterApiType(torrent) && this.isTorrentMatchingFilterName(torrent);
+	}
 
+	isTorrentMatchingFilterName(torrent: TorrentInfo): boolean {
+		if(!this.searchTorrent || this.searchTorrent.trim() === '') return true;
 		return torrent.name.toLowerCase().includes(this.searchTorrent.toLowerCase());
+	}
+
+	isTorrentMatchingFilterApiType(torrent: TorrentInfo): boolean {
+		if(this.selectedApi === ApiType.ANY) return true;
+
+		return torrent.category === this.selectedApi;
 	}
 }
