@@ -120,10 +120,6 @@ export class TorrentsListComponent implements OnDestroy {
 		);
 	}
 
-	filterTorrents() {
-		// this.torrents = this.torrents.find(torrent -> torrent.originalName)
-	}
-
 	getMovieData(torrent: TorrentInfo) {
 		this.theMovieDbService.getMovieByName(this.cleaningDataService.cleanTorrentName(torrent.name)).subscribe(
 			(movie) => {
@@ -181,5 +177,11 @@ export class TorrentsListComponent implements OnDestroy {
 				}
 			}
 		);
+	}
+
+	isTorrentMatchFilter(torrent: TorrentInfo): boolean {
+		if(!this.searchTorrent || this.searchTorrent.trim() === '') return true;
+
+		return torrent.name.toLowerCase().includes(this.searchTorrent.toLowerCase());
 	}
 }
