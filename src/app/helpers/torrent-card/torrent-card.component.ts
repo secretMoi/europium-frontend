@@ -23,8 +23,6 @@ export class TorrentCardComponent {
 
 	@Output() deleteTorrent = new EventEmitter<TorrentInfo>();
 
-	@ViewChild('movieCard') movieCard!: ElementRef<HTMLDivElement>;
-
 	apiType = ApiType;
 	torrentState = TorrentState;
 	isMetaDataModalOpen: boolean = false;

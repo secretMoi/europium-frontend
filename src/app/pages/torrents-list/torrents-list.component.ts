@@ -5,6 +5,7 @@ import {map, Subscription, timer} from "rxjs";
 import {TheMovieDbService} from "../../service/the-movie-db.service";
 import {CleaningDataService} from "../../service/cleaning-data.service";
 import {ApiType} from "../../models/enums/api-type";
+import {TorrentState} from "../../models/torrent-state";
 
 @Component({
 	selector: 'app-torrents-list',
@@ -13,9 +14,15 @@ import {ApiType} from "../../models/enums/api-type";
 })
 export class TorrentsListComponent implements OnDestroy {
 	torrents!: TorrentInfo[];
+	isFirstLoading = true;
+
+	// torrent subscription
 	timerSubscription!: Subscription;
 	lastTimingSubscription!: number;
-	isFirstLoading = true;
+	numberOfRefresh: number = 0;
+	maxNumberOfRefresh: number = 50;
+	refreshTimingWhileDownloading: number = 1000;
+	refreshTimingWithoutDownloading: number = 5000;
 
 	// order
 	lastSortedProperty!: string;
@@ -129,19 +136,29 @@ export class TorrentsListComponent implements OnDestroy {
 					this.isFirstLoading = false;
 				}
 
-				let hasDownloadingTorrent = this.torrents.findIndex(f => f.state === 'downloading') != -1;
-				if (hasDownloadingTorrent && this.lastTimingSubscription != 1000) {
-					this.timerSubscription.unsubscribe();
-					this.setTimerSubscription(1000);
-				}
-				if (!hasDownloadingTorrent && this.lastTimingSubscription != 5000) {
-					this.timerSubscription.unsubscribe();
-					this.setTimerSubscription(5000);
-				}
+				this.limitNumberOfRefresh();
 			}
 		);
 	}
 
+	limitNumberOfRefresh() {
+		this.numberOfRefresh++;
+		if (this.numberOfRefresh > this.maxNumberOfRefresh) this.timerSubscription.unsubscribe();
+
+		let hasDownloadingTorrent = this.torrents.findIndex(f => f.state === TorrentState.DOWNLOADING) != -1;
+		if (hasDownloadingTorrent && this.lastTimingSubscription != this.refreshTimingWhileDownloading) {
+			this.resetTimerSubscription(this.refreshTimingWhileDownloading);
+		}
+		if (!hasDownloadingTorrent && this.lastTimingSubscription != this.refreshTimingWithoutDownloading) {
+			this.resetTimerSubscription(this.refreshTimingWithoutDownloading);
+		}
+	}
+
+	resetTimerSubscription(interval: number) {
+		this.timerSubscription.unsubscribe();
+		this.setTimerSubscription(interval);
+		this.numberOfRefresh = 0;
+	}
 
 	getMovieData(torrent: TorrentInfo) {
 		this.theMovieDbService.getMovieByName(this.cleaningDataService.cleanTorrentName(torrent.name)).subscribe(

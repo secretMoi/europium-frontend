@@ -41,15 +41,22 @@
 			<div class="movie_social">
 				<ul>
 					<li *ngIf="torrent.category === apiType.RADARR">
-						<a [href]=torrent.movie?.radarrInformation?.fileLink target="_blank">
+						<a *ngIf="torrent.movie?.radarrInformation?.fileLink" [href]=torrent.movie?.radarrInformation?.fileLink
+							 target="_blank">
 							<img src="assets/RADARR.svg" height="50" alt=""/>
 						</a>
+
+						<img *ngIf="!torrent.movie?.radarrInformation?.fileLink" src="assets/RADARR.svg" height="50" alt=""/>
+
 					</li>
 
 					<li *ngIf="torrent.category === apiType.SONARR">
-						<a [href]=torrent.movie?.sonarrInformation?.fileLink target="_blank">
+						<a *ngIf="torrent.movie?.sonarrInformation?.fileLink" [href]=torrent.movie?.sonarrInformation?.fileLink
+							 target="_blank">
 							<img src="assets/SONARR.svg" height="50" alt=""/>
 						</a>
+
+						<img *ngIf="!torrent.movie?.sonarrInformation?.fileLink" src="assets/SONARR.svg" height="50" alt=""/>
 					</li>
 
 					<li><img [src]="displayState(torrent.state)" height="50" [title]="torrent.state" alt=""/></li>
