@@ -41,6 +41,7 @@ export class TorrentCardComponent {
 		if (state === 'pausedUP') return 'assets/check.svg';
 		if (state === 'uploading') return 'assets/check.svg';
 		if (state === 'downloading') return 'assets/play.svg';
+		if (state === 'queuedDL') return 'assets/pause.svg';
 		if (state === 'error') return 'assets/cancel.svg';
 		if (state === 'missingFiles') return 'assets/broken-link.svg';
 
