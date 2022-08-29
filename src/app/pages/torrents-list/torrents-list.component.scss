@@ -1,6 +1,7 @@
 .row {
 	margin: 0;
 	align-items: center;
+
 }
 
 .form-control {
@@ -18,6 +19,28 @@
 	padding-left: 0;
 }
 
+.d-flex {
+	padding: 3rem !important;
+}
+
+.form-select {
+	width: 35%;
+}
+
 option {
 	text-align: center;
 }
+
+@media screen and (max-width: 600px) {
+	.d-flex {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 1.2rem !important;
+	}
+
+	.form-select {
+		width: 100%;
+	}
+}
+
+

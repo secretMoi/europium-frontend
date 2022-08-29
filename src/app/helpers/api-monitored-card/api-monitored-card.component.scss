@@ -1,0 +1,21 @@
+.api-status {
+	height: 96px;
+}
+
+@media screen and (max-width: 600px) {
+	.api-status {
+		height: 64px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.api-status {
+		height: 48px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.api-status {
+		height: 36px;
+	}
+}

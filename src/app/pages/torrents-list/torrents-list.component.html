@@ -1,20 +1,20 @@
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="bg-white p-5 rounded shadow">
+		<div class="bg-white rounded shadow">
 
-			<div class="d-flex justify-content-between">
+			<div class="d-flex justify-content-between gap-3">
 
 				<div class="input-group border rounded-pill p-1">
 					<input type="search" placeholder="Rechercher un torrent..." aria-describedby="button-addon3"
 								 class="form-control bg-none border-0" [(ngModel)]="searchTorrent">
 					<div class="input-group-append border-0">
 						<button id="button-addon3" type="button" class="btn btn-link text-success">
-							<img src="assets/search.svg" height="32px" alt="">
+							<img src="assets/search.svg" height="20px" alt="">
 						</button>
 					</div>
 				</div>
 
-				<select class="form-select rounded-pill w-25 ms-5" aria-label="Default select example" [(ngModel)]="selectedApi">
+				<select class="form-select rounded-pill filter-element" aria-label="Default select example" [(ngModel)]="selectedApi">
 					<option selected [ngValue]="apiType.ANY">API</option>
 					<option [ngValue]="apiType.RADARR">Radarr</option>
 					<option [ngValue]="apiType.SONARR">Sonarr</option>
