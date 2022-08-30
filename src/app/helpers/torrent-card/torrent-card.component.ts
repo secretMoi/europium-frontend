@@ -38,13 +38,13 @@ export class TorrentCardComponent {
 	}
 
 	displayState(state: string): string {
-		if (state === 'pausedUP') return 'assets/check.svg';
-		if (state === 'pausedDL') return 'assets/pause.svg';
-		if (state === 'uploading') return 'assets/check.svg';
-		if (state === 'downloading') return 'assets/play.svg';
-		if (state === 'queuedDL') return 'assets/pause.svg';
-		if (state === 'error') return 'assets/cancel.svg';
-		if (state === 'missingFiles') return 'assets/broken-link.svg';
+		if (state === TorrentState.PAUSE_UPLOAD) return 'assets/check.svg';
+		if (state === TorrentState.PAUSE_DOWNLOAD) return 'assets/pause.svg';
+		if (state === TorrentState.UPLOADING) return 'assets/check.svg';
+		if (state === TorrentState.DOWNLOADING) return 'assets/play.svg';
+		if (state === TorrentState.QUEUED_DOWNLOAD) return 'assets/pause.svg';
+		if (state === TorrentState.ERROR) return 'assets/cancel.svg';
+		if (state === TorrentState.MISSING_FILE) return 'assets/broken-link.svg';
 
 		return 'assets/interrogation-mark.svg';
 	}

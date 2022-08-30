@@ -1,5 +1,6 @@
 .api-status {
 	height: 96px;
+	width: 96px;
 }
 
 .fs-4 {
@@ -9,17 +10,20 @@
 @media screen and (max-width: 600px) {
 	.api-status {
 		height: 64px;
+		width: 64px;
 	}
 }
 
 @media screen and (max-width: 500px) {
 	.api-status {
 		height: 48px;
+		width: 48px;
 	}
 }
 
 @media screen and (max-width: 400px) {
 	.api-status {
 		height: 36px;
+		width: 36px;
 	}
 }

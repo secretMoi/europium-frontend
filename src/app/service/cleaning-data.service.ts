@@ -39,9 +39,12 @@ export class CleaningDataService {
 		name = this.removeAllTextAfter(name, 'TRUEFRENCH');
 		name = this.removeAllTextAfter(name, new Date().getFullYear().toString());
 		name = this.removeAllTextAfter(name, 'S0');
+		name = this.removeAllTextAfter(name, 'S1');
 		name = this.removeAllTextAfter(name, '(');
 		name = this.removeAllTextAfter(name, 'SAISON');
 		name = this.removeAllTextAfter(name, 'SEASON');
+		name = this.removeAllTextAfter(name, '20');
+		name = this.removeAllTextAfter(name, '19');
 		name = this.removeAllTextBetween(name, '[', ']');
 
 		name = name.split(".").join(" ").trim();

@@ -20,11 +20,15 @@
 }
 
 .d-flex {
-	padding: 3rem !important;
+	padding: 2rem !important;
 }
 
 .form-select {
 	width: 35%;
+}
+
+select {
+	height: 48px;
 }
 
 option {

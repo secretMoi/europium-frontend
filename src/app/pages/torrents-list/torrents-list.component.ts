@@ -30,8 +30,12 @@ export class TorrentsListComponent implements OnDestroy {
 
 	// filters
 	searchTorrent!: string;
+
 	selectedApi: string = ApiType.ANY;
 	apiType = ApiType;
+
+	selectedTorrentState: string = TorrentState.ANY;
+	torrentState = TorrentState;
 
 	constructor(
 		private torrentService: TorrentService,
@@ -220,7 +224,35 @@ export class TorrentsListComponent implements OnDestroy {
 	}
 
 	isTorrentMatchFilters(torrent: TorrentInfo): boolean {
-		return this.isTorrentMatchingFilterApiType(torrent) && this.isTorrentMatchingFilterName(torrent);
+		return this.isTorrentMatchingFilterApiType(torrent) &&
+			this.isTorrentMatchingFilterName(torrent) &&
+			this.isTorrentMatchingFilterState(torrent);
+	}
+
+	isTorrentMatchingFilterState(torrent: TorrentInfo): boolean {
+		if(this.selectedTorrentState === TorrentState.ANY) return true;
+
+		if(this.selectedTorrentState === TorrentState.RUNNING) {
+			if(torrent.state === TorrentState.DOWNLOADING ||
+				torrent.state === TorrentState.PAUSE_DOWNLOAD ||
+				torrent.state === TorrentState.QUEUED_DOWNLOAD ||
+				torrent.state === TorrentState.ERROR)
+				return true;
+
+			return false;
+		}
+
+		if(this.selectedTorrentState === TorrentState.FINISHED) {
+			if (torrent.state === TorrentState.PAUSE_UPLOAD ||
+				torrent.state === TorrentState.UPLOADING ||
+				torrent.state === TorrentState.MISSING_FILE
+			)
+				return true;
+
+			return false;
+		}
+
+		return true;
 	}
 
 	isTorrentMatchingFilterName(torrent: TorrentInfo): boolean {
