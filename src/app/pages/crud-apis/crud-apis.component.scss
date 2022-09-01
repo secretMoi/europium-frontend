@@ -7,3 +7,53 @@ th, td {
   text-align: center;
   padding: 30px;
 }
+
+.api-logo {
+	height: 96px;
+}
+
+.btn {
+	margin-bottom: 3rem;
+	float: right;
+}
+
+.add-img {
+	margin-right: 5px;
+	vertical-align: center;
+}
+
+.edit-btn {
+	height: 56px;
+}
+
+.api-name {
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+	.api-logo {
+		height: 64px;
+		width: 64px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.api-logo {
+		height: 48px;
+		width: 48px;
+	}
+
+	.theme-table table tr th, .theme-table table tr td {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.edit-btn {
+		height: 48px;
+	}
+
+	.api-name {
+		font-size: 1.3rem;
+	}
+}

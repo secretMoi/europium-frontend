@@ -1,10 +1,8 @@
 import {
 	Component,
-	ElementRef,
 	EventEmitter,
 	Input,
 	Output,
-	ViewChild
 } from '@angular/core';
 import {TorrentInfo} from "../../models/torrent-info";
 import {CleaningDataService} from "../../service/cleaning-data.service";
@@ -24,7 +22,6 @@ export class TorrentCardComponent {
 	@Output() deleteTorrent = new EventEmitter<TorrentInfo>();
 
 	apiType = ApiType;
-	torrentState = TorrentState;
 	isMetaDataModalOpen: boolean = false;
 
   constructor(

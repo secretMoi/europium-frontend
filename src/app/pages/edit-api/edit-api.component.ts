@@ -15,6 +15,7 @@ export class EditApiComponent implements OnInit {
   api!: MonitoredApi;
   logoData!: string | SafeUrl;
   isAlertDisplayed: boolean = false;
+	apiCode!: string | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,12 +33,12 @@ export class EditApiComponent implements OnInit {
     //   console.log(this.route.snapshot.params['name']);
     // });
 
-    const apiCode = this.route.snapshot.paramMap.get('code');
-    if(apiCode) {
-      this.apiService.getApiByCode(apiCode).subscribe(
+    this.apiCode = this.route.snapshot.paramMap.get('code');
+    if(this.apiCode) {
+      this.apiService.getApiByCode(this.apiCode).subscribe(
         (api: MonitoredApi) => {
           this.api = api;
-          this.apiService.getApiLogo(apiCode).subscribe(
+          this.apiService.getApiLogo(<string>this.apiCode).subscribe(
             (blobImage: any) => this.logoData = this.sanitizer.bypassSecurityTrustUrl(blobImage)
           )
         }
@@ -67,10 +68,10 @@ export class EditApiComponent implements OnInit {
   }
 
   saveApi() {
-    this.apiService.saveApi(this.api).subscribe(
-      _ => this.router.navigate(['/api']),
-      _ => this.isAlertDisplayed = true
-    );
+		this.apiService.saveApi(this.api).subscribe(
+			_ => this.router.navigate(['/api']),
+			_ => this.isAlertDisplayed = true
+		);
   }
 
   cancelApi() {

@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: 'volume-list', component: VolumeListComponent},
   {path: 'files-list', component: ListFilesComponent},
   {path: 'api', component: CrudApisComponent},
+  {path: 'api/create', component: EditApiComponent},
   {path: 'api/edit/:code', component: EditApiComponent},
   {path: 'torrent/list', component: TorrentsListComponent},
 	{path: '', redirectTo: '/home', pathMatch: 'full'},
