@@ -20,9 +20,9 @@
   </div>
 
   <div id="collapseExample" [(ngbCollapse)]="isCollapsed">
-    <div class="card card-body" style="margin-top: 0;">
+    <div class="card card-body border-0">
       <div class="list-group">
-        <a href="#" class="list-group-item" *ngFor="let apiUrl of monitoredApi.apiUrls">
+        <a [href]="apiUrl.url" class="list-group-item api-link" *ngFor="let apiUrl of monitoredApi.apiUrls">
           <div class="d-flex justify-content-between w-100">
             <div class="p-2 fs-4 my-auto">
               <a href="{{ apiUrl.url }}" target="_blank">{{ apiUrl.url }}</a>

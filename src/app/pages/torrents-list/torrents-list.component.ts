@@ -134,10 +134,10 @@ export class TorrentsListComponent implements OnDestroy {
 					}
 
 					this.dynamicSort('added_on', true);
+					this.isFirstLoading = false;
 				} else {
 					this.sortOrder *= -1;
 					this.dynamicSort(this.lastSortedProperty);
-					this.isFirstLoading = false;
 				}
 
 				this.limitNumberOfRefresh();

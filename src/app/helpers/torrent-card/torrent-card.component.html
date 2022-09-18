@@ -67,7 +67,7 @@
 						</a>
 					</li>
 
-					<li *ngIf="torrent.movie?.radarrInformation?.movieFile" (click)="isMetaDataModalOpen = !isMetaDataModalOpen">
+					<li (click)="isMetaDataModalOpen = !isMetaDataModalOpen">
 						<a [href]="getModalLink()" target="_self" data-bs-toggle="modal">
 							<img src="assets/metadata.svg" width="50" alt=""/>
 						</a>
@@ -97,6 +97,7 @@
 
 <app-torrent-metadata-modal
 	[isOpen]="isMetaDataModalOpen"
+	[originalName]="torrent.originalName"
 	[metaData]="torrent.movie?.radarrInformation?.movieFile?.mediaInfo!"
 	[modalName]="'modal_' + torrent.hash">
 </app-torrent-metadata-modal>

@@ -7,6 +7,7 @@ import {ListFilesArguments} from "../../models/list-files-arguments";
 import {ChartConfig} from "../../helpers/chart/chartConfig";
 import {FileType} from "../../models/file-type";
 import {FileSystem} from "../../models/file-system";
+import {CleaningDataService} from "../../service/cleaning-data.service";
 
 @Component({
 	selector: 'app-list-files',
@@ -38,7 +39,10 @@ export class ListFilesComponent {
 
 	@ViewChild(HorizontalChartComponent) horizontalChartComponent?: HorizontalChartComponent;
 
-	constructor(public storageService: StorageService) {
+	constructor(
+		public storageService: StorageService,
+		public cleaningDataService: CleaningDataService,
+	) {
 		this.displayFileOrFolderText();
 
 		this.getVolumes();

@@ -12,6 +12,7 @@ export class TorrentMetadataModalComponent implements OnInit {
 
 	@Input() isOpen!: boolean;
 	@Input() metaData!: MediaInfo;
+	@Input() originalName!: string;
 	@Input() modalName?: string;
 
   constructor(

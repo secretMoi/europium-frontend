@@ -1,12 +1,25 @@
-.col-4 {
+@import '~bootstrap/scss/bootstrap';
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+.card {
+	overflow: hidden;
+}
+
+.metadata-value {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	align-items: center;
 	top: auto;
 	margin-top: auto;
 	margin-bottom: auto;
+	text-align: end;
 }
 
-.row {
-	border-bottom: 1px solid #eee;
+.metadata-title {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: $primary;
+	color: white;
+
 }

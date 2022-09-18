@@ -7,6 +7,10 @@
 	overflow-wrap: anywhere;
 }
 
+.api-link:hover {
+	background-color: #F5F5F5;
+}
+
 @media screen and (max-width: 600px) {
 	.api-status {
 		height: 64px;

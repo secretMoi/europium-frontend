@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="{{modalName}}" tabindex="-1" aria-labelledby="exampleModalLabel"
 		 aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 
 			<div class="modal-header">
@@ -10,6 +10,13 @@
 			</div>
 
 			<div class="modal-body">
+
+				<app-metadata-element
+					*ngIf="originalName"
+					[label]="'Nom original'"
+					[value]="originalName"
+				>
+				</app-metadata-element>
 
 				<app-metadata-element
 					*ngIf="metaData?.resolution"
@@ -49,7 +56,7 @@
 				<app-metadata-element
 					*ngIf="metaData?.videoBitrate"
 					[label]="'Débit vidéo'"
-					[value]="metaData.videoBitrate.toString()"
+					[value]="metaData.videoBitrate.toString() + ' kbps'"
 				>
 				</app-metadata-element>
 
@@ -63,7 +70,7 @@
 				<app-metadata-element
 					*ngIf="metaData?.audioBitrate"
 					[label]="'Débit audio'"
-					[value]="(metaData.audioBitrate / 1000).toString()"
+					[value]="(metaData.audioBitrate / 1000).toString() + ' kbps'"
 				>
 				</app-metadata-element>
 
