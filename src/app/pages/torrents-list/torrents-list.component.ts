@@ -265,4 +265,8 @@ export class TorrentsListComponent implements OnDestroy {
 
 		return torrent.category === this.selectedApi;
 	}
+
+	public trackByHash(_: any, torrentInfo: TorrentInfo): string {
+		return torrentInfo.hash;
+	}
 }

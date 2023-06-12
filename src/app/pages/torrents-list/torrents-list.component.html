@@ -38,7 +38,7 @@
 	</div>
 </div>
 
-<div class="mb-5" *ngFor="let torrent of torrents">
+<div class="mb-5" *ngFor="let torrent of torrents; trackBy: trackByHash">
 	<app-torrent-card
 		[hidden]="!isTorrentMatchFilters(torrent)"
 		[torrent]="torrent"
