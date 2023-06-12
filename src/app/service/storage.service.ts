@@ -22,7 +22,8 @@ export class StorageService {
   }
 
   getCleanVolumeName(name: string) {
-    name = name.substring(1, name.length);
+		if(name.startsWith('/'))
+    	name = name.substring(1, name.length);
 
     if(name.endsWith('/usbshare')) {
       name = name.replace('/usbshare', '');
