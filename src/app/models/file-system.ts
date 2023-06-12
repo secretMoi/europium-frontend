@@ -4,4 +4,5 @@ export interface FileSystem {
   available: string;
   percentageUsed: string;
   volume: string;
+	isLocal: boolean;
 }

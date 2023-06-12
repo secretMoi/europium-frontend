@@ -31,7 +31,7 @@
 				>
 					<option
 						*ngFor="let fileSystem of fileSystems"
-						[ngValue]="fileSystem.volume">{{ storageService.getCleanVolumeName(fileSystem.volume) }}
+						[ngValue]="fileSystem">{{ storageService.getCleanVolumeName(fileSystem.volume) }}
 					</option>
 				</select>
 			</div>

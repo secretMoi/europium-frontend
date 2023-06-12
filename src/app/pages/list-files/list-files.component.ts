@@ -16,7 +16,6 @@ import {CleaningDataService} from "../../service/cleaning-data.service";
 })
 export class ListFilesComponent {
 	defaultResultNumber: number = 50;
-	defaultVolume: string = '/volumeUSB1/usbshare';
 
 	files: File[] = [];
 
@@ -29,7 +28,7 @@ export class ListFilesComponent {
 
 	isFile: boolean = true;
 	resultNumber?: number = this.defaultResultNumber;
-	selectedVolume?: string = this.defaultVolume;
+	selectedVolume!: FileSystem;
 
 	lastSortedProperty!: string;
 	sortOrder: number = 1;
@@ -46,7 +45,6 @@ export class ListFilesComponent {
 		this.displayFileOrFolderText();
 
 		this.getVolumes();
-		this.loadData(this.getListFilesArguments());
 
 		this.chartConfig = new ChartConfig(
 			800, 600, '16px sans-serif', '#262626'
@@ -55,7 +53,11 @@ export class ListFilesComponent {
 
 	getVolumes() {
 		this.storageService.getFileSystems().subscribe(
-			(volumes: FileSystem[]) => this.fileSystems = volumes
+			(volumes: FileSystem[]) => {
+				this.fileSystems = volumes;
+				this.selectedVolume = volumes[0];
+				this.loadData(this.getListFilesArguments());
+			}
 		);
 	}
 
@@ -110,7 +112,7 @@ export class ListFilesComponent {
 	}
 
 	getListFilesArguments() {
-		return new ListFilesArguments(this.defaultVolume, this.defaultResultNumber, 1);
+		return new ListFilesArguments(this.fileSystems[0].volume, this.defaultResultNumber, 1, this.selectedVolume?.isLocal ?? false);
 	}
 
 	toggleIsFileValue() {
@@ -129,10 +131,10 @@ export class ListFilesComponent {
 
 	sendFilter() {
 		const fileType = this.isFile ? FileType.File : FileType.Folder;
-		const resultNumber = this.resultNumber ? this.resultNumber : this.defaultResultNumber;
-		const volume = this.selectedVolume ? this.selectedVolume : this.defaultVolume;
+		const resultNumber = this.resultNumber ?? this.defaultResultNumber;
+		const volume = this.selectedVolume.volume;
 
-		this.loadData(new ListFilesArguments(volume, resultNumber, fileType));
+		this.loadData(new ListFilesArguments(volume, resultNumber, fileType, this.selectedVolume.isLocal));
 	}
 
 	dynamicSort(property: string) {
