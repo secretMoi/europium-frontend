@@ -73,7 +73,7 @@ export class CleaningDataService {
 	}
 
 	getSizeToDisplay(size: number): string {
-		const suffixes = ['b', 'Kb', 'Mb', 'Gb', 'Tb'];
+		const suffixes = ['o', 'Ko', 'Mo', 'Go', 'To'];
 		const suffixIndex = Math.floor(Math.log(size) / Math.log(1024));
 		const suffix = suffixes[suffixIndex];
 
