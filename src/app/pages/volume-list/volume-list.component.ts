@@ -29,9 +29,9 @@ export class VolumeListComponent {
 
         for(let fileSystem of fileSystems) {
           this.chartData?.push(new ChartData(
-            this.multiplySizeBySuffix(fileSystem.size),
+            this.multiplySizeBySuffix(fileSystem.size.toString()),
             fileSystem.volume,
-            fileSystem.size
+            fileSystem.size.toString()
           ));
         }
 

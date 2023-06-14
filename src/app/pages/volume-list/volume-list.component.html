@@ -14,10 +14,10 @@
 		<tr *ngFor="let fileSystem of fileSystems">
 
 			<td>{{ fileSystem.volume }}</td>
-			<td>{{ fileSystem.size }}</td>
-			<td>{{ fileSystem.used }}</td>
+			<td>{{ fileSystem.size | formatFileSize }}</td>
+			<td>{{ fileSystem.used | formatFileSize }}</td>
 			<td>{{ fileSystem.percentageUsed }}</td>
-			<td>{{ fileSystem.available }}</td>
+			<td>{{ fileSystem.available | formatFileSize }}</td>
 
 		</tr>
 		</tbody>

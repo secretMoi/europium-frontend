@@ -14,46 +14,49 @@ import {ApiMonitoredCardComponent} from './helpers/api-monitored-card/api-monito
 import {HandleApiComponent} from './pages/handle-api/handle-api.component';
 import {NgbCollapseModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { CrudApisComponent } from './pages/crud-apis/crud-apis.component';
-import { EditApiComponent } from './pages/edit-api/edit-api.component';
-import { TorrentsListComponent} from './pages/torrents-list/torrents-list.component';
-import { PaginationComponent } from './helpers/pagination/pagination.component';
-import { TorrentCardComponent } from './helpers/torrent-card/torrent-card.component';
+import {CrudApisComponent} from './pages/crud-apis/crud-apis.component';
+import {EditApiComponent} from './pages/edit-api/edit-api.component';
+import {TorrentsListComponent} from './pages/torrents-list/torrents-list.component';
+import {PaginationComponent} from './helpers/pagination/pagination.component';
+import {TorrentCardComponent} from './helpers/torrent-card/torrent-card.component';
 import {TruncatePipe} from "./pipes/truncate.pipe";
-import { TorrentMetadataModalComponent } from './helpers/torrent-metadata-modal/torrent-metadata-modal.component';
-import { MetadataElementComponent } from './helpers/torrent-metadata-modal/metadata-element/metadata-element.component';
-import { ProgressBarComponent } from './helpers/progress-bar/progress-bar.component';
+import {TorrentMetadataModalComponent} from './helpers/torrent-metadata-modal/torrent-metadata-modal.component';
+import {MetadataElementComponent} from './helpers/torrent-metadata-modal/metadata-element/metadata-element.component';
+import {ProgressBarComponent} from './helpers/progress-bar/progress-bar.component';
+import {FormatFileSizePipe} from "./pipes/format-file-size.pipe";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChartComponent,
-    HorizontalChartComponent,
-    VolumeListComponent,
-    ListFilesComponent,
-    HomeComponent,
-    ApiMonitoredCardComponent,
-    HandleApiComponent,
-    CrudApisComponent,
-    EditApiComponent,
-    TorrentsListComponent,
-    PaginationComponent,
-    TorrentCardComponent,
+	declarations: [
+		AppComponent,
+		ChartComponent,
+		HorizontalChartComponent,
+		VolumeListComponent,
+		ListFilesComponent,
+		HomeComponent,
+		ApiMonitoredCardComponent,
+		HandleApiComponent,
+		CrudApisComponent,
+		EditApiComponent,
+		TorrentsListComponent,
+		PaginationComponent,
+		TorrentCardComponent,
 		TruncatePipe,
-  TorrentMetadataModalComponent,
-  MetadataElementComponent,
-  ProgressBarComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    NgbCollapseModule,
-    BrowserAnimationsModule,
-    NgbModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+		FormatFileSizePipe,
+		TorrentMetadataModalComponent,
+		MetadataElementComponent,
+		ProgressBarComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		FormsModule,
+		NgbCollapseModule,
+		BrowserAnimationsModule,
+		NgbModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,7 +1,7 @@
 export interface FileSystem {
-  size: string;
-  used: string;
-  available: string;
+  size: number;
+  used: number;
+  available: number;
   percentageUsed: string;
   volume: string;
 	isLocal: boolean;
