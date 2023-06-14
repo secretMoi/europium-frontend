@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {TorrentInfo} from "../models/torrent-info";
+import {last} from "../helpers/utils/array";
 
 @Injectable({
 	providedIn: 'root'
@@ -33,7 +34,7 @@ export class CleaningDataService {
 		return speed.toString();
 	}
 
-	cleanTorrentName(name: string): string {
+	cleanTorrentName(name: string, isMovie: boolean = false): string {
 		name = this.removeAllTextAfter(name, 'MULTI');
 		name = this.removeAllTextAfter(name, 'VOSTFR');
 		name = this.removeAllTextAfter(name, 'TRUEFRENCH');
@@ -46,6 +47,11 @@ export class CleaningDataService {
 		name = this.removeAllTextAfter(name, '20');
 		name = this.removeAllTextAfter(name, '19');
 		name = this.removeAllTextBetween(name, '[', ']');
+
+		if(isMovie && name.includes('.')) {
+			console.log(name);
+			name = name.substring(0, name.lastIndexOf("."));
+		}
 
 		name = name.split(".").join(" ").trim();
 

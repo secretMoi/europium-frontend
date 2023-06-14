@@ -14,7 +14,7 @@
 				<img *ngIf="torrent.movie?.poster_path" class="locandina" src="{{ torrent.movie?.poster_path }}" alt="">
 
 				<!--				Media Name-->
-				<h1>{{ cleaningDataService.cleanTorrentName(torrent.name) }}</h1>
+				<h1>{{ cleaningDataService.cleanTorrentName(torrent.name, !!torrent.movie) }}</h1>
 
 				<!--				Season + Episode-->
 				<h4 *ngIf="torrent.category === apiType.SONARR && (torrent.season || torrent.episode)">

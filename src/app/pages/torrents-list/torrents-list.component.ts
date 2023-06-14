@@ -165,7 +165,7 @@ export class TorrentsListComponent implements OnDestroy {
 	}
 
 	getMovieData(torrent: TorrentInfo) {
-		this.theMovieDbService.getMovieByName(this.cleaningDataService.cleanTorrentName(torrent.name)).subscribe(
+		this.theMovieDbService.getMovieByName(this.cleaningDataService.cleanTorrentName(torrent.name, true)).subscribe(
 			(movie) => {
 				if (movie === null) return;
 
