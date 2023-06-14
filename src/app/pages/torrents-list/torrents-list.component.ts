@@ -233,23 +233,16 @@ export class TorrentsListComponent implements OnDestroy {
 		if(this.selectedTorrentState === TorrentState.ANY) return true;
 
 		if(this.selectedTorrentState === TorrentState.RUNNING) {
-			if(torrent.state === TorrentState.DOWNLOADING ||
+			return torrent.state === TorrentState.DOWNLOADING ||
 				torrent.state === TorrentState.PAUSE_DOWNLOAD ||
 				torrent.state === TorrentState.QUEUED_DOWNLOAD ||
-				torrent.state === TorrentState.ERROR)
-				return true;
-
-			return false;
+				torrent.state === TorrentState.ERROR;
 		}
 
 		if(this.selectedTorrentState === TorrentState.FINISHED) {
-			if (torrent.state === TorrentState.PAUSE_UPLOAD ||
+			return torrent.state === TorrentState.PAUSE_UPLOAD ||
 				torrent.state === TorrentState.UPLOADING ||
-				torrent.state === TorrentState.MISSING_FILE
-			)
-				return true;
-
-			return false;
+				torrent.state === TorrentState.MISSING_FILE;
 		}
 
 		return true;
