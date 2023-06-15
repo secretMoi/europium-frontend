@@ -23,7 +23,7 @@
 
 .validate-button {
 	display: flex;
-	justify-content: end !important;
+	justify-content: flex-end !important;
 }
 
 .files-parameters {
@@ -54,7 +54,7 @@
 	.items-per-page {
 		width: 33%;
 		display: flex;
-		justify-content: end !important;
+		justify-content: flex-end !important;
 
 		div {
 			width: 300px;
