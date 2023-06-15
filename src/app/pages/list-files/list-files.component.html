@@ -1,45 +1,37 @@
 <div class="card">
 	<div class="card-body">
 
-		<form class="row g-3">
+		<form class="files-parameters">
 
 			<!--			File / Folder-->
-			<div class="form-switch col-3 my-auto d-flex justify-content-center">
+			<div class="form-switch file-parameter">
 				<input class="form-check-input switch" type="checkbox" role="switch" id="flexSwitchCheckChecked"
 							 [checked]="isFile" (click)="toggleIsFileValue()">
 				<label class="form-check-label" for="flexSwitchCheckChecked">{{ fileOrFolderText }}</label>
 			</div>
 
 			<!--			Result number-->
-			<div class="col-4">
-				<div class="mb-3 row">
-					<div class="input-group">
-						<span class="input-group-text">Nombre de résultats</span>
-						<input class="form-control" placeholder="Nombre de résultats" [(ngModel)]="resultNumber"
-									 name="resultNumber"/>
-					</div>
-				</div>
+			<div class="input-group file-parameter">
+				<span class="input-group-text">Nombre de résultats</span>
+				<input class="form-control" placeholder="Nombre de résultats" [(ngModel)]="resultNumber"
+							 name="resultNumber"/>
 			</div>
 
 			<!--			Select volume-->
-			<div class="col-4 my-auto mx-auto">
-				<select
-					class="form-select"
-					aria-label="Sélectionner un volume"
-					name="selectVolume"
-					[(ngModel)]="selectedVolume"
-				>
-					<option
-						*ngFor="let fileSystem of fileSystems"
-						[ngValue]="fileSystem">{{ storageService.getCleanVolumeName(fileSystem.volume) }}
-					</option>
-				</select>
-			</div>
+			<select
+				class="form-select file-parameter"
+				aria-label="Sélectionner un volume"
+				name="selectVolume"
+				[(ngModel)]="selectedVolume"
+			>
+				<option
+					*ngFor="let fileSystem of fileSystems"
+					[ngValue]="fileSystem">{{ storageService.getCleanVolumeName(fileSystem.volume) }}
+				</option>
+			</select>
 
-			<div class="col-12">
-				<div class="d-flex flex-row-reverse bd-highlight">
-					<button type="button" class="btn btn-primary" (click)="sendFilter()">Envoyer</button>
-				</div>
+			<div class="file-parameter validate-button">
+				<button type="button" class="btn btn-primary" (click)="sendFilter()">Envoyer</button>
 			</div>
 
 		</form>
@@ -67,31 +59,27 @@
 </div>
 
 <!--Table footer-->
-<div class="row align-items-center">
-	<div class="col"></div>
+<div class="footer">
+	<div class="blank-item"></div>
 
 	<!--	Pagination-->
-	<div class="col">
-		<app-pagination
-			class="d-flex justify-content-center mt-3 mx-auto"
-			(pageChanged)="onPageChanged($event)"
-			[numberOfItems]="files.length" [numberOfItemsPerPage]="itemPerPage"
-		></app-pagination>
-	</div>
+	<app-pagination
+		class="pagination"
+		(pageChanged)="onPageChanged($event)"
+		[numberOfItems]="files.length" [numberOfItemsPerPage]="itemPerPage"
+	></app-pagination>
 
 	<!--	Item per page-->
-	<div class="col">
-		<div class="ms-auto w-75 d-flex justify-content-end">
-			<div class="input-group">
-				<span class="input-group-text">Eléments par page</span>
+	<div class="items-per-page">
+		<div class="input-group">
+			<span class="input-group-text">Eléments par page</span>
 
-				<select class="form-select" [(ngModel)]="itemPerPage">
-					<option [ngValue]="0">Tous</option>
-					<option [ngValue]="10">10</option>
-					<option [ngValue]="20">20</option>
-					<option [ngValue]="50">50</option>
-				</select>
-			</div>
+			<select class="form-select" [(ngModel)]="itemPerPage">
+				<option [ngValue]="0">Tous</option>
+				<option [ngValue]="10">10</option>
+				<option [ngValue]="20">20</option>
+				<option [ngValue]="50">50</option>
+			</select>
 		</div>
 	</div>
 </div>
@@ -104,7 +92,9 @@
 							data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
 				Graphique
 			</button>
+
 		</h2>
+
 		<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
 				 data-bs-parent="#accordionFlushExample">
 			<div class="accordion-body">

@@ -5,9 +5,7 @@ import {CleaningDataService} from "../service/cleaning-data.service";
 	name: 'formatFileSize'
 })
 export class FormatFileSizePipe implements PipeTransform {
-
-	constructor(private _cleaningDataService: CleaningDataService) {
-	}
+	constructor(private _cleaningDataService: CleaningDataService) {}
 
 	transform(value: number | null): string {
 		if(!value) return '';

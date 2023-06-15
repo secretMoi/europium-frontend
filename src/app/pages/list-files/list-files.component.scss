@@ -14,3 +14,76 @@
 .accordion-button:focus {
   box-shadow: none;
 }
+
+.form-switch {
+	display: flex;
+	justify-content: center !important;
+	margin: auto;
+}
+
+.validate-button {
+	display: flex;
+	justify-content: end !important;
+}
+
+.files-parameters {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	gap: 50px;
+
+	.file-parameter {
+		flex: 1 0 26%;
+	}
+}
+
+.footer {
+	display: flex;
+
+	.blank-item {
+		width: 33%;
+	}
+
+	.pagination {
+		display: flex;
+		justify-content: center !important;
+		width: 33%;
+	}
+
+	.items-per-page {
+		width: 33%;
+		display: flex;
+		justify-content: end !important;
+
+		div {
+			width: 300px;
+		}
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.files-parameters {
+		gap: 25px;
+
+		.file-parameter {
+			flex: 1 0 40%;
+		}
+	}
+
+	.footer {
+		display: unset;
+
+		.blank-item {
+			width: 0;
+		}
+
+		.pagination {
+			width: 100%;
+		}
+
+		.items-per-page {
+			width: 100%;
+		}
+	}
+}
