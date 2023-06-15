@@ -15,17 +15,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Replace secrets
-      uses: MathieuSoysal/replace-string-in-file@v1.0.0
-      with:
-        file: environment.prod.ts
-        old-string: SERVER_URL
-        new-string: ${{ secrets.SERVER_URL }}
-
     - name: use node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+
+    - run: (Get-Content myFile.txt) -replace 'SERVER_URL', '${{ secrets.SERVER_URL }}' | Out-File -encoding UTF-8 environment.prod.ts
     - run: npm i
     - run: npm run build
    # - run: cp -r ./dist/angular-deploy-github-self-host/* /usr/share/nginx/html
