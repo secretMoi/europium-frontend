@@ -8,15 +8,24 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    environment: Prod
     strategy:
       matrix:
         node-version: [19.x]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+
+    - name: Replace secrets
+      uses: MathieuSoysal/replace-string-in-file@v1.0.0
+      with:
+        file: environment.prod.ts
+        old-string: SERVER_URL
+        new-string: ${{ Prod.SERVER_URL }}
+
     - name: use node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm i
     - run: npm run build
-   # - run: cp -r ./dist/angular-deploy-github-self-host/* /usr/share/nginx/html 
+   # - run: cp -r ./dist/angular-deploy-github-self-host/* /usr/share/nginx/html
