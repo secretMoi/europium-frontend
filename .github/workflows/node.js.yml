@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: selft-hosted
+    runs-on: H4DV2T3
 
     steps:
     - uses: actions/checkout@v3
