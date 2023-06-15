@@ -20,7 +20,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - run: (Get-Content myFile.txt) -replace 'SERVER_URL', '${{ secrets.SERVER_URL }}' | Out-File -encoding UTF-8 environment.prod.ts
+    - run: (Get-Content environment.prod.ts) -replace 'SERVER_URL', '${{ secrets.SERVER_URL }}' | Out-File -encoding UTF-8 environment.prod.ts
     - run: npm i
     - run: npm run build
    # - run: cp -r ./dist/angular-deploy-github-self-host/* /usr/share/nginx/html
