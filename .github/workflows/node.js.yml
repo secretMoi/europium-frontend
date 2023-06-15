@@ -20,7 +20,7 @@ jobs:
       with:
         file: environment.prod.ts
         old-string: SERVER_URL
-        new-string: ${{ Prod.SERVER_URL }}
+        new-string: ${{ secrets.SERVER_URL }}
 
     - name: use node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
