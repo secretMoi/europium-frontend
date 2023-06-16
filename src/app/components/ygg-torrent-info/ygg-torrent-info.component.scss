@@ -1,6 +1,5 @@
 .ygg-container {
 	display: flex;
-	gap: 30px;
 
 	.ygg-info {
 		display: flex;
@@ -9,6 +8,16 @@
 
 		img {
 			width: 32px;
+		}
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.ygg-info {
+		flex-direction: column;
+
+		img {
+			margin: auto;
 		}
 	}
 }
