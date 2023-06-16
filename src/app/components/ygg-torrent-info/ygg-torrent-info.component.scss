@@ -1,0 +1,14 @@
+.ygg-container {
+	display: flex;
+	gap: 30px;
+
+	.ygg-info {
+		display: flex;
+		gap: 5px;
+		margin: auto;
+
+		img {
+			width: 32px;
+		}
+	}
+}

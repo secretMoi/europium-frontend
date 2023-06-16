@@ -2,36 +2,36 @@
 	<div class="row justify-content-center">
 		<div class="bg-white rounded shadow">
 
-			<div class="d-flex justify-content-between">
+			<div class="d-flex justify-content-between ygg-torrent-info">
+				<app-ygg-torrent-info></app-ygg-torrent-info>
+			</div>
 
+			<div class="d-flex justify-content-between">
 				<div class="input-group border rounded-pill p-1">
-					<input type="search" placeholder="Rechercher un torrent..." aria-describedby="button-addon3"
+					<input type="search" placeholder="Rechercher un torrent..."
 								 class="form-control bg-none border-0" [(ngModel)]="searchTorrent">
 					<div class="input-group-append border-0">
-						<button id="button-addon3" type="button" class="btn btn-link text-success">
+						<button type="button" class="btn btn-link text-success">
 							<img src="assets/search.svg" height="20px" alt="">
 						</button>
 					</div>
 				</div>
-
 			</div>
 
 			<div class="d-flex justify-content-between gap-3">
-
-				<select class="form-select rounded-pill filter-element" aria-label="Default select example"
+				<select class="form-select rounded-pill filter-element"
 								[(ngModel)]="selectedApi">
 					<option selected [ngValue]="apiType.ANY">Type</option>
 					<option [ngValue]="apiType.RADARR">Film</option>
 					<option [ngValue]="apiType.SONARR">Série</option>
 				</select>
 
-				<select class="form-select rounded-pill filter-element" aria-label="Default select example"
+				<select class="form-select rounded-pill filter-element"
 								[(ngModel)]="selectedTorrentState">
 					<option selected [ngValue]="torrentState.ANY">Status</option>
 					<option [ngValue]="torrentState.RUNNING">En cours</option>
 					<option [ngValue]="torrentState.FINISHED">Fini</option>
 				</select>
-
 			</div>
 
 		</div>
