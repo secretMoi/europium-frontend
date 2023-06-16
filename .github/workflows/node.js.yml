@@ -20,7 +20,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - run: (Get-Content _work\europium-frontend\europium-frontend\src\environments\environment.prod.ts) -replace 'SERVER_URL', '${{ secrets.SERVER_URL }}' | Out-File -encoding utf8 _work\europium-frontend\europium-frontend\src\environments\environment.prod.ts
+    - run: (Get-Content src\environments\environment.prod.ts) -replace 'SERVER_URL', '${{ secrets.SERVER_URL }}' | Out-File -encoding utf8 src\environments\environment.prod.ts
     - run: npm i
-    - run: ng build --configuration production --base-href /europium-frontend/ --aot;
+    - run: ng build --configuration production --base-href /europium-frontend/ --aot
+    - run: node .\server.js
    # - run: cp -r ./dist/angular-deploy-github-self-host/* /usr/share/nginx/html
