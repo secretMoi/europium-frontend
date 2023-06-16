@@ -243,3 +243,15 @@ html, body {
 		}
 	}
 }
+
+@media screen and (max-width: 500px) {
+	.locandina {
+		float: unset !important;
+	}
+
+	.movie_header {
+		h1 {
+			padding-top: 15px;
+		}
+	}
+}

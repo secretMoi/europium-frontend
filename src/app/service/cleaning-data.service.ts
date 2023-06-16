@@ -47,10 +47,8 @@ export class CleaningDataService {
 		name = this.removeAllTextAfter(name, '19');
 		name = this.removeAllTextBetween(name, '[', ']');
 
-		if(isMovie && name.includes('.')) {
-			console.log(name);
+		if(isMovie && name.includes('.'))
 			name = name.substring(0, name.lastIndexOf("."));
-		}
 
 		name = name.split(".").join(" ").trim();
 
