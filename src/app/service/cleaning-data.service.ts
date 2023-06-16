@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {TorrentInfo} from "../models/torrent-info";
-import {last} from "../helpers/utils/array";
 
 @Injectable({
 	providedIn: 'root'

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {YggTorrentService} from "../../service/ygg-torrent.service";
-import {YggtorrentAccountInformation} from "../../models/yggtorrent-account-information";
+import {YggTorrentAccount} from "../../models/ygg-torrent-account";
 
 @Component({
   selector: 'app-ygg-torrent-info',
@@ -8,7 +8,7 @@ import {YggtorrentAccountInformation} from "../../models/yggtorrent-account-info
   styleUrls: ['./ygg-torrent-info.component.scss']
 })
 export class YggTorrentInfoComponent {
-	public accountInformation!: YggtorrentAccountInformation;
+	public accountInformation!: YggTorrentAccount;
 
   constructor(private _yggTorrentService: YggTorrentService) {
 		this._yggTorrentService.getRatio().subscribe(accountInformation => this.accountInformation = accountInformation);
