@@ -5,7 +5,7 @@
 		<img src="assets/cancel.svg" height="50" class="ribbon clickable-image" (click)="onDeleteTorrent(torrent)" alt=""/>
 	</div>
 
-	<div #movieCard class="movie_card">
+	<div class="movie_card">
 		<div class="info_section">
 
 			<div class="movie_header">
@@ -39,8 +39,7 @@
 			</div>
 
 			<div class="movie_social">
-				<ul>
-					<li *ngIf="torrent.category === apiType.RADARR">
+					<div *ngIf="torrent.category === apiType.RADARR">
 						<a *ngIf="torrent.movie?.radarrInformation?.fileLink" [href]=torrent.movie?.radarrInformation?.fileLink
 							 target="_blank">
 							<img src="assets/RADARR.svg" alt=""/>
@@ -48,31 +47,30 @@
 
 						<img *ngIf="!torrent.movie?.radarrInformation?.fileLink" src="assets/RADARR.svg" alt=""/>
 
-					</li>
+					</div>
 
-					<li *ngIf="torrent.category === apiType.SONARR">
+					<div *ngIf="torrent.category === apiType.SONARR">
 						<a *ngIf="torrent.movie?.sonarrInformation?.fileLink" [href]=torrent.movie?.sonarrInformation?.fileLink
 							 target="_blank">
 							<img src="assets/SONARR.svg" alt=""/>
 						</a>
 
 						<img *ngIf="!torrent.movie?.sonarrInformation?.fileLink" src="assets/SONARR.svg" alt=""/>
-					</li>
+					</div>
 
-					<li><img [src]="displayState(torrent.state)" height="50" [title]="torrent.state" alt=""/></li>
+					<div><img [src]="displayState(torrent.state)" height="50" [title]="torrent.state" alt=""/></div>
 
-					<li *ngIf="torrent?.movie?.link">
+					<div *ngIf="torrent?.movie?.link">
 						<a [href]=torrent.movie?.link target="_blank">
 							<img src="assets/tmdb.svg" alt=""/>
 						</a>
-					</li>
+					</div>
 
-					<li (click)="isMetaDataModalOpen = !isMetaDataModalOpen">
+					<div (click)="isMetaDataModalOpen = !isMetaDataModalOpen">
 						<a [href]="getModalLink()" target="_self" data-bs-toggle="modal">
 							<img src="assets/metadata.svg" alt=""/>
 						</a>
-					</li>
-				</ul>
+					</div>
 			</div>
 
 			<!--		Progress bar-->

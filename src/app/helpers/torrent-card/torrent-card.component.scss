@@ -2,27 +2,6 @@
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 
-* {
-	box-sizing: border-box;
-	margin: 0;
-}
-
-html, body {
-	margin: 0;
-	background: white;
-	font-family: 'Montserrat', helvetica, arial, sans-serif;
-	font-size: 14px;
-	font-weight: 400;
-}
-
-.link {
-	display: block;
-	text-align: center;
-	color: #777;
-	text-decoration: none;
-	padding: 10px;
-}
-
 .torrent-container {
 	height: auto;
 	margin-top: 60px;
@@ -110,35 +89,16 @@ html, body {
 
 			.movie_social {
 				height: 10%;
-				padding-left: 15px;
 				padding-bottom: 20px;
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-start;
+				flex-wrap: wrap;
+				gap: 30px;
+				padding-left: 25px;
 
-				ul {
-					list-style: none;
-					padding: 0;
-					margin-bottom: 0;
-
-					li {
-						display: inline-block;
-						color: rgba(0, 0, 0, 0.3);
-						transition: color 0.3s;
-						transition-delay: 0.15s;
-						margin: 0 15px 1rem;
-
-						img {
-							height: 50px;
-						}
-
-						&:hover {
-							transition: color 0.3s;
-							color: rgba(0, 0, 0, 0.7);
-						}
-
-						i {
-							font-size: 19px;
-							cursor: pointer;
-						}
-					}
+				img {
+					height: 40px;
 				}
 			}
 		}
@@ -272,12 +232,12 @@ html, body {
 				}
 
 				.movie_social {
-					ul {
-						li {
-							img {
-								height: 30px;
-							}
-						}
+					gap: 0;
+					padding-right: 25px;
+					justify-content: space-between;
+
+					img {
+						height: 35px;
 					}
 				}
 			}
