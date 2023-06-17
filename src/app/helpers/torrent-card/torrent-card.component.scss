@@ -125,6 +125,10 @@ html, body {
 						transition-delay: 0.15s;
 						margin: 0 15px 1rem;
 
+						img {
+							height: 50px;
+						}
+
 						&:hover {
 							transition: color 0.3s;
 							color: rgba(0, 0, 0, 0.7);
@@ -252,6 +256,31 @@ html, body {
 	.movie_header {
 		h1 {
 			padding-top: 15px;
+		}
+	}
+
+	.torrent-container {
+		.movie_card {
+			.info_section {
+				.movie_desc {
+					.text {
+						overflow: hidden;
+						-webkit-box-orient: vertical;
+						-webkit-line-clamp: 5;
+						display: -webkit-box;
+					}
+				}
+
+				.movie_social {
+					ul {
+						li {
+							img {
+								height: 30px;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

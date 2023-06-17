@@ -8,7 +8,7 @@ import {YggTorrentAccount} from "../../models/ygg-torrent-account";
   styleUrls: ['./ygg-torrent-info.component.scss']
 })
 export class YggTorrentInfoComponent {
-	public accountInformation!: YggTorrentAccount;
+	public accountInformation?: YggTorrentAccount;
 
   constructor(private _yggTorrentService: YggTorrentService) {
 		this._yggTorrentService.getRatio().subscribe(accountInformation => this.accountInformation = accountInformation);
