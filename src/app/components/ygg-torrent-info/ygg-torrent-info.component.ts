@@ -8,10 +8,18 @@ import {YggTorrentAccount} from "../../models/ygg-torrent-account";
   styleUrls: ['./ygg-torrent-info.component.scss']
 })
 export class YggTorrentInfoComponent {
-	public accountInformation?: YggTorrentAccount;
+	public yggTorrentAccount?: YggTorrentAccount;
+
+	get up(): number {
+		return this.yggTorrentAccount?.up ?? 0;
+	}
+
+	get down(): number {
+		return this.yggTorrentAccount?.down ?? 0;
+	}
 
   constructor(private _yggTorrentService: YggTorrentService) {
-		this._yggTorrentService.getRatio().subscribe(accountInformation => this.accountInformation = accountInformation);
+		this._yggTorrentService.getRatio().subscribe(accountInformation => this.yggTorrentAccount = accountInformation);
 	}
 
 }
