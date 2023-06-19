@@ -33,16 +33,20 @@ $governor: #4133B7;
 .cards {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: flex-start;
 	justify-content: center;
 	gap: 2.5rem;
 	margin: 5vh auto;
 }
 
-.card {
+.torrent-card {
 	border-radius: 16px;
 	box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
 	max-width: 400px;
+	border: 1px solid #e0e0e0;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .information {
@@ -65,9 +69,10 @@ $governor: #4133B7;
 	}
 
 	.title {
-		font-size: 1.5rem;
+		font-size: 1.4rem;
 		color: $void;
 		line-height: 1.25;
+		word-wrap: anywhere;
 
 		a {
 			text-decoration: unset;
