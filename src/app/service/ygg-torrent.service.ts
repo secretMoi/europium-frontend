@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {TorrentInfo} from "../models/torrent-info";
 import {YggTorrentAccount} from "../models/ygg-torrent-account";
+import {YggTorrentSearch} from "../models/ygg-torrent-search";
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,9 @@ export class YggTorrentService {
 
   getRatio(): Observable<YggTorrentAccount> {
     return this.http.get<YggTorrentAccount>(environment.backendUrl + '/YggTorrent/ratio');
+  }
+
+  search(search: string): Observable<YggTorrentSearch[]> {
+    return this.http.post<YggTorrentSearch[]>(environment.backendUrl + '/YggTorrent/search', {search});
   }
 }

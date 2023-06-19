@@ -25,6 +25,7 @@ import {MetadataElementComponent} from './helpers/torrent-metadata-modal/metadat
 import {ProgressBarComponent} from './helpers/progress-bar/progress-bar.component';
 import {FormatFileSizePipe} from "./pipes/format-file-size.pipe";
 import { YggTorrentInfoComponent } from './components/ygg-torrent-info/ygg-torrent-info.component';
+import { YggSearchComponent } from './pages/ygg-search/ygg-search.component';
 
 @NgModule({
 	declarations: [
@@ -46,7 +47,8 @@ import { YggTorrentInfoComponent } from './components/ygg-torrent-info/ygg-torre
 		TorrentMetadataModalComponent,
 		MetadataElementComponent,
 		ProgressBarComponent,
-  YggTorrentInfoComponent
+  YggTorrentInfoComponent,
+  YggSearchComponent
 	],
 	imports: [
 		BrowserModule,
