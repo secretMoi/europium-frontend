@@ -155,6 +155,14 @@ $governor: #4133B7;
 	}
 }
 
+@media screen and (max-width: 500px) {
+	.information {
+		.title {
+			font-size: 1.2rem;
+		}
+	}
+}
+
 //.plan {
 //	padding: 10px;
 //	background-color: $white;
