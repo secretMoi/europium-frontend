@@ -1,5 +1,10 @@
 .d-flex {
 	padding: 32px !important;
+	padding-bottom: 0 !important;
+}
+
+.menu {
+	padding-bottom: 15px;
 }
 
 .ygg-torrent-info {
@@ -225,7 +230,30 @@ $governor: #4133B7;
 		transform: translateY(20px);
 		transition: all 200ms linear;
 		width: 150px;
-		line-height: 35px;
+		line-height: 40px;
+		user-select: none;
+
+		div {
+			padding: 5px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.active {
+			background-color: $titan-white;
+			border-radius: 6px;
+		}
+
+		img {
+			height: 18px;
+			//padding-left: 10px;
+		}
+
+		.sort-icon {
+			transform: scaleY(-1);
+		}
 	}
 
 	.dropdown:checked ~ .section-dropdown {

@@ -1,6 +1,6 @@
 <div class="container">
-	<div class="row justify-content-center">
-		<div class="bg-white rounded shadow">
+	<div class="justify-content-center">
+		<div class="menu bg-white rounded shadow">
 
 			<div class="ygg-torrent-info">
 				<app-ygg-torrent-info></app-ygg-torrent-info>
@@ -34,24 +34,25 @@
 					</label>
 
 					<div class="section-dropdown">
-						<div (click)="sortTorrents('age')">Age</div>
-						<div (click)="sortTorrents('size')">Taille</div>
-						<div (click)="sortTorrents('downloaded')">Téléchargés</div>
-						<div (click)="sortTorrents('seeders')">Seeds</div>
+						<div (click)="sortTorrents('age')" [class.active]="sortByProperty === 'age'">
+							Age
+							<img src="assets/down.svg" *ngIf="sortByProperty === 'age'" [class.sort-icon]="!sortOrder">
+						</div>
+						<div (click)="sortTorrents('size')" [class.active]="sortByProperty === 'size'">
+							Taille
+							<img src="assets/down.svg" *ngIf="sortByProperty === 'size'" [class.sort-icon]="!sortOrder">
+						</div>
+						<div (click)="sortTorrents('downloaded')" [class.active]="sortByProperty === 'downloaded'">
+							Téléchargés
+							<img src="assets/down.svg" *ngIf="sortByProperty === 'downloaded'" [class.sort-icon]="!sortOrder">
+						</div>
+						<div (click)="sortTorrents('seeders')" [class.active]="sortByProperty === 'seeders'">
+							Seeds
+							<img src="assets/down.svg" *ngIf="sortByProperty === 'seeders'" [class.sort-icon]="!sortOrder">
+						</div>
 					</div>
 				</div>
-
-<!--				<select class="form-select rounded-pill filter-element"-->
-<!--								[(ngModel)]="sortByProperty" (ngModelChange)="orderChange()">-->
-<!--					<option selected [ngValue]="''">Tri</option>-->
-<!--					<option [ngValue]="'age'">Age</option>-->
-<!--					<option [ngValue]="'size'">Taille</option>-->
-<!--					<option [ngValue]="'downloaded'">Téléchargés</option>-->
-<!--					<option [ngValue]="'seeders'">Seeds</option>-->
-<!--				</select>-->
 			</div>
-
-
 
 		</div>
 	</div>

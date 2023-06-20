@@ -41,11 +41,13 @@ export class YggSearchComponent {
 	}
 
 	public sortTorrents(property: string) {
+		if(this.sortByProperty === property)
+			this.sortOrder = !this.sortOrder;
+		else
+			this.sortOrder = false;
+
 		this.sortByProperty = property;
-
-
-
-		this.yggTorrentSearch = dynamicSort(this.yggTorrentSearch, this.sortByProperty, this.sortByProperty === this.previousSortByProperty);
+		this.yggTorrentSearch = dynamicSort(this.yggTorrentSearch, this.sortByProperty, this.sortByProperty === this.previousSortByProperty && this.sortOrder);
 		this.previousSortByProperty = this.sortByProperty;
 	}
 
