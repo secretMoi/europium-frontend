@@ -27,6 +27,7 @@ import {FormatFileSizePipe} from "./pipes/format-file-size.pipe";
 import { YggTorrentInfoComponent } from './components/ygg-torrent-info/ygg-torrent-info.component';
 import { YggSearchComponent } from './pages/ygg-search/ygg-search.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import {DateAgoPipe} from "./pipes/date-ago.pipe";
 
 @NgModule({
 	declarations: [
@@ -45,6 +46,7 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 		TorrentCardComponent,
 		TruncatePipe,
 		FormatFileSizePipe,
+		DateAgoPipe,
 		TorrentMetadataModalComponent,
 		MetadataElementComponent,
 		ProgressBarComponent,

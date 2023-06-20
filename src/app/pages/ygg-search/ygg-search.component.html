@@ -37,11 +37,11 @@
 			<dl class="details">
 				<div>
 					<dt>Age</dt>
-					<dd>{{ torrent.age }}</dd>
+					<dd>{{ torrent.age | dateAgo }}</dd>
 				</div>
 				<div>
 					<dt>Taille</dt>
-					<dd>{{ torrent.size }}</dd>
+					<dd>{{ torrent.size | formatFileSize }}</dd>
 				</div>
 				<div>
 					<dt>Téléchargé</dt>
