@@ -52,6 +52,15 @@ $governor: #4133B7;
 .information {
 	background-color: $white;
 	padding: 1.5rem;
+	padding-top: 0;
+
+	.tags {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: baseline;
+		padding-bottom: 10px;
+	}
 
 	.tag {
 		display: inline-block;
@@ -62,6 +71,7 @@ $governor: #4133B7;
 		padding: 0.5em 0.75em;
 		line-height: 1;
 		border-radius: 6px;
+		width: fit-content;
 
 		& + * {
 			margin-top: 1rem;

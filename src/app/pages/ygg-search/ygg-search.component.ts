@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {YggTorrentService} from "../../service/ygg-torrent.service";
-import {YggTorrentSearch} from "../../models/ygg-torrent-search";
+import {MediaQuality, MediaType, YggTorrentSearch} from "../../models/ygg-torrent-search";
 
 @Component({
 	selector: 'app-ygg-search',
@@ -18,4 +18,18 @@ export class YggSearchComponent {
 		this._yggTorrentService.search(this.searchText).subscribe(results => this.yggTorrentSearch = results);
 	}
 
+	public mediaType(torrent: YggTorrentSearch): string {
+		if(torrent.mediaType === MediaType.Serie) return 'Série';
+		if(torrent.mediaType === MediaType.Movie) return 'Film';
+
+		return 'Inconnu';
+	}
+
+	public mediaQuality(torrent: YggTorrentSearch): string {
+		if(torrent.mediaQuality === MediaQuality.FHD) return '1080';
+		if(torrent.mediaQuality === MediaQuality.UHD) return '4K';
+		if(torrent.mediaQuality === MediaQuality.HD) return '720';
+
+		return 'Inconnu';
+	}
 }
