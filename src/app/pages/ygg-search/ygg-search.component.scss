@@ -12,7 +12,7 @@
 }
 
 .form-select {
-	width: 35%;
+	max-width: 300px;
 }
 
 select {
@@ -164,7 +164,7 @@ $governor: #4133B7;
 @media screen and (max-width: 500px) {
 	.information {
 		.title {
-			font-size: 38px;
+			font-size: 24px;
 		}
 	}
 }
@@ -235,6 +235,7 @@ $governor: #4133B7;
 
 		div {
 			padding: 5px;
+			padding-right: 10px;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;

@@ -11,6 +11,17 @@
 	background-color: #F5F5F5;
 }
 
+.card > .list-group:last-child {
+	border-bottom-width: 0;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+}
+.card > .list-group:first-child {
+	border-top-width: 0;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+
 @media screen and (max-width: 600px) {
 	.api-status {
 		height: 64px;

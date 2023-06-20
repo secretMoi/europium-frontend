@@ -6,12 +6,17 @@
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 
+body {
+	background-color: #fafafa;
+}
+
 .theme-table table {
   overflow: hidden;
   border-collapse: collapse;
   border-spacing: 0;
   border-radius: 10px;
   box-shadow: 0 0 0 1px #bbb;
+	background-color: white;
 }
 
 .theme-table table tr th {
