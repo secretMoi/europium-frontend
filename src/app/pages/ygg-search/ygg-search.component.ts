@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {YggTorrentService} from "../../service/ygg-torrent.service";
 import {MediaQuality, MediaType, YggTorrentSearch} from "../../models/ygg-torrent-search";
+import {dynamicSort} from "../../helpers/utils/array";
 
 @Component({
 	selector: 'app-ygg-search',
@@ -10,15 +11,19 @@ import {MediaQuality, MediaType, YggTorrentSearch} from "../../models/ygg-torren
 export class YggSearchComponent {
 	public searchText!: string;
 	public yggTorrentSearch: YggTorrentSearch[] = [];
+	public sortByProperty: string = '';
+	public filterMediaType: MediaType = MediaType.Unknown;
+	public mediaType = MediaType;
 
-	constructor(private _yggTorrentService: YggTorrentService) {
-	}
+	private previousSortByProperty = '';
+
+	constructor(private _yggTorrentService: YggTorrentService) {}
 
 	public search() {
 		this._yggTorrentService.search(this.searchText).subscribe(results => this.yggTorrentSearch = results);
 	}
 
-	public mediaType(torrent: YggTorrentSearch): string {
+	public getMediaType(torrent: YggTorrentSearch): string {
 		if(torrent.mediaType === MediaType.Serie) return 'Série';
 		if(torrent.mediaType === MediaType.Movie) return 'Film';
 		if(torrent.mediaType === MediaType.Anime) return 'Animé';
@@ -32,5 +37,22 @@ export class YggSearchComponent {
 		if(torrent.mediaQuality === MediaQuality.HD) return '720';
 
 		return 'Inconnu';
+	}
+
+	public orderChange() {
+		console.log(this.sortByProperty, this.previousSortByProperty);
+		this.yggTorrentSearch = dynamicSort(this.yggTorrentSearch, this.sortByProperty, this.sortByProperty === this.previousSortByProperty);
+		this.previousSortByProperty = this.sortByProperty;
+		console.log(this.sortByProperty, this.previousSortByProperty);
+	}
+
+	public canDisplayTorrent(torrent: YggTorrentSearch): boolean {
+		if(this.filterMediaType === MediaType.Unknown) return true;
+
+		return torrent.mediaType === this.filterMediaType;
+	}
+
+	public filterByMediaType() {
+		this.previousSortByProperty = this.sortByProperty;
 	}
 }
