@@ -21,6 +21,7 @@ export class YggSearchComponent {
 	public mediaType(torrent: YggTorrentSearch): string {
 		if(torrent.mediaType === MediaType.Serie) return 'Série';
 		if(torrent.mediaType === MediaType.Movie) return 'Film';
+		if(torrent.mediaType === MediaType.Anime) return 'Animé';
 
 		return 'Inconnu';
 	}

@@ -23,4 +23,5 @@ export enum MediaType
 	Unknown,
 	Movie,
 	Serie,
+	Anime
 }
