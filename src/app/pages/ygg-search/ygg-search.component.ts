@@ -12,6 +12,7 @@ export class YggSearchComponent {
 	public searchText!: string;
 	public yggTorrentSearch: YggTorrentSearch[] = [];
 	public sortByProperty: string = '';
+	public sortOrder: boolean = false;
 	public filterMediaType: MediaType = MediaType.Unknown;
 	public mediaType = MediaType;
 
@@ -39,20 +40,18 @@ export class YggSearchComponent {
 		return 'Inconnu';
 	}
 
-	public orderChange() {
-		console.log(this.sortByProperty, this.previousSortByProperty);
+	public sortTorrents(property: string) {
+		this.sortByProperty = property;
+
+
+
 		this.yggTorrentSearch = dynamicSort(this.yggTorrentSearch, this.sortByProperty, this.sortByProperty === this.previousSortByProperty);
 		this.previousSortByProperty = this.sortByProperty;
-		console.log(this.sortByProperty, this.previousSortByProperty);
 	}
 
 	public canDisplayTorrent(torrent: YggTorrentSearch): boolean {
 		if(this.filterMediaType === MediaType.Unknown) return true;
 
 		return torrent.mediaType === this.filterMediaType;
-	}
-
-	public filterByMediaType() {
-		this.previousSortByProperty = this.sortByProperty;
 	}
 }

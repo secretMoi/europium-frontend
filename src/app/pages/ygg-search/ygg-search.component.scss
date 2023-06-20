@@ -1,5 +1,5 @@
 .d-flex {
-	padding: 2rem !important;
+	padding: 32px !important;
 }
 
 .ygg-torrent-info {
@@ -46,7 +46,7 @@ $governor: #4133B7;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 2.5rem;
+	gap: 80px;
 	margin: 5vh auto;
 }
 
@@ -63,7 +63,7 @@ $governor: #4133B7;
 
 .information {
 	background-color: $white;
-	padding: 1.5rem;
+	padding: 48px;
 	padding-top: 0;
 
 	.tags {
@@ -79,19 +79,19 @@ $governor: #4133B7;
 		background-color: $titan-white;
 		color: $indigo;
 		font-weight: 600;
-		font-size: 0.875rem;
+		font-size: 14px;
 		padding: 0.5em 0.75em;
 		line-height: 1;
 		border-radius: 6px;
 		width: fit-content;
 
 		& + * {
-			margin-top: 1rem;
+			margin-top: 16px;
 		}
 	}
 
 	.title {
-		font-size: 1.4rem;
+		font-size: 22px;
 		color: $void;
 		line-height: 1.25;
 		word-wrap: anywhere;
@@ -102,7 +102,7 @@ $governor: #4133B7;
 		}
 
 		& + * {
-			margin-top: 1rem;
+			margin-top: 16px;
 		}
 	}
 
@@ -110,7 +110,7 @@ $governor: #4133B7;
 		color: $charcoal;
 
 		& + * {
-			margin-top: 1.25rem;
+			margin-top: 20px;
 		}
 	}
 
@@ -131,14 +131,14 @@ $governor: #4133B7;
 		}
 
 		dt {
-			font-size: .875rem;
+			font-size: 14px;
 			color: $cold-purple;
 		}
 
 		dd {
 			color: $indigo;
 			font-weight: 600;
-			font-size: 1.25rem;
+			font-size: 20px;
 		}
 	}
 }
@@ -159,7 +159,116 @@ $governor: #4133B7;
 @media screen and (max-width: 500px) {
 	.information {
 		.title {
-			font-size: 1.2rem;
+			font-size: 38px;
 		}
 	}
 }
+
+.sec-center {
+	position: relative;
+	width: 150px;
+	margin-left: auto;
+	display: flex;
+	justify-content: flex-end;
+
+	.dropdown:checked + label, .dropdown:not(:checked) + label {
+		position: relative;
+		height: 50px;
+		transition: all 200ms linear;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		-ms-flex-pack: center;
+		cursor: pointer;
+		box-shadow: 0 12px 35px 0 rgba(255, 235, 167, .15);
+	}
+
+	.dropdown:checked + label:before, .dropdown:not(:checked) + label:before {
+		position: fixed;
+		top: 0;
+		left: 0;
+		content: '';
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		cursor: auto;
+		pointer-events: none;
+	}
+
+	.dropdown:checked + label:before {
+		pointer-events: auto;
+	}
+
+	.dropdown:not(:checked) + label .uil {
+		font-size: 24px;
+		margin-left: 10px;
+		transition: transform 200ms linear;
+	}
+
+	.dropdown:checked + label .uil {
+		transform: rotate(180deg);
+		font-size: 24px;
+		margin-left: 10px;
+		transition: transform 200ms linear;
+	}
+
+	.section-dropdown {
+		position: absolute;
+		padding: 10px;
+		top: 60px;
+		left: 0;
+		border-radius: 10px;
+		background-color: white;
+		box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+		opacity: 0;
+		cursor: pointer;
+		transform: translateY(20px);
+		transition: all 200ms linear;
+		width: 150px;
+		line-height: 35px;
+	}
+
+	.dropdown:checked ~ .section-dropdown {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateY(0);
+	}
+
+	.section-dropdown:before {
+		position: absolute;
+		top: -20px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		content: '';
+		display: block;
+		z-index: 1;
+	}
+
+	.dark-light:checked ~ .sec-center .section-dropdown:after {
+		border-bottom: 8px solid #fff;
+	}
+
+	[type="checkbox"]:checked, [type="checkbox"]:not(:checked) {
+		position: absolute;
+		left: -9999px;
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+
+//.section-dropdown:after {
+//	position: absolute;
+//	top: -7px;
+//	left: 30px;
+//	width: 0;
+//	height: 0;
+//	border-left: 8px solid transparent;
+//	border-right: 8px solid transparent;
+//	border-bottom: 8px solid #111;
+//	content: '';
+//	display: block;
+//	z-index: 2;
+//	transition: all 200ms linear;
+//}

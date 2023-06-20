@@ -129,9 +129,8 @@ export class TorrentsListComponent implements OnDestroy {
 				}
 
 				if (this.isFirstLoading) {
-					for (let torrent of this.torrents) {
+					for (let torrent of this.torrents)
 						torrent.originalName = torrent.name;
-					}
 
 					this.dynamicSort('added_on', true);
 					this.isFirstLoading = false;
