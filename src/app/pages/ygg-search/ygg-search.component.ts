@@ -9,19 +9,17 @@ import {dynamicSort} from "../../helpers/utils/array";
 	styleUrls: ['./ygg-search.component.scss']
 })
 export class YggSearchComponent {
-	public searchText!: string;
 	public yggTorrentSearch: YggTorrentSearch[] = [];
 	public sortByProperty: string = '';
 	public sortOrder: boolean = false;
-	public filterMediaType: MediaType = MediaType.Unknown;
-	public mediaType = MediaType;
+	public mediaType: MediaType = MediaType.Unknown;
 
 	private previousSortByProperty = '';
 
 	constructor(private _yggTorrentService: YggTorrentService) {}
 
-	public search() {
-		this._yggTorrentService.search(this.searchText).subscribe(results => this.yggTorrentSearch = results);
+	public search(searchText: string) {
+		this._yggTorrentService.search(searchText).subscribe(results => this.yggTorrentSearch = results);
 	}
 
 	public getMediaType(torrent: YggTorrentSearch): string {
@@ -52,8 +50,12 @@ export class YggSearchComponent {
 	}
 
 	public canDisplayTorrent(torrent: YggTorrentSearch): boolean {
-		if(this.filterMediaType === MediaType.Unknown) return true;
+		if(this.mediaType === MediaType.Unknown) return true;
 
-		return torrent.mediaType === this.filterMediaType;
+		return torrent.mediaType === this.mediaType;
+	}
+
+	public changeMediaType(mediaType: MediaType) {
+		this.mediaType = mediaType;
 	}
 }

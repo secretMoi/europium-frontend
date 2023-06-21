@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {YggTorrentService} from "../../service/ygg-torrent.service";
-import {YggTorrentAccount} from "../../models/ygg-torrent-account";
+import {YggTorrentAccount} from "../../../models/ygg-torrent-account";
+import {YggTorrentService} from "../../../service/ygg-torrent.service";
 
 @Component({
   selector: 'app-ygg-torrent-info',

@@ -24,10 +24,11 @@ import {TorrentMetadataModalComponent} from './helpers/torrent-metadata-modal/to
 import {MetadataElementComponent} from './helpers/torrent-metadata-modal/metadata-element/metadata-element.component';
 import {ProgressBarComponent} from './helpers/progress-bar/progress-bar.component';
 import {FormatFileSizePipe} from "./pipes/format-file-size.pipe";
-import { YggTorrentInfoComponent } from './components/ygg-torrent-info/ygg-torrent-info.component';
-import { YggSearchComponent } from './pages/ygg-search/ygg-search.component';
-import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import {YggSearchComponent} from './pages/ygg-search/ygg-search.component';
+import {MainMenuComponent} from './components/main-menu/main-menu.component';
 import {DateAgoPipe} from "./pipes/date-ago.pipe";
+import {YggTorrentInfoComponent} from "./components/ygg/ygg-torrent-info/ygg-torrent-info.component";
+import {SearchFiltersComponent} from "./components/ygg/search-filters/search-filters.component";
 
 @NgModule({
 	declarations: [
@@ -50,9 +51,10 @@ import {DateAgoPipe} from "./pipes/date-ago.pipe";
 		TorrentMetadataModalComponent,
 		MetadataElementComponent,
 		ProgressBarComponent,
-  YggTorrentInfoComponent,
-  YggSearchComponent,
-  MainMenuComponent
+		YggTorrentInfoComponent,
+		YggSearchComponent,
+		MainMenuComponent,
+  	SearchFiltersComponent
 	],
 	imports: [
 		BrowserModule,
