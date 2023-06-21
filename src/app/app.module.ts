@@ -30,6 +30,7 @@ import {DateAgoPipe} from "./pipes/date-ago.pipe";
 import {YggTorrentInfoComponent} from "./components/ygg/ygg-torrent-info/ygg-torrent-info.component";
 import {SearchFiltersComponent} from "./components/ygg/search-filters/search-filters.component";
 import {SortMenuComponent} from './components/ui/sort-menu/sort-menu.component';
+import { YggTorrentCardComponent } from './components/ygg/ygg-torrent-card/ygg-torrent-card.component';
 
 @NgModule({
 	declarations: [
@@ -56,7 +57,8 @@ import {SortMenuComponent} from './components/ui/sort-menu/sort-menu.component';
 		YggSearchComponent,
 		MainMenuComponent,
 		SearchFiltersComponent,
-		SortMenuComponent
+		SortMenuComponent,
+  YggTorrentCardComponent
 	],
 	imports: [
 		BrowserModule,

@@ -1,44 +1,9 @@
 <app-search-filters [sortProperty]="sortByProperty" [sortOrder]="sortOrder"
-										(onSearch)="search($event)" (onSort)="sortTorrents($event)" (onSelectMediaType)="changeMediaType($event)">
-
+										(onSearch)="search($event)" (onSort)="sortTorrents($event)"
+										(onSelectMediaType)="changeMediaType($event)">
 </app-search-filters>
 
 <div class="cards">
-	<article *ngFor="let torrent of this.yggTorrentSearch" [hidden]="!canDisplayTorrent(torrent)"
-					 class="information [ torrent-card ]">
-		<div class="tags">
-			<span class="tag">{{ getMediaType(torrent) }}</span>
-			<span class="tag">{{ mediaQuality(torrent) }}</span>
-		</div>
-
-		<h2 class="title">
-			<a [href]=torrent.pageUrl target="_blank">{{ torrent.name }}</a>
-		</h2>
-
-		<div class="content-container">
-			<dl class="details">
-				<div>
-					<dt>Age</dt>
-					<dd>{{ torrent.age | dateAgo }}</dd>
-				</div>
-				<div>
-					<dt>Taille</dt>
-					<dd>{{ torrent.size | formatFileSize }}</dd>
-				</div>
-				<div>
-					<dt>Téléchargé</dt>
-					<dd>{{ torrent.downloaded }}</dd>
-				</div>
-				<div>
-					<dt>Seeders</dt>
-					<dd>{{ torrent.seeders }}</dd>
-				</div>
-			</dl>
-
-			<div class="actions">
-				<div><a [href]=torrent.torrentUrl target="_blank"><img src="assets/download.svg" height="100%"></a></div>
-				<div><a [href]=torrent.pageUrl target="_blank"><img src="assets/goto.svg" height="100%"></a></div>
-			</div>
-		</div>
-	</article>
+	<app-ygg-torrent-card *ngFor="let torrent of this.yggTorrentSearch; trackBy: trackByName" [hidden]="!canDisplayTorrent(torrent)"
+												[torrent]="torrent"></app-ygg-torrent-card>
 </div>

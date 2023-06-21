@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {YggTorrentService} from "../../service/ygg-torrent.service";
-import {MediaQuality, MediaType, YggTorrentSearch} from "../../models/ygg-torrent-search";
+import {MediaType, YggTorrentSearch} from "../../models/ygg-torrent-search";
 import {dynamicSort} from "../../helpers/utils/array";
+import {MonitoredApi} from "../../models/monitored-api";
 
 @Component({
 	selector: 'app-ygg-search',
@@ -20,22 +21,6 @@ export class YggSearchComponent {
 
 	public search(searchText: string) {
 		this._yggTorrentService.search(searchText).subscribe(results => this.yggTorrentSearch = results);
-	}
-
-	public getMediaType(torrent: YggTorrentSearch): string {
-		if(torrent.mediaType === MediaType.Serie) return 'Série';
-		if(torrent.mediaType === MediaType.Movie) return 'Film';
-		if(torrent.mediaType === MediaType.Anime) return 'Animé';
-
-		return 'Inconnu';
-	}
-
-	public mediaQuality(torrent: YggTorrentSearch): string {
-		if(torrent.mediaQuality === MediaQuality.FHD) return '1080';
-		if(torrent.mediaQuality === MediaQuality.UHD) return '4K';
-		if(torrent.mediaQuality === MediaQuality.HD) return '720';
-
-		return 'Inconnu';
 	}
 
 	public sortTorrents(property: string) {
@@ -57,5 +42,9 @@ export class YggSearchComponent {
 
 	public changeMediaType(mediaType: MediaType) {
 		this.mediaType = mediaType;
+	}
+
+	public trackByName(_: any, torrent: YggTorrentSearch): string {
+		return torrent.name;
 	}
 }
