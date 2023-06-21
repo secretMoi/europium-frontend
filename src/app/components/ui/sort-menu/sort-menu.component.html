@@ -1,0 +1,15 @@
+<div class="sec-center">
+	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
+	<label class="for-dropdown" for="dropdown">
+		<img src="assets/sort.svg" height="32px">
+		<!--					<img class="uil" src="assets/sort.svg" height="32px">-->
+	</label>
+
+	<div class="section-dropdown">
+		<div *ngFor="let element of elements" (click)="elementSelected(element.key)"
+				 [class.active]="sortProperty === element.key">
+			{{element.label}}
+			<img src="assets/down.svg" *ngIf="sortProperty === element.key" [class.sort-icon]="!sortOrder">
+		</div>
+	</div>
+</div>

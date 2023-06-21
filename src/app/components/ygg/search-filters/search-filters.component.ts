@@ -6,11 +6,7 @@ import {MediaType} from "../../../models/ygg-torrent-search";
   templateUrl: './search-filters.component.html',
   styleUrls: ['./search-filters.component.scss']
 })
-export class SearchFiltersComponent implements OnInit {
-
-	public mediaType = MediaType;
-	public searchText!: string;
-	public filterMediaType: MediaType = MediaType.Unknown;
+export class SearchFiltersComponent {
 
 	@Input() sortProperty!: string;
 	@Input() sortOrder!: boolean;
@@ -19,7 +15,30 @@ export class SearchFiltersComponent implements OnInit {
 	@Output() onSort = new EventEmitter<string>();
 	@Output() onSelectMediaType = new EventEmitter<MediaType>();
 
-  constructor() { }
+	public mediaType = MediaType;
+	public searchText!: string;
+	public filterMediaType: MediaType = MediaType.Unknown;
+
+	get sortMenuElements() {
+		return [
+			{
+				key: 'age',
+				label: 'Age'
+			},
+			{
+				key: 'size',
+				label: 'Taille'
+			},
+			{
+				key: 'downloaded',
+				label: 'Téléchargés'
+			},
+			{
+				key: 'seeders',
+				label: 'Seeds'
+			},
+		]
+	}
 
 	public search() {
 		this.onSearch.emit(this.searchText);
@@ -32,7 +51,4 @@ export class SearchFiltersComponent implements OnInit {
 	public selectMediaType() {
 		this.onSelectMediaType.emit(this.filterMediaType);
 	}
-
-  ngOnInit(): void {
-  }
 }
