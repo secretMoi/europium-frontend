@@ -1,7 +1,8 @@
-<div *ngFor="let notification of notifications" class="notification-container" [class.show]="canDisplayNotification"
-		 (click)="closeNotification(notification)">
-	<div class="content">
-		<img *ngIf="notification.type" [src]="getNotificationImagePath(notification)" height="24px">
+<div class="notification-container">
+	<div class="content" *ngFor="let notification of notifications"
+			 [class.show]="canDisplayNotification" [class.hide]="isNotificationClosing(notification)"
+			 (click)="closeNotification(notification)">
+		<img *ngIf="canDisplayNotificationImage" [src]="getNotificationImagePath(notification)" height="24px">
 		{{ notification.message }}
 	</div>
 </div>

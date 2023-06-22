@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {YggTorrentService} from "../../service/ygg-torrent.service";
 import {MediaType, YggTorrentSearch} from "../../models/ygg-torrent-search";
 import {dynamicSort} from "../../helpers/utils/array";
-import {NotificationService} from "../../components/ui/notification/notification.service";
 
 @Component({
 	selector: 'app-ygg-search',
@@ -17,10 +16,7 @@ export class YggSearchComponent {
 
 	private previousSortByProperty = '';
 
-	constructor(private _yggTorrentService: YggTorrentService, private _notificationService: NotificationService) {
-		this._notificationService.addNotificationMessage('coucou');
-		this._notificationService.addNotificationMessage('coucou');
-		this._notificationService.addNotificationMessage('coucou');
+	constructor(private _yggTorrentService: YggTorrentService) {
 	}
 
 	public search(searchText: string) {
