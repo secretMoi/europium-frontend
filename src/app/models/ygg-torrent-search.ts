@@ -1,7 +1,7 @@
 export interface YggTorrentSearch {
 	name: string;
 	pageUrl: string;
-	torrentUrl: string;
+	torrentId: string;
 	age: number;
 	size: number;
 	downloaded: number;

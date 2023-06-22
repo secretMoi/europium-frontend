@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {MediaQuality, MediaType, YggTorrentSearch} from "../../../models/ygg-torrent-search";
+import {TorrentService} from "../../../service/torrent.service";
 
 @Component({
   selector: 'app-ygg-torrent-card',
@@ -9,6 +10,9 @@ import {MediaQuality, MediaType, YggTorrentSearch} from "../../../models/ygg-tor
 export class YggTorrentCardComponent {
 
 	@Input() torrent!: YggTorrentSearch;
+
+	constructor(private _torrentService: TorrentService) {
+	}
 
 	get getMediaType(): string {
 		if(this.torrent.mediaType === MediaType.Serie) return 'Série';
@@ -24,5 +28,9 @@ export class YggTorrentCardComponent {
 		if(this.torrent.mediaQuality === MediaQuality.HD) return '720';
 
 		return 'Inconnu';
+	}
+
+	public downloadTorrent() {
+		this._torrentService.addTorrent(this.torrent).subscribe();
 	}
 }
