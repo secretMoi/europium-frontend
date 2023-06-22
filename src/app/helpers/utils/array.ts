@@ -26,3 +26,12 @@ export const dynamicSort = <T>(array: T[], property: string, reverse: boolean = 
 		return result * order;
 	});
 }
+
+export const removeElement = <T>(array: T[], elementToRemove: T): T[] => {
+	let indexOfElement = array.indexOf(elementToRemove);
+
+	if (indexOfElement > -1)
+		array.splice(indexOfElement, 1);
+
+	return array;
+}

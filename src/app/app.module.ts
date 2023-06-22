@@ -31,6 +31,7 @@ import {YggTorrentInfoComponent} from "./components/ygg/ygg-torrent-info/ygg-tor
 import {SearchFiltersComponent} from "./components/ygg/search-filters/search-filters.component";
 import {SortMenuComponent} from './components/ui/sort-menu/sort-menu.component';
 import { YggTorrentCardComponent } from './components/ygg/ygg-torrent-card/ygg-torrent-card.component';
+import { NotificationComponent } from './components/ui/notification/notification.component';
 
 @NgModule({
 	declarations: [
@@ -58,7 +59,8 @@ import { YggTorrentCardComponent } from './components/ygg/ygg-torrent-card/ygg-t
 		MainMenuComponent,
 		SearchFiltersComponent,
 		SortMenuComponent,
-  YggTorrentCardComponent
+  YggTorrentCardComponent,
+  NotificationComponent
 	],
 	imports: [
 		BrowserModule,
