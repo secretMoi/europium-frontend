@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {YggTorrentService} from "../../service/ygg-torrent.service";
 import {MediaType, YggTorrentSearch} from "../../models/ygg-torrent-search";
 import {dynamicSort} from "../../helpers/utils/array";
+import {NotificationService, NotificationType} from "../../components/ui/notification/notification.service";
 
 @Component({
 	selector: 'app-ygg-search',
@@ -16,11 +17,14 @@ export class YggSearchComponent {
 
 	private previousSortByProperty = '';
 
-	constructor(private _yggTorrentService: YggTorrentService) {
+	constructor(private _yggTorrentService: YggTorrentService, private _notificationService: NotificationService) {
 	}
 
 	public search(searchText: string) {
-		this._yggTorrentService.search(searchText).subscribe(results => this.yggTorrentSearch = results);
+		this._yggTorrentService.search(searchText).subscribe({
+			next: results => this.yggTorrentSearch = results,
+			error: _ => this._notificationService.addNotification({type: NotificationType.Error, message: 'Aucun résultat'})
+		});
 	}
 
 	public sortTorrents(property: string) {
