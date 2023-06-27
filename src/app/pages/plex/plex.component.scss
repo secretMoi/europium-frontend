@@ -1,26 +1,34 @@
-// Basic
-$white: #fff;
-$black: #000;
-
 // Greys
-$ash: #eaeef6;
-$charcoal: #a0a0a0;
 $void: #141b22;
-
-// Beige/Browns
-$fair-pink: #FFEDEC;
-$apricot: #FBC8BE;
-$coffee: #754D42;
-$del-rio: #917072;
-
-// Green
-$java: #1FCAC5;
 
 // Purple
 $titan-white: #f1eeff;
 $cold-purple: #a69fd6;
 $indigo: #6558d3;
-$governor: #4133B7;
+
+
+.d-flex {
+	padding: 32px !important;
+	padding-bottom: 0 !important;
+}
+
+.menu {
+	padding-bottom: 15px;
+}
+
+.form-select {
+	max-width: 300px;
+}
+
+select {
+	height: 48px;
+}
+
+option {
+	text-align: center;
+}
+
+
 
 .cards {
 	display: flex;
@@ -36,7 +44,7 @@ $governor: #4133B7;
 	}
 
 	.information {
-		background-color: $white;
+		background-color: #fff;
 		padding: 20px;
 
 		.title {

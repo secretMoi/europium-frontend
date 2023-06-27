@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {PlexDuplicate} from "../models/plex/plex-duplicate";
+import {PlexLibrary} from "../models/plex/plex-library";
 
 @Injectable({
 	providedIn: 'root'
@@ -11,7 +12,11 @@ export class PlexService {
 	constructor(private http: HttpClient) {
 	}
 
-	getDuplicates(): Observable<PlexDuplicate[]> {
-		return this.http.get<PlexDuplicate[]>(environment.backendUrl + '/plex/duplicates/6');
+	getDuplicates(libraryId: number): Observable<PlexDuplicate[]> {
+		return this.http.get<PlexDuplicate[]>(environment.backendUrl + '/plex/duplicates/' + libraryId);
+	}
+
+	getLibraries(): Observable<PlexLibrary[]> {
+		return this.http.get<PlexLibrary[]>(environment.backendUrl + '/plex/libraries');
 	}
 }

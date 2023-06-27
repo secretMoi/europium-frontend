@@ -1,3 +1,19 @@
+<div class="container">
+	<div class="justify-content-center">
+		<div class="menu bg-white rounded shadow">
+
+			<div class="d-flex justify-content-between">
+				<select class="form-select rounded-pill filter-element" [(ngModel)]="filterLibraryId" (ngModelChange)="selectLibrary()">
+					<option selected [ngValue]="null">Librairie</option>
+					<option *ngFor="let plexLibrary of plexLibraries; trackBy: trackById" [ngValue]="plexLibrary.id">{{ plexLibrary.title }}</option>
+				</select>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
 <div class="cards">
 	<article *ngFor="let duplicate of this.plexDuplicates; trackBy: trackById" class="information [ torrent-card ]">
 
