@@ -32,6 +32,7 @@ import {SearchFiltersComponent} from "./components/ygg/search-filters/search-fil
 import {SortMenuComponent} from './components/ui/sort-menu/sort-menu.component';
 import { YggTorrentCardComponent } from './components/ygg/ygg-torrent-card/ygg-torrent-card.component';
 import { NotificationComponent } from './components/ui/notification/notification.component';
+import { PlexComponent } from './pages/plex/plex.component';
 
 @NgModule({
 	declarations: [
@@ -60,7 +61,8 @@ import { NotificationComponent } from './components/ui/notification/notification
 		SearchFiltersComponent,
 		SortMenuComponent,
   YggTorrentCardComponent,
-  NotificationComponent
+  NotificationComponent,
+  PlexComponent
 	],
 	imports: [
 		BrowserModule,

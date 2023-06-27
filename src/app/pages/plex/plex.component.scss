@@ -1,0 +1,113 @@
+// Basic
+$white: #fff;
+$black: #000;
+
+// Greys
+$ash: #eaeef6;
+$charcoal: #a0a0a0;
+$void: #141b22;
+
+// Beige/Browns
+$fair-pink: #FFEDEC;
+$apricot: #FBC8BE;
+$coffee: #754D42;
+$del-rio: #917072;
+
+// Green
+$java: #1FCAC5;
+
+// Purple
+$titan-white: #f1eeff;
+$cold-purple: #a69fd6;
+$indigo: #6558d3;
+$governor: #4133B7;
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 80px;
+	margin: 5vh auto;
+
+	.torrent-card {
+		border-radius: 16px;
+		box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
+		max-width: 400px;
+	}
+
+	.information {
+		background-color: $white;
+		padding: 20px;
+
+		.title {
+			font-size: 22px;
+			color: $void;
+			line-height: 1.25;
+			word-wrap: anywhere;
+		}
+
+		.files-container {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			padding-top: 15px;
+
+			.file {
+				color: $void;
+				border-radius: 8px;
+				border: 1px solid $titan-white;
+				word-wrap: anywhere;
+				padding: 15px;
+
+				.file-header {
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+					gap: 10px;
+
+					.delete {
+						height: 32px;
+						cursor: pointer;
+					}
+				}
+
+				.details {
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: space-between;
+					gap: 15px;
+					padding-top: 20px;
+
+					div {
+						padding: .75em 1em;
+						background-color: $titan-white;
+						border-radius: 8px;
+						display: flex;
+						flex-direction: column-reverse;
+						gap: .125em;
+						flex-basis: 45%;
+					}
+
+					dt {
+						font-size: 14px;
+						color: $cold-purple;
+					}
+
+					dd {
+						color: $indigo;
+						font-weight: 600;
+						font-size: 20px;
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (max-width: 500px) {
+		.information {
+			.title {
+				font-size: 24px;
+			}
+		}
+	}
+}

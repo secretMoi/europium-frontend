@@ -1,0 +1,40 @@
+<div class="cards">
+	<article *ngFor="let duplicate of this.plexDuplicates; trackBy: trackById" class="information [ torrent-card ]">
+
+		<h2 class="title">
+			{{ duplicate.title }}
+		</h2>
+
+		<div class="files-container">
+
+			<div class="file" *ngFor="let media of duplicate.plexMedias; trackBy: trackById">
+
+				<div class="file-header">
+					{{ media.filePath }}
+					<div class="delete"><img (click)="deleteMedia()" src="assets/delete.svg" height="100%"></div>
+				</div>
+
+				<dl class="details">
+					<div>
+						<dt>Taille</dt>
+						<dd>{{ media.size | formatFileSize }}</dd>
+					</div>
+					<div>
+						<dt>Résolution</dt>
+						<dd>{{ media.resolution }}</dd>
+					</div>
+					<div>
+						<dt>Débit</dt>
+						<dd>{{ media.bitrate }}</dd>
+					</div>
+					<div>
+						<dt>Codec</dt>
+						<dd>{{ media.codec }}</dd>
+					</div>
+				</dl>
+			</div>
+
+		</div>
+	</article>
+
+</div>

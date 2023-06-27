@@ -7,6 +7,7 @@ import {CrudApisComponent} from "./pages/crud-apis/crud-apis.component";
 import {EditApiComponent} from "./pages/edit-api/edit-api.component";
 import {TorrentsListComponent} from "./pages/torrents-list/torrents-list.component";
 import {YggSearchComponent} from "./pages/ygg-search/ygg-search.component";
+import {PlexComponent} from "./pages/plex/plex.component";
 
 const routes: Routes = [
 	{path: 'home', component: HomeComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
 	{path: 'api/edit/:code', component: EditApiComponent},
 	{path: 'torrent/list', component: TorrentsListComponent},
 	{path: 'ygg/search', component: YggSearchComponent},
+	{path: 'plex', component: PlexComponent},
 	{path: '', redirectTo: '/home', pathMatch: 'full'},
 ];
 
