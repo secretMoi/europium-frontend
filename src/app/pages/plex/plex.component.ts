@@ -11,12 +11,12 @@ import {PlexLibrary} from "../../models/plex/plex-library";
 export class PlexComponent {
 	public plexDuplicates: PlexDuplicate[] = [];
 	public plexLibraries: PlexLibrary[] = [];
-	public filterLibraryId: number | null = null;
+	public filterLibrary: PlexLibrary | null = null;
 
   constructor(private _plexService: PlexService) {
 		this._plexService.getLibraries().subscribe(res => {
 			this.plexLibraries = res;
-			this.filterLibraryId = this.plexLibraries[0].id;
+			this.filterLibrary = this.plexLibraries[0];
 			this.selectLibrary();
 		});
 	}
@@ -30,6 +30,6 @@ export class PlexComponent {
 	}
 
 	selectLibrary() {
-		this._plexService.getDuplicates(this.filterLibraryId!).subscribe(res => this.plexDuplicates = res);
+		this._plexService.getDuplicates(this.filterLibrary!).subscribe(res => this.plexDuplicates = res);
 	}
 }

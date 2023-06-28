@@ -12,8 +12,8 @@ export class PlexService {
 	constructor(private http: HttpClient) {
 	}
 
-	getDuplicates(libraryId: number): Observable<PlexDuplicate[]> {
-		return this.http.get<PlexDuplicate[]>(environment.backendUrl + '/plex/duplicates/' + libraryId);
+	getDuplicates(library: PlexLibrary): Observable<PlexDuplicate[]> {
+		return this.http.get<PlexDuplicate[]>(environment.backendUrl + `/plex/duplicates/${library.type}/${library.id}`);
 	}
 
 	getLibraries(): Observable<PlexLibrary[]> {
