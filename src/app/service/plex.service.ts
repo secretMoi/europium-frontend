@@ -19,4 +19,8 @@ export class PlexService {
 	getLibraries(): Observable<PlexLibrary[]> {
 		return this.http.get<PlexLibrary[]>(environment.backendUrl + '/plex/libraries');
 	}
+
+	deleteMedia(mediaId: number, fileId: number): Observable<boolean> {
+		return this.http.delete<boolean>(environment.backendUrl + `/plex/delete/media/${mediaId}/file/${fileId}`);
+	}
 }

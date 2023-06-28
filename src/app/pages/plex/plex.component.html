@@ -22,12 +22,11 @@
 		</h2>
 
 		<div class="files-container">
-
 			<div class="file" *ngFor="let media of duplicate.plexMedias; trackBy: trackById">
 
 				<div class="file-header">
 					{{ media.filePath }}
-					<div class="delete"><img (click)="deleteMedia()" src="assets/delete.svg" height="100%"></div>
+					<div class="delete"><img (click)="deleteMedia(duplicate, media)" src="assets/delete.svg" height="100%"></div>
 				</div>
 
 				<dl class="details">

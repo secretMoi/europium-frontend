@@ -20,13 +20,22 @@ export class NotificationService {
 	private static count = 0;
 
 	public addNotification(notification: Notification) {
-		console.log(notification);
 		this._notifications.push({id: NotificationService.count, ...notification});
 		NotificationService.count++;
 	}
 
+	public successNotification(message: string) {
+		this._notifications.push({id: NotificationService.count, type: NotificationType.Success, message: message});
+		NotificationService.count++;
+	}
+
+	public errorNotification(message: string) {
+		this._notifications.push({id: NotificationService.count, type: NotificationType.Error, message: message});
+		NotificationService.count++;
+	}
+
 	public addNotificationMessage(message: string) {
-		this._notifications.push({id: NotificationService.count,message: message});
+		this._notifications.push({id: NotificationService.count, message: message});
 		NotificationService.count++;
 	}
 
