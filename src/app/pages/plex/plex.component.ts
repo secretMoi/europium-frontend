@@ -5,7 +5,13 @@ import {PlexLibrary} from "../../models/plex/plex-library";
 import {PlexMedia} from "../../models/plex/plex-media";
 import {NotificationService} from "../../components/ui/notification/notification.service";
 import {dynamicSort} from "../../helpers/utils/array";
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+
+interface ImageBlob {
+	image?: SafeUrl;
+}
+
+type PlexDuplicateExtended = PlexDuplicate & ImageBlob;
 
 @Component({
 	selector: 'app-plex',
@@ -13,7 +19,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 	styleUrls: ['./plex.component.scss']
 })
 export class PlexComponent {
-	public plexDuplicates: PlexDuplicate[] = [];
+	public plexDuplicates: PlexDuplicateExtended[] = [];
 	public plexLibraries: PlexLibrary[] = [];
 	public filterLibrary: PlexLibrary | null = null;
 
@@ -43,11 +49,18 @@ export class PlexComponent {
 		});
 	}
 
-	getThumbnail(duplicate: PlexDuplicate) {
+	getThumbnail(duplicate: PlexDuplicateExtended) {
 		this._plexService.getThumbnail(duplicate.parentId, duplicate.thumbnailId)
-			.subscribe(image => {
-				console.log(this.domSanitizer.bypassSecurityTrustUrl(image.toString()));
-			});
+			.subscribe(data => this.createImageFromBlob(data, duplicate));
+	}
+
+	createImageFromBlob(image: Blob, duplicate: PlexDuplicateExtended) {
+		let reader = new FileReader();
+		reader.onloadend = () => {
+			duplicate.image = this.domSanitizer.bypassSecurityTrustUrl(reader.result as string);
+		}
+
+		reader.readAsDataURL(image);
 	}
 
 	public trackById(_: any, plexDuplicate: { id: number }): number {

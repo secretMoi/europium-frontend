@@ -12,11 +12,13 @@
 <div class="cards">
 	<article *ngFor="let duplicate of this.plexDuplicates; trackBy: trackById" class="information [ torrent-card ]">
 
-		<h2 class="title">
-			{{ duplicate.title }}
-		</h2>
+		<div class="title-header" >
+			<h2 class="title">
+				{{ duplicate.title }}
+			</h2>
 
-<!--		<img src="">-->
+			<img [src]="duplicate.image">
+		</div>
 
 		<div class="files-container">
 			<div class="file" *ngFor="let media of duplicate.plexMedias; trackBy: trackById">

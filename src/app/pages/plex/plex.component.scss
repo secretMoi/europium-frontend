@@ -51,11 +51,23 @@ $indigo: #6558d3;
 		background-color: #fff;
 		padding: 20px;
 
-		.title {
-			font-size: 22px;
-			color: $void;
-			line-height: 1.25;
-			word-wrap: anywhere;
+		.title-header {
+			display: flex;
+			justify-content: space-between;
+
+			.title {
+				font-size: 22px;
+				color: $void;
+				line-height: 1.25;
+				word-wrap: anywhere;
+				width: 100%;
+				text-align: center;
+			}
+
+			img {
+				border-radius: 10px;
+				width: 50%;
+			}
 		}
 
 		.files-container {
