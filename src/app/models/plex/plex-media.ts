@@ -3,6 +3,6 @@ export interface PlexMedia {
 	bitrate: number;
 	resolution: string;
 	filePath: string;
-	codec: string;
+	videoCodec: string;
 	size: number;
 }

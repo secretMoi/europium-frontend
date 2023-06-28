@@ -2,7 +2,7 @@
 	<div class="justify-content-center">
 		<div class="menu bg-white rounded shadow">
 
-			<div class="d-flex justify-content-between">
+			<div class="d-flex justify-content-center">
 				<select class="form-select rounded-pill filter-element" [(ngModel)]="filterLibrary" (ngModelChange)="selectLibrary()">
 					<option selected [ngValue]="null">Librairie</option>
 					<option *ngFor="let plexLibrary of plexLibraries; trackBy: trackById" [ngValue]="plexLibrary">{{ plexLibrary.title }}</option>
@@ -44,7 +44,7 @@
 					</div>
 					<div>
 						<dt>Codec</dt>
-						<dd>{{ media.codec }}</dd>
+						<dd>{{ media.videoCodec }}</dd>
 					</div>
 				</dl>
 			</div>
