@@ -54,6 +54,7 @@ $indigo: #6558d3;
 		.title-header {
 			display: flex;
 			justify-content: space-between;
+			gap: 10px;
 
 			.title {
 				font-size: 22px;
@@ -73,15 +74,29 @@ $indigo: #6558d3;
 		.files-container {
 			display: flex;
 			flex-direction: column;
-			gap: 20px;
-			padding-top: 15px;
+			margin-top: 15px;
+			border: 1px solid $titan-white;
+			border-radius: 8px;
+			position: relative;
 
 			.file {
 				color: $void;
-				border-radius: 8px;
-				border: 1px solid $titan-white;
 				word-wrap: anywhere;
 				padding: 15px;
+				padding-bottom: 0;
+
+				&:after {
+					content: "";
+					background: $titan-white;
+					position: absolute;
+					left: 35px;
+					height: 2px;
+					width: 80%;
+				}
+
+				&:last-child:after {
+					display: none;
+				}
 
 				.file-header {
 					display: flex;
