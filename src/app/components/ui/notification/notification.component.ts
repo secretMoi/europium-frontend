@@ -19,6 +19,7 @@ export class NotificationComponent {
 	}
 
 	constructor(private _notificationService: NotificationService) {
+		this._notificationService.notificationPushed.subscribe(notification => this._notificationPushed(notification));
 	}
 
 	public canDisplayNotificationImage(notification: Notification) {
@@ -42,6 +43,12 @@ export class NotificationComponent {
 		setTimeout(() => {
 			removeElement(this.notificationsToClose, notification);
 			this._notificationService.removeNotification(notification);
-		}, 500);
+		}, this._notificationService.timeToRemove);
+	}
+
+	private _notificationPushed(notification: Notification) {
+		setTimeout(() => {
+			this.notificationsToClose.push(notification);
+		}, this._notificationService.stayTime - this._notificationService.timeToRemove);
 	}
 }
