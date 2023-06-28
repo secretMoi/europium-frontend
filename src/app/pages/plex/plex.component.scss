@@ -45,7 +45,7 @@ $indigo: #6558d3;
 	.torrent-card {
 		border-radius: 16px;
 		box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
-		max-width: 400px;
+		max-width: 500px;
 	}
 
 	.information {
@@ -64,6 +64,7 @@ $indigo: #6558d3;
 				word-wrap: anywhere;
 				width: 100%;
 				text-align: center;
+				margin: auto;
 			}
 
 			img {
