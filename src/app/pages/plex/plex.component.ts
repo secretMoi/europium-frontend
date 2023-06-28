@@ -4,6 +4,7 @@ import {PlexDuplicate} from "../../models/plex/plex-duplicate";
 import {PlexLibrary} from "../../models/plex/plex-library";
 import {PlexMedia} from "../../models/plex/plex-media";
 import {NotificationService} from "../../components/ui/notification/notification.service";
+import {dynamicSort} from "../../helpers/utils/array";
 
 @Component({
 	selector: 'app-plex',
@@ -14,6 +15,24 @@ export class PlexComponent {
 	public plexDuplicates: PlexDuplicate[] = [];
 	public plexLibraries: PlexLibrary[] = [];
 	public filterLibrary: PlexLibrary | null = null;
+
+	public sortProperty!: string;
+	public sortOrder!: boolean;
+
+	private previousSortByProperty = '';
+
+	get sortMenuElements() {
+		return [
+			{
+				key: 'title',
+				label: 'Titre'
+			},
+			{
+				key: 'totalSize',
+				label: 'Taille'
+			},
+		]
+	}
 
 	constructor(private _plexService: PlexService, private _notificationService: NotificationService) {
 		this._plexService.getLibraries().subscribe(res => {
@@ -42,6 +61,20 @@ export class PlexComponent {
 	}
 
 	selectLibrary() {
-		this._plexService.getDuplicates(this.filterLibrary!).subscribe(res => this.plexDuplicates = res);
+		this._plexService.getDuplicates(this.filterLibrary!).subscribe(res => {
+			this.plexDuplicates = res;
+			this._executeSort();
+		});
+	}
+
+	public sort(property: string) {
+		this.sortOrder = this.sortProperty === property ? !this.sortOrder : false;
+		this.sortProperty = property;
+		this._executeSort();
+		this.previousSortByProperty = this.sortProperty;
+	}
+
+	private _executeSort() {
+		this.plexDuplicates = dynamicSort(this.plexDuplicates, this.sortProperty, this.sortProperty === this.previousSortByProperty && this.sortOrder);
 	}
 }

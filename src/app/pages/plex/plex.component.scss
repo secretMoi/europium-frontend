@@ -6,26 +6,30 @@ $titan-white: #f1eeff;
 $cold-purple: #a69fd6;
 $indigo: #6558d3;
 
+.filters {
+	display: flex;
+	justify-content: space-between;
+	width: 50vw;
+	margin: auto;
+	padding: 15px;
+	background-color: white;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 
-.d-flex {
-	padding: 32px !important;
-	padding-bottom: 0 !important;
+	.form-select {
+		max-width: 300px;
+		height: 48px;
+		border-radius: 50px;
+
+		option {
+			text-align: center;
+		}
+	}
 }
 
-.menu {
-	padding-bottom: 15px;
-}
-
-.form-select {
-	max-width: 300px;
-}
-
-select {
-	height: 48px;
-}
-
-option {
-	text-align: center;
+@media screen and (max-width: 500px) {
+	.filters {
+		width: 90vw;
+	}
 }
 
 

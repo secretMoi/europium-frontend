@@ -1,16 +1,11 @@
-<div class="container">
-	<div class="justify-content-center">
-		<div class="menu bg-white rounded shadow">
+<div class="filters">
+	<select class="form-select rounded-pill" [(ngModel)]="filterLibrary" (ngModelChange)="selectLibrary()">
+		<option selected [ngValue]="null">Librairie</option>
+		<option *ngFor="let plexLibrary of plexLibraries; trackBy: trackById"
+						[ngValue]="plexLibrary">{{ plexLibrary.title }}</option>
+	</select>
 
-			<div class="d-flex justify-content-center">
-				<select class="form-select rounded-pill filter-element" [(ngModel)]="filterLibrary" (ngModelChange)="selectLibrary()">
-					<option selected [ngValue]="null">Librairie</option>
-					<option *ngFor="let plexLibrary of plexLibraries; trackBy: trackById" [ngValue]="plexLibrary">{{ plexLibrary.title }}</option>
-				</select>
-			</div>
-
-		</div>
-	</div>
+	<app-sort-menu [elements]="sortMenuElements" [sortOrder]="sortOrder" [sortProperty]="sortProperty" (onElementSelected)="sort($event)"></app-sort-menu>
 </div>
 
 
