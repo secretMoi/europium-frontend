@@ -23,4 +23,8 @@ export class PlexService {
 	deleteMedia(mediaId: number, fileId: number): Observable<boolean> {
 		return this.http.delete<boolean>(environment.backendUrl + `/plex/delete/media/${mediaId}/file/${fileId}`);
 	}
+
+	getThumbnail(parentId: number, thumbnailId: number) {
+		return this.http.get(environment.backendUrl + `/plex/thumbnail/${parentId}/${thumbnailId}`);
+	}
 }

@@ -5,6 +5,7 @@ import {PlexLibrary} from "../../models/plex/plex-library";
 import {PlexMedia} from "../../models/plex/plex-media";
 import {NotificationService} from "../../components/ui/notification/notification.service";
 import {dynamicSort} from "../../helpers/utils/array";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
 	selector: 'app-plex',
@@ -34,12 +35,19 @@ export class PlexComponent {
 		]
 	}
 
-	constructor(private _plexService: PlexService, private _notificationService: NotificationService) {
+	constructor(private _plexService: PlexService, private _notificationService: NotificationService, private readonly domSanitizer: DomSanitizer,) {
 		this._plexService.getLibraries().subscribe(res => {
 			this.plexLibraries = res;
 			this.filterLibrary = this.plexLibraries[0];
 			this.selectLibrary();
 		});
+	}
+
+	getThumbnail(duplicate: PlexDuplicate) {
+		this._plexService.getThumbnail(duplicate.parentId, duplicate.thumbnailId)
+			.subscribe(image => {
+				console.log(this.domSanitizer.bypassSecurityTrustUrl(image.toString()));
+			});
 	}
 
 	public trackById(_: any, plexDuplicate: { id: number }): number {
@@ -63,6 +71,9 @@ export class PlexComponent {
 	selectLibrary() {
 		this._plexService.getDuplicates(this.filterLibrary!).subscribe(res => {
 			this.plexDuplicates = res;
+
+			res.forEach(x => this.getThumbnail(x));
+
 			this._executeSort();
 		});
 	}
