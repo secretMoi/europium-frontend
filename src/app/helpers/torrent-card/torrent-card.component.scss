@@ -1,4 +1,3 @@
-@import '~bootstrap/scss/bootstrap';
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 
@@ -15,17 +14,15 @@
 	&:hover {
 		backface-visibility: hidden;
 		-webkit-font-smoothing: subpixel-antialiased;
-		transform: perspective(1px) scale(1.03);
+		transform: perspective(1px) scale(1.01);
 		box-shadow: 0 0 80px -25px rgba(0, 0, 0, 0.5);
 		transition: all 0.4s;
 	}
 
 	.movie_card {
-
 		overflow: hidden;
 		border-radius: 10px;
 		box-shadow: 0 0 120px -25px rgba(0, 0, 0, 0.5);
-
 		position: relative;
 		display: block;
 
