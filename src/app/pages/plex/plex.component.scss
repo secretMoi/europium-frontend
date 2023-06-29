@@ -92,7 +92,7 @@ $indigo: #6558d3;
 					background: $titan-white;
 					position: absolute;
 					left: 35px;
-					height: 2px;
+					height: 1px;
 					width: 80%;
 				}
 
@@ -147,7 +147,25 @@ $indigo: #6558d3;
 	@media screen and (max-width: 500px) {
 		.information {
 			.title {
-				font-size: 24px;
+				font-size: 22px;
+			}
+
+			.files-container {
+				.file {
+					.file-header {
+						font-size: 15px;
+					}
+
+					.details {
+						dt {
+							font-size: 14px;
+						}
+
+						dd {
+							font-size: 18px;
+						}
+					}
+				}
 			}
 		}
 	}
