@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Notification, NotificationService, NotificationType} from "./notification.service";
 import {removeElement} from "../../../helpers/utils/array";
+import {interval} from "rxjs";
 
 @Component({
 	selector: 'app-notification',
@@ -47,6 +48,12 @@ export class NotificationComponent {
 	}
 
 	private _notificationPushed(notification: Notification) {
+		if(notification.isPermanent) return;
+
+		notification.progress$ = interval(30).subscribe(_ =>
+				notification.progress = notification.progress! - 30 / (this._notificationService.stayTime - this._notificationService.timeToRemove) * 100
+			);
+
 		setTimeout(() => {
 			this.notificationsToClose.push(notification);
 		}, this._notificationService.stayTime - this._notificationService.timeToRemove);

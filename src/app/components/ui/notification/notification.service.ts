@@ -1,10 +1,14 @@
 import {EventEmitter, Injectable} from "@angular/core";
 import {removeElement} from "../../../helpers/utils/array";
+import {Subscription} from "rxjs";
 
 export interface Notification {
 	id?: number;
 	message: string;
 	type?: NotificationType;
+	isPermanent?: boolean;
+	progress?: number;
+	progress$?: Subscription;
 }
 
 export enum NotificationType {
@@ -50,6 +54,7 @@ export class NotificationService {
 	}
 
 	public removeNotification(notification: Notification) {
+		notification.progress$?.unsubscribe();
 		return removeElement(this._notifications, notification);
 	}
 
@@ -59,8 +64,14 @@ export class NotificationService {
 
 		this.notificationPushed.emit(notification);
 
-		setTimeout(() => {
-			this.removeNotification(notification);
-		}, this.stayTime);
+		if(!notification.isPermanent) {
+			notification.progress = 100;
+
+			setTimeout(() => {
+				notification.progress$?.unsubscribe();
+
+				this.removeNotification(notification);
+			}, this.stayTime);
+		}
 	}
 }

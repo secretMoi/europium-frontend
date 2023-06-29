@@ -23,6 +23,7 @@ export class TorrentCardComponent {
 
 	apiType = ApiType;
 	isMetaDataModalOpen: boolean = false;
+	torrentState = TorrentState;
 
   constructor(
 		public cleaningDataService: CleaningDataService,

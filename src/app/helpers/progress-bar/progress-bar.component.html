@@ -1,4 +1,4 @@
-<div class="progress-container" *ngIf="torrent.state === torrentState.DOWNLOADING">
-	<progress class="progress" max="100" [value]="cleaningDataService.getProgressToDisplay(torrent.progress)">
+<div class="progress-container">
+	<progress class="progress" max="100" [value]="value">
 	</progress>
 </div>

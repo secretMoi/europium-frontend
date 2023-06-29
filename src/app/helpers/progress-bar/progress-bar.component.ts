@@ -1,7 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TorrentInfo} from "../../models/torrent-info";
-import {TorrentState} from "../../models/torrent-state";
-import {CleaningDataService} from "../../service/cleaning-data.service";
 
 @Component({
   selector: 'app-progress-bar',
@@ -9,16 +6,11 @@ import {CleaningDataService} from "../../service/cleaning-data.service";
   styleUrls: ['./progress-bar.component.scss']
 })
 export class ProgressBarComponent implements OnInit {
+	@Input() value!: number;
+	@Input() height: number = 5;
 
-	@Input() torrent!: TorrentInfo;
-
-	torrentState = TorrentState;
-
-  constructor(
-		public cleaningDataService: CleaningDataService
-	) { }
-
-  ngOnInit(): void {
-  }
-
+	ngOnInit(): void {
+		console.log(this.height);
+		document.documentElement.style.setProperty('--height', this.height.toString());
+	}
 }

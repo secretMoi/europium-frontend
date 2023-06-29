@@ -1,14 +1,16 @@
-@import '~bootstrap/scss/bootstrap';
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
+
+:root {
+	--height: 5;
+}
 
 .progress, progress[value] {
 	width: auto;
 	border: none;
-	height: 14px;
+	height: calc(var(--height) * 1px);
 	display: block;
 	appearance: none;
-	-webkit-appearance: none;
 	border-radius: 0;
 
 	&::-webkit-progress-bar {
@@ -20,7 +22,7 @@
 	}
 }
 
-.progress-materializecss {
+/*.progress-materializecss {
 	position: relative;
 	height: 4px;
 	display: block;
@@ -85,4 +87,4 @@
 		left: 107%;
 		right: -8%;
 	}
-}
+}*/

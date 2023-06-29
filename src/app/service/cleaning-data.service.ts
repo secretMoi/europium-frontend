@@ -128,12 +128,10 @@ export class CleaningDataService {
 	getSeasonAndEpisodeFromTorrent(torrent: TorrentInfo): string {
 		let text: string = '';
 
-		if (torrent.season && torrent.season > 0) {
+		if (torrent.season && torrent.season > 0)
 			text += 'Saison ' + torrent.season;
-		}
-		if (torrent.episode && torrent.episode > 0) {
+		if (torrent.episode && torrent.episode > 0)
 			text += ' Episode ' + torrent.episode;
-		}
 
 		return text;
 	}
@@ -143,19 +141,16 @@ export class CleaningDataService {
 		let languagesKnown: string[] = [];
 
 		for (let language of languagesList) {
-			if (languagesKnown.indexOf(language) === -1) {
+			if (languagesKnown.indexOf(language) === -1)
 				languagesKnown.push(language);
-			}
 		}
 
 		for(let i = 0; i < languagesKnown.length; i++) {
-			if (languagesKnown[i] == 'fre') {
+			if (languagesKnown[i] == 'fre')
 				languagesKnown[i] = 'Français'
-			}
 
-			if (languagesKnown[i] == 'eng') {
+			if (languagesKnown[i] == 'eng')
 				languagesKnown[i] = 'Anglais'
-			}
 		}
 
 		return languagesKnown.join(', ');

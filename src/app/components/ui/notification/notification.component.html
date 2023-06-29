@@ -2,7 +2,13 @@
 	<div class="content" *ngFor="let notification of notifications"
 			 [class.show]="canDisplayNotification" [class.hide]="isNotificationClosing(notification)"
 			 (click)="closeNotification(notification)">
-		<img *ngIf="canDisplayNotificationImage" [src]="getNotificationImagePath(notification)" height="24px">
-		{{ notification.message }}
+
+		<div class="notification">
+			<img *ngIf="canDisplayNotificationImage(notification)" [src]="getNotificationImagePath(notification)" height="24px">
+			{{ notification.message }}
+		</div>
+
+		<app-progress-bar *ngIf="!notification.isPermanent" [value]="notification.progress!" [height]="3"></app-progress-bar>
+
 	</div>
 </div>

@@ -75,7 +75,9 @@
 
 			<!--		Progress bar-->
 			<app-progress-bar
-				[torrent]="torrent"
+				*ngIf="torrent.state === torrentState.DOWNLOADING"
+				[height]="14"
+				[value]="cleaningDataService.getProgressToDisplay(torrent.progress)"
 			></app-progress-bar>
 
 		</div>
