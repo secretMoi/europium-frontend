@@ -5,6 +5,9 @@ import {Subject} from "rxjs";
 import {MonitoredApiService} from "../../service/monitored-api.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {ApiState} from "../../models/api-state";
+import {ApiCode} from "../../models/api-code";
+import {PlexService} from "../../service/plex.service";
+import {NotificationService} from "../../components/ui/notification/notification.service";
 
 @Component({
   selector: 'app-api-monitored-card',
@@ -32,7 +35,12 @@ export class ApiMonitoredCardComponent implements OnInit {
 
   image!: any;
 
-  constructor(private monitoredApiService: MonitoredApiService, private sanitizer: DomSanitizer) {}
+	get isPlex(): boolean {
+		return this.monitoredApi.code === ApiCode.PLEX;
+	}
+
+  constructor(private _monitoredApiService: MonitoredApiService, private _sanitizer: DomSanitizer,
+							private _plexService: PlexService, private _notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.monitoredApiChanged.subscribe(
@@ -44,21 +52,19 @@ export class ApiMonitoredCardComponent implements OnInit {
   }
 
   updateApiState() {
-
     for(const apiUrl of this.monitoredApi.apiUrls){
       const apiState = new ApiState(this.monitoredApi.code, apiUrl.url);
 
-      this.monitoredApiService.getApiState(apiState).subscribe(
+      this._monitoredApiService.getApiState(apiState).subscribe(
         value => apiUrl.state = value,
         _ => apiUrl.state = false
       );
     }
-
   }
 
   updateApiLogo() {
-    this.monitoredApiService.getApiLogo(this.monitoredApi.code).subscribe(
-      (blobImage: any) => this.image = this.sanitizer.bypassSecurityTrustUrl(blobImage)
+    this._monitoredApiService.getApiLogo(this.monitoredApi.code).subscribe(
+      (blobImage: any) => this.image = this._sanitizer.bypassSecurityTrustUrl(blobImage)
     );
   }
 
@@ -75,17 +81,9 @@ export class ApiMonitoredCardComponent implements OnInit {
       }
     });
 
-    if(hasUp === true) {
-      return true;
-    }
-
-    if(hasUp === false && hasDown === true) {
-      return null;
-    }
-
-    if(hasUp === false && hasDown === false) {
-      return false;
-    }
+    if(hasUp === true) return true;
+    if(hasUp === false && hasDown === true) return null;
+    if(hasUp === false && hasDown === false) return false;
 
     return null;
   }
@@ -98,4 +96,16 @@ export class ApiMonitoredCardComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
     this.state = (this.state === 'initial' ? 'final' : 'initial');
   }
+
+	restartPlex($event: MouseEvent) {
+		$event.stopPropagation();
+		this._plexService.restart().subscribe({
+			next: _ => this._notificationService.successNotification('Serveur redémarré'),
+			error: _ => this._notificationService.errorNotification('Impossible de redémarrer le serveur'),
+		});
+	}
+
+	public trackById(_: any, item: { apiUrlId: number }): number {
+		return item.apiUrlId;
+	}
 }

@@ -4,7 +4,9 @@
     <div class="d-flex justify-content-between w-100" (click)="navigateToApiLink()" style="cursor: pointer">
       <div class="p-2"><img [src]='image' class="api-status" alt=""></div>
       <div class="p-2 fs-2 my-auto">{{ monitoredApi.name }}</div>
-      <div class="p-2">
+      <div class="p-2 status-icons">
+				<img *ngIf="isPlex" (click)="restartPlex($event)" src="assets/refresh.svg" class="api-status" alt="">
+
         <img *ngIf="getApiState()" src="assets/check.svg" class="api-status" alt="">
         <img *ngIf="getApiState() === false" src="assets/cancel.svg" class="api-status" alt="">
         <div *ngIf="getApiState() === null" class="spinner-border text-primary api-status" role="status">
@@ -22,7 +24,7 @@
   <div id="collapseExample" [(ngbCollapse)]="isCollapsed">
     <div class="card card-body border-0">
       <div class="list-group">
-        <a [href]="apiUrl.url" class="list-group-item api-link" *ngFor="let apiUrl of monitoredApi.apiUrls">
+        <a [href]="apiUrl.url" class="list-group-item api-link" *ngFor="let apiUrl of monitoredApi.apiUrls; trackBy: trackById">
           <div class="d-flex justify-content-between w-100">
             <div class="p-2 fs-4 my-auto">
               <a href="{{ apiUrl.url }}" target="_blank">{{ apiUrl.url }}</a>

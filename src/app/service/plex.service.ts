@@ -27,4 +27,8 @@ export class PlexService {
 	getThumbnail(parentId: number, thumbnailId: number) {
 		return this.http.get(environment.backendUrl + `/plex/thumbnail/${parentId}/${thumbnailId}`, { responseType: 'blob' });
 	}
+
+	restart() {
+		return this.http.get(environment.backendUrl + `/plex/restart`);
+	}
 }
