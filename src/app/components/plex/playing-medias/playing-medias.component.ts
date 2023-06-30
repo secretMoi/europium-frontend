@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {PlexService} from "../../../service/plex.service";
 import {PlexPlayingMedia} from "../../../models/plex/plex-playing-medias";
 import {BaseComponent} from "../../base.component";
@@ -19,13 +19,20 @@ type PlexPlayingMediaExtended = PlexPlayingMedia & ImageBlob;
 export class PlayingMediasComponent extends BaseComponent {
 	public playingMedias: PlexPlayingMediaExtended[] = [];
 
+	@Output() hasAnyMedia$ = new EventEmitter<boolean>();
+
   constructor(private _plexService: PlexService, private _imageService: ImageService) {
 		super();
 
 		this._plexService.getPlayingMedias().subscribe(medias => {
 			this.playingMedias = medias;
 			medias.forEach(media => this._getThumbnail(media));
+			this.hasAnyMedia$.emit(medias.length > 0);
 		});
+	}
+
+	getProgress(media: PlexPlayingMedia) {
+		return media.progress / media.duration * 100;
 	}
 
 	private _getThumbnail(media: PlexPlayingMediaExtended) {

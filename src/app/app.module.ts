@@ -36,6 +36,7 @@ import { PlexComponent } from './pages/plex/plex.component';
 import { PlayingMediasComponent } from './components/plex/playing-medias/playing-medias.component';
 import { SingleDataCardComponent } from './components/ui/single-data-card/single-data-card.component';
 import { MultipleDataCardComponent } from './components/ui/multiple-data-card/multiple-data-card.component';
+import {MillisToTimePipe} from "./pipes/millis-to-time.pipe";
 
 @NgModule({
 	declarations: [
@@ -55,6 +56,7 @@ import { MultipleDataCardComponent } from './components/ui/multiple-data-card/mu
 		TruncatePipe,
 		FormatFileSizePipe,
 		DateAgoPipe,
+		MillisToTimePipe,
 		TorrentMetadataModalComponent,
 		MetadataElementComponent,
 		ProgressBarComponent,
@@ -63,12 +65,12 @@ import { MultipleDataCardComponent } from './components/ui/multiple-data-card/mu
 		MainMenuComponent,
 		SearchFiltersComponent,
 		SortMenuComponent,
-  YggTorrentCardComponent,
-  NotificationComponent,
-  PlexComponent,
-  PlayingMediasComponent,
-  SingleDataCardComponent,
-  MultipleDataCardComponent
+		YggTorrentCardComponent,
+		NotificationComponent,
+		PlexComponent,
+		PlayingMediasComponent,
+		SingleDataCardComponent,
+		MultipleDataCardComponent
 	],
 	imports: [
 		BrowserModule,

@@ -1,4 +1,4 @@
-<app-playing-medias class="playing-medias"></app-playing-medias>
+<app-playing-medias [style.display]="canDisplayPlayingMedia ? 'block' : 'none'" class="playing-medias" (hasAnyMedia$)="setPlayingMediaVisibility($event)"></app-playing-medias>
 
 <div class="filters">
 	<select class="form-select rounded-pill" [(ngModel)]="filterLibrary" (ngModelChange)="selectLibrary()">

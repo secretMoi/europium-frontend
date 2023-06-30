@@ -28,6 +28,8 @@ export class PlexComponent {
 	public sortProperty!: string;
 	public sortOrder!: boolean;
 
+	public canDisplayPlayingMedia: boolean = false;
+
 	private previousSortByProperty = '';
 
 	get sortMenuElements() {
@@ -91,16 +93,20 @@ export class PlexComponent {
 		this.previousSortByProperty = this.sortProperty;
 	}
 
-	private _executeSort() {
-		this.plexDuplicates = dynamicSort(this.plexDuplicates, this.sortProperty, this.sortProperty === this.previousSortByProperty && this.sortOrder);
-	}
-
-	getMediaDataTags(media: PlexMedia) {
+	public getMediaDataTags(media: PlexMedia) {
 		return [
 			{label: 'Taille', value: this._formatFileSizePipe.transform(media.size)},
 			{label: 'Résolution', value: media.resolution},
 			{label: 'Débit', value: media.bitrate},
 			{label: 'Codec', value: media.videoCodec},
 		];
+	}
+
+	public setPlayingMediaVisibility(isVisible: boolean) {
+		this.canDisplayPlayingMedia = isVisible;
+	}
+
+	private _executeSort() {
+		this.plexDuplicates = dynamicSort(this.plexDuplicates, this.sortProperty, this.sortProperty === this.previousSortByProperty && this.sortOrder);
 	}
 }
