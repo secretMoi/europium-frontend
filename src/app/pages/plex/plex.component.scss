@@ -6,6 +6,17 @@ $titan-white: #f1eeff;
 $cold-purple: #a69fd6;
 $indigo: #6558d3;
 
+.playing-medias {
+	width: 50vw;
+	padding: 15px;
+	//background-color: white;
+	display: flex;
+	border-radius: 16px;
+	//box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
+	margin: auto;
+	margin-bottom: 30px;
+}
+
 .filters {
 	display: flex;
 	justify-content: space-between;
@@ -29,6 +40,10 @@ $indigo: #6558d3;
 
 @media screen and (max-width: 500px) {
 	.filters {
+		width: 90vw;
+	}
+
+	.playing-medias {
 		width: 90vw;
 	}
 }
@@ -112,35 +127,6 @@ $indigo: #6558d3;
 						cursor: pointer;
 					}
 				}
-
-				.details {
-					display: flex;
-					flex-wrap: wrap;
-					justify-content: space-between;
-					gap: 15px;
-					padding-top: 20px;
-
-					div {
-						padding: .75em 1em;
-						background-color: $titan-white;
-						border-radius: 8px;
-						display: flex;
-						flex-direction: column-reverse;
-						gap: .125em;
-						flex-basis: 45%;
-					}
-
-					dt {
-						font-size: 14px;
-						color: $cold-purple;
-					}
-
-					dd {
-						color: $indigo;
-						font-weight: 600;
-						font-size: 20px;
-					}
-				}
 			}
 		}
 	}
@@ -155,16 +141,6 @@ $indigo: #6558d3;
 				.file {
 					.file-header {
 						font-size: 15px;
-					}
-
-					.details {
-						dt {
-							font-size: 14px;
-						}
-
-						dd {
-							font-size: 18px;
-						}
 					}
 				}
 			}

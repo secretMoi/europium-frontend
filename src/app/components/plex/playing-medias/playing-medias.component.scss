@@ -1,0 +1,53 @@
+// Greys
+$void: #141b22;
+
+.media-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 80px;
+	margin: 5vh auto;
+
+	.media-card {
+		border-radius: 16px;
+		box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
+		max-width: 500px;
+		background-color: #fff;
+		position: relative;
+		overflow: hidden;
+
+		.header {
+			display: flex;
+			justify-content: space-between;
+
+			.title-header {
+				height: 100px;
+				flex-grow: 1;
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				padding-left: 10px;
+				padding-right: 10px;
+
+				.title {
+					font-size: 22px;
+					color: $void;
+					line-height: 1.25;
+					word-wrap: anywhere;
+				}
+
+				.year {
+					font-size: 16px;
+				}
+			}
+
+			.poster {
+				border-radius: 0 10px 0 0;
+				overflow: hidden;
+				height: 100px;
+				mask: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 30%);
+			}
+		}
+	}
+}

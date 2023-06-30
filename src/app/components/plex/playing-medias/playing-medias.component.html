@@ -1,0 +1,14 @@
+<div class="media-container">
+	<div class="media-card" *ngFor="let media of playingMedias; trackBy: trackById">
+		<div class="header">
+			<div class="title-header">
+				<div class="title">{{ media.title }}</div>
+				<div class="year">{{ media.year }}</div>
+			</div>
+
+			<div class="poster">
+				<img [src]="media.image">
+			</div>
+		</div>
+	</div>
+</div>

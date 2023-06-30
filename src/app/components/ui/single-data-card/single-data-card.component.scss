@@ -1,0 +1,33 @@
+$titan-white: #f1eeff;
+$cold-purple: #a69fd6;
+$indigo: #6558d3;
+
+div {
+	padding: .75em 1em;
+	background-color: $titan-white;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column-reverse;
+	gap: .125em;
+}
+
+dt {
+	font-size: 14px;
+	color: $cold-purple;
+}
+
+dd {
+	color: $indigo;
+	font-weight: 600;
+	font-size: 20px;
+}
+
+@media screen and (max-width: 500px) {
+	dt {
+		font-size: 14px;
+	}
+
+	dd {
+		font-size: 18px;
+	}
+}

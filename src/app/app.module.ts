@@ -33,6 +33,9 @@ import {SortMenuComponent} from './components/ui/sort-menu/sort-menu.component';
 import { YggTorrentCardComponent } from './components/ygg/ygg-torrent-card/ygg-torrent-card.component';
 import { NotificationComponent } from './components/ui/notification/notification.component';
 import { PlexComponent } from './pages/plex/plex.component';
+import { PlayingMediasComponent } from './components/plex/playing-medias/playing-medias.component';
+import { SingleDataCardComponent } from './components/ui/single-data-card/single-data-card.component';
+import { MultipleDataCardComponent } from './components/ui/multiple-data-card/multiple-data-card.component';
 
 @NgModule({
 	declarations: [
@@ -62,7 +65,10 @@ import { PlexComponent } from './pages/plex/plex.component';
 		SortMenuComponent,
   YggTorrentCardComponent,
   NotificationComponent,
-  PlexComponent
+  PlexComponent,
+  PlayingMediasComponent,
+  SingleDataCardComponent,
+  MultipleDataCardComponent
 	],
 	imports: [
 		BrowserModule,

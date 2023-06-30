@@ -5,7 +5,9 @@ import {PlexLibrary} from "../../models/plex/plex-library";
 import {PlexMedia} from "../../models/plex/plex-media";
 import {NotificationService} from "../../components/ui/notification/notification.service";
 import {dynamicSort} from "../../helpers/utils/array";
-import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {SafeUrl} from "@angular/platform-browser";
+import {FormatFileSizePipe} from "../../pipes/format-file-size.pipe";
+import {ImageService} from "../../helpers/utils/image.service";
 
 interface ImageBlob {
 	image?: SafeUrl;
@@ -41,7 +43,7 @@ export class PlexComponent {
 		]
 	}
 
-	constructor(private _plexService: PlexService, private _notificationService: NotificationService, private readonly domSanitizer: DomSanitizer,) {
+	constructor(private _plexService: PlexService, private _notificationService: NotificationService, private _imageService: ImageService, private _formatFileSizePipe: FormatFileSizePipe) {
 		this._plexService.getLibraries().subscribe(res => {
 			this.plexLibraries = res;
 			this.filterLibrary = this.plexLibraries[0];
@@ -51,16 +53,7 @@ export class PlexComponent {
 
 	getThumbnail(duplicate: PlexDuplicateExtended) {
 		this._plexService.getThumbnail(duplicate.parentId, duplicate.thumbnailId)
-			.subscribe(data => this.createImageFromBlob(data, duplicate));
-	}
-
-	createImageFromBlob(image: Blob, duplicate: PlexDuplicateExtended) {
-		let reader = new FileReader();
-		reader.onloadend = () => {
-			duplicate.image = this.domSanitizer.bypassSecurityTrustUrl(reader.result as string);
-		}
-
-		reader.readAsDataURL(image);
+			.subscribe(data => this._imageService.createImageFromBlob(data, duplicate));
 	}
 
 	public trackById(_: any, plexDuplicate: { id: number }): number {
@@ -100,5 +93,14 @@ export class PlexComponent {
 
 	private _executeSort() {
 		this.plexDuplicates = dynamicSort(this.plexDuplicates, this.sortProperty, this.sortProperty === this.previousSortByProperty && this.sortOrder);
+	}
+
+	getMediaDataTags(media: PlexMedia) {
+		return [
+			{label: 'Taille', value: this._formatFileSizePipe.transform(media.size)},
+			{label: 'Résolution', value: media.resolution},
+			{label: 'Débit', value: media.bitrate},
+			{label: 'Codec', value: media.videoCodec},
+		];
 	}
 }

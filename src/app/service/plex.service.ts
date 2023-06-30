@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {PlexDuplicate} from "../models/plex/plex-duplicate";
 import {PlexLibrary} from "../models/plex/plex-library";
+import {PlexPlayingMedia} from "../models/plex/plex-playing-medias";
 
 @Injectable({
 	providedIn: 'root'
@@ -30,5 +31,9 @@ export class PlexService {
 
 	restart() {
 		return this.http.get(environment.backendUrl + `/plex/restart`);
+	}
+
+	getPlayingMedias() {
+		return this.http.get<PlexPlayingMedia[]>(environment.backendUrl + `/plex/medias/playing`);
 	}
 }

@@ -1,8 +1,11 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Injectable, Pipe, PipeTransform} from '@angular/core';
 import {CleaningDataService} from "../service/cleaning-data.service";
 
 @Pipe({
 	name: 'formatFileSize'
+})
+@Injectable({
+	providedIn: 'root'
 })
 export class FormatFileSizePipe implements PipeTransform {
 	constructor(private _cleaningDataService: CleaningDataService) {}

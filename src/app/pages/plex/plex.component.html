@@ -1,3 +1,5 @@
+<app-playing-medias class="playing-medias"></app-playing-medias>
+
 <div class="filters">
 	<select class="form-select rounded-pill" [(ngModel)]="filterLibrary" (ngModelChange)="selectLibrary()">
 		<option selected [ngValue]="null">Librairie</option>
@@ -30,24 +32,7 @@
 					<div class="delete"><img (click)="deleteMedia(duplicate, media)" src="assets/delete.svg" height="100%"></div>
 				</div>
 
-				<dl class="details">
-					<div>
-						<dt>Taille</dt>
-						<dd>{{ media.size | formatFileSize }}</dd>
-					</div>
-					<div>
-						<dt>Résolution</dt>
-						<dd>{{ media.resolution }}</dd>
-					</div>
-					<div>
-						<dt>Débit</dt>
-						<dd>{{ media.bitrate }} kbps</dd>
-					</div>
-					<div>
-						<dt>Codec</dt>
-						<dd>{{ media.videoCodec }}</dd>
-					</div>
-				</dl>
+				<app-multiple-data-card [data]="getMediaDataTags(media)"></app-multiple-data-card>
 			</div>
 
 		</div>
