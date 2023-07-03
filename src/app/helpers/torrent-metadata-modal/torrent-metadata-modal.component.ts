@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
 import {CleaningDataService} from "../../service/cleaning-data.service";
 import {MediaInfo} from "../../models/radarr-information";
@@ -8,7 +8,7 @@ import {MediaInfo} from "../../models/radarr-information";
   templateUrl: './torrent-metadata-modal.component.html',
   styleUrls: ['./torrent-metadata-modal.component.scss']
 })
-export class TorrentMetadataModalComponent implements OnInit {
+export class TorrentMetadataModalComponent {
 
 	@Input() isOpen!: boolean;
 	@Input() metaData!: MediaInfo;
@@ -19,7 +19,4 @@ export class TorrentMetadataModalComponent implements OnInit {
 		public cleaningDataService: CleaningDataService,
 		public router: Router
 	) {}
-
-  ngOnInit(): void {
-  }
 }

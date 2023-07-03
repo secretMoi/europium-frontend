@@ -1,92 +1,71 @@
-<!-- Modal -->
-<div class="modal fade" id="{{modalName}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-		 aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
+<app-modal [name]="modalName" title="Meta data">
+	<app-metadata-element
+		*ngIf="originalName"
+		[label]="'Nom original'"
+		[value]="originalName"
+	>
+	</app-metadata-element>
 
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Meta data</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
+	<app-metadata-element
+		*ngIf="metaData?.resolution"
+		[label]="'Résolution'"
+		[value]="metaData.resolution"
+	>
+	</app-metadata-element>
 
-			<div class="modal-body">
+	<app-metadata-element
+		*ngIf="metaData?.runTime"
+		[label]="'Durée'"
+		[value]="metaData.runTime"
+	>
+	</app-metadata-element>
 
-				<app-metadata-element
-					*ngIf="originalName"
-					[label]="'Nom original'"
-					[value]="originalName"
-				>
-				</app-metadata-element>
+	<app-metadata-element
+		*ngIf="metaData?.audioLanguages"
+		[label]="'Langue'"
+		[value]="cleaningDataService.cleanLanguages(metaData.audioLanguages)"
+	>
+	</app-metadata-element>
 
-				<app-metadata-element
-					*ngIf="metaData?.resolution"
-					[label]="'Résolution'"
-					[value]="metaData.resolution"
-				>
-				</app-metadata-element>
+	<app-metadata-element
+		*ngIf="metaData?.subtitles"
+		[label]="'Sous titres'"
+		[value]="cleaningDataService.cleanLanguages(metaData.subtitles)"
+	>
+	</app-metadata-element>
 
-				<app-metadata-element
-					*ngIf="metaData?.runTime"
-					[label]="'Durée'"
-					[value]="metaData.runTime"
-				>
-				</app-metadata-element>
+	<app-metadata-element
+		*ngIf="metaData?.videoBitDepth"
+		[label]="'HDR'"
+		[imageToDisplay]="metaData.videoBitDepth > 8 ? 'assets/hdr-true.svg' : 'assets/hdr-false.svg'"
+	>
+	</app-metadata-element>
 
-				<app-metadata-element
-					*ngIf="metaData?.audioLanguages"
-					[label]="'Langue'"
-					[value]="cleaningDataService.cleanLanguages(metaData.audioLanguages)"
-				>
-				</app-metadata-element>
+	<app-metadata-element
+		*ngIf="metaData?.videoBitrate"
+		[label]="'Débit vidéo'"
+		[value]="metaData.videoBitrate.toString() + ' kbps'"
+	>
+	</app-metadata-element>
 
-				<app-metadata-element
-					*ngIf="metaData?.subtitles"
-					[label]="'Sous titres'"
-					[value]="cleaningDataService.cleanLanguages(metaData.subtitles)"
-				>
-				</app-metadata-element>
+	<app-metadata-element
+		*ngIf="metaData?.videoCodec"
+		[label]="'HEVC'"
+		[imageToDisplay]="metaData.videoCodec.search('265') != -1 ? 'assets/hevc-true.svg' : 'assets/hevc-false.svg'"
+	>
+	</app-metadata-element>
 
-				<app-metadata-element
-					*ngIf="metaData?.videoBitDepth"
-					[label]="'HDR'"
-					[imageToDisplay]="metaData.videoBitDepth > 8 ? 'assets/hdr-true.svg' : 'assets/hdr-false.svg'"
-				>
-				</app-metadata-element>
+	<app-metadata-element
+		*ngIf="metaData?.audioBitrate"
+		[label]="'Débit audio'"
+		[value]="(metaData.audioBitrate / 1000).toString() + ' kbps'"
+	>
+	</app-metadata-element>
 
-				<app-metadata-element
-					*ngIf="metaData?.videoBitrate"
-					[label]="'Débit vidéo'"
-					[value]="metaData.videoBitrate.toString() + ' kbps'"
-				>
-				</app-metadata-element>
-
-				<app-metadata-element
-					*ngIf="metaData?.videoCodec"
-					[label]="'HEVC'"
-					[imageToDisplay]="metaData.videoCodec.search('265') != -1 ? 'assets/hevc-true.svg' : 'assets/hevc-false.svg'"
-				>
-				</app-metadata-element>
-
-				<app-metadata-element
-					*ngIf="metaData?.audioBitrate"
-					[label]="'Débit audio'"
-					[value]="(metaData.audioBitrate / 1000).toString() + ' kbps'"
-				>
-				</app-metadata-element>
-
-				<app-metadata-element
-					*ngIf="metaData?.audioChannels"
-					[label]="'Canaux audio'"
-					[value]="metaData.audioChannels.toString( )"
-				>
-				</app-metadata-element>
-
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-			</div>
-
-		</div>
-	</div>
-</div>
+	<app-metadata-element
+		*ngIf="metaData?.audioChannels"
+		[label]="'Canaux audio'"
+		[value]="metaData.audioChannels.toString( )"
+	>
+	</app-metadata-element>
+</app-modal>

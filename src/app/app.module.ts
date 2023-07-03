@@ -37,6 +37,7 @@ import { PlayingMediasComponent } from './components/plex/playing-medias/playing
 import { SingleDataCardComponent } from './components/ui/single-data-card/single-data-card.component';
 import { MultipleDataCardComponent } from './components/ui/multiple-data-card/multiple-data-card.component';
 import {MillisToTimePipe} from "./pipes/millis-to-time.pipe";
+import { ModalComponent } from './components/ui/modal/modal.component';
 
 @NgModule({
 	declarations: [
@@ -70,7 +71,8 @@ import {MillisToTimePipe} from "./pipes/millis-to-time.pipe";
 		PlexComponent,
 		PlayingMediasComponent,
 		SingleDataCardComponent,
-		MultipleDataCardComponent
+		MultipleDataCardComponent,
+  ModalComponent
 	],
 	imports: [
 		BrowserModule,
