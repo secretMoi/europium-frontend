@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-horizontal-buttons',
   templateUrl: './horizontal-buttons.component.html',
   styleUrls: ['./horizontal-buttons.component.scss']
 })
-export class HorizontalButtonsComponent {
+export class HorizontalButtonsComponent implements OnInit {
 	@Input() buttons!: {image: string; label: string}[];
 
 	@Output() onButtonClicked = new EventEmitter<string>();
@@ -23,5 +23,9 @@ export class HorizontalButtonsComponent {
 
 	public isButtonActive(button: {label: string}) {
 		return button.label === this.activeButton;
+	}
+
+	ngOnInit() {
+		this.buttonClicked(this.buttons[0]);
 	}
 }
