@@ -1,0 +1,6 @@
+<div class="buttons-container">
+	<button class="button-action" *ngFor="let button of buttons; trackBy: trackByLabel" (click)="buttonClicked(button)">
+		<img [src]="'assets/' + button.image">
+		{{ button.label }}
+	</button>
+</div>

@@ -14,6 +14,11 @@ interface ImageBlob {
 
 export type PlexDuplicateExtended = PlexDuplicate & ImageBlob;
 
+enum SubMenus {
+	Current = 'En cours',
+	Duplicates = 'Doublons',
+}
+
 @Component({
 	selector: 'app-plex',
 	templateUrl: './plex.component.html',
@@ -29,6 +34,9 @@ export class PlexComponent extends BaseComponent {
 
 	public canDisplayPlayingMedia: boolean = false;
 
+	public currentSubMenu: SubMenus = SubMenus.Current;
+	public readonly subMenus = SubMenus;
+
 	private previousSortByProperty = '';
 
 	get sortMenuElements() {
@@ -41,6 +49,19 @@ export class PlexComponent extends BaseComponent {
 				key: 'totalSize',
 				label: 'Taille'
 			},
+		]
+	}
+
+	get buttons() {
+		return [
+			{
+				image: 'duplicate.svg',
+				label: SubMenus.Duplicates
+			},
+			{
+				image: 'play-theme.svg',
+				label: SubMenus.Current
+			}
 		]
 	}
 
@@ -78,6 +99,10 @@ export class PlexComponent extends BaseComponent {
 		this.sortProperty = property;
 		this._executeSort();
 		this.previousSortByProperty = this.sortProperty;
+	}
+
+	subMenuSelected($event: string) {
+		this.currentSubMenu = $event as SubMenus;
 	}
 
 	public setPlayingMediaVisibility(isVisible: boolean) {

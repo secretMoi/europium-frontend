@@ -1,0 +1,46 @@
+// Greys
+$void: #141b22;
+
+// Purple
+$titan-white: #f1eeff;
+$cold-purple: #a69fd6;
+$indigo: #6558d3;
+
+.buttons-container {
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+	overflow: hidden;
+	width: fit-content;
+	border-radius: 15px;
+	border: 1px solid $cold-purple;
+	color: $void;
+
+	button {
+		background-color: unset;
+		border: none;
+	}
+
+	.button-action {
+		display: flex;
+		gap: 15px;
+		padding: 15px;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 28px;
+		border-left: 1px solid $cold-purple;
+		min-width: 100px;
+
+		img {
+			height: 28px;
+		}
+
+		&:first-child {
+			border-left: none;
+		}
+
+		&:focus {
+			background-color: $titan-white;
+		}
+	}
+}

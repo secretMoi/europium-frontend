@@ -8,12 +8,16 @@ $indigo: #6558d3;
 
 .playing-medias {
 	width: 90vw;
-	//background-color: white;
 	display: flex;
 	border-radius: 16px;
-	//box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
 	margin: auto;
 	margin-bottom: 30px;
+}
+
+.sub-menu {
+	width: 100%;
+	display: block;
+	padding-bottom: 20px;
 }
 
 .filters {

@@ -39,6 +39,7 @@ import { MultipleDataCardComponent } from './components/ui/multiple-data-card/mu
 import {MillisToTimePipe} from "./pipes/millis-to-time.pipe";
 import { ModalComponent } from './components/ui/modal/modal.component';
 import { PlexDuplicateItemComponent } from './components/plex/plex-duplicate-item/plex-duplicate-item.component';
+import { HorizontalButtonsComponent } from './components/ui/horizontal-buttons/horizontal-buttons.component';
 
 @NgModule({
 	declarations: [
@@ -74,7 +75,8 @@ import { PlexDuplicateItemComponent } from './components/plex/plex-duplicate-ite
 		SingleDataCardComponent,
 		MultipleDataCardComponent,
   ModalComponent,
-  PlexDuplicateItemComponent
+  PlexDuplicateItemComponent,
+  HorizontalButtonsComponent
 	],
 	imports: [
 		BrowserModule,
