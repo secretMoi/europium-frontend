@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {TorrentInfo} from "../models/torrent-info";
+import {removeAllTextAfter, removeAllTextBetween} from "../helpers/utils/string";
 
 @Injectable({
 	providedIn: 'root'
@@ -34,18 +35,18 @@ export class CleaningDataService {
 	}
 
 	cleanTorrentName(name: string, isMovie: boolean = false): string {
-		name = this.removeAllTextAfter(name, 'MULTI');
-		name = this.removeAllTextAfter(name, 'VOSTFR');
-		name = this.removeAllTextAfter(name, 'TRUEFRENCH');
-		name = this.removeAllTextAfter(name, new Date().getFullYear().toString());
-		name = this.removeAllTextAfter(name, 'S0');
-		name = this.removeAllTextAfter(name, 'S1');
-		name = this.removeAllTextAfter(name, '(');
-		name = this.removeAllTextAfter(name, 'SAISON');
-		name = this.removeAllTextAfter(name, 'SEASON');
-		name = this.removeAllTextAfter(name, '20');
-		name = this.removeAllTextAfter(name, '19');
-		name = this.removeAllTextBetween(name, '[', ']');
+		name = removeAllTextAfter(name, 'MULTI');
+		name = removeAllTextAfter(name, 'VOSTFR');
+		name = removeAllTextAfter(name, 'TRUEFRENCH');
+		name = removeAllTextAfter(name, new Date().getFullYear().toString());
+		name = removeAllTextAfter(name, 'S0');
+		name = removeAllTextAfter(name, 'S1');
+		name = removeAllTextAfter(name, '(');
+		name = removeAllTextAfter(name, 'SAISON');
+		name = removeAllTextAfter(name, 'SEASON');
+		name = removeAllTextAfter(name, '20');
+		name = removeAllTextAfter(name, '19');
+		name = removeAllTextBetween(name, '[', ']');
 
 		if(isMovie && name.includes('.'))
 			name = name.substring(0, name.lastIndexOf("."));
@@ -53,26 +54,6 @@ export class CleaningDataService {
 		name = name.split(".").join(" ").trim();
 
 		return name;
-	}
-
-	removeAllTextAfter(text: string, textToSearch: string): string {
-		let index = text.toUpperCase().indexOf(textToSearch);
-		if (index !== -1)
-			text = text.substring(0, index);
-
-		return text;
-	}
-
-	removeAllTextBetween(text: string, start: string, end: string): string {
-		let startIndex = text.toUpperCase().indexOf(start);
-		if (startIndex === -1) return text;
-		let endIndex = text.toUpperCase().indexOf(end);
-		if (endIndex === -1) return text;
-
-		let textToKeep = text.substring(0, startIndex);
-		textToKeep = textToKeep + text.substring(endIndex + 1, text.length);
-
-		return textToKeep;
 	}
 
 	getSizeToDisplay(size: number): string {

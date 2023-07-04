@@ -40,6 +40,7 @@ import {MillisToTimePipe} from "./pipes/millis-to-time.pipe";
 import { ModalComponent } from './components/ui/modal/modal.component';
 import { PlexDuplicateItemComponent } from './components/plex/plex-duplicate-item/plex-duplicate-item.component';
 import { HorizontalButtonsComponent } from './components/ui/horizontal-buttons/horizontal-buttons.component';
+import { SvgComponent } from './components/ui/svg/svg.component';
 
 @NgModule({
 	declarations: [
@@ -76,7 +77,8 @@ import { HorizontalButtonsComponent } from './components/ui/horizontal-buttons/h
 		MultipleDataCardComponent,
   ModalComponent,
   PlexDuplicateItemComponent,
-  HorizontalButtonsComponent
+  HorizontalButtonsComponent,
+  SvgComponent
 	],
 	imports: [
 		BrowserModule,

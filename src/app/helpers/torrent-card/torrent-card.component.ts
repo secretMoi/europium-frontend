@@ -9,6 +9,7 @@ import {CleaningDataService} from "../../service/cleaning-data.service";
 import {ApiType} from "../../models/enums/api-type";
 import {TorrentState} from "../../models/torrent-state";
 import {Router} from "@angular/router";
+import {removeAllTextAfter} from "../utils/string";
 
 @Component({
   selector: 'app-torrent-card',
@@ -32,7 +33,7 @@ export class TorrentCardComponent {
 	}
 
 	getModalLink(): string {
-		return this.cleaningDataService.removeAllTextAfter(this.router.url, '#') + '#modal_' + this.torrent.hash;
+		return removeAllTextAfter(this.router.url, '#') + '#modal_' + this.torrent.hash;
 	}
 
 	displayState(state: string): string {
