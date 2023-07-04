@@ -38,9 +38,9 @@ $indigo: #6558d3;
 		&:first-child {
 			border-left: none;
 		}
+	}
 
-		&:focus {
-			background-color: $titan-white;
-		}
+	.active {
+		background-color: $titan-white;
 	}
 }

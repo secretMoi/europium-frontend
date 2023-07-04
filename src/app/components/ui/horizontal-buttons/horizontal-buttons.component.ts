@@ -10,11 +10,18 @@ export class HorizontalButtonsComponent {
 
 	@Output() onButtonClicked = new EventEmitter<string>();
 
+	private activeButton: string = '';
+
 	buttonClicked(button: { image: string; label: string }) {
+		this.activeButton = button.label;
 		this.onButtonClicked.emit(button.label);
 	}
 
 	public trackByLabel(_: any, item: { label: string }): string {
 		return item.label;
+	}
+
+	public isButtonActive(button: {label: string}) {
+		return button.label === this.activeButton;
 	}
 }
