@@ -38,6 +38,7 @@ import { SingleDataCardComponent } from './components/ui/single-data-card/single
 import { MultipleDataCardComponent } from './components/ui/multiple-data-card/multiple-data-card.component';
 import {MillisToTimePipe} from "./pipes/millis-to-time.pipe";
 import { ModalComponent } from './components/ui/modal/modal.component';
+import { PlexDuplicateItemComponent } from './components/plex/plex-duplicate-item/plex-duplicate-item.component';
 
 @NgModule({
 	declarations: [
@@ -72,7 +73,8 @@ import { ModalComponent } from './components/ui/modal/modal.component';
 		PlayingMediasComponent,
 		SingleDataCardComponent,
 		MultipleDataCardComponent,
-  ModalComponent
+  ModalComponent,
+  PlexDuplicateItemComponent
 	],
 	imports: [
 		BrowserModule,
