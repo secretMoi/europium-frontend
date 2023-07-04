@@ -15,5 +15,4 @@ export class SortMenuComponent {
   public elementSelected(property: string) {
 		this.onElementSelected.emit(property);
 	}
-
 }
