@@ -1,11 +1,14 @@
-<div class="bottom-sheet" [ngClass]="isOpen ? 'show' : 'hide'">
-	<div (click)="close($event)" class="close-button">
-		<app-svg name="simple-cross" [colors]="['red']"></app-svg>
-	</div>
+<div *ngIf="!isClosed" #container class="bottom-sheet-container" (click)="close($event)">
+	<div class="bottom-sheet" id="bottom-sheet" #bottomSheet
+			 [ngClass]="isOpen ? 'show' : 'hide'" stopPropagation>
+<!--		<div (click)="close($event)" class="close-button">-->
+<!--			<app-svg name="simple-cross" [colors]="['red']" [height]="24"></app-svg>-->
+<!--		</div>-->
 
-	<div *ngIf="canDrag" class="handler">
-		<span></span>
-	</div>
+		<div *ngIf="canDrag" class="handler">
+			<span></span>
+		</div>
 
-	<ng-content></ng-content>
+		<ng-content></ng-content>
+	</div>
 </div>

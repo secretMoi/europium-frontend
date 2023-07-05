@@ -10,7 +10,6 @@ export class ProgressBarComponent implements OnInit {
 	@Input() height: number = 5;
 
 	ngOnInit(): void {
-		console.log(this.height);
 		document.documentElement.style.setProperty('--height', this.height.toString());
 	}
 }

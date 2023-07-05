@@ -42,6 +42,7 @@ import { PlexDuplicateItemComponent } from './components/plex/plex-duplicate-ite
 import { HorizontalButtonsComponent } from './components/ui/horizontal-buttons/horizontal-buttons.component';
 import { SvgComponent } from './components/ui/svg/svg.component';
 import { BottomSheetComponent } from './components/ui/bottom-sheet/bottom-sheet.component';
+import {StopPropagationDirective} from "./directives/stop-propagation.directive";
 
 @NgModule({
 	declarations: [
@@ -76,11 +77,12 @@ import { BottomSheetComponent } from './components/ui/bottom-sheet/bottom-sheet.
 		PlayingMediasComponent,
 		SingleDataCardComponent,
 		MultipleDataCardComponent,
-  ModalComponent,
-  PlexDuplicateItemComponent,
-  HorizontalButtonsComponent,
-  SvgComponent,
-  BottomSheetComponent
+		ModalComponent,
+		PlexDuplicateItemComponent,
+		HorizontalButtonsComponent,
+		SvgComponent,
+		BottomSheetComponent,
+		StopPropagationDirective
 	],
 	imports: [
 		BrowserModule,

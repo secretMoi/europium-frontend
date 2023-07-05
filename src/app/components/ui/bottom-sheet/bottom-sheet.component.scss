@@ -1,3 +1,17 @@
+:root {
+	--animation-duration: 0.5s;
+}
+
+.bottom-sheet-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 998;
+	display: block;
+}
+
 .bottom-sheet {
 	position: fixed;
 	bottom: 0;
@@ -36,11 +50,11 @@
 	}
 
 	&.show {
-		animation: enter-animation 0.5s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+		animation: enter-animation var(--animation-duration) cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
 	}
 
 	&.hide {
-		animation: exit-animation 0.5s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+		animation: exit-animation var(--animation-duration) cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
 	}
 }
 
