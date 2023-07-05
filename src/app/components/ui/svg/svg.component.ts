@@ -13,7 +13,6 @@ export class SvgComponent implements OnInit {
 	@Input() width?: number;
 	@Input() colors?: string[];
 
-	public svgPaths!: { d: string }[];
 	public svgIcon?: SafeHtml;
 
   constructor(private _httpClient: HttpClient, private sanitizer: DomSanitizer) {	}
@@ -21,23 +20,19 @@ export class SvgComponent implements OnInit {
 	ngOnInit() {
 		this._httpClient
 			.get(`assets/${this.name}.svg`, { responseType: 'text' })
-			.subscribe(value => {
-				const svg = this.sanitizer.bypassSecurityTrustHtml(value);
-
-				//this._changeColors();
-
-				this.svgIcon = svg;
-			});
+			.subscribe(value => this.svgIcon = this.sanitizer.bypassSecurityTrustHtml(this._changeColors(value)));
 	}
 
 	private _changeColors(svgContent: string): string {
-		if(!this.colors || this.colors.length === 0) return '';
+		if	(!this.colors || this.colors.length === 0) return svgContent;
 
-		return '';
-		//svgContent.replace('')
+		for (let index = 0; index < this.colors.length; index++)
+			svgContent = this._setColor(svgContent, 'path' + index, this.colors[index]);
 
-		// for (let color of this.colors) {
-		//
-		// }
+		return svgContent;
+	}
+
+	private _setColor(svgContent: string, className: string, color: string): string {
+		return svgContent.replace(`class="${className}"`, `fill="${color}"`);
 	}
 }
