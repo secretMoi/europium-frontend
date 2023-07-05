@@ -1,3 +1,13 @@
+<app-bottom-sheet *ngIf="askMediaType" [isOpen]="askMediaType" (onClose)="onCloseBottomSheet()" [close$]="closeBottomSheet$">
+	<div class="media-type-title">Type de fichier</div>
+
+	<select class="form-select rounded-pill filter-element" [(ngModel)]="filterMediaType" (ngModelChange)="selectMediaType()">
+		<option [ngValue]="mediaType.Movie">Film</option>
+		<option [ngValue]="mediaType.Serie">Série</option>
+		<option [ngValue]="mediaType.Anime">Animé</option>
+	</select>
+</app-bottom-sheet>
+
 <article class="information [ torrent-card ]">
 	<div class="tags">
 		<span class="tag">{{ getMediaType }}</span>
@@ -29,7 +39,7 @@
 		</dl>
 
 		<div class="actions">
-			<div><img (click)="downloadTorrent()" src="assets/download.svg" height="100%"></div>
+			<div><img (click)="askDownloadTorrent()" src="assets/download.svg" height="100%"></div>
 			<div><a [href]=torrent.pageUrl target="_blank"><img src="assets/goto.svg" height="100%"></a></div>
 		</div>
 	</div>

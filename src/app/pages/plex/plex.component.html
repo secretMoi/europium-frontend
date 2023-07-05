@@ -1,7 +1,5 @@
 <app-horizontal-buttons class="sub-menu" [buttons]="buttons" (onButtonClicked)="subMenuSelected($event)"></app-horizontal-buttons>
 
-<app-bottom-sheet>Coucou</app-bottom-sheet>
-
 <app-playing-medias
 	*ngIf="currentSubMenu === subMenus.Current"
 	class="playing-medias"
@@ -18,7 +16,6 @@
 
 		<app-sort-menu [elements]="sortMenuElements" [sortOrder]="sortOrder" [sortProperty]="sortProperty" (onElementSelected)="sort($event)"></app-sort-menu>
 	</div>
-
 
 	<div class="cards">
 		<app-plex-duplicate-item

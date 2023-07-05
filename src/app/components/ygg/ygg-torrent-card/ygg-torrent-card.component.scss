@@ -22,6 +22,14 @@ $cold-purple: #a69fd6;
 $indigo: #6558d3;
 $governor: #4133B7;
 
+.media-type-title {
+	font-size: 24px;
+	font-weight: 450;
+	line-height: 48px;
+	letter-spacing: 1.3px;
+	color: $void;
+}
+
 .torrent-card {
 	border-radius: 16px;
 	box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);

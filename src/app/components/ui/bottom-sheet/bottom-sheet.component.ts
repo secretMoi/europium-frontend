@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-bottom-sheet',
@@ -7,8 +8,11 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@a
 })
 export class BottomSheetComponent implements OnInit, AfterViewInit {
 	@Input() canDrag: boolean = false;
+	@Input() isOpen: boolean = false;
+	@Input() close$?: Observable<void>;
 
-	public isOpen: boolean = true;
+	@Output() onClose = new EventEmitter();
+
 	public isClosed: boolean = false;
 
 	private animationDuration = '500ms';
@@ -16,10 +20,10 @@ export class BottomSheetComponent implements OnInit, AfterViewInit {
 	@ViewChild('container', {static: false}) container!: ElementRef;
 	@ViewChild('bottomSheet', {static: false}) bottomSheet!: ElementRef;
 
-  constructor() { }
-
 	ngOnInit() {
 		document.documentElement.style.setProperty('--animation-duration', this.animationDuration);
+
+		this.close$?.subscribe(_ => this.close())
 	}
 
 	ngAfterViewInit() {
@@ -27,12 +31,14 @@ export class BottomSheetComponent implements OnInit, AfterViewInit {
 		this.container.nativeElement.style.height = ( this.container.nativeElement.offsetHeight - this.bottomSheet.nativeElement.offsetHeight) + 'px';
 	}
 
-	close($event: MouseEvent) {
-		$event.stopPropagation();
+	close($event: MouseEvent | void) {
+		if($event) $event.stopPropagation();
+
 		this.isOpen = false;
 
 		setTimeout(() => {
 			this.isClosed = true;
+			this.onClose.emit();
 		}, Number(this.animationDuration.slice(0, -2)));
 	}
 }
