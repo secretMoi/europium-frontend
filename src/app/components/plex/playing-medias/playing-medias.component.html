@@ -1,4 +1,4 @@
-<div class="media-container">
+<div *ngIf="canDisplayMedias" class="media-container">
 	<div class="media-card" *ngFor="let media of playingMedias; trackBy: trackById">
 		<div class="header">
 			<div class="title-header">
@@ -18,4 +18,9 @@
 
 		<app-progress-bar [height]="5" [value]="getProgress(media)"></app-progress-bar>
 	</div>
+</div>
+
+<div *ngIf="!canDisplayMedias" class="no-media">
+	<img src="assets/no-recording.svg" height="164px">
+	<div>Il n'y a aucun média en cours de lecture</div>
 </div>

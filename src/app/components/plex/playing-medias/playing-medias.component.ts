@@ -21,6 +21,10 @@ export class PlayingMediasComponent extends BaseComponent {
 
 	@Output() hasAnyMedia$ = new EventEmitter<boolean>();
 
+	get canDisplayMedias() {
+		return this.playingMedias?.length > 0;
+	}
+
   constructor(private _plexService: PlexService, private _imageService: ImageService) {
 		super();
 

@@ -2,7 +2,7 @@
 
 <app-playing-medias
 	*ngIf="currentSubMenu === subMenus.Current"
-	[style.display]="canDisplayPlayingMedia ? 'block' : 'none'" class="playing-medias"
+	class="playing-medias"
 	(hasAnyMedia$)="setPlayingMediaVisibility($event)">
 </app-playing-medias>
 
