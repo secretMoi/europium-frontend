@@ -1,6 +1,5 @@
-<div *ngIf="isOpen" class="bottom-sheet">
+<div class="bottom-sheet" [ngClass]="isOpen ? 'show' : 'hide'">
 	<div (click)="close($event)" class="close-button">
-<!--		<img src="assets/simple-cross.svg" height="24px">-->
 		<app-svg name="simple-cross" [colors]="['red']"></app-svg>
 	</div>
 
@@ -8,5 +7,5 @@
 		<span></span>
 	</div>
 
-	Coucou
+	<ng-content></ng-content>
 </div>

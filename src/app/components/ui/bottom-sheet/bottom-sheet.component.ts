@@ -12,7 +12,6 @@ export class BottomSheetComponent {
 
   constructor() { }
 
-
 	close($event: MouseEvent) {
 		$event.stopPropagation();
 		this.isOpen = false;

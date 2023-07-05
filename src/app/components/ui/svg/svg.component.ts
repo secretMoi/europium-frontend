@@ -20,7 +20,14 @@ export class SvgComponent implements OnInit {
 	ngOnInit() {
 		this._httpClient
 			.get(`assets/${this.name}.svg`, { responseType: 'text' })
-			.subscribe(value => this.svgIcon = this.sanitizer.bypassSecurityTrustHtml(this._changeColors(value)));
+			.subscribe(value => this.svgIcon = this.sanitizer.bypassSecurityTrustHtml(this._changeAttributes(value)));
+	}
+
+	private _changeAttributes(svgContent: string): string {
+		svgContent = this._changeColors(svgContent);
+		svgContent = this._changeSizes(svgContent);
+
+		return svgContent;
 	}
 
 	private _changeColors(svgContent: string): string {
@@ -30,6 +37,10 @@ export class SvgComponent implements OnInit {
 			svgContent = this._setColor(svgContent, 'path' + index, this.colors[index]);
 
 		return svgContent;
+	}
+
+	private _changeSizes(svgContent: string): string {
+		return svgContent.replace(`<svg`, `<svg height="${this.height}px" width="${this.width ?? this.height}px"`);
 	}
 
 	private _setColor(svgContent: string, className: string, color: string): string {
