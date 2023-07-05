@@ -41,6 +41,7 @@ import { ModalComponent } from './components/ui/modal/modal.component';
 import { PlexDuplicateItemComponent } from './components/plex/plex-duplicate-item/plex-duplicate-item.component';
 import { HorizontalButtonsComponent } from './components/ui/horizontal-buttons/horizontal-buttons.component';
 import { SvgComponent } from './components/ui/svg/svg.component';
+import { BottomSheetComponent } from './components/ui/bottom-sheet/bottom-sheet.component';
 
 @NgModule({
 	declarations: [
@@ -78,7 +79,8 @@ import { SvgComponent } from './components/ui/svg/svg.component';
   ModalComponent,
   PlexDuplicateItemComponent,
   HorizontalButtonsComponent,
-  SvgComponent
+  SvgComponent,
+  BottomSheetComponent
 	],
 	imports: [
 		BrowserModule,

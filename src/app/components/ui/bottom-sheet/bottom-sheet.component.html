@@ -1,0 +1,11 @@
+<div *ngIf="isOpen" class="bottom-sheet">
+	<div (click)="close($event)" class="close-button">
+		<img src="assets/simple-cross.svg" height="24px">
+	</div>
+
+	<div *ngIf="canDrag" class="handler">
+		<span></span>
+	</div>
+
+	Coucou
+</div>

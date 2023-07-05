@@ -45,7 +45,7 @@ export class TorrentCardComponent {
 		if (state === TorrentState.ERROR) return 'assets/cancel.svg';
 		if (state === TorrentState.MISSING_FILE) return 'assets/broken-link.svg';
 
-		return 'assets/interrogation-mark.png';
+		return 'assets/interrogation.svg';
 	}
 
 	onDeleteTorrent(torrent: TorrentInfo) {
