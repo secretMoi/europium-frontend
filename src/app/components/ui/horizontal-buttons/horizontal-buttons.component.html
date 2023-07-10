@@ -1,6 +1,6 @@
 <div class="buttons-container">
 	<button class="button-action"
-					*ngFor="let button of buttons; trackBy: trackByLabel"
+					*ngFor="let button of buttons; trackBy: trackById"
 					[class.active]="isButtonActive(button)"
 					(click)="buttonClicked(button)">
 		<img [src]="'assets/' + button.image">
