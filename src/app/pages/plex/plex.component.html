@@ -1,13 +1,11 @@
 <div class="sub-menu">
-	<div class="centered-sub-menu">
 		<app-horizontal-buttons [buttons]="buttons"
 														(onButtonClicked)="subMenuSelected($event)">
 		</app-horizontal-buttons>
+</div>
 
-		<div>
-			<img class="history" *ngIf="currentSubMenu === subMenus.Current" class="history" src="assets/history.svg" height="42px">
-		</div>
-	</div>
+<div *ngIf="currentSubMenu === subMenus.Current" class="actions-menu">
+	<img class="history" src="assets/history.svg" height="42px">
 </div>
 
 <ng-container *ngIf="currentSubMenu === subMenus.Current">

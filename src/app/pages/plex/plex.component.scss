@@ -8,8 +8,8 @@ $indigo: #6558d3;
 
 .history {
 	display: block;
-	margin-top: auto;
-	margin-bottom: auto;
+	padding-right: 5vw;
+	margin-left: auto;
 }
 
 .playing-medias {
@@ -24,14 +24,6 @@ $indigo: #6558d3;
 	width: 100%;
 	display: block;
 	padding-bottom: 20px;
-
-	.centered-sub-menu {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		gap: 50px;
-		align-items: center;
-	}
 }
 
 .filters {
