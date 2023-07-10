@@ -1,0 +1,6 @@
+<div class="history-container" *ngFor="let history of mediasHistory">
+	<div class="media-history">
+		{{ history.title }}<br>
+		{{ history.userId }} - {{ history.seenAt * 1000 | date: 'short' }}
+	</div>
+</div>

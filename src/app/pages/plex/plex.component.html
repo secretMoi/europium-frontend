@@ -4,9 +4,9 @@
 		</app-horizontal-buttons>
 </div>
 
-<!--<div *ngIf="currentSubMenu === subMenus.Current" class="actions-menu">-->
-<!--	<img class="history" src="assets/history.svg" height="42px">-->
-<!--</div>-->
+<ng-container *ngIf="currentSubMenu === subMenus.History">
+	<app-plex-history></app-plex-history>
+</ng-container>
 
 <ng-container *ngIf="currentSubMenu === subMenus.Current">
 	<app-playing-medias

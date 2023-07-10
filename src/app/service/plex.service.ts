@@ -5,6 +5,7 @@ import {environment} from "../../environments/environment";
 import {PlexDuplicate} from "../models/plex/plex-duplicate";
 import {PlexLibrary} from "../models/plex/plex-library";
 import {PlexPlayingMedia} from "../models/plex/plex-playing-medias";
+import {PlexMediaHistory} from "../models/plex/plex-media-history";
 
 @Injectable({
 	providedIn: 'root'
@@ -35,5 +36,9 @@ export class PlexService {
 
 	getPlayingMedias() {
 		return this.http.get<PlexPlayingMedia[]>(environment.backendUrl + `/plex/medias/playing`);
+	}
+
+	getMediaHistory() {
+		return this.http.get<PlexMediaHistory[]>(environment.backendUrl + `/plex/medias/history`);
 	}
 }

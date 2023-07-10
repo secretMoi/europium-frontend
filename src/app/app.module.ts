@@ -43,6 +43,7 @@ import { HorizontalButtonsComponent } from './components/ui/horizontal-buttons/h
 import { SvgComponent } from './components/ui/svg/svg.component';
 import { BottomSheetComponent } from './components/ui/bottom-sheet/bottom-sheet.component';
 import {StopPropagationDirective} from "./directives/stop-propagation.directive";
+import { PlexHistoryComponent } from './components/plex/plex-history/plex-history.component';
 
 @NgModule({
 	declarations: [
@@ -82,7 +83,8 @@ import {StopPropagationDirective} from "./directives/stop-propagation.directive"
 		HorizontalButtonsComponent,
 		SvgComponent,
 		BottomSheetComponent,
-		StopPropagationDirective
+		StopPropagationDirective,
+  PlexHistoryComponent
 	],
 	imports: [
 		BrowserModule,
