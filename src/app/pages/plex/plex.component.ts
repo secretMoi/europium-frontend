@@ -15,8 +15,9 @@ interface ImageBlob {
 export type PlexDuplicateExtended = PlexDuplicate & ImageBlob;
 
 enum SubMenus {
-	Current = 'En cours',
-	Duplicates = 'Doublons',
+	Current,
+	Duplicates,
+	History,
 }
 
 @Component({
@@ -56,11 +57,15 @@ export class PlexComponent extends BaseComponent {
 		return [
 			{
 				image: 'duplicate.svg',
-				label: SubMenus.Duplicates
+				id: SubMenus.Duplicates
 			},
 			{
 				image: 'play-theme.svg',
-				label: SubMenus.Current
+				id: SubMenus.Current
+			},
+			{
+				image: 'history.svg',
+				id: SubMenus.History
 			}
 		]
 	}
@@ -101,7 +106,7 @@ export class PlexComponent extends BaseComponent {
 		this.previousSortByProperty = this.sortProperty;
 	}
 
-	subMenuSelected($event: string) {
+	subMenuSelected($event: number) {
 		this.currentSubMenu = $event as SubMenus;
 	}
 

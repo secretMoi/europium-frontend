@@ -6,23 +6,23 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./horizontal-buttons.component.scss']
 })
 export class HorizontalButtonsComponent implements OnInit {
-	@Input() buttons!: {image: string; label: string}[];
+	@Input() buttons!: {image: string; id: number}[];
 
-	@Output() onButtonClicked = new EventEmitter<string>();
+	@Output() onButtonClicked = new EventEmitter<number>();
 
-	private activeButton: string = '';
+	private activeButton: number = 0;
 
-	buttonClicked(button: { image: string; label: string }) {
-		this.activeButton = button.label;
-		this.onButtonClicked.emit(button.label);
+	buttonClicked(button: { image: string; id: number }) {
+		this.activeButton = button.id;
+		this.onButtonClicked.emit(button.id);
 	}
 
-	public trackByLabel(_: any, item: { label: string }): string {
-		return item.label;
+	public trackByLabel(_: any, item: { id: number }): number {
+		return item.id;
 	}
 
-	public isButtonActive(button: {label: string}) {
-		return button.label === this.activeButton;
+	public isButtonActive(button: {id: number}) {
+		return button.id === this.activeButton;
 	}
 
 	ngOnInit() {

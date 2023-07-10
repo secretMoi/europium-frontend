@@ -22,14 +22,12 @@ $indigo: #6558d3;
 	}
 
 	.button-action {
-		display: flex;
-		gap: 15px;
 		padding: 15px;
 		font-weight: 500;
 		font-size: 18px;
 		line-height: 28px;
 		border-left: 1px solid $cold-purple;
-		min-width: 100px;
+		min-width: 75px;
 
 		img {
 			height: 28px;
