@@ -1,6 +1,6 @@
-<div class="history-container" *ngFor="let history of mediasHistory">
-	<div class="media-history">
-		{{ history.title }}<br>
-		{{ history.userId }} - {{ history.seenAt * 1000 | date: 'short' }}
-	</div>
+<div class="cards">
+	<app-plex-history-item
+		*ngFor="let history of mediasHistory"
+		[plexMediaHistory]="history">
+	</app-plex-history-item>
 </div>

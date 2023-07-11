@@ -39,6 +39,6 @@ export class PlexService {
 	}
 
 	getMediaHistory() {
-		return this.http.get<PlexMediaHistory[]>(environment.backendUrl + `/plex/medias/history`);
+		return this.http.get<PlexMediaHistory[]>(environment.backendUrl + `/plex/medias/history?since=1688194009`);
 	}
 }

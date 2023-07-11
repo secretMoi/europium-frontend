@@ -44,6 +44,7 @@ import { SvgComponent } from './components/ui/svg/svg.component';
 import { BottomSheetComponent } from './components/ui/bottom-sheet/bottom-sheet.component';
 import {StopPropagationDirective} from "./directives/stop-propagation.directive";
 import { PlexHistoryComponent } from './components/plex/plex-history/plex-history.component';
+import { PlexHistoryItemComponent } from './components/plex/plex-history-item/plex-history-item.component';
 
 @NgModule({
 	declarations: [
@@ -84,7 +85,8 @@ import { PlexHistoryComponent } from './components/plex/plex-history/plex-histor
 		SvgComponent,
 		BottomSheetComponent,
 		StopPropagationDirective,
-  PlexHistoryComponent
+  PlexHistoryComponent,
+  PlexHistoryItemComponent
 	],
 	imports: [
 		BrowserModule,
