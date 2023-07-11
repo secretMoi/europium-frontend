@@ -1,4 +1,5 @@
 import {MediaType} from "../ygg-torrent-search";
+import {SafeUrl} from "@angular/platform-browser";
 
 export interface PlexMediaHistory {
 	id?: number;
@@ -6,4 +7,7 @@ export interface PlexMediaHistory {
 	title: string;
 	mediaType: MediaType;
 	seenAt: number;
+	parentId: number;
+	thumbnailId: number;
+	image: SafeUrl;
 }

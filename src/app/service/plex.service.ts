@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {PlexDuplicate} from "../models/plex/plex-duplicate";
@@ -26,8 +26,13 @@ export class PlexService {
 		return this.http.delete<boolean>(environment.backendUrl + `/plex/delete/media/${mediaId}/file/${fileId}`);
 	}
 
-	getThumbnail(parentId: number, thumbnailId: number) {
-		return this.http.get(environment.backendUrl + `/plex/thumbnail/${parentId}/${thumbnailId}`, { responseType: 'blob' });
+	getThumbnail(parentId: number, thumbnailId: number, width?: number, height?: number) {
+		let params = new HttpParams();
+
+		if(width) params = params.append('width', width);
+		if(height) params = params.append('height', height);
+
+		return this.http.get(environment.backendUrl + `/plex/thumbnail/${parentId}/${thumbnailId}`, { params: params, responseType: 'blob' });
 	}
 
 	restart() {
