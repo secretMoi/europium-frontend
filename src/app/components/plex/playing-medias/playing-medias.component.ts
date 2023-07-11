@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {PlexService} from "../../../service/plex.service";
 import {PlexPlayingMedia} from "../../../models/plex/plex-playing-medias";
 import {BaseComponent} from "../../base.component";
@@ -43,13 +43,4 @@ export class PlayingMediasComponent extends BaseComponent {
 		this._plexService.getThumbnail(media.id, media.thumbnailId)
 			.subscribe(data => this._imageService.createImageFromBlob(data, media));
 	}
-
-	// getMediaDataTags(media: PlexPlayingMedia) {
-	// 	return [
-	// 		{label: 'Taille', value: this._formatFileSizePipe.transform(media.size)},
-	// 		{label: 'Résolution', value: media.resolution},
-	// 		{label: 'Débit', value: media.bitrate},
-	// 		{label: 'Codec', value: media.videoCodec},
-	// 	];
-	// }
 }

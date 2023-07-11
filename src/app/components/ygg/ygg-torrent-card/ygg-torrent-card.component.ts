@@ -3,6 +3,7 @@ import {MediaQuality, MediaType, YggTorrentSearch} from "../../../models/ygg-tor
 import {TorrentService} from "../../../service/torrent.service";
 import {NotificationService, NotificationType} from "../../ui/notification/notification.service";
 import {Subject} from "rxjs";
+import {getMediaTypeLabel} from "../../../mappers/media-mapper";
 
 @Component({
   selector: 'app-ygg-torrent-card',
@@ -21,11 +22,7 @@ export class YggTorrentCardComponent {
 	constructor(private _torrentService: TorrentService, private _notificationService: NotificationService) {	}
 
 	get getMediaType(): string {
-		if(this.torrent.mediaType === MediaType.Serie) return 'Série';
-		if(this.torrent.mediaType === MediaType.Movie) return 'Film';
-		if(this.torrent.mediaType === MediaType.Anime) return 'Animé';
-
-		return 'Inconnu';
+		return getMediaTypeLabel(this.torrent.mediaType);
 	}
 
 	get mediaQuality(): string {
