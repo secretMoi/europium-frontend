@@ -16,7 +16,7 @@ export class PlexHistoryItemComponent {
 
 	public getMediaDataTags() {
 		return [
-			{label: 'User', value: this.plexMediaHistory.userId},
+			{label: 'User', value: this.plexMediaHistory.user},
 			{label: 'Type', value: this.plexMediaHistory.mediaType},
 			{label: 'Il y a', value: dateAgo(getCurrentTimestamp() - this.plexMediaHistory.seenAt)},
 		];
