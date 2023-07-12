@@ -23,7 +23,7 @@ export class PlexHistoryComponent extends BaseComponent {
 	private _getThumbnail(media: PlexMediaHistory) {
 		if (media.parentId === 0 || media.thumbnailId === 0) return;
 
-		this._plexService.getThumbnail({parentId: media.parentId, thumbnailId: media.thumbnailId, size: 400, isArt: true})
+		this._plexService.getThumbnail({parentId: media.parentId, thumbnailId: media.thumbnailId, size: 500, isArt: true})
 			.subscribe(data => this._imageService.createImageFromBlob(data, media));
 	}
 }
