@@ -77,6 +77,8 @@ $indigo: #6558d3;
 
 @media screen and (max-width: 500px) {
 	.information {
+		width: auto;
+
 		.title {
 			font-size: 22px;
 		}
