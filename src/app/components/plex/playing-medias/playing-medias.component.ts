@@ -40,7 +40,7 @@ export class PlayingMediasComponent extends BaseComponent {
 	}
 
 	private _getThumbnail(media: PlexPlayingMediaExtended) {
-		this._plexService.getThumbnail(media.id, media.thumbnailId)
+		this._plexService.getThumbnail({parentId: media.id, thumbnailId: media.thumbnailId})
 			.subscribe(data => this._imageService.createImageFromBlob(data, media));
 	}
 }

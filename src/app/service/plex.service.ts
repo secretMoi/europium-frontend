@@ -6,6 +6,7 @@ import {PlexDuplicate} from "../models/plex/plex-duplicate";
 import {PlexLibrary} from "../models/plex/plex-library";
 import {PlexPlayingMedia} from "../models/plex/plex-playing-medias";
 import {PlexMediaHistory} from "../models/plex/plex-media-history";
+import {PlexPictureParameters} from "../models/plex/plex-picture-parameters";
 
 @Injectable({
 	providedIn: 'root'
@@ -26,13 +27,15 @@ export class PlexService {
 		return this.http.delete<boolean>(environment.backendUrl + `/plex/delete/media/${mediaId}/file/${fileId}`);
 	}
 
-	getThumbnail(parentId: number, thumbnailId: number, width?: number, height?: number) {
+	getThumbnail(plexPictureParameters: PlexPictureParameters) {
 		let params = new HttpParams();
 
-		if(width) params = params.append('width', width);
-		if(height) params = params.append('height', height);
+		params = params.append('parentId', plexPictureParameters.parentId)
+		if(plexPictureParameters.thumbnailId) params = params.append('thumbnailId', plexPictureParameters.thumbnailId);
+		if(plexPictureParameters.size) params = params.append('size', plexPictureParameters.size);
+		if(plexPictureParameters.isArt === true) params = params.append('isArt', plexPictureParameters.isArt);
 
-		return this.http.get(environment.backendUrl + `/plex/thumbnail/${parentId}/${thumbnailId}`, { params: params, responseType: 'blob' });
+		return this.http.get(environment.backendUrl + `/plex/thumbnail`, { params: params, responseType: 'blob' });
 	}
 
 	restart() {
@@ -44,6 +47,7 @@ export class PlexService {
 	}
 
 	getMediaHistory() {
+		// return this.http.get<PlexMediaHistory[]>(environment.backendUrl + `/plex/medias/history`);
 		return this.http.get<PlexMediaHistory[]>(environment.backendUrl + `/plex/medias/history?since=1688194009`);
 	}
 }

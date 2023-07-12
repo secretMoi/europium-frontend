@@ -5,14 +5,14 @@ import {BaseComponent} from "../../base.component";
 import {ImageService} from "../../../helpers/utils/image.service";
 
 @Component({
-  selector: 'app-plex-history',
-  templateUrl: './plex-history.component.html',
-  styleUrls: ['./plex-history.component.scss']
+	selector: 'app-plex-history',
+	templateUrl: './plex-history.component.html',
+	styleUrls: ['./plex-history.component.scss']
 })
 export class PlexHistoryComponent extends BaseComponent {
 	public mediasHistory: PlexMediaHistory[] = [];
 
-  constructor(private _plexService: PlexService, private _imageService: ImageService) {
+	constructor(private _plexService: PlexService, private _imageService: ImageService) {
 		super();
 		this._plexService.getMediaHistory().subscribe(history => {
 			this.mediasHistory = history;
@@ -21,9 +21,9 @@ export class PlexHistoryComponent extends BaseComponent {
 	}
 
 	private _getThumbnail(media: PlexMediaHistory) {
-		if(media.parentId === 0 || media.thumbnailId === 0) return;
+		if (media.parentId === 0 || media.thumbnailId === 0) return;
 
-		this._plexService.getThumbnail(media.parentId, media.thumbnailId, 400)
+		this._plexService.getThumbnail({parentId: media.parentId, thumbnailId: media.thumbnailId, size: 400, isArt: true})
 			.subscribe(data => this._imageService.createImageFromBlob(data, media));
 	}
 }

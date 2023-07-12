@@ -81,7 +81,7 @@ export class PlexComponent extends BaseComponent {
 	}
 
 	getThumbnail(duplicate: PlexDuplicateExtended) {
-		this._plexService.getThumbnail(duplicate.parentId, duplicate.thumbnailId)
+		this._plexService.getThumbnail({parentId: duplicate.parentId, thumbnailId: duplicate.thumbnailId})
 			.subscribe(data => this._imageService.createImageFromBlob(data, duplicate));
 	}
 
