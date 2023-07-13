@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, shareReplay} from "rxjs";
 import {environment} from "../../environments/environment";
 import {PlexDuplicate} from "../models/plex/plex-duplicate";
 import {PlexLibrary} from "../models/plex/plex-library";
@@ -29,13 +29,14 @@ export class PlexService {
 
 	getThumbnail(plexPictureParameters: PlexPictureParameters) {
 		let params = new HttpParams();
+		params = params.append('cache', 'true');
 
 		params = params.append('parentId', plexPictureParameters.parentId)
 		if(plexPictureParameters.thumbnailId) params = params.append('thumbnailId', plexPictureParameters.thumbnailId);
 		if(plexPictureParameters.size) params = params.append('size', plexPictureParameters.size);
 		if(plexPictureParameters.isArt === true) params = params.append('isArt', plexPictureParameters.isArt);
 
-		return this.http.get(environment.backendUrl + `/plex/thumbnail`, { params: params, responseType: 'blob' });
+		return this.http.get(environment.backendUrl + `/plex/thumbnail`, { params: params, responseType: 'blob' }).pipe(shareReplay(1));
 	}
 
 	restart() {

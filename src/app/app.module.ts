@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ChartComponent} from './helpers/chart/chart.component';
 import {HorizontalChartComponent} from './helpers/horizontal-chart/horizontal-chart.component';
 import {VolumeListComponent} from './pages/volume-list/volume-list.component';
@@ -45,6 +45,7 @@ import { BottomSheetComponent } from './components/ui/bottom-sheet/bottom-sheet.
 import {StopPropagationDirective} from "./directives/stop-propagation.directive";
 import { PlexHistoryComponent } from './components/plex/plex-history/plex-history.component';
 import { PlexHistoryItemComponent } from './components/plex/plex-history-item/plex-history-item.component';
+import {CacheInterceptor} from "./interceptors/cache.interceptor";
 
 @NgModule({
 	declarations: [
@@ -85,8 +86,8 @@ import { PlexHistoryItemComponent } from './components/plex/plex-history-item/pl
 		SvgComponent,
 		BottomSheetComponent,
 		StopPropagationDirective,
-  PlexHistoryComponent,
-  PlexHistoryItemComponent
+		PlexHistoryComponent,
+		PlexHistoryItemComponent
 	],
 	imports: [
 		BrowserModule,
@@ -97,7 +98,11 @@ import { PlexHistoryItemComponent } from './components/plex/plex-history-item/pl
 		BrowserAnimationsModule,
 		NgbModule
 	],
-	providers: [],
+	providers: [{
+		provide: HTTP_INTERCEPTORS,
+		useClass: CacheInterceptor,
+		multi: true
+	}],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
