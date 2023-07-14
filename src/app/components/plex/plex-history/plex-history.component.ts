@@ -14,16 +14,7 @@ export class PlexHistoryComponent extends BaseComponent {
 
 	constructor(private _plexService: PlexService, private _imageService: ImageService) {
 		super();
-		this._plexService.getMediaHistory().subscribe(history => {
-			this.mediasHistory = history;
-			this.mediasHistory.forEach(media => this._getThumbnail(media));
-		});
-	}
 
-	private _getThumbnail(media: PlexMediaHistory) {
-		if (media.parentId === 0 || media.thumbnailId === 0) return;
-
-		this._plexService.getThumbnail({parentId: media.parentId, thumbnailId: media.thumbnailId, size: 500, isArt: true})
-			.subscribe(data => this._imageService.createImageFromBlob(data, media));
+		this._plexService.getMediaHistory().subscribe(history => this.mediasHistory = history);
 	}
 }

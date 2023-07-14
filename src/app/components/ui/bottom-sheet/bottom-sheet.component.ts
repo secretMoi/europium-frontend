@@ -27,8 +27,7 @@ export class BottomSheetComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		//const containerElement = this.container.nativeElement as HTMLElement;
-		this.container.nativeElement.style.height = ( this.container.nativeElement.offsetHeight - this.bottomSheet.nativeElement.offsetHeight) + 'px';
+		this.container.nativeElement.style.height = (this.container.nativeElement.offsetHeight - this.bottomSheet.nativeElement.offsetHeight) + 'px';
 	}
 
 	close($event: MouseEvent | void) {

@@ -93,7 +93,7 @@ export class PlexComponent extends BaseComponent {
 		this._plexService.getDuplicates(this.filterLibrary!).subscribe(res => {
 			this.plexDuplicates = res;
 
-			res.forEach(x => this.getThumbnail(x)); // todo optimize with cache
+			res.forEach(x => this.getThumbnail(x));
 
 			this._executeSort();
 		});
