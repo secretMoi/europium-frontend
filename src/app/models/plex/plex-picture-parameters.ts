@@ -1,6 +1,7 @@
+import {SafeUrl} from "@angular/platform-browser";
+
 export interface PlexPictureParameters {
-	parentId: number;
-	thumbnailId?: number;
 	size?: number;
 	isArt?: boolean;
+	media: {parentId: number, thumbnailId?: number, image?: SafeUrl};
 }

@@ -1,14 +1,6 @@
-<article class="information [ torrent-card ]">
+<article #item class="information [ torrent-card ]">
 
-	<div class="title-header" >
-		<h2 class="title">
-			{{ plexDuplicate.title }}
-		</h2>
-
-		<div class="poster">
-			<img [src]="plexDuplicate.image">
-		</div>
-	</div>
+	<app-media-poster-header [image]="plexDuplicate.image" [title]="plexDuplicate.title"></app-media-poster-header>
 
 	<div class="files-container">
 		<div class="file" *ngFor="let media of plexDuplicate.plexMedias; trackBy: trackById">

@@ -1,5 +1,5 @@
 <div *ngIf="canDisplayMedias" class="media-container">
-	<div class="media-card" *ngFor="let media of playingMedias; trackBy: trackById">
+	<div #item class="media-card" *ngFor="let media of playingMedias; trackBy: trackById">
 		<div class="header">
 			<div class="title-header">
 				<div class="title">{{ media.title }}</div>

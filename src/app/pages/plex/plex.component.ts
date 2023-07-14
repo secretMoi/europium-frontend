@@ -80,11 +80,6 @@ export class PlexComponent extends BaseComponent {
 		});
 	}
 
-	getThumbnail(duplicate: PlexDuplicateExtended) {
-		this._plexService.getThumbnail({parentId: duplicate.parentId, thumbnailId: duplicate.thumbnailId})
-			.subscribe(data => this._imageService.createImageFromBlob(data, duplicate));
-	}
-
 	deleteMedia() {
 		this.selectLibrary();
 	}
@@ -92,9 +87,6 @@ export class PlexComponent extends BaseComponent {
 	selectLibrary() {
 		this._plexService.getDuplicates(this.filterLibrary!).subscribe(res => {
 			this.plexDuplicates = res;
-
-			res.forEach(x => this.getThumbnail(x));
-
 			this._executeSort();
 		});
 	}

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable, shareReplay} from "rxjs";
+import {Observable, of, tap} from "rxjs";
 import {environment} from "../../environments/environment";
 import {PlexDuplicate} from "../models/plex/plex-duplicate";
 import {PlexLibrary} from "../models/plex/plex-library";
@@ -8,12 +8,13 @@ import {PlexPlayingMedia} from "../models/plex/plex-playing-medias";
 import {PlexMediaHistory} from "../models/plex/plex-media-history";
 import {PlexPictureParameters} from "../models/plex/plex-picture-parameters";
 import {HttpCacheService} from "./http-cache.service";
+import {ImageService} from "../helpers/utils/image.service";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class PlexService {
-	constructor(private http: HttpClient, private httpCacheService: HttpCacheService) {
+	constructor(private http: HttpClient, private httpCacheService: HttpCacheService, private imageService: ImageService) {
 	}
 
 	getDuplicates(library: PlexLibrary): Observable<PlexDuplicate[]> {
@@ -29,14 +30,21 @@ export class PlexService {
 	}
 
 	getThumbnail(plexPictureParameters: PlexPictureParameters) {
+		if (plexPictureParameters.media.parentId === 0 || plexPictureParameters.media.thumbnailId === 0) return of();
+
 		let params = new HttpParams();
 
-		params = params.append('parentId', plexPictureParameters.parentId)
-		if(plexPictureParameters.thumbnailId) params = params.append('thumbnailId', plexPictureParameters.thumbnailId);
+		params = params.append('parentId', plexPictureParameters.media.parentId)
+		if(plexPictureParameters.media.thumbnailId) params = params.append('thumbnailId', plexPictureParameters.media.thumbnailId);
 		if(plexPictureParameters.size) params = params.append('size', plexPictureParameters.size);
 		if(plexPictureParameters.isArt === true) params = params.append('isArt', plexPictureParameters.isArt);
 
-		return this.httpCacheService.get(environment.backendUrl + `/plex/thumbnail`, { params: params, responseType: 'blob' });
+		return this.httpCacheService.get(
+			environment.backendUrl + `/plex/thumbnail`,
+			{ params: params, responseType: 'blob' }
+		).pipe(tap(
+			data => this.imageService.createImageFromBlob(data, plexPictureParameters.media)
+		));
 	}
 
 	restart() {

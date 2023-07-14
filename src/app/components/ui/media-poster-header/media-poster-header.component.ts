@@ -7,6 +7,6 @@ import {SafeUrl} from "@angular/platform-browser";
   styleUrls: ['./media-poster-header.component.scss']
 })
 export class MediaPosterHeaderComponent {
-	@Input() image!: SafeUrl;
+	@Input() image?: SafeUrl;
 	@Input() title!: string;
 }

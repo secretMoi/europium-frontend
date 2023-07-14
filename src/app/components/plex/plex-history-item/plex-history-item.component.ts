@@ -6,20 +6,25 @@ import {PlexService} from "../../../service/plex.service";
 import {ImageService} from "../../../helpers/utils/image.service";
 
 @Component({
-  selector: 'app-plex-history-item',
-  templateUrl: './plex-history-item.component.html',
-  styleUrls: ['./plex-history-item.component.scss']
+	selector: 'app-plex-history-item',
+	templateUrl: './plex-history-item.component.html',
+	styleUrls: ['./plex-history-item.component.scss']
 })
 export class PlexHistoryItemComponent implements AfterViewInit {
 
 	@Input() plexMediaHistory!: PlexMediaHistory;
 
-	@ViewChild('item', {static: false, read: ElementRef}) children!: ElementRef;
+	@ViewChild('item', {static: false, read: ElementRef}) historyChild!: ElementRef;
 
 	constructor(private _plexService: PlexService, private _imageService: ImageService) {}
 
 	ngAfterViewInit() {
-		this._getThumbnail(this.children.nativeElement.offsetWidth)
+		this._plexService.getThumbnail({
+				size: this.historyChild.nativeElement.offsetWidth,
+				isArt: true,
+				media: this.plexMediaHistory
+			}
+		).subscribe();
 	}
 
 	public getMediaDataTags() {
@@ -29,17 +34,5 @@ export class PlexHistoryItemComponent implements AfterViewInit {
 			{label: 'Type', value: getMediaTypeLabel(this.plexMediaHistory.mediaType)},
 			{label: 'Il y a', value: dateAgo(getCurrentTimestamp() - this.plexMediaHistory.seenAt)},
 		];
-	}
-
-	private _getThumbnail(width: number) {
-		if (this.plexMediaHistory.parentId === 0 || this.plexMediaHistory.thumbnailId === 0) return;
-
-		this._plexService.getThumbnail({
-			parentId: this.plexMediaHistory.parentId,
-			thumbnailId: this.plexMediaHistory.thumbnailId,
-			size: width,
-			isArt: true
-		})
-			.subscribe(data => this._imageService.createImageFromBlob(data, this.plexMediaHistory));
 	}
 }
