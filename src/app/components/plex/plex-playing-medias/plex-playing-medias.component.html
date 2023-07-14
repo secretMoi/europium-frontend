@@ -1,0 +1,12 @@
+<div *ngIf="canDisplayMedias" class="media-container">
+	<app-plex-playing-media-item
+		class="playing-media"
+		*ngFor="let playingMedia of playingMedias; trackBy: trackById"
+		[playingMedia]="playingMedia">
+	</app-plex-playing-media-item>
+</div>
+
+<div *ngIf="!canDisplayMedias" class="no-media">
+	<img src="assets/no-recording.svg" height="164px">
+	<div>Il n'y a aucun média en cours de lecture</div>
+</div>

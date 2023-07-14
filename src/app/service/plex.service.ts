@@ -30,6 +30,8 @@ export class PlexService {
 	}
 
 	getThumbnail(plexPictureParameters: PlexPictureParameters) {
+		console.warn(plexPictureParameters);
+
 		if (plexPictureParameters.media.parentId === 0 || plexPictureParameters.media.thumbnailId === 0) return of();
 
 		let params = new HttpParams();

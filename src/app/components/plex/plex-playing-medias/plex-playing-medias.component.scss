@@ -1,0 +1,48 @@
+.media-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 80px;
+
+	.playing-media {
+		width: 100%;
+	}
+}
+
+.no-media {
+	margin: auto;
+	padding-top: 20px;
+
+	img {
+		margin: auto;
+		display: block;
+	}
+
+	div {
+		padding-top: 20px;
+		font-size: 18px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.media-container {
+		gap: 40px;
+		width: 100%;
+
+		.media-card {
+			width: 100%;
+
+			.header {
+				.title-header {
+					.title {
+						font-size: 18px;
+					}
+
+					.year {
+						font-size: 14px;
+					}
+				}
+			}
+		}
+	}
+}

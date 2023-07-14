@@ -33,7 +33,6 @@ import {SortMenuComponent} from './components/ui/sort-menu/sort-menu.component';
 import { YggTorrentCardComponent } from './components/ygg/ygg-torrent-card/ygg-torrent-card.component';
 import { NotificationComponent } from './components/ui/notification/notification.component';
 import { PlexComponent } from './pages/plex/plex.component';
-import { PlayingMediasComponent } from './components/plex/playing-medias/playing-medias.component';
 import { SingleDataCardComponent } from './components/ui/single-data-card/single-data-card.component';
 import { MultipleDataCardComponent } from './components/ui/multiple-data-card/multiple-data-card.component';
 import {MillisToTimePipe} from "./pipes/millis-to-time.pipe";
@@ -47,6 +46,8 @@ import { PlexHistoryComponent } from './components/plex/plex-history/plex-histor
 import { PlexHistoryItemComponent } from './components/plex/plex-history-item/plex-history-item.component';
 import {CacheInterceptor} from "./interceptors/cache.interceptor";
 import { MediaPosterHeaderComponent } from './components/ui/media-poster-header/media-poster-header.component';
+import { PlexPlayingMediaItemComponent } from './components/plex/plex-playing-media-item/plex-playing-media-item.component';
+import {PlexPlayingMediasComponent} from "./components/plex/plex-playing-medias/plex-playing-medias.component";
 
 @NgModule({
 	declarations: [
@@ -78,7 +79,7 @@ import { MediaPosterHeaderComponent } from './components/ui/media-poster-header/
 		YggTorrentCardComponent,
 		NotificationComponent,
 		PlexComponent,
-		PlayingMediasComponent,
+		PlexPlayingMediasComponent,
 		SingleDataCardComponent,
 		MultipleDataCardComponent,
 		ModalComponent,
@@ -89,7 +90,8 @@ import { MediaPosterHeaderComponent } from './components/ui/media-poster-header/
 		StopPropagationDirective,
 		PlexHistoryComponent,
 		PlexHistoryItemComponent,
-  MediaPosterHeaderComponent
+		MediaPosterHeaderComponent,
+		PlexPlayingMediaItemComponent
 	],
 	imports: [
 		BrowserModule,

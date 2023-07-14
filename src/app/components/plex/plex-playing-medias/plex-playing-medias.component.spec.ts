@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayingMediasComponent } from './playing-medias.component';
+import { PlexPlayingMediasComponent } from './plex-playing-medias.component';
 
 describe('PlayingMediasComponent', () => {
-  let component: PlayingMediasComponent;
-  let fixture: ComponentFixture<PlayingMediasComponent>;
+  let component: PlexPlayingMediasComponent;
+  let fixture: ComponentFixture<PlexPlayingMediasComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlayingMediasComponent ]
+      declarations: [ PlexPlayingMediasComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PlayingMediasComponent);
+    fixture = TestBed.createComponent(PlexPlayingMediasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

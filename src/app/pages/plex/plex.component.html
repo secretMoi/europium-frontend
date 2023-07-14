@@ -9,10 +9,10 @@
 </ng-container>
 
 <ng-container *ngIf="currentSubMenu === subMenus.Current">
-	<app-playing-medias
+	<app-plex-playing-medias
 		class="playing-medias"
 		(hasAnyMedia$)="setPlayingMediaVisibility($event)">
-	</app-playing-medias>
+	</app-plex-playing-medias>
 </ng-container>
 
 <ng-container *ngIf="currentSubMenu === subMenus.Duplicates">

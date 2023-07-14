@@ -2,22 +2,14 @@ import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/c
 import {PlexService} from "../../../service/plex.service";
 import {PlexPlayingMedia} from "../../../models/plex/plex-playing-medias";
 import {BaseComponent} from "../../base.component";
-import {SafeUrl} from "@angular/platform-browser";
-import {ImageService} from "../../../helpers/utils/image.service";
-
-interface ImageBlob {
-	image?: SafeUrl;
-}
-
-type PlexPlayingMediaExtended = PlexPlayingMedia & ImageBlob;
 
 @Component({
-  selector: 'app-playing-medias',
-  templateUrl: './playing-medias.component.html',
-  styleUrls: ['./playing-medias.component.scss']
+  selector: 'app-plex-playing-medias',
+  templateUrl: './plex-playing-medias.component.html',
+  styleUrls: ['./plex-playing-medias.component.scss']
 })
-export class PlayingMediasComponent extends BaseComponent {
-	public playingMedias: PlexPlayingMediaExtended[] = [];
+export class PlexPlayingMediasComponent extends BaseComponent {
+	public playingMedias: PlexPlayingMedia[] = [];
 
 	@Output() hasAnyMedia$ = new EventEmitter<boolean>();
 
@@ -27,7 +19,7 @@ export class PlayingMediasComponent extends BaseComponent {
 		return this.playingMedias?.length > 0;
 	}
 
-  constructor(private _plexService: PlexService, private _imageService: ImageService) {
+  constructor(private _plexService: PlexService) {
 		super();
 
 		this._plexService.getPlayingMedias().subscribe(medias => {
@@ -37,12 +29,7 @@ export class PlayingMediasComponent extends BaseComponent {
 		});
 	}
 
-	getProgress(media: PlexPlayingMedia) {
-		return media.progress / media.duration * 100;
-	}
-
 	private getThumbnail() {
-		console.warn(this.playingMedias);
 		for (let playingMedia of this.playingMedias) {
 			this._plexService.getThumbnail({
 					size: this.mediaChild.nativeElement.offsetWidth,
