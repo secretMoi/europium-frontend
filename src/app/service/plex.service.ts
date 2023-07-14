@@ -7,12 +7,13 @@ import {PlexLibrary} from "../models/plex/plex-library";
 import {PlexPlayingMedia} from "../models/plex/plex-playing-medias";
 import {PlexMediaHistory} from "../models/plex/plex-media-history";
 import {PlexPictureParameters} from "../models/plex/plex-picture-parameters";
+import {HttpCacheService} from "./http-cache.service";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class PlexService {
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private httpCacheService: HttpCacheService) {
 	}
 
 	getDuplicates(library: PlexLibrary): Observable<PlexDuplicate[]> {
@@ -29,14 +30,13 @@ export class PlexService {
 
 	getThumbnail(plexPictureParameters: PlexPictureParameters) {
 		let params = new HttpParams();
-		params = params.append('cache', 'true');
 
 		params = params.append('parentId', plexPictureParameters.parentId)
 		if(plexPictureParameters.thumbnailId) params = params.append('thumbnailId', plexPictureParameters.thumbnailId);
 		if(plexPictureParameters.size) params = params.append('size', plexPictureParameters.size);
 		if(plexPictureParameters.isArt === true) params = params.append('isArt', plexPictureParameters.isArt);
 
-		return this.http.get(environment.backendUrl + `/plex/thumbnail`, { params: params, responseType: 'blob' }).pipe(shareReplay(1));
+		return this.httpCacheService.get(environment.backendUrl + `/plex/thumbnail`, { params: params, responseType: 'blob' });
 	}
 
 	restart() {
