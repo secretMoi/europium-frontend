@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {PlexPlayingMedia} from "../../../models/plex/plex-playing-medias";
 import {SafeUrl} from "@angular/platform-browser";
 import {PlexService} from "../../../service/plex.service";
 
 interface ImageBlob {
 	image?: SafeUrl;
+	parentId?: number;
 }
 
 type PlexPlayingMediaExtended = PlexPlayingMedia & ImageBlob;
@@ -21,17 +22,15 @@ export class PlexPlayingMediaItemComponent implements AfterViewInit {
 
   constructor(private _plexService: PlexService) { }
 
-  ngAfterViewInit() {
+	ngAfterViewInit() {
+		this.playingMedia.parentId = this.playingMedia.id;
+
 		this._plexService.getThumbnail({
 				size: this.mediaChild.nativeElement.offsetWidth,
 				isArt: true,
-				media: {parentId: this.playingMedia.id, ...this.playingMedia}
+				media: this.playingMedia
 			}
-		).subscribe(async image => this.playingMedia.image = await image);
-
-		setTimeout(() => {
-			console.warn(this.playingMedia.image)
-		}, 3000);
+		).subscribe();
   }
 
 	getProgress(media: PlexPlayingMedia) {

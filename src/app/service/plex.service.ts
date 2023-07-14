@@ -34,7 +34,7 @@ export class PlexService {
 
 		let params = new HttpParams();
 
-		params = params.append('parentId', plexPictureParameters.media.parentId)
+		if(plexPictureParameters.media.parentId) params = params.append('parentId', plexPictureParameters.media.parentId)
 		if(plexPictureParameters.media.thumbnailId) params = params.append('thumbnailId', plexPictureParameters.media.thumbnailId);
 		if(plexPictureParameters.size) params = params.append('size', plexPictureParameters.size);
 		if(plexPictureParameters.isArt === true) params = params.append('isArt', plexPictureParameters.isArt);
@@ -42,9 +42,14 @@ export class PlexService {
 		return this.httpCacheService.get(
 			environment.backendUrl + `/plex/thumbnail`,
 			{ params: params, responseType: 'blob' }
-		).pipe(map(
-			async data => plexPictureParameters.media.image = await this.imageService.blobToBase64(data)
-		));
+		)
+			.pipe(tap(
+				x => this.imageService.createImageFromBlob(x, plexPictureParameters.media)
+			))
+		// 	.pipe(map(
+		// 	async data => plexPictureParameters.media.image = await this.imageService.blobToBase64(data)
+		// ))
+			;
 	}
 
 	restart() {

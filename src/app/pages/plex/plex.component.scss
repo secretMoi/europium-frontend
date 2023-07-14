@@ -7,11 +7,12 @@ $cold-purple: #a69fd6;
 $indigo: #6558d3;
 
 .playing-medias {
-	width: 90vw;
 	display: flex;
 	border-radius: 16px;
 	margin: auto;
 	margin-bottom: 30px;
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
 .sub-menu {

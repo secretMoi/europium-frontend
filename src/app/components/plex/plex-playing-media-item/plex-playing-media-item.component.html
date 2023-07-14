@@ -1,17 +1,15 @@
 <div #item class="media-card">
+
+	<app-media-poster-header [image]="playingMedia.image" [title]="playingMedia.title"></app-media-poster-header>
+
 	<div class="header">
 		<div class="title-header">
-			<div class="title">{{ playingMedia.title }}</div>
 			<div class="year">{{ playingMedia.year }} - {{ playingMedia.userName }}</div>
 
 			<div class="times">
 				<span class="current-time">{{ playingMedia.progress | millisToTime }}</span>
 				<span class="total-time">{{ playingMedia.duration | millisToTime }}</span>
 			</div>
-		</div>
-
-		<div class="poster">
-			<img [src]="playingMedia.image">
 		</div>
 	</div>
 
