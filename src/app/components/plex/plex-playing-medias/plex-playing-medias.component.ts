@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {PlexService} from "../../../service/plex.service";
 import {PlexPlayingMedia} from "../../../models/plex/plex-playing-medias";
 import {BaseComponent} from "../../base.component";
@@ -13,8 +13,6 @@ export class PlexPlayingMediasComponent extends BaseComponent {
 
 	@Output() hasAnyMedia$ = new EventEmitter<boolean>();
 
-	@ViewChild('item', {static: false, read: ElementRef}) mediaChild!: ElementRef;
-
 	get canDisplayMedias() {
 		return this.playingMedias?.length > 0;
 	}
@@ -24,19 +22,7 @@ export class PlexPlayingMediasComponent extends BaseComponent {
 
 		this._plexService.getPlayingMedias().subscribe(medias => {
 			this.playingMedias = medias;
-			this.getThumbnail();
 			this.hasAnyMedia$.emit(medias.length > 0);
 		});
-	}
-
-	private getThumbnail() {
-		for (let playingMedia of this.playingMedias) {
-			this._plexService.getThumbnail({
-					size: this.mediaChild.nativeElement.offsetWidth,
-					isArt: true,
-					media: {parentId: playingMedia.id, ...playingMedia}
-				}
-			).subscribe();
-		}
 	}
 }

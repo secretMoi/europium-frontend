@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable, of, tap} from "rxjs";
+import {map, Observable, of, tap} from "rxjs";
 import {environment} from "../../environments/environment";
 import {PlexDuplicate} from "../models/plex/plex-duplicate";
 import {PlexLibrary} from "../models/plex/plex-library";
@@ -30,8 +30,6 @@ export class PlexService {
 	}
 
 	getThumbnail(plexPictureParameters: PlexPictureParameters) {
-		console.warn(plexPictureParameters);
-
 		if (plexPictureParameters.media.parentId === 0 || plexPictureParameters.media.thumbnailId === 0) return of();
 
 		let params = new HttpParams();
@@ -44,8 +42,8 @@ export class PlexService {
 		return this.httpCacheService.get(
 			environment.backendUrl + `/plex/thumbnail`,
 			{ params: params, responseType: 'blob' }
-		).pipe(tap(
-			data => this.imageService.createImageFromBlob(data, plexPictureParameters.media)
+		).pipe(map(
+			async data => plexPictureParameters.media.image = await this.imageService.blobToBase64(data)
 		));
 	}
 

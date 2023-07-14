@@ -7,7 +7,7 @@ export interface PlexPlayingMedia {
 	progress: number;
 	duration: number;
 	year: number;
-	thumbnailId: number;
+	thumbnailId?: number;
 	userName: string;
 	isVideoTranscoding: boolean;
 	remoteResolution: string;

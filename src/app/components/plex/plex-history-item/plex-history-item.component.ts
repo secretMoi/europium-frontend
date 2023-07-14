@@ -3,7 +3,6 @@ import {PlexMediaHistory} from "../../../models/plex/plex-media-history";
 import {dateAgo, getCurrentTimestamp} from "../../../helpers/utils/date";
 import {getMediaTypeLabel} from "../../../mappers/media-mapper";
 import {PlexService} from "../../../service/plex.service";
-import {ImageService} from "../../../helpers/utils/image.service";
 
 @Component({
 	selector: 'app-plex-history-item',
@@ -16,7 +15,7 @@ export class PlexHistoryItemComponent implements AfterViewInit {
 
 	@ViewChild('item', {static: false, read: ElementRef}) historyChild!: ElementRef;
 
-	constructor(private _plexService: PlexService, private _imageService: ImageService) {}
+	constructor(private _plexService: PlexService) {}
 
 	ngAfterViewInit() {
 		this._plexService.getThumbnail({
