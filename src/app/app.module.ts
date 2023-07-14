@@ -46,6 +46,7 @@ import {StopPropagationDirective} from "./directives/stop-propagation.directive"
 import { PlexHistoryComponent } from './components/plex/plex-history/plex-history.component';
 import { PlexHistoryItemComponent } from './components/plex/plex-history-item/plex-history-item.component';
 import {CacheInterceptor} from "./interceptors/cache.interceptor";
+import { MediaPosterHeaderComponent } from './components/ui/media-poster-header/media-poster-header.component';
 
 @NgModule({
 	declarations: [
@@ -87,7 +88,8 @@ import {CacheInterceptor} from "./interceptors/cache.interceptor";
 		BottomSheetComponent,
 		StopPropagationDirective,
 		PlexHistoryComponent,
-		PlexHistoryItemComponent
+		PlexHistoryItemComponent,
+  MediaPosterHeaderComponent
 	],
 	imports: [
 		BrowserModule,

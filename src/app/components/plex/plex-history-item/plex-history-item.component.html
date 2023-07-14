@@ -1,14 +1,6 @@
 <article #item class="information [ torrent-card ]">
 
-	<div class="title-header" >
-		<div class="poster" *ngIf="plexMediaHistory.image">
-			<img [src]="plexMediaHistory.image">
-		</div>
-
-		<h2 class="title">
-			{{ plexMediaHistory.title }}
-		</h2>
-	</div>
+	<app-media-poster-header [image]="plexMediaHistory.image" [title]="plexMediaHistory.title"></app-media-poster-header>
 
 	<div class="files-container">
 		<div class="file">
