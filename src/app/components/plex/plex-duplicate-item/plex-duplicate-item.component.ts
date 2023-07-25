@@ -24,6 +24,10 @@ export class PlexDuplicateItemComponent extends BaseComponent implements AfterVi
 	}
 
 	ngAfterViewInit() {
+		this.getThumbnail();
+	}
+
+	getThumbnail() {
 		this._plexService.getThumbnail({
 				size: this.duplicateChild.nativeElement.offsetWidth,
 				isArt: true,

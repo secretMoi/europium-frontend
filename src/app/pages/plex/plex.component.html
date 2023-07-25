@@ -29,7 +29,7 @@
 
 	<div class="cards">
 		<app-plex-duplicate-item
-			*ngFor="let duplicate of this.plexDuplicates; trackBy: trackById"
+			*ngFor="let duplicate of this.plexDuplicates"
 			[plexDuplicate]="duplicate"
 			(onDelete)="deleteMedia()">
 		</app-plex-duplicate-item>
