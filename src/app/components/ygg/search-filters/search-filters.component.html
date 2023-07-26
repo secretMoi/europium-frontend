@@ -1,34 +1,31 @@
-<div class="container">
-	<div class="justify-content-center">
-		<div class="menu bg-white rounded shadow">
+<app-filter-container>
+	<div class="ygg-torrent-info">
+		<app-ygg-torrent-info></app-ygg-torrent-info>
+	</div>
 
-			<div class="ygg-torrent-info">
-				<app-ygg-torrent-info></app-ygg-torrent-info>
+	<div class="d-flex justify-content-between">
+		<div class="input-group border rounded-pill p-1">
+			<input type="search" placeholder="Rechercher un torrent..." (keyup.enter)="this.search()"
+						 class="form-control bg-none border-0" [(ngModel)]="this.searchText">
+			<div class="input-group-append border-0">
+				<button type="button" class="btn btn-link text-success" (click)="this.search()">
+					<img src="assets/search.svg" height="20px" alt="">
+				</button>
 			</div>
-
-			<div class="d-flex justify-content-between">
-				<div class="input-group border rounded-pill p-1">
-					<input type="search" placeholder="Rechercher un torrent..." (keyup.enter)="this.search()"
-								 class="form-control bg-none border-0" [(ngModel)]="this.searchText">
-					<div class="input-group-append border-0">
-						<button type="button" class="btn btn-link text-success" (click)="this.search()">
-							<img src="assets/search.svg" height="20px" alt="">
-						</button>
-					</div>
-				</div>
-			</div>
-
-			<div class="d-flex justify-content-between">
-				<select class="form-select rounded-pill filter-element" [(ngModel)]="filterMediaType" (ngModelChange)="selectMediaType()">
-					<option selected [ngValue]="mediaType.Unknown">Type</option>
-					<option [ngValue]="mediaType.Movie">Film</option>
-					<option [ngValue]="mediaType.Serie">Série</option>
-					<option [ngValue]="mediaType.Anime">Animé</option>
-				</select>
-
-				<app-sort-menu [elements]="sortMenuElements" [sortOrder]="sortOrder" [sortProperty]="sortProperty" (onElementSelected)="sort($event)"></app-sort-menu>
-			</div>
-
 		</div>
 	</div>
-</div>
+
+	<div class="d-flex justify-content-between">
+		<app-form-select
+			class="filter-type"
+			[options]="mediaTypes"
+			(optionSelected)="selectMediaType($event)"
+		></app-form-select>
+
+		<app-sort-menu [elements]="sortMenuElements"
+									 [sortOrder]="sortOrder"
+									 [sortProperty]="sortProperty"
+									 (onElementSelected)="sort($event)">
+		</app-sort-menu>
+	</div>
+</app-filter-container>

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MediaType} from "../../../models/ygg-torrent-search";
+import {SelectOption} from "../../ui/form/form-select/form-select.component";
 
 @Component({
   selector: 'app-search-filters',
@@ -15,9 +16,7 @@ export class SearchFiltersComponent {
 	@Output() onSort = new EventEmitter<string>();
 	@Output() onSelectMediaType = new EventEmitter<MediaType>();
 
-	public mediaType = MediaType;
 	public searchText!: string;
-	public filterMediaType: MediaType = MediaType.Unknown;
 
 	get sortMenuElements() {
 		return [
@@ -40,6 +39,27 @@ export class SearchFiltersComponent {
 		]
 	}
 
+	get mediaTypes(): SelectOption[] {
+		return [
+			{
+				id: MediaType.Unknown.toString(),
+				label: 'Type'
+			},
+			{
+				id: MediaType.Movie.toString(),
+				label: 'Film'
+			},
+			{
+				id: MediaType.Serie.toString(),
+				label: 'Série'
+			},
+			{
+				id: MediaType.Anime.toString(),
+				label: 'Animé'
+			},
+		]
+	}
+
 	public search() {
 		this.onSearch.emit(this.searchText);
 	}
@@ -48,7 +68,7 @@ export class SearchFiltersComponent {
 		this.onSort.emit(property);
 	}
 
-	public selectMediaType() {
-		this.onSelectMediaType.emit(this.filterMediaType);
+	public selectMediaType(selectOption: SelectOption) {
+		this.onSelectMediaType.emit(Number(selectOption));
 	}
 }

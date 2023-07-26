@@ -1,0 +1,9 @@
+<select class="form-select rounded-pill filter-element"
+				[(ngModel)]="currentOption"
+				(ngModelChange)="onOptionSelected($event)">
+	<option
+		*ngFor="let option of options"
+		[ngValue]="option.id">
+		{{ option.label }}
+	</option>
+</select>

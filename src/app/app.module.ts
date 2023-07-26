@@ -48,6 +48,8 @@ import {CacheInterceptor} from "./interceptors/cache.interceptor";
 import { MediaPosterHeaderComponent } from './components/ui/media-poster-header/media-poster-header.component';
 import { PlexPlayingMediaItemComponent } from './components/plex/plex-playing-media-item/plex-playing-media-item.component';
 import {PlexPlayingMediasComponent} from "./components/plex/plex-playing-medias/plex-playing-medias.component";
+import { FilterContainerComponent } from './components/ui/filter-container/filter-container.component';
+import { FormSelectComponent } from './components/ui/form/form-select/form-select.component';
 
 @NgModule({
 	declarations: [
@@ -91,7 +93,9 @@ import {PlexPlayingMediasComponent} from "./components/plex/plex-playing-medias/
 		PlexHistoryComponent,
 		PlexHistoryItemComponent,
 		MediaPosterHeaderComponent,
-		PlexPlayingMediaItemComponent
+		PlexPlayingMediaItemComponent,
+  FilterContainerComponent,
+  FormSelectComponent
 	],
 	imports: [
 		BrowserModule,
