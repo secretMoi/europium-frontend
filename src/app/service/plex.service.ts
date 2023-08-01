@@ -60,8 +60,7 @@ export class PlexService {
 		return this.http.get<PlexPlayingMedia[]>(environment.backendUrl + `/plex/medias/playing`);
 	}
 
-	getMediaHistory() {
-		// return this.http.get<PlexMediaHistory[]>(environment.backendUrl + `/plex/medias/history`);
-		return this.http.get<PlexMediaHistory[]>(environment.backendUrl + `/plex/medias/history?since=1688194009`);
+	getMediaHistory(since: number) {
+		return this.http.get<PlexMediaHistory[]>(environment.backendUrl + `/plex/medias/history?since=${Math.trunc(since / 1000)}`);
 	}
 }

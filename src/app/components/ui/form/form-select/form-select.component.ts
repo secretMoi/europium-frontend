@@ -16,15 +16,15 @@ export class FormSelectComponent implements OnInit {
 
 	@Output() optionSelected = new EventEmitter<SelectOption>();
 
-	public currentOption!: SelectOption;
+	public currentOption!: string;
 
 	ngOnInit() {
 		if(this.options.length > 0)
-			this.currentOption = this.options[0];
+			this.currentOption = this.options[0].id;
 	}
 
-	onOptionSelected(selectOption: SelectOption) {
-		this.currentOption = selectOption;
-		this.optionSelected.next(selectOption);
+	onOptionSelected(optionId: string) {
+		this.currentOption = optionId;
+		this.optionSelected.next(this.options.find(x => x.id === optionId)!);
 	}
 }
