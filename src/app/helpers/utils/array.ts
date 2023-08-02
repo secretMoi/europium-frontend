@@ -35,3 +35,14 @@ export const removeElement = <T>(array: T[], elementToRemove: T): T[] => {
 
 	return array;
 }
+
+export const getDistinctValuesByProperty = <T>(inputArray: T[], propertyName: keyof T): T[] => {
+	const uniqueValuesMap: Map<T[keyof T], T> = new Map();
+
+	for (const item of inputArray) {
+		const propertyValue = item[propertyName];
+		uniqueValuesMap.set(propertyValue, item);
+	}
+
+	return Array.from(uniqueValuesMap.values());
+}
