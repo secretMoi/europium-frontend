@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 import {PlexService} from "../../../service/plex.service";
 import {PlexMediaHistory} from "../../../models/plex/plex-media-history";
 import {BaseComponent} from "../../base.component";
-import {ImageService} from "../../../helpers/utils/image.service";
 import {SelectOption} from "../../ui/form/form-select/form-select.component";
 import {getDistinctValuesByProperty} from "../../../helpers/utils/array";
+import {BehaviorSubject, map} from "rxjs";
 
 export enum Since {
 	OneDay = '1day',
@@ -18,11 +18,18 @@ export enum Since {
 	styleUrls: ['./plex-history.component.scss']
 })
 export class PlexHistoryComponent extends BaseComponent {
-	public mediasHistory: PlexMediaHistory[] = [];
 	public since: SelectOption[];
 	public users: SelectOption[] = [];
 
-	constructor(private _plexService: PlexService, private _imageService: ImageService) {
+	public mediasHistory$ = new BehaviorSubject<PlexMediaHistory[]>([]);
+
+	private _userSelected: string = 'Utilisateur';
+
+	get mediasFiltered$() {
+		return this.mediasHistory$.pipe(map(x => x.filter(y => this._userSelected === 'Utilisateur' || y.user === this._userSelected)));
+	}
+
+	constructor(private _plexService: PlexService) {
 		super();
 
 		this.since = [
@@ -62,14 +69,19 @@ export class PlexHistoryComponent extends BaseComponent {
 		this.updateHistory(selectOption.id);
 	}
 
-	updateUsersFilter(mediasHistory: PlexMediaHistory[]) {
+	updateUserFilter(selectOption: SelectOption) {
+		this._userSelected = selectOption.label;
+		this.mediasHistory$.next(this.mediasHistory$.getValue());
+	}
+
+	setUsersFilter() {
 		this.users = [];
 		this.users.push({
-			id: '0',
+			id: '',
 			label: 'Utilisateur'
 		});
 
-		this.users.push(...getDistinctValuesByProperty(mediasHistory, 'user')
+		this.users.push(...getDistinctValuesByProperty(this.mediasHistory$.getValue(), 'user')
 			.map(media => {
 			return {
 				id: media.id?.toString() ?? Math.random().toString(),
@@ -81,8 +93,8 @@ export class PlexHistoryComponent extends BaseComponent {
 	updateHistory(since: string) {
 		this._plexService.getMediaHistory(this.getSinceTimestamp(since))
 			.subscribe(history => {
-				this.updateUsersFilter(history);
-				this.mediasHistory = history;
+				this.mediasHistory$.next(history);
+				this.setUsersFilter();
 			});
 	}
 }

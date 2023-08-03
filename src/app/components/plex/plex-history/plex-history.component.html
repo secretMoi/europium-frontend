@@ -1,12 +1,12 @@
 <app-filter-container>
 	<app-form-select [options]="since" (optionSelected)="updateSinceFilter($event)"></app-form-select>
 
-	<app-form-select [options]="users"></app-form-select>
+	<app-form-select [options]="users" (optionSelected)="updateUserFilter($event)"></app-form-select>
 </app-filter-container>
 
 <div class="cards">
 	<app-plex-history-item
-		*ngFor="let history of mediasHistory"
+		*ngFor="let history of mediasFiltered$ | async"
 		[plexMediaHistory]="history">
 	</app-plex-history-item>
 </div>
