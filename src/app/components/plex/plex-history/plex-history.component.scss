@@ -5,3 +5,24 @@
 	gap: 80px;
 	margin: 5vh auto;
 }
+
+.filters {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 20px;
+
+	.select-filter {
+		width: 200px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.filters {
+		justify-content: center;
+
+		.select-filter {
+			width: 100%;
+		}
+	}
+}

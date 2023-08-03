@@ -4,17 +4,6 @@
 		</app-horizontal-buttons>
 </div>
 
-<ng-container *ngIf="currentSubMenu === subMenus.History">
-	<app-plex-history></app-plex-history>
-</ng-container>
-
-<ng-container *ngIf="currentSubMenu === subMenus.Current">
-	<app-plex-playing-medias
-		class="playing-medias"
-		(hasAnyMedia$)="setPlayingMediaVisibility($event)">
-	</app-plex-playing-medias>
-</ng-container>
-
 <ng-container *ngIf="currentSubMenu === subMenus.Duplicates">
 	<div class="filters">
 		<select class="form-select rounded-pill" [(ngModel)]="filterLibrary" (ngModelChange)="selectLibrary()">
@@ -34,4 +23,15 @@
 			(onDelete)="deleteMedia()">
 		</app-plex-duplicate-item>
 	</div>
+</ng-container>
+
+<ng-container *ngIf="currentSubMenu === subMenus.History">
+	<app-plex-history></app-plex-history>
+</ng-container>
+
+<ng-container *ngIf="currentSubMenu === subMenus.Current">
+	<app-plex-playing-medias
+		class="playing-medias"
+		(hasAnyMedia$)="setPlayingMediaVisibility($event)">
+	</app-plex-playing-medias>
 </ng-container>

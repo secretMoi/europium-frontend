@@ -21,12 +21,12 @@ export class PlexHistoryComponent extends BaseComponent {
 	public since: SelectOption[];
 	public users: SelectOption[] = [];
 
-	public mediasHistory$ = new BehaviorSubject<PlexMediaHistory[]>([]);
-
-	private _userSelected: string = 'Utilisateur';
+	private _defaultUser = 'Utilisateur';
+	private _mediasHistory$ = new BehaviorSubject<PlexMediaHistory[]>([]);
+	private _userSelected: string = this._defaultUser;
 
 	get mediasFiltered$() {
-		return this.mediasHistory$.pipe(map(x => x.filter(y => this._userSelected === 'Utilisateur' || y.user === this._userSelected)));
+		return this._mediasHistory$.pipe(map(x => x.filter(y => this._userSelected === this._defaultUser || y.user === this._userSelected)));
 	}
 
 	constructor(private _plexService: PlexService) {
@@ -71,17 +71,17 @@ export class PlexHistoryComponent extends BaseComponent {
 
 	updateUserFilter(selectOption: SelectOption) {
 		this._userSelected = selectOption.label;
-		this.mediasHistory$.next(this.mediasHistory$.getValue());
+		this._mediasHistory$.next(this._mediasHistory$.getValue());
 	}
 
 	setUsersFilter() {
 		this.users = [];
 		this.users.push({
 			id: '',
-			label: 'Utilisateur'
+			label: this._defaultUser
 		});
 
-		this.users.push(...getDistinctValuesByProperty(this.mediasHistory$.getValue(), 'user')
+		this.users.push(...getDistinctValuesByProperty(this._mediasHistory$.getValue(), 'user')
 			.map(media => {
 			return {
 				id: media.id?.toString() ?? Math.random().toString(),
@@ -93,7 +93,7 @@ export class PlexHistoryComponent extends BaseComponent {
 	updateHistory(since: string) {
 		this._plexService.getMediaHistory(this.getSinceTimestamp(since))
 			.subscribe(history => {
-				this.mediasHistory$.next(history);
+				this._mediasHistory$.next(history);
 				this.setUsersFilter();
 			});
 	}

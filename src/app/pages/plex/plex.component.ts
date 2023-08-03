@@ -2,10 +2,8 @@ import {Component} from '@angular/core';
 import {PlexService} from "../../service/plex.service";
 import {PlexDuplicate} from "../../models/plex/plex-duplicate";
 import {PlexLibrary} from "../../models/plex/plex-library";
-import {NotificationService} from "../../components/ui/notification/notification.service";
 import {dynamicSort} from "../../helpers/utils/array";
 import {SafeUrl} from "@angular/platform-browser";
-import {ImageService} from "../../helpers/utils/image.service";
 import {BaseComponent} from "../../components/base.component";
 
 interface ImageBlob {
@@ -70,7 +68,7 @@ export class PlexComponent extends BaseComponent {
 		]
 	}
 
-	constructor(private _plexService: PlexService, private _notificationService: NotificationService, private _imageService: ImageService) {
+	constructor(private _plexService: PlexService) {
 		super();
 
 		this._plexService.getLibraries().subscribe(res => {
