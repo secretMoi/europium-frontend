@@ -46,7 +46,7 @@ export class ApiMonitoredCardComponent implements OnInit {
     this.monitoredApiChanged.subscribe(
       _ => {
         this.updateApiState();
-        this.updateApiLogo();
+        this.getApiLogo();
       }
     );
   }
@@ -62,7 +62,7 @@ export class ApiMonitoredCardComponent implements OnInit {
     }
   }
 
-  updateApiLogo() {
+  getApiLogo() {
     this._monitoredApiService.getApiLogo(this.monitoredApi.code).subscribe(
       (blobImage: any) => this.image = this._sanitizer.bypassSecurityTrustUrl(blobImage)
     );
@@ -73,12 +73,10 @@ export class ApiMonitoredCardComponent implements OnInit {
     let hasDown: boolean | null = null;
 
     this.monitoredApi.apiUrls.forEach((apiUrl) => {
-      if(apiUrl.state) {
+      if(apiUrl.state)
         hasUp = true;
-      }
-      else {
+      else
         hasDown = true;
-      }
     });
 
     if(hasUp === true) return true;

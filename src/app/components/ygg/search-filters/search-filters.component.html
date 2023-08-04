@@ -6,7 +6,7 @@
 	<div class="d-flex justify-content-between">
 		<div class="input-group border rounded-pill p-1">
 			<input type="search" placeholder="Rechercher un torrent..." (keyup.enter)="this.search()"
-						 class="form-control bg-none border-0" [(ngModel)]="this.searchText">
+						 class="form-control bg-none border-0 torrent-search" [(ngModel)]="this.searchText">
 			<div class="input-group-append border-0">
 				<button type="button" class="btn btn-link text-success" (click)="this.search()">
 					<img src="assets/search.svg" height="20px" alt="">
