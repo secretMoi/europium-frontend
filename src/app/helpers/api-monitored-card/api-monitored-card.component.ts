@@ -8,6 +8,7 @@ import {ApiState} from "../../models/api-state";
 import {ApiCode} from "../../models/api-code";
 import {PlexService} from "../../service/plex.service";
 import {NotificationService} from "../../components/ui/notification/notification.service";
+import {ApiUrl} from "../../models/api-url";
 
 @Component({
   selector: 'app-api-monitored-card',
@@ -103,7 +104,7 @@ export class ApiMonitoredCardComponent implements OnInit {
 		});
 	}
 
-	public trackById(_: any, item: { apiUrlId: number }): number {
+	public trackById(_: any, item: ApiUrl): number {
 		return item.apiUrlId;
 	}
 }

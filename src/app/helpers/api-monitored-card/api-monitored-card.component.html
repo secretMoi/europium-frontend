@@ -1,46 +1,40 @@
-<li class="list-group-item">
+<div class="api-container">
+	<div class="header">
+		<div class="header-api-info" (click)="navigateToApiLink()" style="cursor: pointer">
+			<div><img [src]='image' class="api-status" alt=""></div>
 
-  <div class="d-flex justify-content-between">
-    <div class="d-flex justify-content-between w-100" (click)="navigateToApiLink()" style="cursor: pointer">
-      <div class="p-2"><img [src]='image' class="api-status" alt=""></div>
-      <div class="p-2 fs-2 my-auto">{{ monitoredApi.name }}</div>
-      <div class="p-2 status-icons">
+			<div class="api-title">{{ monitoredApi.name }}</div>
+
+			<div class="status-icons">
 				<img *ngIf="isPlex" (click)="restartPlex($event)" src="assets/refresh.svg" class="api-status" alt="">
 
-        <img *ngIf="getApiState()" src="assets/check.svg" class="api-status" alt="">
-        <img *ngIf="getApiState() === false" src="assets/cancel.svg" class="api-status" alt="">
-        <div *ngIf="getApiState() === null" class="spinner-border text-primary api-status" role="status">
-          <span class="visually-hidden">Loading</span>
-        </div>
-      </div>
-    </div>
+				<img *ngIf="getApiState()" src="assets/check.svg" class="api-status" alt="">
+				<img *ngIf="getApiState() === false" src="assets/cancel.svg" class="api-status" alt="">
+				<div *ngIf="getApiState() === null" class="spinner-border text-primary api-status" role="status">
+					<span class="visually-hidden">Loading</span>
+				</div>
+			</div>
+		</div>
 
-    <p class="ms-3 my-auto">
-      <img aria-controls="collapseExample" src="assets/down.svg" class="api-status" alt=""
-           [@smoothCollapse]='state' (click)="rotate()" [attr.aria-expanded]="!isCollapsed" />
-    </p>
-  </div>
+		<img aria-controls="collapseExample" src="assets/down.svg" class="dropdown-button api-status" alt=""
+				 [@smoothCollapse]='state' (click)="rotate()" [attr.aria-expanded]="!isCollapsed"/>
+	</div>
 
-  <div id="collapseExample" [(ngbCollapse)]="isCollapsed">
-    <div class="card card-body border-0">
-      <div class="list-group">
-        <a [href]="apiUrl.url" class="list-group-item api-link" *ngFor="let apiUrl of monitoredApi.apiUrls; trackBy: trackById">
-          <div class="d-flex justify-content-between w-100">
-            <div class="p-2 fs-4 my-auto">
-              <a href="{{ apiUrl.url }}" target="_blank">{{ apiUrl.url }}</a>
-            </div>
+	<div id="collapseExample" [(ngbCollapse)]="isCollapsed">
+		<div class="urls-container">
+			<a [href]="apiUrl.url" class="url-item api-link"
+				 *ngFor="let apiUrl of monitoredApi.apiUrls; trackBy: trackById">
+				<div class="my-auto">
+					<a href="{{ apiUrl.url }}" target="_blank">{{ apiUrl.url }}</a>
+				</div>
 
-            <div class="p-2">
-              <img *ngIf="apiUrl.state" src="assets/check.svg" class="api-status" alt="">
-              <img *ngIf="apiUrl.state === false" src="assets/cancel.svg" class="api-status" alt="">
-              <div *ngIf="apiUrl.state === null" class="spinner-border text-primary api-status" role="status">
-                <span class="visually-hidden">Loading</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
 
-</li>
+				<img *ngIf="apiUrl.state" src="assets/check.svg" class="api-status" alt="">
+				<img *ngIf="apiUrl.state === false" src="assets/cancel.svg" class="api-status" alt="">
+				<div *ngIf="apiUrl.state === null" class="spinner-border text-primary api-status" role="status">
+					<span class="visually-hidden">Loading</span>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
