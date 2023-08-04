@@ -19,7 +19,6 @@ export class FormSelectComponent implements OnInit {
 	public currentOption!: string;
 
 	ngOnInit() {
-		console.warn(this.options);
 		if(this.options.length > 0)
 			this.currentOption = this.options[0].id;
 	}

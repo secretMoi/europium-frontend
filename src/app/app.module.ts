@@ -50,6 +50,7 @@ import { PlexPlayingMediaItemComponent } from './components/plex/plex-playing-me
 import {PlexPlayingMediasComponent} from "./components/plex/plex-playing-medias/plex-playing-medias.component";
 import { FilterContainerComponent } from './components/ui/filter-container/filter-container.component';
 import { FormSelectComponent } from './components/ui/form/form-select/form-select.component';
+import { SearchFieldComponent } from './components/ui/form/search-field/search-field.component';
 
 @NgModule({
 	declarations: [
@@ -95,7 +96,8 @@ import { FormSelectComponent } from './components/ui/form/form-select/form-selec
 		MediaPosterHeaderComponent,
 		PlexPlayingMediaItemComponent,
   FilterContainerComponent,
-  FormSelectComponent
+  FormSelectComponent,
+  SearchFieldComponent
 	],
 	imports: [
 		BrowserModule,

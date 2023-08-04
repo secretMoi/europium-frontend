@@ -1,16 +1,15 @@
-.d-flex {
-	padding: 32px !important;
-	padding-bottom: 0 !important;
+.search-container {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	padding: 10px;
 }
 
-.ygg-torrent-info {
-	padding-top: 15px;
+.bottom {
+	display: flex;
+	justify-content: space-between;
 }
 
 .filter-type {
 	min-width: 170px;
-}
-
-.torrent-search {
-	margin-left: 8px;
 }

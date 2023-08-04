@@ -1,0 +1,13 @@
+<div class="search-container">
+	<input type="search"
+				 [placeholder]="placeHolder"
+				 (keyup.enter)="onSearch()"
+				 class="torrent-search"
+				 [(ngModel)]="searchText">
+
+	<img
+		class="search-icon"
+		src="assets/search.svg"
+		height="20px"
+		(click)="onSearch()">
+</div>

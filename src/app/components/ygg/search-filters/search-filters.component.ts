@@ -16,8 +16,6 @@ export class SearchFiltersComponent {
 	@Output() onSort = new EventEmitter<string>();
 	@Output() onSelectMediaType = new EventEmitter<MediaType>();
 
-	public searchText!: string;
-
 	get sortMenuElements() {
 		return [
 			{
@@ -60,8 +58,8 @@ export class SearchFiltersComponent {
 		]
 	}
 
-	public search() {
-		this.onSearch.emit(this.searchText);
+	public search(text: string) {
+		this.onSearch.emit(text);
 	}
 
 	public sort(property: string) {
