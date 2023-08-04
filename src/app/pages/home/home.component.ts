@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MonitoredApiService} from "../../service/monitored-api.service";
 import {MonitoredApi} from "../../models/monitored-api";
 import {ReplaySubject, Subject} from "rxjs";
-import {TorrentInfo} from "../../models/torrent-info";
 
 @Component({
   selector: 'app-home',

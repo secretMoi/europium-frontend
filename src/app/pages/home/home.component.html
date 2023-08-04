@@ -1,9 +1,8 @@
-<div class="card border-0">
-	<ul class="list-group list-group-flush mb-3" *ngFor="let monitoredApi of monitoredApis; trackBy: trackById">
-		<app-api-monitored-card
-			class="api"
-			[monitoredApi]="monitoredApi"
-			[monitoredApiChanged]="monitoredApisValueChanged"
-		></app-api-monitored-card>
-	</ul>
+<div class="api-container">
+	<app-api-monitored-card
+		class="api"
+		*ngFor="let monitoredApi of monitoredApis; trackBy: trackById"
+		[monitoredApi]="monitoredApi"
+		[monitoredApiChanged]="monitoredApisValueChanged"
+	></app-api-monitored-card>
 </div>

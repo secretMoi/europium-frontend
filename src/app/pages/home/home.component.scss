@@ -1,7 +1,15 @@
-.card {
+.api-container {
 	background-color: unset;
+	border: none;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	word-wrap: break-word;
 }
 
 .api {
 	border-radius: 15px;
+	margin-bottom: 16px;
+	display: flex;
+	flex-direction: column;
 }
