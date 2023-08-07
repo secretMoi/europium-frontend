@@ -3,11 +3,11 @@ import {MediaType} from "../../../models/ygg-torrent-search";
 import {SelectOption} from "../../ui/form/form-select/form-select.component";
 
 @Component({
-  selector: 'app-search-filters',
-  templateUrl: './search-filters.component.html',
-  styleUrls: ['./search-filters.component.scss']
+  selector: 'app-ygg-search-filters',
+  templateUrl: './ygg-search-filters.component.html',
+  styleUrls: ['./ygg-search-filters.component.scss']
 })
-export class SearchFiltersComponent {
+export class YggSearchFiltersComponent {
 
 	@Input() sortProperty!: string;
 	@Input() sortOrder!: boolean;
@@ -59,6 +59,7 @@ export class SearchFiltersComponent {
 	}
 
 	public search(text: string) {
+		console.warn(text);
 		this.onSearch.emit(text);
 	}
 

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchFiltersComponent } from './search-filters.component';
+import { YggSearchFiltersComponent } from './ygg-search-filters.component';
 
 describe('SearchFiltersComponent', () => {
-  let component: SearchFiltersComponent;
-  let fixture: ComponentFixture<SearchFiltersComponent>;
+  let component: YggSearchFiltersComponent;
+  let fixture: ComponentFixture<YggSearchFiltersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchFiltersComponent ]
+      declarations: [ YggSearchFiltersComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SearchFiltersComponent);
+    fixture = TestBed.createComponent(YggSearchFiltersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

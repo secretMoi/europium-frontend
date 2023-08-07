@@ -1,7 +1,7 @@
-<app-search-filters [sortProperty]="sortByProperty" [sortOrder]="sortOrder"
+<app-ygg-search-filters [sortProperty]="sortByProperty" [sortOrder]="sortOrder"
 										(onSearch)="search($event)" (onSort)="sortTorrents($event)"
 										(onSelectMediaType)="changeMediaType($event)">
-</app-search-filters>
+</app-ygg-search-filters>
 
 <div class="cards">
 	<app-ygg-torrent-card *ngFor="let torrent of this.yggTorrentSearch; trackBy: trackByName" [hidden]="!canDisplayTorrent(torrent)"

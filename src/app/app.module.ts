@@ -28,7 +28,6 @@ import {YggSearchComponent} from './pages/ygg-search/ygg-search.component';
 import {MainMenuComponent} from './components/main-menu/main-menu.component';
 import {DateAgoPipe} from "./pipes/date-ago.pipe";
 import {YggTorrentInfoComponent} from "./components/ygg/ygg-torrent-info/ygg-torrent-info.component";
-import {SearchFiltersComponent} from "./components/ygg/search-filters/search-filters.component";
 import {SortMenuComponent} from './components/ui/sort-menu/sort-menu.component';
 import { YggTorrentCardComponent } from './components/ygg/ygg-torrent-card/ygg-torrent-card.component';
 import { NotificationComponent } from './components/ui/notification/notification.component';
@@ -51,6 +50,7 @@ import {PlexPlayingMediasComponent} from "./components/plex/plex-playing-medias/
 import { FilterContainerComponent } from './components/ui/filter-container/filter-container.component';
 import { FormSelectComponent } from './components/ui/form/form-select/form-select.component';
 import { SearchFieldComponent } from './components/ui/form/search-field/search-field.component';
+import {YggSearchFiltersComponent} from "./components/ygg/ygg-search-filters/ygg-search-filters.component";
 
 @NgModule({
 	declarations: [
@@ -77,7 +77,7 @@ import { SearchFieldComponent } from './components/ui/form/search-field/search-f
 		YggTorrentInfoComponent,
 		YggSearchComponent,
 		MainMenuComponent,
-		SearchFiltersComponent,
+		YggSearchFiltersComponent,
 		SortMenuComponent,
 		YggTorrentCardComponent,
 		NotificationComponent,

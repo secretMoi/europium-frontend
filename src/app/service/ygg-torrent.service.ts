@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
-import {TorrentInfo} from "../models/torrent-info";
 import {YggTorrentAccount} from "../models/ygg-torrent-account";
 import {YggTorrentSearch} from "../models/ygg-torrent-search";
 
