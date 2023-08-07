@@ -59,7 +59,6 @@ export class YggSearchFiltersComponent {
 	}
 
 	public search(text: string) {
-		console.warn(text);
 		this.onSearch.emit(text);
 	}
 

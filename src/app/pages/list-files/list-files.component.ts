@@ -84,8 +84,7 @@ export class ListFilesComponent {
 				}
 
 				this.horizontalChartComponent?.refreshChart();
-			},
-			_ => console.error('error')
+			}
 		);
 	}
 
