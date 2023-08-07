@@ -1,13 +1,22 @@
-<div class="ygg-container">
+<div class="ygg-container" [class.is-loading]="!isDataLoaded">
 	<div class="ygg-info">
-		<img src="assets/upload.svg"> {{ this.up }} {{ yggTorrentAccount?.upUnit }}
+		<ng-container *ngIf="isDataLoaded">
+			<img src="assets/upload.svg">
+			<span class="ratio">{{ this.up }} {{ yggTorrentAccount?.upUnit }}</span>
+		</ng-container>
 	</div>
 
 	<div class="ygg-info">
-		<img src="assets/exchange.svg"> {{ (this.up - this.down) | number: '1.0-2' }} {{ yggTorrentAccount?.upUnit }}
+		<ng-container *ngIf="isDataLoaded">
+			<img src="assets/exchange.svg">
+			<span class="ratio">{{ (this.up - this.down) | number: '1.0-2' }} {{ yggTorrentAccount?.upUnit }}</span>
+		</ng-container>
 	</div>
 
 	<div class="ygg-info">
-		<img src="assets/download.svg"> {{ this.down }} {{ yggTorrentAccount?.downUnit }}
+		<ng-container *ngIf="isDataLoaded">
+			<img src="assets/download.svg">
+			<span class="ratio">{{ this.down }} {{ yggTorrentAccount?.downUnit }}</span>
+		</ng-container>
 	</div>
 </div>

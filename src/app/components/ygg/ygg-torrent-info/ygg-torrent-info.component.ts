@@ -9,6 +9,7 @@ import {YggTorrentService} from "../../../service/ygg-torrent.service";
 })
 export class YggTorrentInfoComponent {
 	public yggTorrentAccount?: YggTorrentAccount;
+	public isDataLoaded: boolean = false;
 
 	get up(): number {
 		return this.yggTorrentAccount?.up ?? 0;
@@ -19,7 +20,10 @@ export class YggTorrentInfoComponent {
 	}
 
   constructor(private _yggTorrentService: YggTorrentService) {
-		this._yggTorrentService.getRatio().subscribe(accountInformation => this.yggTorrentAccount = accountInformation);
+		this._yggTorrentService.getRatio().subscribe(accountInformation => {
+			this.yggTorrentAccount = accountInformation;
+			this.isDataLoaded = true;
+		});
 	}
 
 }
