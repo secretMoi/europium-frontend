@@ -149,12 +149,10 @@ export class TorrentsListComponent implements OnDestroy {
 		if (this.numberOfRefresh > this.maxNumberOfRefresh) this.timerSubscription.unsubscribe();
 
 		let hasDownloadingTorrent = this.torrents.findIndex(f => f.state === TorrentState.DOWNLOADING) != -1;
-		if (hasDownloadingTorrent && this.lastTimingSubscription != this.refreshTimingWhileDownloading) {
+		if (hasDownloadingTorrent && this.lastTimingSubscription != this.refreshTimingWhileDownloading)
 			this.resetTimerSubscription(this.refreshTimingWhileDownloading);
-		}
-		if (!hasDownloadingTorrent && this.lastTimingSubscription != this.refreshTimingWithoutDownloading) {
+		if (!hasDownloadingTorrent && this.lastTimingSubscription != this.refreshTimingWithoutDownloading)
 			this.resetTimerSubscription(this.refreshTimingWithoutDownloading);
-		}
 	}
 
 	resetTimerSubscription(interval: number) {
@@ -189,11 +187,10 @@ export class TorrentsListComponent implements OnDestroy {
 	}
 
 	dynamicSort(property: string, isFirstLoading?: boolean) {
-		if (this.lastSortedProperty === property) {
+		if (this.lastSortedProperty === property)
 			this.sortOrder *= -1;
-		} else {
+		else
 			this.sortOrder = 1;
-		}
 
 		this.lastSortedProperty = property;
 		let sortOrder = this.sortOrder;

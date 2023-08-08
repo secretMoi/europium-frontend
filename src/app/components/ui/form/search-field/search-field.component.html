@@ -3,6 +3,7 @@
 				 [placeholder]="placeHolder"
 				 (keyup.enter)="onSearch()"
 				 class="torrent-search"
+				 (ngModelChange)="textChanged($event)"
 				 [(ngModel)]="searchText">
 
 	<img

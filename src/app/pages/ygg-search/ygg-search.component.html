@@ -1,9 +1,15 @@
-<app-ygg-search-filters [sortProperty]="sortByProperty" [sortOrder]="sortOrder"
-										(onSearch)="search($event)" (onSort)="sortTorrents($event)"
-										(onSelectMediaType)="changeMediaType($event)">
+<app-ygg-search-filters
+	[sortProperty]="sortByProperty"
+	[sortOrder]="sortOrder"
+	(onSearch)="search($event)"
+	(onSort)="sortTorrents($event)"
+	(onSelectMediaType)="changeMediaType($event)">
 </app-ygg-search-filters>
 
 <div class="cards">
-	<app-ygg-torrent-card *ngFor="let torrent of this.yggTorrentSearch; trackBy: trackByName" [hidden]="!canDisplayTorrent(torrent)"
-												[torrent]="torrent"></app-ygg-torrent-card>
+	<app-ygg-torrent-card
+		*ngFor="let torrent of this.yggTorrentSearch; trackBy: trackByName"
+		[hidden]="!canDisplayTorrent(torrent)"
+		[torrent]="torrent">
+	</app-ygg-torrent-card>
 </div>

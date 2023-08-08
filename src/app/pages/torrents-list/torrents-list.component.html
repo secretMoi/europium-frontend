@@ -1,38 +1,29 @@
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="bg-white rounded shadow">
+<app-filter-container class="filter-container">
+	<div class="filter-container">
+		<app-search-field
+			placeHolder="Rechercher un torrent..."
+			[(searchText)]="searchTorrent">
+		</app-search-field>
 
-			<div class="d-flex justify-content-between">
-				<div class="input-group border rounded-pill p-1">
-					<input type="search" placeholder="Rechercher un torrent..."
-								 class="form-control bg-none border-0" [(ngModel)]="searchTorrent">
-					<div class="input-group-append border-0">
-						<button type="button" class="btn btn-link text-success">
-							<img src="assets/search.svg" height="20px" alt="">
-						</button>
-					</div>
-				</div>
-			</div>
+		<div class="bottom-filters">
+			<select class="form-select rounded-pill filter-element"
+							[(ngModel)]="selectedApi">
+				<option selected [ngValue]="apiType.ANY">Type</option>
+				<option [ngValue]="apiType.RADARR">Film</option>
+				<option [ngValue]="apiType.SONARR">Série</option>
+			</select>
 
-			<div class="d-flex justify-content-between gap-3">
-				<select class="form-select rounded-pill filter-element"
-								[(ngModel)]="selectedApi">
-					<option selected [ngValue]="apiType.ANY">Type</option>
-					<option [ngValue]="apiType.RADARR">Film</option>
-					<option [ngValue]="apiType.SONARR">Série</option>
-				</select>
-
-				<select class="form-select rounded-pill filter-element"
-								[(ngModel)]="selectedTorrentState">
-					<option selected [ngValue]="torrentState.ANY">Status</option>
-					<option [ngValue]="torrentState.RUNNING">En cours</option>
-					<option [ngValue]="torrentState.FINISHED">Fini</option>
-				</select>
-			</div>
-
+			<select class="form-select rounded-pill filter-element"
+							[(ngModel)]="selectedTorrentState">
+				<option selected [ngValue]="torrentState.ANY">Status</option>
+				<option [ngValue]="torrentState.RUNNING">En cours</option>
+				<option [ngValue]="torrentState.FINISHED">Fini</option>
+			</select>
 		</div>
+
 	</div>
-</div>
+
+</app-filter-container>
 
 <div class="mb-5" *ngFor="let torrent of torrents; trackBy: trackByHash">
 	<app-torrent-card
