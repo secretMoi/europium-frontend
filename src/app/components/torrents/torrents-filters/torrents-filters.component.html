@@ -1,0 +1,25 @@
+<app-filter-container class="filter-container">
+	<div class="filter-container">
+
+		<app-search-field
+			placeHolder="Rechercher un torrent..."
+			[searchText]="searchTorrent"
+			(searchTextChange)="searchTextChange($event)">
+		</app-search-field>
+
+		<div class="bottom-filters">
+			<app-form-select
+				class="select-filter"
+				[options]="apis"
+				(optionSelected)="selectApi($event)">
+			</app-form-select>
+
+			<app-form-select
+				class="select-filter"
+				[options]="torrentStates"
+				(optionSelected)="selectTorrentState($event)">
+			</app-form-select>
+		</div>
+
+	</div>
+</app-filter-container>

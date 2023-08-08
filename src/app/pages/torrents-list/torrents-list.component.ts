@@ -32,10 +32,8 @@ export class TorrentsListComponent implements OnDestroy {
 	searchTorrent!: string;
 
 	selectedApi: string = ApiType.ANY;
-	apiType = ApiType;
 
 	selectedTorrentState: string = TorrentState.ANY;
-	torrentState = TorrentState;
 
 	constructor(
 		private torrentService: TorrentService,
@@ -257,5 +255,13 @@ export class TorrentsListComponent implements OnDestroy {
 
 	public trackByHash(_: any, torrentInfo: TorrentInfo): string {
 		return torrentInfo.hash;
+	}
+
+	apiPicked(apiType: ApiType) {
+		this.selectedApi = apiType;
+	}
+
+	torrentStatePicked(torrentState: TorrentState) {
+		this.selectedTorrentState = torrentState;
 	}
 }

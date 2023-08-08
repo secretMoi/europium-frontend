@@ -1,29 +1,9 @@
-<app-filter-container class="filter-container">
-	<div class="filter-container">
-		<app-search-field
-			placeHolder="Rechercher un torrent..."
-			[(searchText)]="searchTorrent">
-		</app-search-field>
-
-		<div class="bottom-filters">
-			<select class="form-select rounded-pill filter-element"
-							[(ngModel)]="selectedApi">
-				<option selected [ngValue]="apiType.ANY">Type</option>
-				<option [ngValue]="apiType.RADARR">Film</option>
-				<option [ngValue]="apiType.SONARR">Série</option>
-			</select>
-
-			<select class="form-select rounded-pill filter-element"
-							[(ngModel)]="selectedTorrentState">
-				<option selected [ngValue]="torrentState.ANY">Status</option>
-				<option [ngValue]="torrentState.RUNNING">En cours</option>
-				<option [ngValue]="torrentState.FINISHED">Fini</option>
-			</select>
-		</div>
-
-	</div>
-
-</app-filter-container>
+<app-torrents-filters
+	[(searchTorrent)]="searchTorrent"
+	(apiPicked)="apiPicked($event)"
+	(torrentStatePicked)="torrentStatePicked($event)"
+>
+</app-torrents-filters>
 
 <div class="mb-5" *ngFor="let torrent of torrents; trackBy: trackByHash">
 	<app-torrent-card

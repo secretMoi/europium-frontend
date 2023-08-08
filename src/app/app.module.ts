@@ -51,6 +51,7 @@ import { FilterContainerComponent } from './components/ui/filter-container/filte
 import { FormSelectComponent } from './components/ui/form/form-select/form-select.component';
 import { SearchFieldComponent } from './components/ui/form/search-field/search-field.component';
 import {YggSearchFiltersComponent} from "./components/ygg/ygg-search-filters/ygg-search-filters.component";
+import { TorrentsFiltersComponent } from './components/torrents/torrents-filters/torrents-filters.component';
 
 @NgModule({
 	declarations: [
@@ -97,7 +98,8 @@ import {YggSearchFiltersComponent} from "./components/ygg/ygg-search-filters/ygg
 		PlexPlayingMediaItemComponent,
   FilterContainerComponent,
   FormSelectComponent,
-  SearchFieldComponent
+  SearchFieldComponent,
+  TorrentsFiltersComponent
 	],
 	imports: [
 		BrowserModule,
