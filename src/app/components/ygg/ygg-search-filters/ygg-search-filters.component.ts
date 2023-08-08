@@ -67,6 +67,6 @@ export class YggSearchFiltersComponent {
 	}
 
 	public selectMediaType(selectOption: SelectOption) {
-		this.onSelectMediaType.emit(Number(selectOption));
+		this.onSelectMediaType.emit(Number(selectOption.id));
 	}
 }
