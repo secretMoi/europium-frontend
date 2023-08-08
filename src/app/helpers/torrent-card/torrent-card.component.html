@@ -10,8 +10,8 @@
 
 			<div class="movie_header">
 				<!--				Poster-->
-				<img *ngIf="!torrent.movie?.poster_path" class="locandina" src="assets/missing-poster.svg" width="170" alt="">
-				<img *ngIf="torrent.movie?.poster_path" class="locandina" src="{{ torrent.movie?.poster_path }}" alt="">
+				<img *ngIf="!torrent.movie?.poster_path" class="locandina" src="assets/missing-poster.svg" width="170" alt="" loading="lazy">
+				<img *ngIf="torrent.movie?.poster_path" class="locandina" src="{{ torrent.movie?.poster_path }}" alt="" loading="lazy">
 
 				<!--				Media Name-->
 				<h1>{{ cleaningDataService.cleanTorrentName(torrent.name, !!torrent.movie) }}</h1>
