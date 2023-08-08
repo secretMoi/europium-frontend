@@ -1,0 +1,7 @@
+<div class="loading" *ngIf="!image"></div>
+
+<img
+	*ngIf="image"
+	[class.fit-height]="fitHeight"
+	[src]="image"
+	loading="lazy">

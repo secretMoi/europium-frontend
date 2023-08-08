@@ -1,6 +1,6 @@
 <div class="title-header" >
-	<div class="poster" *ngIf="image">
-		<img [src]="image" loading="lazy">
+	<div class="poster">
+		<app-image-loader [image]="image"></app-image-loader>
 	</div>
 
 	<h2 class="title">

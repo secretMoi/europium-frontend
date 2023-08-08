@@ -29,29 +29,32 @@ import {MainMenuComponent} from './components/main-menu/main-menu.component';
 import {DateAgoPipe} from "./pipes/date-ago.pipe";
 import {YggTorrentInfoComponent} from "./components/ygg/ygg-torrent-info/ygg-torrent-info.component";
 import {SortMenuComponent} from './components/ui/sort-menu/sort-menu.component';
-import { YggTorrentCardComponent } from './components/ygg/ygg-torrent-card/ygg-torrent-card.component';
-import { NotificationComponent } from './components/ui/notification/notification.component';
-import { PlexComponent } from './pages/plex/plex.component';
-import { SingleDataCardComponent } from './components/ui/single-data-card/single-data-card.component';
-import { MultipleDataCardComponent } from './components/ui/multiple-data-card/multiple-data-card.component';
+import {YggTorrentCardComponent} from './components/ygg/ygg-torrent-card/ygg-torrent-card.component';
+import {NotificationComponent} from './components/ui/notification/notification.component';
+import {PlexComponent} from './pages/plex/plex.component';
+import {SingleDataCardComponent} from './components/ui/single-data-card/single-data-card.component';
+import {MultipleDataCardComponent} from './components/ui/multiple-data-card/multiple-data-card.component';
 import {MillisToTimePipe} from "./pipes/millis-to-time.pipe";
-import { ModalComponent } from './components/ui/modal/modal.component';
-import { PlexDuplicateItemComponent } from './components/plex/plex-duplicate-item/plex-duplicate-item.component';
-import { HorizontalButtonsComponent } from './components/ui/horizontal-buttons/horizontal-buttons.component';
-import { SvgComponent } from './components/ui/svg/svg.component';
-import { BottomSheetComponent } from './components/ui/bottom-sheet/bottom-sheet.component';
+import {ModalComponent} from './components/ui/modal/modal.component';
+import {PlexDuplicateItemComponent} from './components/plex/plex-duplicate-item/plex-duplicate-item.component';
+import {HorizontalButtonsComponent} from './components/ui/horizontal-buttons/horizontal-buttons.component';
+import {SvgComponent} from './components/ui/svg/svg.component';
+import {BottomSheetComponent} from './components/ui/bottom-sheet/bottom-sheet.component';
 import {StopPropagationDirective} from "./directives/stop-propagation.directive";
-import { PlexHistoryComponent } from './components/plex/plex-history/plex-history.component';
-import { PlexHistoryItemComponent } from './components/plex/plex-history-item/plex-history-item.component';
+import {PlexHistoryComponent} from './components/plex/plex-history/plex-history.component';
+import {PlexHistoryItemComponent} from './components/plex/plex-history-item/plex-history-item.component';
 import {CacheInterceptor} from "./interceptors/cache.interceptor";
-import { MediaPosterHeaderComponent } from './components/ui/media-poster-header/media-poster-header.component';
-import { PlexPlayingMediaItemComponent } from './components/plex/plex-playing-media-item/plex-playing-media-item.component';
+import {MediaPosterHeaderComponent} from './components/ui/media-poster-header/media-poster-header.component';
+import {
+	PlexPlayingMediaItemComponent
+} from './components/plex/plex-playing-media-item/plex-playing-media-item.component';
 import {PlexPlayingMediasComponent} from "./components/plex/plex-playing-medias/plex-playing-medias.component";
-import { FilterContainerComponent } from './components/ui/filter-container/filter-container.component';
-import { FormSelectComponent } from './components/ui/form/form-select/form-select.component';
-import { SearchFieldComponent } from './components/ui/form/search-field/search-field.component';
+import {FilterContainerComponent} from './components/ui/filter-container/filter-container.component';
+import {FormSelectComponent} from './components/ui/form/form-select/form-select.component';
+import {SearchFieldComponent} from './components/ui/form/search-field/search-field.component';
 import {YggSearchFiltersComponent} from "./components/ygg/ygg-search-filters/ygg-search-filters.component";
-import { TorrentsFiltersComponent } from './components/torrents/torrents-filters/torrents-filters.component';
+import {TorrentsFiltersComponent} from './components/torrents/torrents-filters/torrents-filters.component';
+import {ImageLoaderComponent} from './components/ui/image-loader/image-loader.component';
 
 @NgModule({
 	declarations: [
@@ -96,10 +99,11 @@ import { TorrentsFiltersComponent } from './components/torrents/torrents-filters
 		PlexHistoryItemComponent,
 		MediaPosterHeaderComponent,
 		PlexPlayingMediaItemComponent,
-  FilterContainerComponent,
-  FormSelectComponent,
-  SearchFieldComponent,
-  TorrentsFiltersComponent
+		FilterContainerComponent,
+		FormSelectComponent,
+		SearchFieldComponent,
+		TorrentsFiltersComponent,
+		ImageLoaderComponent
 	],
 	imports: [
 		BrowserModule,
