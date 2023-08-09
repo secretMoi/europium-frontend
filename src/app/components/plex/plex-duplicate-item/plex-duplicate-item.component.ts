@@ -24,7 +24,7 @@ export class PlexDuplicateItemComponent extends BaseComponent implements AfterVi
 	}
 
 	get zoom() {
-		return Math.round(window.devicePixelRatio * 100);
+		return Math.round(window.devicePixelRatio);
 	}
 
   constructor(private _plexService: PlexService, private _notificationService: NotificationService, private _formatFileSizePipe: FormatFileSizePipe) {
@@ -37,7 +37,7 @@ export class PlexDuplicateItemComponent extends BaseComponent implements AfterVi
 
 	getThumbnail() {
 		this._plexService.getThumbnail({
-				size: this.duplicateChild.nativeElement.offsetWidth,
+				size: this.duplicateChild.nativeElement.offsetWidth * this.zoom,
 				isArt: true,
 				media: this.plexDuplicate
 			}
