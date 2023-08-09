@@ -56,10 +56,10 @@ export class ApiMonitoredCardComponent implements OnInit {
     for(const apiUrl of this.monitoredApi.apiUrls){
       const apiState = new ApiState(this.monitoredApi.code, apiUrl.url);
 
-      this._monitoredApiService.getApiState(apiState).subscribe(
-        value => apiUrl.state = value,
-        _ => apiUrl.state = false
-      );
+      this._monitoredApiService.getApiState(apiState).subscribe({
+				next: (value) => apiUrl.state = value,
+				error: _ => apiUrl.state = false
+			});
     }
   }
 

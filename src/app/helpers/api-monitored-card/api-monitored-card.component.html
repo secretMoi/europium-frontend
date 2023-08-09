@@ -2,7 +2,9 @@
 	<div class="header">
 		<div class="header-api-info" (click)="navigateToApiLink()" style="cursor: pointer">
 			<div class="grouped">
-				<div><img [src]='image' class="api-status" alt=""></div>
+				<div class="api-status">
+					<app-image-loader [fitWidth]="true" [image]="image" class="api-status"></app-image-loader>
+				</div>
 				<div class="api-title">{{ monitoredApi.name }}</div>
 			</div>
 
