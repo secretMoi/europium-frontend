@@ -1,5 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 name: Angular Build && Deploy
 on:
   push:
@@ -22,5 +20,4 @@ jobs:
 
     - run: (Get-Content src\environments\environment.prod.ts) -replace 'SERVER_URL', '${{ secrets.SERVER_URL }}' | Out-File -encoding utf8 src\environments\environment.prod.ts
     - run: npm i
-    - run: ng build --configuration production --base-href /europium-frontend/ --aot
-   # - run: cp -r ./dist/angular-deploy-github-self-host/* /usr/share/nginx/html
+    - run: ng build --configuration production --base-href /europium-frontend/ --aot --build-optimizer
