@@ -19,6 +19,14 @@ export class PlexDuplicateItemComponent extends BaseComponent implements AfterVi
 
 	@ViewChild('item', {static: false, read: ElementRef}) duplicateChild!: ElementRef;
 
+	get screenWidth() {
+		return window.innerWidth;
+	}
+
+	get zoom() {
+		return Math.round(window.devicePixelRatio * 100);
+	}
+
   constructor(private _plexService: PlexService, private _notificationService: NotificationService, private _formatFileSizePipe: FormatFileSizePipe) {
 		super();
 	}
