@@ -37,7 +37,7 @@ export class PlexDuplicateItemComponent extends BaseComponent implements AfterVi
 
 	getThumbnail() {
 		this._plexService.getThumbnail({
-				size: this.duplicateChild.nativeElement.offsetWidth * this.zoom,
+				size: this.duplicateChild.nativeElement.offsetWidth,
 				isArt: true,
 				media: this.plexDuplicate
 			}
