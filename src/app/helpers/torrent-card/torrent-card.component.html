@@ -10,7 +10,9 @@
 
 			<div class="movie_header">
 				<!--				Poster-->
-				<app-image-loader class="locandina" [fitHeight]="true" [image]="torrent.movie?.poster_path"></app-image-loader>
+				<div class="locandina">
+					<app-image-loader [fitWidth]="true" [image]="torrent.movie?.poster_path"></app-image-loader>
+				</div>
 
 				<!--				Media Name-->
 				<h1>{{ cleaningDataService.cleanTorrentName(torrent.name, !!torrent.movie) }}</h1>
@@ -83,13 +85,7 @@
 
 		<!--Background poster-->
 		<div class="blur_back bright_back">
-			<img *ngIf="torrent.movie?.backdrop_path"
-					 src="{{ torrent.movie?.backdrop_path }}"
-					 loading="lazy">
-
-			<img *ngIf="!torrent.movie?.backdrop_path"
-					 src="assets/missing-poster.svg"
-					 loading="lazy">
+			<app-image-loader [fitWidth]="posterFillWidth" [fitHeight]="!posterFillWidth" [image]="torrent.movie?.backdrop_path"></app-image-loader>
 		</div>
 	</div>
 </div>

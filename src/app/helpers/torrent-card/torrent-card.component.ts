@@ -1,6 +1,7 @@
 import {
+	AfterViewInit,
 	Component,
-	EventEmitter,
+	EventEmitter, HostListener,
 	Input,
 	Output,
 } from '@angular/core';
@@ -10,13 +11,14 @@ import {ApiType} from "../../models/enums/api-type";
 import {TorrentState} from "../../models/torrent-state";
 import {Router} from "@angular/router";
 import {removeAllTextAfter} from "../utils/string";
+import {state} from "@angular/animations";
 
 @Component({
   selector: 'app-torrent-card',
   templateUrl: './torrent-card.component.html',
   styleUrls: ['./torrent-card.component.scss']
 })
-export class TorrentCardComponent {
+export class TorrentCardComponent implements AfterViewInit {
 
 	@Input() torrent!: TorrentInfo;
 
@@ -25,11 +27,20 @@ export class TorrentCardComponent {
 	apiType = ApiType;
 	isMetaDataModalOpen: boolean = false;
 	torrentState = TorrentState;
+	posterFillWidth: boolean = false;
 
   constructor(
 		public cleaningDataService: CleaningDataService,
 		public router: Router
-	) {
+	) {}
+
+	ngAfterViewInit() {
+		this.setPosterFillWidth();
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onResize() {
+		this.setPosterFillWidth();
 	}
 
 	getModalLink(): string {
@@ -50,5 +61,9 @@ export class TorrentCardComponent {
 
 	onDeleteTorrent(torrent: TorrentInfo) {
 		this.deleteTorrent.emit(torrent);
+	}
+
+	private setPosterFillWidth() {
+		this.posterFillWidth = window.innerWidth < 1042;
 	}
 }

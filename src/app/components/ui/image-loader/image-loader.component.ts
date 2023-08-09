@@ -10,4 +10,5 @@ export class ImageLoaderComponent {
 	@Input() image?: SafeUrl;
 
 	@Input() fitHeight: boolean = false;
+	@Input() fitWidth: boolean = false;
 }
