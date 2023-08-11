@@ -1,0 +1,22 @@
+<app-filter-container>
+	<div class="filters">
+
+		<app-form-select
+			class="select-filter"
+			*ngIf="libraries"
+			[options]="libraries"
+			(optionSelected)="selectLibrary($event)">
+		</app-form-select>
+
+		<app-sort-menu [elements]="sortMenuElements" [sortOrder]="sortOrder" [sortProperty]="sortProperty"
+									 (onElementSelected)="sort($event)"></app-sort-menu>
+	</div>
+</app-filter-container>
+
+<div class="cards">
+	<app-plex-duplicate-item
+		*ngFor="let duplicate of this.plexDuplicates"
+		[plexDuplicate]="duplicate"
+		(onDelete)="deleteMedia()">
+	</app-plex-duplicate-item>
+</div>

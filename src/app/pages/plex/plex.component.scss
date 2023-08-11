@@ -21,32 +21,8 @@ $indigo: #6558d3;
 	padding-bottom: 20px;
 }
 
-.filters {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	gap: 20px;
-
-	.select-filter {
-		width: 300px;
-	}
-}
-
 @media screen and (max-width: 500px) {
-	.filters {
-		width: 90vw;
-	}
-
 	.playing-medias {
 		width: 90vw;
 	}
-}
-
-
-.cards {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 80px;
-	margin: 5vh auto;
 }

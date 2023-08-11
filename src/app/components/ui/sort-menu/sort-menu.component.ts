@@ -1,12 +1,17 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
+export interface SortMenuElement {
+	key: string;
+	label: string;
+}
+
 @Component({
   selector: 'app-sort-menu',
   templateUrl: './sort-menu.component.html',
   styleUrls: ['./sort-menu.component.scss']
 })
 export class SortMenuComponent {
-	@Input() elements!: { key: string, label: string }[];
+	@Input() elements!: SortMenuElement[];
 	@Input() sortProperty!: string;
 	@Input() sortOrder!: boolean;
 

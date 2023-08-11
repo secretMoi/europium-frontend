@@ -4,38 +4,12 @@
 		</app-horizontal-buttons>
 </div>
 
-<ng-container *ngIf="currentSubMenu === subMenus.Duplicates">
-	<app-filter-container>
-		<div class="filters">
+<app-plex-duplicates *ngIf="currentSubMenu === subMenus.Duplicates"></app-plex-duplicates>
 
-			<app-form-select
-				class="select-filter"
-				*ngIf="libraries"
-				[options]="libraries"
-				(optionSelected)="selectLibrary($event)">
-			</app-form-select>
+<app-plex-history *ngIf="currentSubMenu === subMenus.History"></app-plex-history>
 
-			<app-sort-menu [elements]="sortMenuElements" [sortOrder]="sortOrder" [sortProperty]="sortProperty"
-										 (onElementSelected)="sort($event)"></app-sort-menu>
-		</div>
-	</app-filter-container>
-
-	<div class="cards">
-		<app-plex-duplicate-item
-			*ngFor="let duplicate of this.plexDuplicates"
-			[plexDuplicate]="duplicate"
-			(onDelete)="deleteMedia()">
-		</app-plex-duplicate-item>
-	</div>
-</ng-container>
-
-<ng-container *ngIf="currentSubMenu === subMenus.History">
-	<app-plex-history></app-plex-history>
-</ng-container>
-
-<ng-container *ngIf="currentSubMenu === subMenus.Current">
-	<app-plex-playing-medias
-		class="playing-medias"
-		(hasAnyMedia$)="setPlayingMediaVisibility($event)">
-	</app-plex-playing-medias>
-</ng-container>
+<app-plex-playing-medias
+	*ngIf="currentSubMenu === subMenus.Current"
+	class="playing-medias"
+	(hasAnyMedia$)="setPlayingMediaVisibility($event)">
+</app-plex-playing-medias>

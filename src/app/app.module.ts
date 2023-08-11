@@ -55,6 +55,7 @@ import {SearchFieldComponent} from './components/ui/form/search-field/search-fie
 import {YggSearchFiltersComponent} from "./components/ygg/ygg-search-filters/ygg-search-filters.component";
 import {TorrentsFiltersComponent} from './components/torrents/torrents-filters/torrents-filters.component';
 import {ImageLoaderComponent} from './components/ui/image-loader/image-loader.component';
+import { PlexDuplicatesComponent } from './components/plex/plex-duplicates/plex-duplicates.component';
 
 @NgModule({
 	declarations: [
@@ -103,7 +104,8 @@ import {ImageLoaderComponent} from './components/ui/image-loader/image-loader.co
 		FormSelectComponent,
 		SearchFieldComponent,
 		TorrentsFiltersComponent,
-		ImageLoaderComponent
+		ImageLoaderComponent,
+  PlexDuplicatesComponent
 	],
 	imports: [
 		BrowserModule,
