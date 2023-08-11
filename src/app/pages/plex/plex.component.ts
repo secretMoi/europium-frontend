@@ -5,6 +5,7 @@ import {PlexLibrary} from "../../models/plex/plex-library";
 import {dynamicSort} from "../../helpers/utils/array";
 import {SafeUrl} from "@angular/platform-browser";
 import {BaseComponent} from "../../components/base.component";
+import {SelectOption} from "../../components/ui/form/form-select/form-select.component";
 
 interface ImageBlob {
 	image?: SafeUrl;
@@ -26,7 +27,9 @@ enum SubMenus {
 export class PlexComponent extends BaseComponent {
 	public plexDuplicates: PlexDuplicateExtended[] = [];
 	public plexLibraries: PlexLibrary[] = [];
-	public filterLibrary: PlexLibrary | null = null;
+	public currentLibraryFilter!: PlexLibrary;
+
+	public libraries?: SelectOption<PlexLibrary>[];
 
 	public sortProperty!: string;
 	public sortOrder!: boolean;
@@ -48,7 +51,7 @@ export class PlexComponent extends BaseComponent {
 				key: 'totalSize',
 				label: 'Taille'
 			},
-		]
+		];
 	}
 
 	get buttons() {
@@ -65,15 +68,16 @@ export class PlexComponent extends BaseComponent {
 				image: 'history.svg',
 				id: SubMenus.History
 			}
-		]
+		];
 	}
 
 	constructor(private _plexService: PlexService) {
 		super();
 
-		this._plexService.getLibraries().subscribe(res => {
-			this.plexLibraries = res;
-			this.filterLibrary = this.plexLibraries[0];
+		this._plexService.getLibraries().subscribe(plexLibraries => {
+			this.plexLibraries = plexLibraries;
+			this.setLibraryFilter(plexLibraries);
+			this.currentLibraryFilter = plexLibraries[0];
 			this.selectLibrary();
 		});
 	}
@@ -82,17 +86,19 @@ export class PlexComponent extends BaseComponent {
 		this.selectLibrary();
 	}
 
-	selectLibrary() {
-		this._plexService.getDuplicates(this.filterLibrary!).subscribe(res => {
+	selectLibrary(library?: SelectOption<PlexLibrary>) {
+		if (library) this.currentLibraryFilter = library.data!;
+
+		this._plexService.getDuplicates(this.currentLibraryFilter!).subscribe(res => {
 			this.plexDuplicates = res;
-			this._executeSort();
+			this.executeSort();
 		});
 	}
 
 	public sort(property: string) {
 		this.sortOrder = this.sortProperty === property ? !this.sortOrder : false;
 		this.sortProperty = property;
-		this._executeSort();
+		this.executeSort();
 		this.previousSortByProperty = this.sortProperty;
 	}
 
@@ -104,7 +110,17 @@ export class PlexComponent extends BaseComponent {
 		this.canDisplayPlayingMedia = isVisible;
 	}
 
-	private _executeSort() {
+	private executeSort() {
 		this.plexDuplicates = dynamicSort(this.plexDuplicates, this.sortProperty, this.sortProperty === this.previousSortByProperty && this.sortOrder);
+	}
+
+	private setLibraryFilter(plexLibrary: PlexLibrary[]) {
+		this.libraries = plexLibrary.map(library => {
+			return {
+				id: library.id.toString(),
+				label: library.title,
+				data: library
+			}
+		});
 	}
 }

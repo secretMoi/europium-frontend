@@ -24,21 +24,11 @@ $indigo: #6558d3;
 .filters {
 	display: flex;
 	justify-content: space-between;
-	width: 50vw;
-	margin: auto;
-	padding: 15px;
-	background-color: white;
-	box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
-	border-radius: 16px;
+	flex-wrap: wrap;
+	gap: 20px;
 
-	.form-select {
-		max-width: 300px;
-		height: 48px;
-		border-radius: 50px;
-
-		option {
-			text-align: center;
-		}
+	.select-filter {
+		width: 300px;
 	}
 }
 

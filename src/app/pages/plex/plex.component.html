@@ -5,16 +5,20 @@
 </div>
 
 <ng-container *ngIf="currentSubMenu === subMenus.Duplicates">
-	<div class="filters">
-		<select class="form-select rounded-pill" [(ngModel)]="filterLibrary" (ngModelChange)="selectLibrary()">
-			<option selected [ngValue]="null">Librairie</option>
-			<option *ngFor="let plexLibrary of plexLibraries; trackBy: trackById"
-							[ngValue]="plexLibrary">{{ plexLibrary.title }}</option>
-		</select>
+	<app-filter-container>
+		<div class="filters">
 
-		<app-sort-menu [elements]="sortMenuElements" [sortOrder]="sortOrder" [sortProperty]="sortProperty"
-									 (onElementSelected)="sort($event)"></app-sort-menu>
-	</div>
+			<app-form-select
+				class="select-filter"
+				*ngIf="libraries"
+				[options]="libraries"
+				(optionSelected)="selectLibrary($event)">
+			</app-form-select>
+
+			<app-sort-menu [elements]="sortMenuElements" [sortOrder]="sortOrder" [sortProperty]="sortProperty"
+										 (onElementSelected)="sort($event)"></app-sort-menu>
+		</div>
+	</app-filter-container>
 
 	<div class="cards">
 		<app-plex-duplicate-item

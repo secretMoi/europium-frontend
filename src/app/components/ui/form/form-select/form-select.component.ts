@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
-export interface SelectOption {
+export interface SelectOption<T = void> {
 	id: string;
 	label: string;
+	data?: T;
 }
 
 @Component({
@@ -12,9 +13,9 @@ export interface SelectOption {
 })
 export class FormSelectComponent implements OnInit {
 
-	@Input() options!: SelectOption[]
+	@Input() options!: SelectOption<any>[]
 
-	@Output() optionSelected = new EventEmitter<SelectOption>();
+	@Output() optionSelected = new EventEmitter<SelectOption<any>>();
 
 	public currentOption!: string;
 
