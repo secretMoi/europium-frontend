@@ -24,10 +24,13 @@ export class NotificationComponent {
 	}
 
 	public canDisplayNotificationImage(notification: Notification) {
+		console.warn(notification.type, NotificationType.Success, notification.type === NotificationType.Success);
 		return !!notification.type;
 	}
 
 	public getNotificationImagePath(notification: Notification): string {
+		console.warn(notification.type, NotificationType.Success, notification.type === NotificationType.Success);
+
 		if (notification.type === NotificationType.Success) return 'assets/check.svg';
 		if (notification.type === NotificationType.Error) return 'assets/cancel.svg';
 

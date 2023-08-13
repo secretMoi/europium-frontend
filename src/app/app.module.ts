@@ -55,8 +55,9 @@ import {SearchFieldComponent} from './components/ui/form/search-field/search-fie
 import {YggSearchFiltersComponent} from "./components/ygg/ygg-search-filters/ygg-search-filters.component";
 import {TorrentsFiltersComponent} from './components/torrents/torrents-filters/torrents-filters.component';
 import {ImageLoaderComponent} from './components/ui/image-loader/image-loader.component';
-import { PlexDuplicatesComponent } from './components/plex/plex-duplicates/plex-duplicates.component';
-import { LoginPage } from './pages/login-page/login-page.component';
+import {PlexDuplicatesComponent} from './components/plex/plex-duplicates/plex-duplicates.component';
+import {LoginPage} from './pages/login-page/login-page.component';
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 @NgModule({
 	declarations: [
@@ -106,8 +107,8 @@ import { LoginPage } from './pages/login-page/login-page.component';
 		SearchFieldComponent,
 		TorrentsFiltersComponent,
 		ImageLoaderComponent,
-  PlexDuplicatesComponent,
-  LoginPage
+		PlexDuplicatesComponent,
+		LoginPage
 	],
 	imports: [
 		BrowserModule,
@@ -118,11 +119,17 @@ import { LoginPage } from './pages/login-page/login-page.component';
 		BrowserAnimationsModule,
 		NgbModule
 	],
-	providers: [{
-		provide: HTTP_INTERCEPTORS,
-		useClass: CacheInterceptor,
-		multi: true
-	}],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: CacheInterceptor,
+			multi: true
+		},
+		{ provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true
+		},
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

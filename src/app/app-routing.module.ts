@@ -9,17 +9,18 @@ import {TorrentsListComponent} from "./pages/torrents-list/torrents-list.compone
 import {YggSearchComponent} from "./pages/ygg-search/ygg-search.component";
 import {PlexComponent} from "./pages/plex/plex.component";
 import {LoginPage} from "./pages/login-page/login-page.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
-	{path: 'home', component: HomeComponent},
-	{path: 'volume-list', component: VolumeListComponent},
-	{path: 'files-list', component: ListFilesComponent},
-	{path: 'api', component: CrudApisComponent},
-	{path: 'api/create', component: EditApiComponent},
-	{path: 'api/edit/:code', component: EditApiComponent},
-	{path: 'torrent/list', component: TorrentsListComponent},
-	{path: 'ygg/search', component: YggSearchComponent},
-	{path: 'plex', component: PlexComponent},
+	{path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+	{path: 'volume-list', component: VolumeListComponent, canActivate: [AuthGuard]},
+	{path: 'files-list', component: ListFilesComponent, canActivate: [AuthGuard]},
+	{path: 'api', component: CrudApisComponent, canActivate: [AuthGuard]},
+	{path: 'api/create', component: EditApiComponent, canActivate: [AuthGuard]},
+	{path: 'api/edit/:code', component: EditApiComponent, canActivate: [AuthGuard]},
+	{path: 'torrent/list', component: TorrentsListComponent, canActivate: [AuthGuard]},
+	{path: 'ygg/search', component: YggSearchComponent, canActivate: [AuthGuard]},
+	{path: 'plex', component: PlexComponent, canActivate: [AuthGuard]},
 	{path: 'login', component: LoginPage},
 	{path: '', redirectTo: '/home', pathMatch: 'full'},
 ];

@@ -2,19 +2,19 @@
 	<div class="login-form">
 		<span class="title">Connexion</span>
 
-		<form class="form">
+		<div class="form">
 			<div class="input-wrapper">
-				<input class="input" placeholder="Identifiant" type="text" >
+				<input class="input" [(ngModel)]="username" placeholder="Identifiant" type="text" >
 				<span class="underline"></span>
 			</div>
 
 			<div class="input-wrapper">
-				<input class="input" placeholder="Mot de passe" type="password" >
+				<input class="input" [(ngModel)]="password" placeholder="Mot de passe" type="password" >
 				<span class="underline"></span>
 			</div>
 
-			<button class="login-button">Se connecter</button>
-		</form>
+			<button (click)="onSubmit()" class="login-button">Se connecter</button>
+		</div>
 	</div>
 
 	<div class="login-image">
