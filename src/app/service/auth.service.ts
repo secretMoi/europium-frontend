@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
 	providedIn: 'root'
 })
 export class AuthService {
-	private tokenKey = '';
+	private tokenKey = 'europium_token';
 
 	constructor(private http: HttpClient) {}
 
