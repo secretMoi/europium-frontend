@@ -56,6 +56,7 @@ import {YggSearchFiltersComponent} from "./components/ygg/ygg-search-filters/ygg
 import {TorrentsFiltersComponent} from './components/torrents/torrents-filters/torrents-filters.component';
 import {ImageLoaderComponent} from './components/ui/image-loader/image-loader.component';
 import { PlexDuplicatesComponent } from './components/plex/plex-duplicates/plex-duplicates.component';
+import { LoginPage } from './pages/login-page/login-page.component';
 
 @NgModule({
 	declarations: [
@@ -105,7 +106,8 @@ import { PlexDuplicatesComponent } from './components/plex/plex-duplicates/plex-
 		SearchFieldComponent,
 		TorrentsFiltersComponent,
 		ImageLoaderComponent,
-  PlexDuplicatesComponent
+  PlexDuplicatesComponent,
+  LoginPage
 	],
 	imports: [
 		BrowserModule,

@@ -1,7 +1,8 @@
 <div class="sub-menu">
-		<app-horizontal-buttons [buttons]="buttons"
-														(onButtonClicked)="subMenuSelected($event)">
-		</app-horizontal-buttons>
+	<app-horizontal-buttons
+		[buttons]="buttons"
+		(onButtonClicked)="subMenuSelected($event)">
+	</app-horizontal-buttons>
 </div>
 
 <app-plex-duplicates *ngIf="currentSubMenu === subMenus.Duplicates"></app-plex-duplicates>

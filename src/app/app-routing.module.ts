@@ -8,6 +8,7 @@ import {EditApiComponent} from "./pages/edit-api/edit-api.component";
 import {TorrentsListComponent} from "./pages/torrents-list/torrents-list.component";
 import {YggSearchComponent} from "./pages/ygg-search/ygg-search.component";
 import {PlexComponent} from "./pages/plex/plex.component";
+import {LoginPage} from "./pages/login-page/login-page.component";
 
 const routes: Routes = [
 	{path: 'home', component: HomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
 	{path: 'torrent/list', component: TorrentsListComponent},
 	{path: 'ygg/search', component: YggSearchComponent},
 	{path: 'plex', component: PlexComponent},
+	{path: 'login', component: LoginPage},
 	{path: '', redirectTo: '/home', pathMatch: 'full'},
 ];
 
