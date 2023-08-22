@@ -15,7 +15,6 @@ export class LoginPage {
   constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router) {}
 
 	onSubmit() {
-		console.warn(this.username, this.password);
 		this.authService.login(this.username, this.password).subscribe({
 			next: _ => {
 				this.notificationService.successNotification('Connexion réussie');

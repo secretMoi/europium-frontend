@@ -8,11 +8,11 @@ import {Router} from "@angular/router";
 	providedIn: 'root'
 })
 export class AuthService {
-	private tokenKey = 'europium_token';
+	private accessTokenKey = 'europium_access_token';
 	private refreshTokenKey = 'europium_refresh_token';
 
-	get token(): string | null {
-		return localStorage.getItem(this.tokenKey);
+	get accessToken(): string | null {
+		return localStorage.getItem(this.accessTokenKey);
 	}
 
 	get refreshToken(): string | null {
@@ -26,7 +26,7 @@ export class AuthService {
 			.pipe(
 				tap((response: any) => {
 					if (response.token)
-						localStorage.setItem(this.tokenKey, response.token);
+						localStorage.setItem(this.accessTokenKey, response.token);
 					if (response.refreshToken)
 						localStorage.setItem(this.refreshTokenKey, response.refreshToken);
 				})
@@ -35,21 +35,22 @@ export class AuthService {
 
 	refreshTokens(): Observable<any> {
 		const refreshToken = this.refreshToken;
+		const accessToken = this.accessToken;
 		if (!refreshToken) {
 			// Handle error: No refresh token available
 		}
 
-		return this.http.post(environment.backendUrl + `/auth/refresh`, { refreshToken }).pipe(
+		return this.http.post(environment.backendUrl + `/auth/refresh`, { accessToken, refreshToken }).pipe(
 			tap((response: any) => {
 				if (response.token) {
-					localStorage.setItem(this.tokenKey, response.token);
+					localStorage.setItem(this.accessTokenKey, response.token);
 				}
 			})
 		);
 	}
 
 	logout() {
-		localStorage.removeItem(this.tokenKey);
+		localStorage.removeItem(this.accessTokenKey);
 		localStorage.removeItem(this.refreshTokenKey);
 
 		this.router.navigate(['/login']);

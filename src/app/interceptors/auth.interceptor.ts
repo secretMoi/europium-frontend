@@ -8,7 +8,7 @@ export class AuthInterceptor implements HttpInterceptor {
 	constructor(private authService: AuthService) {}
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		const token = this.authService.token;
+		const token = this.authService.accessToken;
 
 		if (token) {
 			request = request.clone({
@@ -25,7 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
 					return this.authService.refreshTokens().pipe(
 						switchMap(() => {
 							// Retry the original request with the new token
-							const newToken = this.authService.token;
+							const newToken = this.authService.accessToken;
 							if (newToken) {
 								request = request.clone({
 									setHeaders: {
