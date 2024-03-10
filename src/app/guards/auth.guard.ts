@@ -1,11 +1,12 @@
-import {Injectable} from "@angular/core";
-import {CanActivate, Router} from "@angular/router";
+import {inject, Injectable} from "@angular/core";
+import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from "@angular/router";
 import {AuthService} from "../service/auth.service";
 
+// todo check after update
 @Injectable({
 	providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class PermissionsService  {
 	constructor(private authService: AuthService, private router: Router) {}
 
 	canActivate(): boolean {
@@ -16,4 +17,8 @@ export class AuthGuard implements CanActivate {
 			return false;
 		}
 	}
+}
+
+export const AuthGuard: CanActivateFn = (): boolean => {
+	return inject(PermissionsService).canActivate();
 }
