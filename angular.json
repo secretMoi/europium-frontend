@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "europium:build:production"
+              "buildTarget": "europium:build:production"
             },
             "development": {
-              "browserTarget": "europium:build:development"
+              "buildTarget": "europium:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "europium:build"
+            "buildTarget": "europium:build"
           }
         },
         "test": {
